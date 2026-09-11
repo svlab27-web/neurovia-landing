@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NeuroVia — три концепции с движением</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230F1C2E'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%23EEC830' stroke-width='2.5'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --navy:#0F1C2E; --navy-2:#16283F; --warm:#F4F3F0; --mist:#E8E6E1;
+    --gold:#EEC830; --gold-dk:#8B6010; --ink:#0A1628; --ink-2:#46566B; --silver:#8A9BB0;
+    --line-d:rgba(244,243,240,0.12);
+    --g-warm:linear-gradient(135deg,#FFE070 0%,#EEC830 45%,#C49818 100%);
+    --f-head:'Manrope',-apple-system,'Segoe UI',sans-serif;
+    --f-body:'IBM Plex Sans',-apple-system,'Segoe UI',Roboto,sans-serif;
+    --f-mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+    color-scheme:light;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--warm);font-family:var(--f-body);
+       font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:var(--f-head);font-weight:800;margin:0;letter-spacing:-.024em;text-wrap:balance}
+  p{margin:0}
+  svg{display:block;max-width:100%}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 26px}
+  @media(max-width:780px){.wrap{padding:0 18px}}
+
+  .top{padding:56px 0 44px;border-bottom:1px solid var(--line-d)}
+  .kick{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold)}
+  .top h1{font-size:36px;line-height:1.14;margin-top:16px}
+  @media(max-width:640px){.top h1{font-size:25px}}
+  .top p{margin-top:16px;font-size:16.5px;color:var(--silver);max-width:72ch}
+  .hint{margin-top:22px;padding-left:16px;border-left:2px solid var(--gold);
+        font-size:14.5px;color:var(--silver);max-width:66ch}
+
+  .band{padding:70px 0;border-bottom:1px solid var(--line-d)}
+  .tag{display:inline-block;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;
+       text-transform:uppercase;color:var(--ink);background:var(--g-warm);padding:5px 12px;border-radius:5px}
+  .band h2{font-size:29px;margin-top:16px;line-height:1.18}
+  @media(max-width:640px){.band h2{font-size:22px}}
+  .band .sub{margin-top:13px;font-size:15.5px;color:var(--silver);max-width:70ch}
+  .stage{margin-top:40px;border:1px solid var(--line-d);border-radius:18px;background:var(--navy-2);padding:38px 32px}
+  .note{margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:780px){.note{grid-template-columns:1fr}}
+  .note div{border-left:2px solid var(--line-d);padding-left:16px}
+  .note div.p{border-left-color:var(--gold)}
+  .note h3{font-family:var(--f-mono);font-weight:500;font-size:10.5px;letter-spacing:.14em;
+           text-transform:uppercase;color:var(--silver)}
+  .note div.p h3{color:var(--gold)}
+  .note p{margin-top:8px;font-size:14px;line-height:1.55;color:var(--silver)}
+
+  /* ============ 1 · СХЛОПЫВАНИЕ КОМАНДЫ ============ */
+  .collapse-nums{display:flex;align-items:baseline;gap:26px;flex-wrap:wrap;margin-bottom:30px;min-height:74px}
+  .cn{font-family:var(--f-mono);font-weight:500;font-variant-numeric:tabular-nums;line-height:1}
+  .cn--from{font-size:62px;color:rgba(244,243,240,.85)}
+  .cn--to{font-size:62px;color:var(--gold);opacity:0}
+  .cn-lab{font-family:var(--f-body);font-size:13.5px;color:var(--silver)}
+  .team{display:flex;gap:3px;height:86px}
+  .member{border-radius:7px;display:flex;flex-direction:column;justify-content:center;
+          padding:0 10px;overflow:hidden;white-space:nowrap;background:rgba(138,155,176,.42)}
+  .member.is-tracker{background:rgba(138,155,176,.6)}
+  .member b{font-family:var(--f-mono);font-weight:500;font-size:12px;color:var(--ink)}
+  .member i{font-style:normal;font-size:11px;color:rgba(10,22,40,.72);margin-top:3px}
+  .member.result{background:var(--g-warm);flex:0 0 6%;min-width:8px;opacity:0}
+  .drop{margin-top:20px;font-family:var(--f-mono);font-size:12.5px;color:var(--silver);min-height:20px}
+  .drop span{opacity:0;margin-right:18px;display:inline-block}
+
+  @media (prefers-reduced-motion: no-preference){
+    @supports (animation-timeline: view()){
+      .collapse .member{animation:squash linear both;animation-timeline:view();}
+      .m1{animation-range:contain 12% contain 26%}
+      .m2{animation-range:contain 18% contain 32%}
+      .m3{animation-range:contain 24% contain 38%}
+      .m4{animation-range:contain 30% contain 44%}
+      .m5{animation-range:contain 36% contain 50%}
+      .m6{animation-range:contain 46% contain 70%}
+      .collapse .member.result{animation:appear linear both;animation-timeline:view();animation-range:contain 62% contain 80%}
+      .collapse .cn--from{animation:fadeout linear both;animation-timeline:view();animation-range:contain 46% contain 68%}
+      .collapse .cn--to{animation:appear linear both;animation-timeline:view();animation-range:contain 62% contain 80%}
+      .collapse .drop span{animation:appear linear both;animation-timeline:view()}
+      .collapse .drop span:nth-child(1){animation-range:contain 20% contain 30%}
+      .collapse .drop span:nth-child(2){animation-range:contain 38% contain 48%}
+      .collapse .drop span:nth-child(3){animation-range:contain 52% contain 66%}
+    }
+  }
+  @keyframes squash{ to{ flex-basis:0; width:0; padding:0; opacity:0; } }
+  @keyframes appear{ from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+  @keyframes fadeout{ to{ opacity:.18; font-size:30px } }
+
+  /* ============ 2 · ПУЛЬС ПО КОНТУРУ ============ */
+  .ringwrap{display:flex;justify-content:center}
+  #pulse{offset-path:path('M 190,72 A 86,86 0 1,1 190,244 A 86,86 0 1,1 190,72');
+         offset-rotate:0deg;animation:run 9s linear infinite}
+  #trail{offset-path:path('M 190,72 A 86,86 0 1,1 190,244 A 86,86 0 1,1 190,72');
+         offset-rotate:0deg;animation:run 9s linear infinite;animation-delay:-.28s;opacity:.35}
+  @keyframes run{ to{ offset-distance:100% } }
+  .node{animation:glow 9s linear infinite}
+  .n1{animation-delay:0s}.n2{animation-delay:1.5s}.n3{animation-delay:3s}
+  .n4{animation-delay:4.5s}.n5{animation-delay:6s}.n6{animation-delay:7.5s}
+  @keyframes glow{ 0%,6%{fill:#EEC830;r:20} 14%,100%{fill:#0F1C2E;r:17} }
+  .passlab{animation:flash 9s linear infinite;opacity:0}
+  .p1{animation-delay:.4s}.p2{animation-delay:1.9s}.p3{animation-delay:3.4s}
+  .p4{animation-delay:4.9s}.p5{animation-delay:6.4s}.p6{animation-delay:7.9s}
+  @keyframes flash{ 0%{opacity:0} 4%{opacity:1} 13%{opacity:1} 18%,100%{opacity:0} }
+  @media (prefers-reduced-motion: reduce){
+    #pulse,#trail,.node,.passlab{animation:none}
+    .passlab{opacity:.7}
+  }
+
+  /* ============ 3 · ЧАСЫ УЛЕТАЮТ ============ */
+  .hours-head{display:flex;align-items:baseline;gap:24px;flex-wrap:wrap;margin-bottom:26px}
+  .hh{font-family:var(--f-mono);font-weight:500;font-size:46px;line-height:1;font-variant-numeric:tabular-nums}
+  .hh--now{color:rgba(244,243,240,.85)}
+  .hh--free{color:var(--gold);opacity:0}
+  .hh-lab{font-size:13.5px;color:var(--silver)}
+  .grid{display:grid;grid-template-columns:repeat(20,1fr);gap:6px;max-width:620px}
+  @media(max-width:640px){.grid{grid-template-columns:repeat(12,1fr)}}
+  .h{aspect-ratio:1;border-radius:3px;background:rgba(138,155,176,.5)}
+  .h.stay{background:var(--gold)}
+  @media (prefers-reduced-motion: no-preference){
+    @supports (animation-timeline: view()){
+      .hours .h.go{animation:fly linear both;animation-timeline:view();animation-range:contain 15% contain 65%}
+      .hours .hh--now{animation:fadeout2 linear both;animation-timeline:view();animation-range:contain 40% contain 60%}
+      .hours .hh--free{animation:appear linear both;animation-timeline:view();animation-range:contain 50% contain 70%}
+    }
+  }
+  @keyframes fly{ to{ opacity:0; transform:translateY(-26px) scale(.5) } }
+  @keyframes fadeout2{ to{ opacity:.2; font-size:24px } }
+
+  .foot{padding:54px 0;background:var(--mist);color:var(--ink)}
+  .foot h2{font-size:22px}
+  .foot p{margin-top:12px;font-size:15px;line-height:1.6;color:var(--ink-2);max-width:76ch}
+  .foot p+p{margin-top:10px}
+  .foot b{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="kick">NeuroVia · динамика</div>
+    <h1>Три концепции с движением — не типы графиков, а то, что происходит на глазах</h1>
+    <p>Прошлый набор был статичным по своей природе: чарт можно только разглядывать. Здесь другое — каждая вещь разворачивается при прокрутке и рассказывает, а не описывает.</p>
+    <p class="hint"><b>Как смотреть:</b> прокручивайте медленно. Движение привязано к скроллу, а не к таймеру, — вы им управляете. Всё сделано чистым CSS, без единой строчки JavaScript.</p>
+  </div>
+</header>
+
+<!-- 1 -->
+<section class="band">
+  <div class="wrap">
+    <span class="tag">Концепция 1</span>
+    <h2>Схлопывание команды</h2>
+    <p class="sub">Шестеро становятся одним у вас на глазах. Не сравнение двух чисел, а превращение: полоса команды сжимается, специалисты уходят один за другим, и в конце остаётся золотая полоска в 6% от исходной.</p>
+
+    <div class="stage collapse">
+      <div class="collapse-nums">
+        <div><span class="cn cn--from">997 000 ₸</span></div>
+        <div><span class="cn cn--to">59 900 ₸</span></div>
+      </div>
+      <div class="team">
+        <div class="member m1" style="flex:0 0 18.1%"><b>180 000 ₸</b><i>Маркетолог</i></div>
+        <div class="member m2" style="flex:0 0 7.5%"><b>75 000</b><i>Копирайтер</i></div>
+        <div class="member m3" style="flex:0 0 7.2%"><b>72 000</b><i>СММ</i></div>
+        <div class="member m4" style="flex:0 0 9.0%"><b>90 000</b><i>Финансист</i></div>
+        <div class="member m5" style="flex:0 0 3.0%"><b>30 000</b><i></i></div>
+        <div class="member m6 is-tracker" style="flex:0 0 55.2%"><b>550 000 ₸</b><i>Бизнес-трекер — 55% всего бюджета</i></div>
+        <div class="member result"><b>59 900</b></div>
+      </div>
+      <div class="drop">
+        <span>— пятеро подрядчиков</span>
+        <span>— трекер, 55% бюджета</span>
+        <span>= один связанный контур</span>
+      </div>
+    </div>
+
+    <div class="note">
+      <div class="p"><h3>Почему это работает</h3><p>Показывает не «у нас дешевле», а <b>что именно исчезает</b>. Трекер уходит последним и занимает больше половины полосы — зритель físически видит, что главные деньги уходят тому, кого вы заменяете. Это и есть ваша линия «трекинг без трекера», только не сказанная, а показанная.</p></div>
+      <div><h3>Риск</h3><p>Это самая «громкая» из трёх. Если поставить её рядом с другой анимацией, страница начнёт суетиться. Работает только в одиночку.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="band">
+  <div class="wrap">
+    <span class="tag">Концепция 2</span>
+    <h2>Пульс по контуру</h2>
+    <p class="sub">Данные бегут по циклу 6П: точка проходит шаг за шагом, каждый узел загорается при её приближении, и рядом появляется то, что этот шаг отдаёт следующему. Главное утверждение страницы перестаёт быть текстом.</p>
+
+    <div class="stage ringwrap">
+      <svg viewBox="-20 0 420 300" role="img" aria-label="Цикл 6П: точка данных обходит шесть шагов, на каждом переходе подписано, что передаётся дальше">
+        <circle cx="190" cy="158" r="86" fill="none" stroke="#EEC830" stroke-opacity="0.22" stroke-width="1.4"/>
+
+        <circle class="node n1" cx="190" cy="72"  r="17" fill="#0F1C2E" stroke="#EEC830" stroke-width="1.3"/>
+        <circle class="node n2" cx="264" cy="115" r="17" fill="#0F1C2E" stroke="#EEC830" stroke-width="1.3"/>
+        <circle class="node n3" cx="264" cy="201" r="17" fill="#0F1C2E" stroke="#EEC830" stroke-width="1.3"/>
+        <circle class="node n4" cx="190" cy="244" r="17" fill="#0F1C2E" stroke="#EEC830" stroke-width="1.3"/>
+        <circle class="node n5" cx="116" cy="201" r="17" fill="#0F1C2E" stroke="#EEC830" stroke-width="1.3"/>
+        <circle class="node n6" cx="116" cy="115" r="17" fill="#0F1C2E" stroke="#EEC830" stroke-width="1.3"/>
+
+        <g fill="#EEC830" font-family="'IBM Plex Mono', monospace" font-size="12.5" text-anchor="middle">
+          <text x="190" y="77">1</text><text x="264" y="120">2</text><text x="264" y="206">3</text>
+          <text x="190" y="249">4</text><text x="116" y="206">5</text><text x="116" y="120">6</text>
+        </g>
+        <g fill="#F4F3F0" font-family="'IBM Plex Mono', monospace" font-size="12" letter-spacing="1.2">
+          <text x="190" y="44"  text-anchor="middle">ПОНЯТЬ</text>
+          <text x="290" y="107" text-anchor="start">ПРЕДЛОЖИТЬ</text>
+          <text x="290" y="209" text-anchor="start">ПРИВЛЕЧЬ</text>
+          <text x="190" y="280" text-anchor="middle">ПРОДАТЬ</text>
+          <text x="90"  y="209" text-anchor="end">ПОСЧИТАТЬ</text>
+          <text x="90"  y="107" text-anchor="end">ПЕРЕСОБРАТЬ</text>
+        </g>
+
+        <g font-family="'IBM Plex Sans', sans-serif" font-size="11.5" fill="#EEC830" text-anchor="middle">
+          <text class="passlab p1" x="190" y="152">карта разрывов → в продукт</text>
+          <text class="passlab p2" x="190" y="152">продукт и боли → в воронку</text>
+          <text class="passlab p3" x="190" y="152">воронка → в контент-план</text>
+          <text class="passlab p4" x="190" y="152">заявки → в заказы и оплаты</text>
+          <text class="passlab p5" x="190" y="152">оплаты → в финмодель</text>
+          <text class="passlab p6" x="190" y="152">выводы → в новую диагностику</text>
+        </g>
+        <text x="190" y="178" text-anchor="middle" fill="#8A9BB0" font-family="'IBM Plex Mono', monospace" font-size="9.5" letter-spacing="1.2">ЗАМКНУТЫЙ ЦИКЛ</text>
+
+        <circle id="trail" r="7" fill="#EEC830"/>
+        <circle id="pulse" r="5" fill="#FFF6D0"/>
+      </svg>
+    </div>
+
+    <div class="note">
+      <div class="p"><h3>Почему это работает</h3><p>Связанность контура — единственное, чего конкурент не скопирует, и сейчас она только заявлена словами. Здесь её видно: точка физически несёт данные из шага в шаг и замыкает круг. Это не иллюстрация к тексту, это доказательство вместо текста.</p></div>
+      <div><h3>Риск</h3><p>Зациклена по таймеру, а не по скроллу, — значит крутится постоянно и может отвлекать. Лечится тем, чтобы запускать её только когда блок в кадре.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="band">
+  <div class="wrap">
+    <span class="tag">Концепция 3</span>
+    <h2>Часы улетают</h2>
+    <p class="sub">Шестьдесят один квадрат — часы вашего месяца. При прокрутке сорок один из них отрывается и улетает, остаются двадцать золотых. Абстрактная цифра становится физической потерей и физическим возвратом.</p>
+
+    <div class="stage hours">
+      <div class="hours-head">
+        <div><span class="hh hh--now">61 ч</span> <span class="hh-lab">уходит сегодня</span></div>
+        <div><span class="hh hh--free">41 ч</span> <span class="hh-lab">возвращается вам</span></div>
+      </div>
+      <div class="grid">
+        <span class="h go"></span><span class="h go"></span><span class="h go"></span><span class="h go"></span><span class="h go"></span>
+        <span class="h go"></span><span class="h go"></span><span class="h go"></span><span class="h go"></span><span class="h go"></span>
+        <span class="h go"></span><span class="h go"></span><span class="h go"></span><span class="h go"></span><span class="h go"></span>
+        <span class="h go"></span><span class="h go"></span><span class="h go"></span><span class="h go"></span><span class="h go"></span>
+        <span class="h go"></span><span class="h go"></span><span class="h go"></span><span class="h go"></span><span class="h go"></span>
+        <span class="h go"></span><span class="h go"></span><span class="h go"></span><span class="h go"></span><span class="h go"></span>
+        <span class="h go"></span><span class="h go"></span><span class="h go"></span><span class="h go"></span><span class="h go"></span>
+        <span class="h go"></span><span class="h go"></span><span class="h go"></span><span class="h go"></span><span class="h go"></span>
+        <span class="h go"></span>
+        <span class="h stay"></span><span class="h stay"></span><span class="h stay"></span><span class="h stay"></span><span class="h stay"></span>
+        <span class="h stay"></span><span class="h stay"></span><span class="h stay"></span><span class="h stay"></span><span class="h stay"></span>
+        <span class="h stay"></span><span class="h stay"></span><span class="h stay"></span><span class="h stay"></span><span class="h stay"></span>
+        <span class="h stay"></span><span class="h stay"></span><span class="h stay"></span><span class="h stay"></span><span class="h stay"></span>
+      </div>
+    </div>
+
+    <div class="note">
+      <div class="p"><h3>Почему это работает</h3><p>Самая дешёвая и самая понятная из трёх. Число 41 сейчас лежит в строке текста и его легко пропустить; здесь оно становится событием. И это единственная концепция, которая говорит не про деньги, а про вечера — то, что у эксперта болит сильнее.</p></div>
+      <div><h3>Риск</h3><p>Шестьдесят один квадрат на телефоне мельчает. Нужна вторая раскладка — например по двенадцать в ряду.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <h2>Что с этим делать</h2>
+    <p><b>Движение привязано к прокрутке, а не к таймеру</b> (кроме пульса) — читатель управляет им сам, и страница не дёргается фоном. Это то, что в 2026 считается признаком дорогого сайта: моушн как повествование, а не как эффект.</p>
+    <p><b>Ни одной строчки JavaScript.</b> Всё на scroll-driven CSS, который недавно получил поддержку во всех основных браузерах. Страница остаётся такой же быстрой.</p>
+    <p><b>Если движение выключено</b> в системных настройках или браузер старый — всё показывается в конечном состоянии и остаётся читаемым.</p>
+    <p><b>Больше одной на экран не ставят.</b> Я бы взял <b>схлопывание</b> в блок сравнения и <b>пульс</b> в блок контура — они в разных местах страницы и не спорят. «Часы» тогда остаются в запасе для рекламы.</p>
+  </div>
+</footer>
+
+</body>
+</html>
