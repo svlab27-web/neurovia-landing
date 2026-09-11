@@ -306,6 +306,82 @@
   .foot nav a { font-size:13px; color:var(--silver); text-decoration:none; }
   .foot nav a:hover { color:var(--warm); }
 
+
+  /* ---------- СХЛОПЫВАНИЕ КОМАНДЫ (блок сравнения) ---------- */
+  .collapse{margin-top:26px;border:1px solid var(--line-l);border-radius:18px;
+            background:var(--navy);padding:32px 28px}
+  .cnums{display:flex;align-items:baseline;gap:24px;flex-wrap:wrap;margin-bottom:26px;min-height:62px}
+  .cnum{font-family:var(--f-mono);font-weight:500;font-variant-numeric:tabular-nums;line-height:1;font-size:52px}
+  .cnum--from{color:rgba(244,243,240,.85)}
+  .cnum--to{color:var(--gold);opacity:0}
+  @media(max-width:640px){.cnum{font-size:34px}}
+  .cteam{display:flex;gap:3px;height:78px}
+  .cmember{border-radius:7px;display:flex;flex-direction:column;justify-content:center;padding:0 10px;
+           overflow:hidden;white-space:nowrap;background:rgba(138,155,176,.42);min-width:0}
+  @media(max-width:700px){
+    .cteam{height:62px}
+    .cmember{padding:0 5px}
+    .cmember i{display:none}
+    .cmember b{font-size:10px}
+  }
+  .cmember.tracker{background:rgba(138,155,176,.62)}
+  .cmember b{font-family:var(--f-mono);font-weight:500;font-size:12px;color:var(--ink)}
+  .cmember i{font-style:normal;font-size:11px;color:rgba(10,22,40,.72);margin-top:3px}
+  .cmember.result{background:var(--g-warm);flex:0 0 6%;min-width:10px;opacity:0}
+  .cdrop{margin-top:20px;font-family:var(--f-mono);font-size:12.5px;color:var(--silver);min-height:20px}
+  .cdrop span{opacity:0;margin-right:18px;display:inline-block}
+  @media (prefers-reduced-motion: no-preference){
+    @supports (animation-timeline: view()){
+      .collapse .cmember{animation:cSquash linear both;animation-timeline:view()}
+      .cm1{animation-range:contain 12% contain 26%} .cm2{animation-range:contain 18% contain 32%}
+      .cm3{animation-range:contain 24% contain 38%} .cm4{animation-range:contain 30% contain 44%}
+      .cm5{animation-range:contain 36% contain 50%} .cm6{animation-range:contain 46% contain 70%}
+      .collapse .cmember.result{animation:cAppear linear both;animation-timeline:view();animation-range:contain 62% contain 80%}
+      .collapse .cnum--from{animation:cFade linear both;animation-timeline:view();animation-range:contain 46% contain 68%}
+      .collapse .cnum--to{animation:cAppear linear both;animation-timeline:view();animation-range:contain 62% contain 80%}
+      .collapse .cdrop span{animation:cAppear linear both;animation-timeline:view()}
+      .collapse .cdrop span:nth-child(1){animation-range:contain 20% contain 30%}
+      .collapse .cdrop span:nth-child(2){animation-range:contain 38% contain 48%}
+      .collapse .cdrop span:nth-child(3){animation-range:contain 52% contain 66%}
+    }
+  }
+  @keyframes cSquash{ to{ flex-basis:0; width:0; padding:0; opacity:0 } }
+  @keyframes cAppear{ from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+  @keyframes cFade{ to{ opacity:.18; font-size:28px } }
+
+  /* ---------- ПУЛЬС ПО КОНТУРУ ---------- */
+  .pulsewrap{display:flex;justify-content:center;margin-bottom:52px}
+  .pulsebox{background:var(--navy-2);border:1px solid var(--line-d);border-radius:20px;
+            padding:16px 10px 10px;max-width:460px;width:100%}
+  .pulsecap{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+            color:var(--silver);text-align:center;padding:0 14px 4px}
+  #nvPulse,#nvTrail{offset-path:path('M 190,72 A 86,86 0 1,1 190,244 A 86,86 0 1,1 190,72');offset-rotate:0deg}
+  @media (prefers-reduced-motion: no-preference){
+    #nvPulse{animation:nvRun 9s linear infinite}
+    #nvTrail{animation:nvRun 9s linear infinite;animation-delay:-.28s;opacity:.35}
+    .nvnode{animation:nvGlow 9s linear infinite}
+    .nvn1{animation-delay:0s}.nvn2{animation-delay:1.5s}.nvn3{animation-delay:3s}
+    .nvn4{animation-delay:4.5s}.nvn5{animation-delay:6s}.nvn6{animation-delay:7.5s}
+    .nvpass{animation:nvFlash 9s linear infinite}
+    .nvp1{animation-delay:.4s}.nvp2{animation-delay:1.9s}.nvp3{animation-delay:3.4s}
+    .nvp4{animation-delay:4.9s}.nvp5{animation-delay:6.4s}.nvp6{animation-delay:7.9s}
+  }
+  @keyframes nvRun{ to{ offset-distance:100% } }
+  @keyframes nvGlow{ 0%,6%{fill:#EEC830;r:20} 14%,100%{fill:#16283F;r:17} }
+  @keyframes nvFlash{ 0%{opacity:0} 4%{opacity:1} 13%{opacity:1} 18%,100%{opacity:0} }
+  .nvpass{opacity:0}
+  @media (prefers-reduced-motion: reduce){ .nvpass.nvp1{opacity:.85} }
+
+  /* Очень узкие экраны: надзаголовок, заголовок и шапка не помещались. */
+  @media (max-width:420px){
+    .eyebrow{font-size:10.5px;letter-spacing:.09em}
+    .eyebrow::before{width:12px}
+    .hero h1{font-size:27px}
+    .nav .wrap{gap:10px}
+    .nav-act{gap:12px}
+    .nav-act .btn{padding:9px 12px;font-size:12px}
+  }
+
   @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} .btn{transition:none} }
 </style>
 </head>
@@ -482,6 +558,26 @@
       </div>
     </div>
 
+
+    <div class="collapse">
+      <div class="cnums">
+        <span class="cnum cnum--from">997 000 ₸</span>
+        <span class="cnum cnum--to">59 900 ₸</span>
+      </div>
+      <div class="cteam">
+        <div class="cmember cm1" style="flex:0 0 18.1%"><b>180 000 ₸</b><i>Маркетолог</i></div>
+        <div class="cmember cm2" style="flex:0 0 7.5%"><b>75 000</b><i>Копирайтер</i></div>
+        <div class="cmember cm3" style="flex:0 0 7.2%"><b>72 000</b><i>СММ</i></div>
+        <div class="cmember cm4" style="flex:0 0 9.0%"><b>90 000</b><i>Финансист</i></div>
+        <div class="cmember cm5" style="flex:0 0 3.0%"><b>30 000</b><i></i></div>
+        <div class="cmember cm6 tracker" style="flex:0 0 55.2%"><b>550 000 ₸</b><i>Бизнес-трекер — 55% всего бюджета найма</i></div>
+        <div class="cmember result"><b>59 900</b></div>
+      </div>
+      <div class="cdrop">
+        <span>— пятеро подрядчиков</span><span>— трекер, 55% бюджета</span><span>= один связанный контур</span>
+      </div>
+    </div>
+
     <div class="verdict">
       <div>
         <h3>Мы предлагаем третий — <em>один связанный контур</em></h3>
@@ -508,6 +604,44 @@
       <div class="eyebrow">Что внутри · формула 6П</div>
       <h2>Шесть шагов в одной логике: следующий собирается из выводов предыдущего</h2>
       <p>Это не набор модулей, между которыми вы ходите. Под каждым шагом написано, что именно он отдаёт следующему, — в наборе из подписок ровно на этих стыках работает человек, а чаще не работает никто.</p>
+    </div>
+
+    <div class="pulsewrap">
+      <div class="pulsebox">
+        <p class="pulsecap">Данные идут по циклу сами</p>
+        <svg viewBox="-20 0 420 300" role="img" aria-label="Цикл 6П: данные проходят шесть шагов, на каждом переходе показано, что передаётся дальше">
+          <circle cx="190" cy="158" r="86" fill="none" stroke="#EEC830" stroke-opacity="0.22" stroke-width="1.4"/>
+          <circle class="nvnode nvn1" cx="190" cy="72"  r="17" fill="#16283F" stroke="#EEC830" stroke-width="1.3"/>
+          <circle class="nvnode nvn2" cx="264" cy="115" r="17" fill="#16283F" stroke="#EEC830" stroke-width="1.3"/>
+          <circle class="nvnode nvn3" cx="264" cy="201" r="17" fill="#16283F" stroke="#EEC830" stroke-width="1.3"/>
+          <circle class="nvnode nvn4" cx="190" cy="244" r="17" fill="#16283F" stroke="#EEC830" stroke-width="1.3"/>
+          <circle class="nvnode nvn5" cx="116" cy="201" r="17" fill="#16283F" stroke="#EEC830" stroke-width="1.3"/>
+          <circle class="nvnode nvn6" cx="116" cy="115" r="17" fill="#16283F" stroke="#EEC830" stroke-width="1.3"/>
+          <g fill="#EEC830" font-family="'IBM Plex Mono', monospace" font-size="12.5" text-anchor="middle">
+            <text x="190" y="77">1</text><text x="264" y="120">2</text><text x="264" y="206">3</text>
+            <text x="190" y="249">4</text><text x="116" y="206">5</text><text x="116" y="120">6</text>
+          </g>
+          <g fill="#F4F3F0" font-family="'IBM Plex Mono', monospace" font-size="12" letter-spacing="1.2">
+            <text x="190" y="44"  text-anchor="middle">ПОНЯТЬ</text>
+            <text x="290" y="107" text-anchor="start">ПРЕДЛОЖИТЬ</text>
+            <text x="290" y="209" text-anchor="start">ПРИВЛЕЧЬ</text>
+            <text x="190" y="280" text-anchor="middle">ПРОДАТЬ</text>
+            <text x="90"  y="209" text-anchor="end">ПОСЧИТАТЬ</text>
+            <text x="90"  y="107" text-anchor="end">ПЕРЕСОБРАТЬ</text>
+          </g>
+          <g font-family="'IBM Plex Sans', sans-serif" font-size="11.5" fill="#EEC830" text-anchor="middle">
+            <text class="nvpass nvp1" x="190" y="152">карта разрывов → в продукт</text>
+            <text class="nvpass nvp2" x="190" y="152">продукт и боли → в воронку</text>
+            <text class="nvpass nvp3" x="190" y="152">воронка → в контент-план</text>
+            <text class="nvpass nvp4" x="190" y="152">заявки → в заказы и оплаты</text>
+            <text class="nvpass nvp5" x="190" y="152">оплаты → в финмодель</text>
+            <text class="nvpass nvp6" x="190" y="152">выводы → в новую диагностику</text>
+          </g>
+          <text x="190" y="178" text-anchor="middle" fill="#8A9BB0" font-family="'IBM Plex Mono', monospace" font-size="9.5" letter-spacing="1.2">ЗАМКНУТЫЙ ЦИКЛ</text>
+          <circle id="nvTrail" r="7" fill="#EEC830"/>
+          <circle id="nvPulse" r="5" fill="#FFF6D0"/>
+        </svg>
+      </div>
     </div>
 
     <div class="flow">
