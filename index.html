@@ -51,7 +51,7 @@
   .band--warm .eyebrow, .band--mist .eyebrow { color:var(--gold-dk); }
 
   .head { max-width:740px; margin-bottom:46px; }
-  .head h2 { font-size:35px; line-height:1.14; margin:18px 0 0; }
+  .head h2 { font-size:41px; line-height:1.12; margin:18px 0 0; }
   .head p { margin-top:17px; font-size:17px; line-height:1.6; }
   .band--navy .head p { color:var(--silver); }
   .band--warm .head p, .band--mist .head p { color:var(--ink-2); }
@@ -93,9 +93,9 @@
     -webkit-mask-image:radial-gradient(ellipse 74% 60% at 42% 16%, black 0%, transparent 76%);
     mask-image:radial-gradient(ellipse 74% 60% at 42% 16%, black 0%, transparent 76%); }
   .hero .wrap { position:relative; z-index:1; }
-  .hero-grid { display:grid; grid-template-columns:1.12fr .88fr; gap:56px; align-items:center; }
+  .hero-grid { display:grid; grid-template-columns:1.28fr .72fr; gap:52px; align-items:center; }
   @media (max-width:980px){ .hero-grid{grid-template-columns:1fr; gap:42px} }
-  .hero h1 { font-size:47px; line-height:1.1; color:var(--warm); margin-top:22px; }
+  .hero h1 { font-size:44px; line-height:1.1; color:var(--warm); margin-top:22px; }
   .hero h1 em { font-style:normal; background:var(--g-text); -webkit-background-clip:text;
                 background-clip:text; color:transparent; }
   .hero h1 .nb { white-space:nowrap; }
@@ -113,12 +113,13 @@
                 display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px 40px; max-width:560px; }
   @media (max-width:420px){ .hero-facts{grid-template-columns:1fr} }
   .fact b { display:block; font-family:var(--f-mono); font-weight:500; font-size:26px;
-            color:var(--gold); line-height:1; font-variant-numeric:tabular-nums; }
+            color:var(--warm); line-height:1; font-variant-numeric:tabular-nums; }
+  .fact--key b { color:var(--gold); }
   .fact span { display:block; font-size:13px; line-height:1.45; color:var(--silver); margin-top:8px; max-width:19ch; }
 
   /* цикл 6П */
   .ring-box { background:var(--navy-2); border:1px solid var(--line-d); border-radius:20px; padding:18px 12px 12px; }
-  .ring-cap { font-family:var(--f-mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  .ring-cap { font-family:var(--f-mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase;
               color:var(--silver); text-align:center; padding:0 14px 6px; }
 
   /* ---------- КАРТА РАЗРЫВОВ (пример) ---------- */
@@ -145,8 +146,10 @@
   .gap-n { font-family:var(--f-mono); font-size:12px; color:var(--gold); padding-top:3px; }
   .gap-what b { display:block; font-family:var(--f-head); font-weight:700; font-size:15px; color:var(--warm); }
   .gap-what span { display:block; font-size:13.5px; line-height:1.5; color:var(--silver); margin-top:5px; }
-  .cli { font-size:13.5px; line-height:1.5; color:var(--warm); opacity:.82; }
-  .cli::before { content:"«"; } .cli::after { content:"»"; }
+  .cli { font-size:14px; line-height:1.55; color:#E4D9B8; font-style:italic; position:relative; padding-left:16px; }
+  .cli::before { content:"«"; position:absolute; left:0; top:-2px; font-style:normal;
+                 font-size:24px; line-height:1; color:var(--gold); opacity:.65; }
+  .cli::after { content:"»"; font-style:normal; color:var(--gold); opacity:.65; }
   .fix { font-size:13.5px; line-height:1.5; color:var(--warm); opacity:.88; }
   .fix::before { content:"→ "; color:var(--gold); }
   .demo-foot { padding:20px 24px; background:rgba(10,22,40,.42); }
@@ -217,7 +220,7 @@
   .fstep .pass { margin-top:16px; font-family:var(--f-mono); font-size:11.5px; line-height:1.5; color:var(--gold); }
   .agents { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:44px; }
   @media (max-width:700px){ .agents{grid-template-columns:1fr} }
-  .agent { background:var(--navy-2); border:1px solid var(--line-d); border-radius:16px; padding:26px; }
+  .agent { border-top:2px solid rgba(238,200,48,.55); padding-top:18px; }
   .agent-k { font-family:var(--f-mono); font-size:10.5px; letter-spacing:.14em;
              text-transform:uppercase; color:var(--gold); }
   .agent h3 { font-size:19px; color:var(--warm); margin-top:9px; }
@@ -249,18 +252,18 @@
   .tier-who { margin-top:16px; font-size:14px; line-height:1.55; color:var(--warm); }
   .tier-key { margin-top:16px; padding-top:14px; border-top:1px solid var(--line-d);
               font-size:13.5px; line-height:1.55; color:var(--silver); }
-  .tier-key b { color:var(--gold); font-weight:600; }
+  .tier-key b { color:var(--warm); font-weight:600; }
   .tier .gap-fill { flex:1; min-height:18px; }
   .tier-cta { margin-top:20px; }
-  .same { margin-top:24px; border:1px solid var(--line-d); border-radius:16px; padding:28px;
-          background:rgba(10,22,40,.42); }
+  .tier-cta .btn { padding:15px 16px; font-size:14.5px; white-space:nowrap; }
+  .same { margin-top:40px; padding-top:26px; border-top:1px solid var(--line-d); }
   .same-k { font-family:var(--f-mono); font-size:10.5px; letter-spacing:.14em;
             text-transform:uppercase; color:var(--gold); }
   .same ul { margin-top:16px; display:grid; grid-template-columns:repeat(3,1fr); gap:11px 28px; }
   @media (max-width:860px){ .same ul{grid-template-columns:repeat(2,1fr)} }
   @media (max-width:560px){ .same ul{grid-template-columns:1fr} }
   .same li { font-size:14px; line-height:1.5; color:var(--warm); padding-left:21px; position:relative; }
-  .same li::before { content:"✓"; position:absolute; left:0; color:var(--gold); font-size:12.5px; }
+  .same li::before { content:"✓"; position:absolute; left:0; color:var(--silver); font-size:12.5px; }
   .same p { margin-top:20px; padding-top:18px; border-top:1px solid var(--line-d);
             font-size:14px; line-height:1.6; color:var(--silver); }
   .same p b { color:var(--warm); font-weight:600; }
@@ -313,7 +316,6 @@
   .cnums{display:flex;align-items:baseline;gap:24px;flex-wrap:wrap;margin-bottom:26px;min-height:62px}
   .cnum{font-family:var(--f-mono);font-weight:500;font-variant-numeric:tabular-nums;line-height:1;font-size:52px}
   .cnum--from{color:rgba(244,243,240,.85)}
-  .cnum--to{color:var(--gold);opacity:0}
   @media(max-width:640px){.cnum{font-size:34px}}
   .cteam{display:flex;gap:3px;height:78px}
   .cmember{border-radius:7px;display:flex;flex-direction:column;justify-content:center;padding:0 10px;
@@ -333,6 +335,10 @@
   @media (prefers-reduced-motion: no-preference){
     @supports (animation-timeline: view()){
       .collapse .cmember{animation:cSquash linear both;animation-timeline:view()}
+      .collapse .cmember b,.collapse .cmember i{animation:cTextOut linear both;animation-timeline:view()}
+      .cm1 b,.cm1 i{animation-range:contain 8% contain 18%} .cm2 b,.cm2 i{animation-range:contain 14% contain 24%}
+      .cm3 b,.cm3 i{animation-range:contain 20% contain 30%} .cm4 b,.cm4 i{animation-range:contain 26% contain 36%}
+      .cm5 b,.cm5 i{animation-range:contain 32% contain 42%} .cm6 b,.cm6 i{animation-range:contain 40% contain 56%}
       .cm1{animation-range:contain 12% contain 26%} .cm2{animation-range:contain 18% contain 32%}
       .cm3{animation-range:contain 24% contain 38%} .cm4{animation-range:contain 30% contain 44%}
       .cm5{animation-range:contain 36% contain 50%} .cm6{animation-range:contain 46% contain 70%}
@@ -346,6 +352,7 @@
     }
   }
   @keyframes cSquash{ to{ flex-basis:0; width:0; padding:0; opacity:0 } }
+  @keyframes cTextOut{ to{ opacity:0 } }
   @keyframes cAppear{ from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
   @keyframes cFade{ to{ opacity:.18; font-size:28px } }
 
@@ -405,14 +412,14 @@
     <div class="hero-grid">
       <div>
         <div class="eyebrow">Платформа для экспертов, стартапов, бизнеса и агентств</div>
-        <h1>NeuroVia — ваш <span class="nb">бизнес-трекер</span> <em>для роста</em></h1>
+        <h1>NeuroVia — ваш <span class="nb">бизнес-трекер</span><br><em>для роста</em></h1>
         <p class="lede">Шесть шагов, где вывод одного сам становится входом следующего. Одиннадцать каналов публикации и переписки, финмодель и разбор конкурентов — в одном кабинете.</p>
         <p class="hero-call">Найдите, где ваш бизнес теряет деньги.</p>
         <div class="hero-cta">
           <a href="#begin" class="btn btn--gold">Диагностика бесплатно</a>
         </div>
         <div class="hero-facts">
-          <div class="fact"><b>0 ₸</b><span>первый разбор, без карты</span></div>
+          <div class="fact fact--key"><b>0 ₸</b><span>первый разбор, без карты</span></div>
           <div class="fact"><b>3 дня</b><span>полный цикл в триале, без карты</span></div>
           <div class="fact"><b>41 ч</b><span>освобождается в месяц на одном проекте</span></div>
           <div class="fact"><b>59 900 ₸</b><span>дальше, помесячно и без привязки</span></div>
@@ -562,7 +569,6 @@
     <div class="collapse">
       <div class="cnums">
         <span class="cnum cnum--from">997 000 ₸</span>
-        <span class="cnum cnum--to">59 900 ₸</span>
       </div>
       <div class="cteam">
         <div class="cmember cm1" style="flex:0 0 18.1%"><b>180 000 ₸</b><i>Маркетолог</i></div>
@@ -571,7 +577,7 @@
         <div class="cmember cm4" style="flex:0 0 9.0%"><b>90 000</b><i>Финансист</i></div>
         <div class="cmember cm5" style="flex:0 0 3.0%"><b>30 000</b><i></i></div>
         <div class="cmember cm6 tracker" style="flex:0 0 55.2%"><b>550 000 ₸</b><i>Бизнес-трекер — 55% всего бюджета найма</i></div>
-        <div class="cmember result"><b>59 900</b></div>
+        <div class="cmember result"></div>
       </div>
       <div class="cdrop">
         <span>— пятеро подрядчиков</span><span>— трекер, 55% бюджета</span><span>= один связанный контур</span>
@@ -777,8 +783,8 @@
         <div class="tier-price">59 900 ₸</div>
         <div class="tier-per">в месяц · 1 проект</div>
         <p class="tier-who">Первый платный шаг после триала. Эксперт или основатель, который ведёт одно дело и хочет замкнуть цикл, не разворачивая пока все каналы.</p>
-        <div class="gap-fill"></div>
         <p class="tier-key">Каналы: <b>Телеграм</b> — бот, канал и группа — и <b>WhatsApp</b>. Автоматический приём оплат через <b>платёжные системы</b>. Один пользователь, без команды.</p>
+        <div class="gap-fill"></div>
         <div class="tier-cta"><a href="#begin" class="btn btn--gnavy btn--block">Начать бесплатно</a></div>
       </div>
 
@@ -788,8 +794,8 @@
         <div class="tier-price">125 000 ₸</div>
         <div class="tier-per">в месяц · 1 проект</div>
         <p class="tier-who">Когда контент-план собран и пора разворачивать его на все площадки, а заявки приходят не только в Телеграм.</p>
-        <div class="gap-fill"></div>
         <p class="tier-key">Всё из «Круга» плюс <b>публикация в десять соцсетей</b>: Instagram, Facebook, Threads, TikTok, X, YouTube, LinkedIn, Pinterest, Bluesky, Google Business — один контент-план на все сразу.</p>
+        <div class="gap-fill"></div>
         <div class="tier-cta"><a href="#begin" class="btn btn--gold btn--block">Начать бесплатно</a></div>
       </div>
 
@@ -798,8 +804,8 @@
         <div class="tier-price">от 280 000 ₸</div>
         <div class="tier-per">в месяц · 3 проекта</div>
         <p class="tier-who">Действующий бизнес с несколькими направлениями или продуктами, где у каждого своя воронка и своя экономика.</p>
-        <div class="gap-fill"></div>
         <p class="tier-key">Всё из «Старта» на <b>трёх проектах</b> с раздельными комплектами каналов. Десять мест в команде.</p>
+        <div class="gap-fill"></div>
         <div class="tier-cta"><a href="#" class="btn btn--gnavy btn--block">Обсудить внедрение</a></div>
       </div>
 
@@ -808,8 +814,8 @@
         <div class="tier-price">от 350 000 ₸</div>
         <div class="tier-per">в месяц · 5 проектов</div>
         <p class="tier-who">Агентство с несколькими клиентами или корпорация с направлениями: каждому нужен свой комплект, роли и доступы.</p>
-        <div class="gap-fill"></div>
         <p class="tier-key">Всё из «Роста» на пяти проектах, шестой и далее докупкой. <b>Онбординг и живой разбор с методологом</b>, команда без ограничения.</p>
+        <div class="gap-fill"></div>
         <div class="tier-cta"><a href="#" class="btn btn--gnavy btn--block">Обсудить внедрение</a></div>
       </div>
     </div>
