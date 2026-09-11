@@ -128,27 +128,30 @@
   .demo-top h3 { font-size:17px; color:var(--warm); }
   .demo-tag { font-family:var(--f-mono); font-size:10.5px; letter-spacing:.13em; text-transform:uppercase;
               color:var(--gold); background:rgba(238,200,48,.13); padding:4px 9px; border-radius:4px; }
-  .gaps { }
-  .gap-row { display:grid; grid-template-columns:34px 1fr 150px 200px; gap:18px;
-             padding:17px 24px; border-bottom:1px solid var(--line-d); align-items:start; }
-  @media (max-width:900px){ .gap-row{grid-template-columns:28px 1fr 130px; }
-                            .gap-row .fix{grid-column:2 / -1; margin-top:2px} }
-  @media (max-width:560px){ .gap-row{grid-template-columns:28px 1fr; gap:10px}
-                            .gap-row .cost{grid-column:2; text-align:left} }
+  .gap-head, .gap-row { display:grid; grid-template-columns:34px 1.25fr 1fr 1fr; gap:20px; padding:0 24px; }
+  .gap-head { padding-top:16px; padding-bottom:12px; border-bottom:1px solid var(--line-d); }
+  .gap-head span { font-family:var(--f-mono); font-size:10.5px; letter-spacing:.13em;
+                   text-transform:uppercase; color:var(--silver); }
+  .gap-row { padding-top:18px; padding-bottom:18px; border-bottom:1px solid var(--line-d); align-items:start; }
+  @media (max-width:980px){
+    .gap-head { display:none; }
+    .gap-row { grid-template-columns:28px 1fr 1fr; gap:14px; }
+    .gap-row .fix { grid-column:2 / -1; }
+  }
+  @media (max-width:620px){
+    .gap-row { grid-template-columns:28px 1fr; gap:10px; }
+    .gap-row .cli, .gap-row .fix { grid-column:2; }
+  }
   .gap-n { font-family:var(--f-mono); font-size:12px; color:var(--gold); padding-top:3px; }
   .gap-what b { display:block; font-family:var(--f-head); font-weight:700; font-size:15px; color:var(--warm); }
   .gap-what span { display:block; font-size:13.5px; line-height:1.5; color:var(--silver); margin-top:5px; }
-  .cost { font-family:var(--f-mono); font-size:15px; color:var(--gold); text-align:right;
-          font-variant-numeric:tabular-nums; }
-  .cost em { font-style:normal; display:block; font-family:var(--f-body); font-size:11.5px;
-             color:var(--silver); margin-top:4px; }
-  .fix { font-size:13px; line-height:1.5; color:var(--warm); opacity:.86; }
+  .cli { font-size:13.5px; line-height:1.5; color:var(--warm); opacity:.82; }
+  .cli::before { content:"«"; } .cli::after { content:"»"; }
+  .fix { font-size:13.5px; line-height:1.5; color:var(--warm); opacity:.88; }
   .fix::before { content:"→ "; color:var(--gold); }
-  .demo-foot { padding:20px 24px; background:rgba(10,22,40,.42);
-               display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:12px 20px; }
-  .demo-foot .sum { font-family:var(--f-head); font-weight:700; font-size:15px; color:var(--warm); }
-  .demo-foot .sum-v { font-family:var(--f-mono); font-weight:500; font-size:24px; color:var(--gold);
-                      font-variant-numeric:tabular-nums; }
+  .demo-foot { padding:20px 24px; background:rgba(10,22,40,.42); }
+  .demo-foot p { font-size:14px; line-height:1.55; color:var(--warm); }
+  .demo-foot b { color:var(--gold); font-weight:600; }
   .demo-note { margin-top:22px; padding-left:16px; border-left:2px solid rgba(238,200,48,.55);
                font-size:13.5px; line-height:1.58; color:var(--silver); max-width:76ch; }
 
@@ -376,54 +379,62 @@
   <div class="wrap">
     <div class="head">
       <div class="eyebrow">Что вы получите за первый вечер</div>
-      <h2>Диагностика не даёт советов. Она даёт цену каждого разрыва</h2>
-      <p>Платформа задаёт вопросы, а на выходе собирает карту: где именно бизнес теряет деньги, сколько это стоит в месяц и в каком порядке это чинить. Бесплатно и без карты — потому что без этой карты остальное продавать бессмысленно.</p>
+      <h2>Диагностика не даёт советов. Она показывает, где именно теряются деньги</h2>
+      <p>Платформа задаёт вопросы, а на выходе собирает список: что не задано в основании вашего бизнеса, как это выглядит со стороны клиента и что с этим делать первым. Бесплатно и без карты — потому что без этого списка остальное продавать бессмысленно.</p>
     </div>
 
     <div class="demo">
       <div class="demo-top">
-        <h3>Карта разрывов · эксперт-нутрициолог, один проект</h3>
-        <span class="demo-tag">Пример вывода</span>
+        <h3>Где теряются деньги · эксперт, один проект</h3>
+        <span class="demo-tag">Так выглядит карта</span>
+      </div>
+      <div class="gap-head">
+        <span></span><span>Что не задано</span><span>Как это видит клиент</span><span>Что делаем на платформе</span>
       </div>
       <div class="gaps">
         <div class="gap-row">
           <div class="gap-n">01</div>
-          <div class="gap-what"><b>Продукт без цены и обещания</b><span>Три заявки из четырёх не доходят до оплаты, и каждый раз по своей причине</span></div>
-          <div class="cost">210 000 ₸<em>в месяц</em></div>
-          <div class="fix">Собрать карточку продукта: оффер, цена, позиционирование</div>
+          <div class="gap-what"><b>Позиционирование не сформулировано</b><span>Каждому объясняете с нуля по часу — и всё равно слышите «я подумаю»</span></div>
+          <div class="cli">Не понимаю, к кому пришёл и чем он отличается от десяти похожих</div>
+          <div class="fix">Собираем позиционирование: для кого вы, от чего спасаете, чем отличаетесь</div>
         </div>
         <div class="gap-row">
           <div class="gap-n">02</div>
-          <div class="gap-what"><b>Заявки в трёх разных местах</b><span>Сторис, личка и блокнот: каждая пятая теряется, часть отвечается через сутки</span></div>
-          <div class="cost">84 000 ₸<em>в месяц</em></div>
-          <div class="fix">Единое окно переписки, заказ рядом с диалогом</div>
+          <div class="gap-what"><b>Нет продукта с понятным результатом</b><span>Продаёте консультацию, а не результат; цена меняется на ходу</span></div>
+          <div class="cli">Не понимаю, что получу на выходе и почему это стоит столько</div>
+          <div class="fix">Карточка продукта с методологом: обещание, результат, цена — одна на всё</div>
         </div>
         <div class="gap-row">
           <div class="gap-n">03</div>
-          <div class="gap-what"><b>Аудитория шире, чем платящие</b><span>Читают одни люди, покупают совсем другие — охваты растут, заявок нет</span></div>
-          <div class="cost">45 000 ₸<em>в месяц</em></div>
-          <div class="fix">Пересобрать аудитории по ступеням Ханта</div>
+          <div class="gap-what"><b>Не определена аудитория, которая платит</b><span>Охваты растут, заявок нет: читают одни люди, покупают другие</span></div>
+          <div class="cli">Вижу контент не про себя и листаю дальше</div>
+          <div class="fix">Разбираем аудитории и оставляем те, что действительно покупают</div>
         </div>
         <div class="gap-row">
           <div class="gap-n">04</div>
-          <div class="gap-what"><b>Контент без плана</b><span>Шесть постов вместо двадцати, темы кончаются к середине месяца</span></div>
-          <div class="cost">12 часов<em>вечеров в месяц</em></div>
-          <div class="fix">Контент-план из разобранных болей, генерация пачкой</div>
+          <div class="gap-what"><b>Боли аудитории не разложены</b><span>Контент вежливо читают и не откликаются</span></div>
+          <div class="cli">Тема вроде важная, но своей проблемы я в ней не узнаю</div>
+          <div class="fix">Боли по ступеням Ханта, под каждую — свой оффер</div>
         </div>
         <div class="gap-row">
           <div class="gap-n">05</div>
-          <div class="gap-what"><b>Маржа по продуктам не разложена</b><span>Непонятно, какой продукт кормит, а какой съедает вечера — решения наугад</span></div>
-          <div class="cost">без цифры<em>решения наугад</em></div>
-          <div class="fix">Финмодель: маржа по продукту, точка безубыточности</div>
+          <div class="gap-what"><b>Непонятно, с кем вас сравнивают</b><span>Слышите «дорого» там, где вы на самом деле дешевле</span></div>
+          <div class="cli">Сравниваю с теми, кого знаю, и ухожу к тому, кто понятнее</div>
+          <div class="fix">Разбор конкурентов и вашего места между ними</div>
+        </div>
+        <div class="gap-row">
+          <div class="gap-n">06</div>
+          <div class="gap-what"><b>Заявка не доходит до оплаты</b><span>Сторис, личка и блокнот: часть обращений теряется, часть отвечается через сутки</span></div>
+          <div class="cli">Написал и не дождался ответа — ушёл к тому, кто ответил</div>
+          <div class="fix">Воронка со ступенями и единое окно заявок</div>
         </div>
       </div>
       <div class="demo-foot">
-        <span class="sum">Итого видимых потерь</span>
-        <span class="sum-v">339 000 ₸ и 12 часов в месяц</span>
+        <p><b>Чинить сверху вниз.</b> Пока не заданы первые три, остальное чинить бесполезно: контент, реклама и продажи опираются на них — и повторяют их ошибку.</p>
       </div>
     </div>
 
-    <p class="demo-note">Это пример вывода на модельном проекте, а не данные реального клиента. Ваши цифры будут другими — диагностика считает их на ваших ответах и вашей нише, и именно поэтому она стоит первой и ничего не стоит.</p>
+    <p class="demo-note">Так выглядит карта у эксперта, который ведёт один проект. У вас будет своя — диагностика собирает её по вашим ответам. Суммы по каждому пункту платформа посчитает на следующем цикле, когда появятся ваши данные по заявкам и продажам.</p>
   </div>
 </section>
 
