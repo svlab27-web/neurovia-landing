@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NeuroVia — два варианта графики для блока сравнения</title>
+<title>NeuroVia — шесть вариантов графики для блока сравнения</title>
 <meta name="robots" content="noindex">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230F1C2E'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%23EEC830' stroke-width='2.5'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -11,7 +11,7 @@
   :root{
     --navy:#0F1C2E; --navy-2:#16283F; --warm:#F4F3F0; --mist:#E8E6E1;
     --gold:#EEC830; --gold-dk:#8B6010; --ink:#0A1628; --ink-2:#46566B;
-    --silver:#8A9BB0; --line-d:rgba(244,243,240,0.12); --line-l:#DAD7D0;
+    --silver:#8A9BB0; --line-d:rgba(244,243,240,0.12);
     --g-warm:linear-gradient(135deg,#FFE070 0%,#EEC830 45%,#C49818 100%);
     --f-head:'Manrope',-apple-system,'Segoe UI',sans-serif;
     --f-body:'IBM Plex Sans',-apple-system,'Segoe UI',Roboto,sans-serif;
@@ -19,7 +19,7 @@
     color-scheme:light;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--warm);color:var(--ink);font-family:var(--f-body);
+  body{margin:0;background:var(--navy);color:var(--warm);font-family:var(--f-body);
        font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
   h1,h2,h3{font-family:var(--f-head);font-weight:800;margin:0;letter-spacing:-.024em;text-wrap:balance}
   p{margin:0}
@@ -27,62 +27,77 @@
   .wrap{max-width:1140px;margin:0 auto;padding:0 26px}
   @media(max-width:780px){.wrap{padding:0 18px}}
 
-  .top{background:var(--navy);color:var(--warm);padding:56px 0 48px}
+  .top{padding:56px 0 44px;border-bottom:1px solid var(--line-d)}
   .kick{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold)}
-  .top h1{font-size:38px;line-height:1.14;margin-top:16px}
-  @media(max-width:640px){.top h1{font-size:26px}}
-  .top p{margin-top:16px;font-size:17px;color:var(--silver);max-width:70ch}
+  .top h1{font-size:36px;line-height:1.14;margin-top:16px}
+  @media(max-width:640px){.top h1{font-size:25px}}
+  .top p{margin-top:16px;font-size:16.5px;color:var(--silver);max-width:72ch}
+  .nums{margin-top:26px;display:flex;flex-wrap:wrap;gap:14px 34px;font-family:var(--f-mono);font-size:13.5px;color:var(--silver)}
+  .nums b{color:var(--warm);font-weight:500}
 
-  .band{padding:72px 0;background:var(--navy);color:var(--warm)}
-  .band+.band{border-top:1px solid var(--line-d)}
+  .band{padding:64px 0;border-bottom:1px solid var(--line-d)}
   .tag{display:inline-block;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;
        text-transform:uppercase;color:var(--ink);background:var(--g-warm);padding:5px 12px;border-radius:5px}
-  .band h2{font-size:30px;margin-top:18px;line-height:1.16}
-  @media(max-width:640px){.band h2{font-size:23px}}
-  .band .sub{margin-top:14px;font-size:16px;color:var(--silver);max-width:68ch}
+  .band h2{font-size:28px;margin-top:16px;line-height:1.18}
+  @media(max-width:640px){.band h2{font-size:22px}}
+  .band .sub{margin-top:13px;font-size:15.5px;color:var(--silver);max-width:70ch}
+  .stage{margin-top:38px;border:1px solid var(--line-d);border-radius:18px;background:var(--navy-2);padding:34px 30px}
+  .note{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:780px){.note{grid-template-columns:1fr}}
+  .note div{border-left:2px solid var(--line-d);padding-left:16px}
+  .note div.p{border-left-color:var(--gold)}
+  .note h3{font-family:var(--f-mono);font-weight:500;font-size:10.5px;letter-spacing:.14em;
+           text-transform:uppercase;color:var(--silver)}
+  .note div.p h3{color:var(--gold)}
+  .note p{margin-top:8px;font-size:14px;line-height:1.55;color:var(--silver)}
 
-  /* ---------- ВАРИАНТ 1 · ТОЧКИ ---------- */
-  .dots-chart{margin-top:46px;border:1px solid var(--line-d);border-radius:18px;
-              background:var(--navy-2);padding:34px 30px 26px}
-  .dots-unit{font-family:var(--f-mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;
-             color:var(--silver);margin-bottom:26px}
-  .drow{display:grid;grid-template-columns:210px 1fr auto;gap:22px;align-items:center;
-        padding:20px 0;border-top:1px solid var(--line-d)}
+  /* 1 · точки */
+  .unit{font-family:var(--f-mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--silver);margin-bottom:24px}
+  .drow{display:grid;grid-template-columns:200px 1fr auto;gap:22px;align-items:center;padding:18px 0;border-top:1px solid var(--line-d)}
   .drow:first-of-type{border-top:none}
   @media(max-width:880px){.drow{grid-template-columns:1fr;gap:10px}}
-  .dname{font-family:var(--f-head);font-weight:700;font-size:16px;color:var(--warm)}
-  .dname em{font-style:normal;display:block;font-family:var(--f-mono);font-weight:400;
-            font-size:11.5px;color:var(--silver);margin-top:5px;letter-spacing:.02em}
+  .dname{font-family:var(--f-head);font-weight:700;font-size:15.5px}
+  .dname em{font-style:normal;display:block;font-family:var(--f-mono);font-weight:400;font-size:11.5px;color:var(--silver);margin-top:5px}
   .dots{display:flex;flex-wrap:wrap;gap:9px}
-  .dot{width:22px;height:22px;border-radius:50%;flex:0 0 auto}
-  .dot--mute{background:rgba(138,155,176,.55)}
-  .dot--mute-p{background:linear-gradient(90deg,rgba(138,155,176,.55) 0 var(--p),transparent var(--p));
-               box-shadow:inset 0 0 0 1px rgba(138,155,176,.35)}
-  .dot--gold{background:var(--gold);box-shadow:0 0 0 4px rgba(238,200,48,.14)}
-  .dot--gold-p{background:linear-gradient(90deg,var(--gold) 0 var(--p),transparent var(--p));
-               box-shadow:inset 0 0 0 1px rgba(238,200,48,.5)}
-  .dsum{font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-size:22px;
-        color:var(--warm);white-space:nowrap;text-align:right}
-  .drow.is-ours .dsum{color:var(--gold);font-size:26px}
-  .drow.is-ours .dname{color:var(--gold)}
+  .dot{width:21px;height:21px;border-radius:50%;flex:0 0 auto}
+  .dot--m{background:rgba(138,155,176,.55)}
+  .dot--mp{background:linear-gradient(90deg,rgba(138,155,176,.55) 0 var(--p),transparent var(--p));box-shadow:inset 0 0 0 1px rgba(138,155,176,.35)}
+  .dot--g{background:var(--gold);box-shadow:0 0 0 4px rgba(238,200,48,.14)}
+  .dot--gp{background:linear-gradient(90deg,var(--gold) 0 var(--p),transparent var(--p));box-shadow:inset 0 0 0 1px rgba(238,200,48,.5)}
+  .dsum{font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-size:21px;white-space:nowrap;text-align:right}
+  .drow.ours .dsum{color:var(--gold);font-size:25px}
+  .drow.ours .dname{color:var(--gold)}
 
-  /* ---------- ВАРИАНТ 2 · КОЛЬЦА ---------- */
-  .rings{margin-top:46px;border:1px solid var(--line-d);border-radius:18px;
-         background:var(--navy-2);padding:20px 20px 10px;display:flex;justify-content:center}
+  /* 3 · типографика */
+  .typo{display:flex;flex-direction:column;gap:26px}
+  .trow{display:flex;align-items:baseline;gap:22px;flex-wrap:wrap}
+  .tval{font-family:var(--f-mono);font-weight:500;font-variant-numeric:tabular-nums;line-height:.92;color:rgba(244,243,240,.55)}
+  .trow.ours .tval{color:var(--gold)}
+  .tlab{font-size:14px;color:var(--silver)}
+  .trow.ours .tlab{color:var(--warm)}
 
-  /* ---------- оценка ---------- */
-  .verdict{margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
-  @media(max-width:780px){.verdict{grid-template-columns:1fr}}
-  .vcard{border:1px solid var(--line-d);border-radius:14px;padding:22px}
-  .vcard h3{font-size:15px;color:var(--warm)}
-  .vcard p{margin-top:10px;font-size:14px;line-height:1.55;color:var(--silver)}
-  .vcard.plus{border-color:rgba(238,200,48,.4)}
-  .vcard.plus h3{color:var(--gold)}
+  /* 4 · сегментированная полоса */
+  .seg{display:flex;height:54px;border-radius:8px;overflow:hidden;gap:2px}
+  .seg span{display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:11.5px;color:var(--ink)}
+  .seg .s1{background:rgba(138,155,176,.5)}
+  .seg .s2{background:rgba(138,155,176,.42)}
+  .seg .s3{background:rgba(138,155,176,.34)}
+  .seg .s4{background:rgba(138,155,176,.46)}
+  .seg .s5{background:rgba(138,155,176,.28)}
+  .seg .s6{background:var(--g-warm);font-weight:500}
+  .seglab{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:16px;font-family:var(--f-mono);font-size:11.5px;color:var(--silver)}
+  .seglab i{font-style:normal;display:inline-block;width:9px;height:9px;border-radius:2px;background:rgba(138,155,176,.45);margin-right:7px}
+  .seglab .hl i{background:var(--gold)}
+  .seglab .hl{color:var(--gold)}
+  .segours{margin-top:30px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .segours .bar{height:54px;border-radius:8px;background:var(--g-warm);width:6%;min-width:34px}
+  .segours .lab{font-family:var(--f-mono);font-size:15px;color:var(--gold)}
 
-  .foot{background:var(--mist);padding:44px 0;color:var(--ink)}
+  .foot{padding:54px 0;background:var(--mist);color:var(--ink)}
   .foot h2{font-size:22px}
-  .foot p{margin-top:12px;font-size:15px;line-height:1.6;color:var(--ink-2);max-width:74ch}
+  .foot p{margin-top:12px;font-size:15px;line-height:1.6;color:var(--ink-2);max-width:76ch}
   .foot p+p{margin-top:10px}
+  .foot b{color:var(--ink)}
 </style>
 </head>
 <body>
@@ -90,129 +105,229 @@
 <header class="top">
   <div class="wrap">
     <div class="kick">NeuroVia · выбор графики</div>
-    <h1>Два варианта для блока «Есть два способа выстроить маркетинг и продажи»</h1>
-    <p>Одни и те же три числа — 997 000 ₸ наймом, 317 167 ₸ набором сервисов и 59 900 ₸ на платформе. Оба варианта показаны в брендовых цветах и в том размере, в каком встанут на страницу.</p>
+    <h1>Шесть вариантов для блока «Есть два способа выстроить маркетинг и продажи»</h1>
+    <p>Одни и те же три числа, шесть способов их показать. Все в брендовых цветах и в реальном размере. Первые два вы уже видели, четвёртый–шестой — новые, другие по принципу.</p>
+    <div class="nums">
+      <span>Нанять шестерых — <b>997 000 ₸</b></span>
+      <span>Собрать из сервисов — <b>317 167 ₸</b></span>
+      <span>NeuroVia — <b>59 900 ₸</b></span>
+    </div>
   </div>
 </header>
 
-<!-- ВАРИАНТ 1 -->
+<!-- 1 -->
 <section class="band">
   <div class="wrap">
     <span class="tag">Вариант 1</span>
     <h2>Точечная матрица</h2>
-    <p class="sub">Одна точка — 50 000 ₸. Разрыв читается количеством, а не сравнением цифр: двадцать точек против одной с небольшим.</p>
-
-    <div class="dots-chart">
-      <div class="dots-unit">● = 50 000 ₸ в месяц</div>
-
+    <p class="sub">Одна точка — 50 000 ₸. Разрыв читается количеством, а не сравнением цифр.</p>
+    <div class="stage">
+      <div class="unit">● = 50 000 ₸ в месяц</div>
       <div class="drow">
         <div class="dname">Нанять специалистов<em>шестеро, включая трекера</em></div>
         <div class="dots">
-          <span class="dot dot--mute"></span><span class="dot dot--mute"></span><span class="dot dot--mute"></span>
-          <span class="dot dot--mute"></span><span class="dot dot--mute"></span><span class="dot dot--mute"></span>
-          <span class="dot dot--mute"></span><span class="dot dot--mute"></span><span class="dot dot--mute"></span>
-          <span class="dot dot--mute"></span><span class="dot dot--mute"></span><span class="dot dot--mute"></span>
-          <span class="dot dot--mute"></span><span class="dot dot--mute"></span><span class="dot dot--mute"></span>
-          <span class="dot dot--mute"></span><span class="dot dot--mute"></span><span class="dot dot--mute"></span>
-          <span class="dot dot--mute"></span><span class="dot dot--mute-p" style="--p:94%"></span>
+          <span class="dot dot--m"></span><span class="dot dot--m"></span><span class="dot dot--m"></span><span class="dot dot--m"></span>
+          <span class="dot dot--m"></span><span class="dot dot--m"></span><span class="dot dot--m"></span><span class="dot dot--m"></span>
+          <span class="dot dot--m"></span><span class="dot dot--m"></span><span class="dot dot--m"></span><span class="dot dot--m"></span>
+          <span class="dot dot--m"></span><span class="dot dot--m"></span><span class="dot dot--m"></span><span class="dot dot--m"></span>
+          <span class="dot dot--m"></span><span class="dot dot--m"></span><span class="dot dot--m"></span><span class="dot dot--mp" style="--p:94%"></span>
         </div>
         <div class="dsum">997 000 ₸</div>
       </div>
-
       <div class="drow">
         <div class="dname">Собрать набор из сервисов<em>пять подписок + 61 ваш час</em></div>
         <div class="dots">
-          <span class="dot dot--mute"></span><span class="dot dot--mute"></span><span class="dot dot--mute"></span>
-          <span class="dot dot--mute"></span><span class="dot dot--mute"></span><span class="dot dot--mute"></span>
-          <span class="dot dot--mute-p" style="--p:34%"></span>
+          <span class="dot dot--m"></span><span class="dot dot--m"></span><span class="dot dot--m"></span>
+          <span class="dot dot--m"></span><span class="dot dot--m"></span><span class="dot dot--m"></span>
+          <span class="dot dot--mp" style="--p:34%"></span>
         </div>
         <div class="dsum">317 167 ₸</div>
       </div>
-
-      <div class="drow is-ours">
+      <div class="drow ours">
         <div class="dname">NeuroVia<em>тариф «Круг», один проект</em></div>
-        <div class="dots">
-          <span class="dot dot--gold"></span><span class="dot dot--gold-p" style="--p:20%"></span>
-        </div>
+        <div class="dots"><span class="dot dot--g"></span><span class="dot dot--gp" style="--p:20%"></span></div>
         <div class="dsum">59 900 ₸</div>
       </div>
     </div>
-
-    <div class="verdict">
-      <div class="vcard plus">
-        <h3>Чем силён</h3>
-        <p>Точный и нейтральный: точки нельзя нарисовать убедительнее, чем есть. Выглядит как приборная панель, а не как реклама — попадает в вашу полосу. При прокрутке точки могут заполняться по очереди, и разрыв досчитывается на глазах.</p>
-      </div>
-      <div class="vcard">
-        <h3>Чем слаб</h3>
-        <p>Сдержанный до сухости. Не создаёт образа, который запомнится и который можно вынести в рекламу отдельной картинкой. Двадцать одинаковых кружков — это честно, но не эффектно.</p>
-      </div>
+    <div class="note">
+      <div class="p"><h3>Силён</h3><p>Точно и нейтрально, манипулировать нечем. Язык приборной панели, а не рекламы.</p></div>
+      <div><h3>Слаб</h3><p>Сухо. Не даёт образа, который можно вынести в презентацию или в рекламу.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ВАРИАНТ 2 -->
+<!-- 2 -->
 <section class="band">
   <div class="wrap">
     <span class="tag">Вариант 2</span>
     <h2>Концентрические кольца</h2>
-    <p class="sub">Площадь каждого круга пропорциональна сумме. Тот же масштаб, никакого преувеличения — но разрыв виден одним взглядом, и форма перекликается с фирменным циклом 6П.</p>
-
-    <div class="rings">
-      <svg viewBox="0 0 620 400" role="img" aria-label="Три вложенных круга: 997 000 тенге при найме, 317 167 тенге при наборе сервисов, 59 900 тенге на платформе">
-        <!-- внешнее кольцо: 997 000 ₸, r=150 -->
+    <p class="sub">Площадь круга пропорциональна сумме. Форма рифмуется с фирменным циклом 6П.</p>
+    <div class="stage" style="display:flex;justify-content:center">
+      <svg viewBox="0 0 620 400" role="img" aria-label="Три вложенных круга: 997 000, 317 167 и 59 900 тенге">
         <circle cx="200" cy="200" r="150" fill="rgba(138,155,176,0.05)" stroke="#8A9BB0" stroke-opacity="0.55" stroke-width="1.3"/>
-        <!-- среднее кольцо: 317 167 ₸, r=84.6 -->
         <circle cx="200" cy="200" r="84.6" fill="rgba(138,155,176,0.09)" stroke="#8A9BB0" stroke-opacity="0.8" stroke-width="1.3"/>
-        <!-- ядро: 59 900 ₸, r=36.8 -->
         <circle cx="200" cy="200" r="36.8" fill="#EEC830"/>
-
-        <!-- выноски -->
         <g stroke="#8A9BB0" stroke-opacity="0.5" stroke-width="1" fill="none">
-          <path d="M200 50 L300 26 L336 26"/>
-          <path d="M200 115.4 L300 96 L336 96"/>
+          <path d="M200 50 L300 26 L336 26"/><path d="M200 115.4 L300 96 L336 96"/>
         </g>
         <path d="M200 163.2 L300 166 L336 166" stroke="#EEC830" stroke-opacity="0.75" stroke-width="1" fill="none"/>
-        <circle cx="200" cy="50" r="3" fill="#8A9BB0"/>
-        <circle cx="200" cy="115.4" r="3" fill="#8A9BB0"/>
-        <circle cx="200" cy="163.2" r="3" fill="#EEC830"/>
-
+        <circle cx="200" cy="50" r="3" fill="#8A9BB0"/><circle cx="200" cy="115.4" r="3" fill="#8A9BB0"/><circle cx="200" cy="163.2" r="3" fill="#EEC830"/>
         <g font-family="'IBM Plex Mono', monospace" font-size="19" fill="#F4F3F0">
-          <text x="346" y="32">997 000 ₸</text>
-          <text x="346" y="102">317 167 ₸</text>
+          <text x="346" y="32">997 000 ₸</text><text x="346" y="102">317 167 ₸</text>
         </g>
         <text x="346" y="172" font-family="'IBM Plex Mono', monospace" font-size="23" fill="#EEC830">59 900 ₸</text>
-
         <g font-family="'IBM Plex Sans', sans-serif" font-size="13" fill="#8A9BB0">
           <text x="346" y="52">нанять шестерых специалистов</text>
           <text x="346" y="122">собрать набор из пяти сервисов</text>
           <text x="346" y="192">NeuroVia · тариф «Круг»</text>
         </g>
-
-        <text x="200" y="378" text-anchor="middle" font-family="'IBM Plex Mono', monospace"
-              font-size="11" letter-spacing="1.4" fill="#8A9BB0">ПЛОЩАДЬ КРУГА ПРОПОРЦИОНАЛЬНА СУММЕ</text>
+        <text x="200" y="378" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="11" letter-spacing="1.4" fill="#8A9BB0">ПЛОЩАДЬ КРУГА ПРОПОРЦИОНАЛЬНА СУММЕ</text>
       </svg>
     </div>
+    <div class="note">
+      <div class="p"><h3>Силён</h3><p>Единый язык форм со страницей. Золотое ядро в пустоте — образ, работающий и вне сайта.</p></div>
+      <div><h3>Слаб</h3><p>Площадь глаз считывает хуже длины: соотношение ощущается, но не снимается точно.</p></div>
+    </div>
+  </div>
+</section>
 
-    <div class="verdict">
-      <div class="vcard plus">
-        <h3>Чем силён</h3>
-        <p>Связывает блок с фирменным циклом 6П — страница получает единый язык форм вместо набора разных чартов. Маленькое золотое ядро внутри почти пустого пространства само по себе становится образом, который можно вынести в презентацию и в рекламу. При прокрутке кольца могут раскрываться от центра наружу.</p>
+<!-- 3 -->
+<section class="band">
+  <div class="wrap">
+    <span class="tag">Вариант 3 · новый</span>
+    <h2>Числовая ось</h2>
+    <p class="sub">Одна линейка от нуля до миллиона и три засечки на ней. Видно не только разрыв между вариантами, но и то, насколько 59 900 прижато к нулю.</p>
+    <div class="stage">
+      <svg viewBox="0 0 1040 250" role="img" aria-label="Числовая ось от нуля до миллиона тенге с тремя отметками">
+        <line x1="40" y1="170" x2="1000" y2="170" stroke="#8A9BB0" stroke-opacity="0.45" stroke-width="1.2"/>
+        <g stroke="#8A9BB0" stroke-opacity="0.3" stroke-width="1">
+          <line x1="40" y1="170" x2="40" y2="180"/><line x1="232" y1="170" x2="232" y2="180"/>
+          <line x1="424" y1="170" x2="424" y2="180"/><line x1="616" y1="170" x2="616" y2="180"/>
+          <line x1="808" y1="170" x2="808" y2="180"/><line x1="1000" y1="170" x2="1000" y2="180"/>
+        </g>
+        <g font-family="'IBM Plex Mono', monospace" font-size="11" fill="#8A9BB0" text-anchor="middle">
+          <text x="40" y="198">0</text><text x="232" y="198">200 тыс</text><text x="424" y="198">400 тыс</text>
+          <text x="616" y="198">600 тыс</text><text x="808" y="198">800 тыс</text><text x="1000" y="198">1 млн</text>
+        </g>
+        <!-- 997 000 → x = 40 + 0.997*960 = 997 -->
+        <line x1="997" y1="60" x2="997" y2="170" stroke="#8A9BB0" stroke-opacity="0.6" stroke-width="1.5"/>
+        <circle cx="997" cy="170" r="5" fill="#8A9BB0"/>
+        <text x="989" y="48" text-anchor="end" font-family="'IBM Plex Mono', monospace" font-size="20" fill="#F4F3F0">997 000 ₸</text>
+        <text x="989" y="66" text-anchor="end" font-family="'IBM Plex Sans', sans-serif" font-size="12.5" fill="#8A9BB0">нанять шестерых</text>
+        <!-- 317 167 → x = 40 + 0.3172*960 = 344 -->
+        <line x1="344" y1="100" x2="344" y2="170" stroke="#8A9BB0" stroke-opacity="0.6" stroke-width="1.5"/>
+        <circle cx="344" cy="170" r="5" fill="#8A9BB0"/>
+        <text x="352" y="96" font-family="'IBM Plex Mono', monospace" font-size="18" fill="#F4F3F0">317 167 ₸</text>
+        <text x="352" y="114" font-family="'IBM Plex Sans', sans-serif" font-size="12.5" fill="#8A9BB0">собрать из сервисов</text>
+        <!-- 59 900 → x = 40 + 0.0599*960 = 98 -->
+        <line x1="98" y1="136" x2="98" y2="170" stroke="#EEC830" stroke-width="2"/>
+        <circle cx="98" cy="170" r="7" fill="#EEC830"/>
+        <text x="110" y="134" font-family="'IBM Plex Mono', monospace" font-size="22" fill="#EEC830">59 900 ₸</text>
+        <text x="110" y="152" font-family="'IBM Plex Sans', sans-serif" font-size="12.5" fill="#F4F3F0">NeuroVia</text>
+      </svg>
+    </div>
+    <div class="note">
+      <div class="p"><h3>Силён</h3><p>Самый редкий приём из шести — числовую ось почти никто не использует на лендингах. Минималистичен до предела, а показывает больше остальных: и разрыв, и положение на общей шкале. Ноль в кадре, поэтому обмануть нечем.</p></div>
+      <div><h3>Слаб</h3><p>Требует широкого экрана: на телефоне ось придётся ставить вертикально. И на ней тесно в левой части, где стоят два близких значения.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="band">
+  <div class="wrap">
+    <span class="tag">Вариант 4 · новый</span>
+    <h2>Одна цифра: 6%</h2>
+    <p class="sub">Весь аргумент сводится к единственному числу — вы платите шесть процентов от того, во что обошёлся бы найм. Остальное уходит в подпись.</p>
+    <div class="stage">
+      <svg viewBox="0 0 1040 300" role="img" aria-label="Кольцо, в котором золотом закрашено шесть процентов">
+        <g transform="translate(150,150)">
+          <circle r="104" fill="none" stroke="#8A9BB0" stroke-opacity="0.28" stroke-width="26"/>
+          <circle r="104" fill="none" stroke="#EEC830" stroke-width="26"
+                  stroke-dasharray="39.2 653.5" stroke-linecap="butt" transform="rotate(-90)"/>
+          <text text-anchor="middle" y="6" font-family="'Manrope', sans-serif" font-weight="800" font-size="54" fill="#EEC830">6%</text>
+        </g>
+        <text x="310" y="112" font-family="'Manrope', sans-serif" font-weight="800" font-size="34" fill="#F4F3F0">Вы платите шесть процентов</text>
+        <text x="310" y="152" font-family="'Manrope', sans-serif" font-weight="800" font-size="34" fill="#F4F3F0">от стоимости найма</text>
+        <text x="310" y="196" font-family="'IBM Plex Sans', sans-serif" font-size="16" fill="#8A9BB0">59 900 ₸ вместо 997 000 ₸ в месяц. И 19% от того,</text>
+        <text x="310" y="220" font-family="'IBM Plex Sans', sans-serif" font-size="16" fill="#8A9BB0">во что обходится набор из пяти сервисов с вашим временем.</text>
+      </svg>
+    </div>
+    <div class="note">
+      <div class="p"><h3>Силён</h3><p>Самый громкий. Одно число вместо трёх — читается за долю секунды и запоминается дословно. Идеально ложится в рекламу, в пост, в презентацию: «6%» работает само по себе.</p></div>
+      <div><h3>Слаб</h3><p>Прячет структуру: не видно ни из чего складываются 997 000, ни что второй способ дороже вдвое. И проценты — язык скидок, есть риск прозвучать как акция, а не как расчёт.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="band">
+  <div class="wrap">
+    <span class="tag">Вариант 5 · новый</span>
+    <h2>Типографика вместо графика</h2>
+    <p class="sub">Никакого чарта вообще: три суммы набраны разным кеглем, размер пропорционален значению. Тип сам становится графикой — главный приём премиального веба 2026 года.</p>
+    <div class="stage">
+      <div class="typo">
+        <div class="trow">
+          <span class="tval" style="font-size:118px">997 000 ₸</span>
+          <span class="tlab">нанять шестерых специалистов</span>
+        </div>
+        <div class="trow">
+          <span class="tval" style="font-size:67px">317 167 ₸</span>
+          <span class="tlab">собрать набор из пяти сервисов<br>с вашими 61 часом</span>
+        </div>
+        <div class="trow ours">
+          <span class="tval" style="font-size:29px">59 900 ₸</span>
+          <span class="tlab">NeuroVia, тариф «Круг»</span>
+        </div>
       </div>
-      <div class="vcard">
-        <h3>Чем слаб</h3>
-        <p>Площади читаются человеком хуже, чем длины: разрыв ощущается, но точное соотношение на глаз не снимешь — за ним придётся идти в подписи. И третье число внутри двух колец требует аккуратных выносок, иначе будет тесно.</p>
+    </div>
+    <div class="note">
+      <div class="p"><h3>Силён</h3><p>Ни одного графического элемента — только шрифт, а разрыв всё равно виден. Выглядит дорого и редко: так делают издания, а не лендинги. Ничего не надо рисовать и нечему сломаться на мобильном.</p></div>
+      <div><h3>Слаб</h3><p>Кегль масштабирован по корню, иначе 59 900 было бы нечитаемо — то есть визуально разрыв меньше реального. Придётся оговорить это подписью, чтобы не упрекнули в занижении.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="band">
+  <div class="wrap">
+    <span class="tag">Вариант 6 · новый</span>
+    <h2>Структура найма: где именно лежат деньги</h2>
+    <p class="sub">Не три числа, а одно — разобранное. Полоса 997 000 ₸ поделена между шестью специалистами, и видно, что больше половины уходит трекеру. То есть ровно тому, кого платформа и заменяет.</p>
+    <div class="stage">
+      <div class="seg">
+        <span class="s1" style="width:18.1%">180 000</span>
+        <span class="s2" style="width:7.5%">75 000</span>
+        <span class="s3" style="width:7.2%">72 000</span>
+        <span class="s4" style="width:9.0%">90 000</span>
+        <span class="s5" style="width:3.0%"></span>
+        <span class="s6" style="width:55.2%">Бизнес-трекер · 550 000 ₸ · 55%</span>
       </div>
+      <div class="seglab">
+        <span><i></i>Маркетолог 180 000</span><span><i></i>Копирайтер 75 000</span>
+        <span><i></i>СММ и дизайн 72 000</span><span><i></i>Финансист 90 000</span>
+        <span><i></i>Переписка 30 000</span><span class="hl"><i></i>Бизнес-трекер 550 000</span>
+      </div>
+      <div class="segours">
+        <div class="bar"></div>
+        <div class="lab">NeuroVia — 59 900 ₸ в той же шкале</div>
+      </div>
+    </div>
+    <div class="note">
+      <div class="p"><h3>Силён</h3><p>Единственный вариант, который добавляет новый факт, а не пересказывает старый: <b>55% бюджета найма — это трекер</b>. Прямо усиливает вашу линию «трекинг без трекера» и объясняет, почему замена окупается.</p></div>
+      <div><h3>Слаб</h3><p>Показывает только левую колонку — второй способ со ста тысячами и вашим временем сюда не помещается, для него нужен отдельный элемент.</p></div>
     </div>
   </div>
 </section>
 
 <footer class="foot">
   <div class="wrap">
-    <h2>Что учесть при выборе</h2>
-    <p><b>Оба варианта честные.</b> Точки масштабированы по количеству, кольца — по площади (радиус растёт как корень из суммы). Ни один не преувеличивает разрыв.</p>
-    <p><b>Оба анимируются чистым CSS,</b> без библиотек и без JavaScript: точки заполняются по очереди, кольца раскрываются от центра. Страница остаётся такой же лёгкой, как сейчас.</p>
-    <p><b>Разница в характере.</b> Точки — язык аналитики: строго, проверяемо, спокойно. Кольца — язык бренда: образно, запоминается, работает за пределами страницы. Если графика должна доказывать — берите первое. Если она должна ещё и представлять вас — второе.</p>
+    <h2>Как выбирать</h2>
+    <p><b>Все шесть честные.</b> Точки масштабированы по количеству, кольца и кегль — по корню из суммы, ось и полоса — линейно. Нигде разрыв не преувеличен.</p>
+    <p><b>Все шесть анимируются чистым CSS,</b> без библиотек: точки заполняются, кольца раскрываются от центра, засечки выезжают на ось, проценты досчитываются, сегменты разъезжаются. JavaScript не нужен.</p>
+    <p><b>Они решают разные задачи.</b> Доказать — <b>1</b> и <b>3</b>. Запомниться и уйти в рекламу — <b>2</b> и <b>4</b>. Выглядеть дорого без единой картинки — <b>5</b>. Сказать то, чего на странице ещё нет — <b>6</b>.</p>
+    <p>Их можно и совместить: например, <b>3</b> как основной график блока и <b>6</b> мелким элементом внутри колонки найма. Тогда блок и доказывает, и добавляет новый аргумент.</p>
   </div>
 </footer>
 
