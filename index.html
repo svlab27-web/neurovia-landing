@@ -158,12 +158,20 @@ details p { font-size: 14px; color: var(--muted); margin-top: 14px; }
 .final { background: var(--navy); color: var(--warm); padding-block: 64px; }
 .final h2 { font-size: 48px; margin-bottom: 26px; }
 .final .eyebrow { color: var(--silver); }
-.final-layout { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; }
-.final-oracle { margin: 0px; justify-self: end; width: min(300px, 30vw); }
+.final-layout { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+/* призыв вынесен в приподнятую карточку — чуть ближе к центру и к Оракулу */
+.final-card { justify-self: stretch; max-width: 700px; margin-left: clamp(0px, 2vw, 26px);
+  padding: 34px 38px 38px; border-radius: 16px;
+  background: linear-gradient(158deg, rgba(255,255,255,.075), rgba(255,255,255,.015) 62%);
+  border: 1px solid rgba(255,255,255,.12); border-top-color: rgba(255,255,255,.24);
+  box-shadow: 0 26px 64px rgba(0,0,0,.45), 0 2px 0 rgba(255,255,255,.06) inset; }
+.final-card h2 { margin-bottom: 22px; }
+.final-oracle { margin: 0px clamp(0px, 6vw, 96px) 0px 0px; justify-self: end; width: min(300px, 30vw); }
 .final-oracle img { width: 100%; height: auto; display: block; will-change: transform, opacity; }
 @media (max-width: 860px) {
   .final-layout { grid-template-columns: 1fr; gap: 8px; }
-  .final-oracle { justify-self: start; width: 180px; }
+  .final-oracle { justify-self: start; width: 180px; margin-right: 0px; }
+  .final-card { margin-left: 0px; padding: 26px 24px 30px; max-width: none; }
 }
 footer { display: flex; justify-content: space-between; gap: 20px; padding-block: 25px; color: var(--muted); font-size: 12px; }
 .content-enter { animation: 0.25s ease 0s 1 normal both running route-in; }
@@ -649,7 +657,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
         </article>
       </div>
     </div></section>
-    <section class="final"><div class="wrap final-layout"><div><p class="eyebrow">Следующий шаг уже ближе</p><h2>С чего начнётся<br>Ваш маршрут?</h2><a class="button" href="#diagnostic">Начать с карты потерь <span aria-hidden="true">↗</span></a></div><figure class="final-oracle"><span class="oracle-breathe"><img id="oracleFinalImg" width="1254" height="1254" loading="lazy" decoding="async" alt="Оракул предлагает следующий шаг: открытая ладонь направлена в сторону, планшет в другой руке"></span></figure></div></section>
+    <section class="final"><div class="wrap final-layout"><div class="final-card"><p class="eyebrow">Следующий шаг уже ближе</p><h2>С чего начнётся<br>Ваш маршрут?</h2><a class="button" href="#diagnostic">Начать с карты потерь <span aria-hidden="true">↗</span></a></div><figure class="final-oracle"><span class="oracle-breathe"><img id="oracleFinalImg" width="1254" height="1254" loading="lazy" decoding="async" alt="Оракул предлагает следующий шаг: открытая ладонь направлена в сторону, планшет в другой руке"></span></figure></div></section>
   </main>
   <footer class="wrap"><span>NeuroVia Labs · 2026</span><span>Прототип · версия 2</span></footer>
   <script>let funnelData = [
