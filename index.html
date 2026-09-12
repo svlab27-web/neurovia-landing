@@ -251,7 +251,47 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, ::before, ::after { animation: auto ease 0s 1 normal none running none !important; transition: none !important; }
-}</style>
+}
+/* === Кому подходит: вкладки сегментов === */
+.audience{grid-template-columns:1.15fr 3fr;align-items:start}
+.persona-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--silver)}
+.persona-tabs button{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;
+  padding:14px 8px 16px;background:none;border:0;border-bottom:3px solid transparent;
+  font:600 15px var(--head);color:var(--ink);cursor:pointer}
+.persona-tabs button span{font:400 11px/1.35 var(--mono);color:var(--muted)}
+.persona-tabs button[aria-selected="true"]{border-bottom-color:var(--navy);background:rgba(244,243,240,.5)}
+.persona-tabs button[aria-selected="true"] span{color:var(--ink)}
+.persona-tabs button:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.persona-panel{display:grid;grid-template-columns:1fr 1fr;gap:32px;padding-top:24px}
+.persona-copy h3{font-size:20px;line-height:1.25;margin:0 0 10px}
+.persona-copy p{color:var(--muted);font-size:15px;line-height:1.6;margin:0}
+.persona-copy ul{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:9px}
+.persona-copy li{display:grid;grid-template-columns:16px 1fr;gap:10px;align-items:start;
+  font-size:14px;line-height:1.45;color:var(--muted)}
+.persona-copy li i{font-style:normal;color:var(--navy);font-weight:700}
+.persona-flow{background:var(--warm);border:1px solid var(--line);border-radius:8px;align-self:start}
+.persona-flow h4{font:600 13px var(--head);margin:0;padding:16px 20px 0}
+.persona-flow ol{list-style:none;margin:0;padding:4px 20px}
+.persona-flow li{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;
+  padding:13px 0;border-bottom:1px solid var(--line)}
+.persona-flow li:last-child{border-bottom:0}
+.persona-flow .n{display:grid;place-items:center;width:34px;height:34px;border-radius:8px;
+  background:var(--navy);color:var(--gold);font:600 12px var(--mono)}
+.persona-flow b{display:block;font-size:14px;font-weight:500}
+.persona-flow small{display:block;font-size:11px;color:var(--muted);margin-top:3px}
+.persona-flow em{font:600 11px var(--mono);font-style:normal;background:var(--gold);color:var(--ink);
+  padding:2px 7px;border-radius:4px;white-space:nowrap}
+@media (max-width:1000px){
+  .audience{grid-template-columns:1fr;gap:24px}
+  .persona-panel{gap:24px}
+}
+@media (max-width:700px){
+  .persona-tabs{grid-template-columns:1fr 1fr;row-gap:4px}
+  .persona-tabs button{font-size:13px;padding:11px 6px 13px}
+  .persona-panel{grid-template-columns:1fr;padding-top:18px}
+  .persona-copy h3{font-size:18px}
+}
+</style>
 </head>
 <body>
   <a class="skip" href="#main">К содержимому</a>
@@ -274,7 +314,28 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
       </div>
     </section>
 
-    <section class="audience wrap" aria-labelledby="audience-title"><h2 id="audience-title">Когда пора<br>собрать систему</h2><div><b>Вы эксперт</b><p>Продажи зависят от Вашего личного времени.</p></div><div><b>У Вас бизнес</b><p>Заявки есть, но до оплаты доходят не все.</p></div><div><b>Вы развиваете проект</b><p>Гипотез много. Нужен один понятный приоритет.</p></div></section>
+    <section class="audience wrap" aria-labelledby="audience-title">
+      <h2 id="audience-title">Когда пора<br>собрать систему</h2>
+      <div class="persona">
+        <div class="persona-tabs" role="tablist" aria-label="Кому подходит">
+          <button type="button" role="tab" data-persona="expert"  aria-selected="true">Эксперт<span>есть опыт, нет системы продаж</span></button>
+          <button type="button" role="tab" data-persona="small"   aria-selected="false">Малый бизнес<span>заявки есть, контроль слабый</span></button>
+          <button type="button" role="tab" data-persona="founder" aria-selected="false">Основатель<span>есть продукт, нужны цифры</span></button>
+          <button type="button" role="tab" data-persona="agency"  aria-selected="false">Агентство<span>несколько клиентов и проектов</span></button>
+        </div>
+        <div class="persona-panel">
+          <div class="persona-copy">
+            <h3 id="personaTitle"></h3>
+            <p id="personaCopy"></p>
+            <ul id="personaList"></ul>
+          </div>
+          <div class="persona-flow">
+            <h4>Первый маршрут</h4>
+            <ol id="personaFlow"></ol>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section class="section" id="diagnostic"><div class="wrap">
       <div class="section-heading"><div><p class="eyebrow">01 / Найти разрыв</p><h2>Больше заявок?<br>Сначала найдём потери.</h2></div><p class="lead">Диагностика связывает продукт, привлечение, продажи и цифры. На выходе: проблема, её причина и первый шаг.</p></div>
@@ -432,7 +493,65 @@ document.querySelectorAll('[data-step]').forEach(button => {
   });
 });
 renderPlan();
-</script>
+
+    const personaData = {
+      expert: {
+        title: "Эксперт упёрся в потолок личного времени",
+        copy: "Вы продаёте консультации и каждый раз объясняете ценность заново. Оракул помогает собрать продукт, оффер и первый трек продаж.",
+        list: ["упаковать опыт в продукт", "собрать понятный оффер", "проверить спрос без большого запуска"],
+        flow: [["01","Диагностика","где теряется ценность","вечер"],
+               ["02","Оффер","что покупает клиент","1 цикл"],
+               ["03","Контент","план под боли аудитории","неделя"]]
+      },
+      small: {
+        title: "Малый бизнес теряет заявки в переписках",
+        copy: "Клиенты приходят из разных каналов, но путь до оплаты не собран. Оракул показывает слабое место и переводит его в задачу.",
+        list: ["связать каналы и заявки", "назначить следующий шаг", "видеть, где срывается продажа"],
+        flow: [["01","Карта заявок","каналы и потери","вечер"],
+               ["02","Воронка","статусы и заказы","3 дня"],
+               ["03","Финансы","маржа и стоимость заявки","неделя"]]
+      },
+      founder: {
+        title: "Основатель принимает решения без общей картины",
+        copy: "Продукт есть, но непонятно, что масштабировать. Оракул связывает продукт, рынок, финмодель и приоритеты.",
+        list: ["проверить гипотезы", "сравнить сценарии роста", "выбрать один следующий шаг"],
+        flow: [["01","Гипотезы","что проверить первым","вечер"],
+               ["02","Финмодель","выручка, расходы, окупаемость","1 цикл"],
+               ["03","План-факт","что менять дальше","месяц"]]
+      },
+      agency: {
+        title: "Агентство ведёт несколько проектов без общего стандарта",
+        copy: "У каждого клиента свои документы, каналы и отчёты. Оракул помогает держать единый трек и статус по каждому проекту.",
+        list: ["стандартизировать диагностику", "развести роли и проекты", "видеть прогресс по всем проектам"],
+        flow: [["01","Портфель","проекты и статусы","неделя"],
+               ["02","Методология","единый стандарт","1 цикл"],
+               ["03","Отчёты","прогресс и решения","месяц"]]
+      }
+    };
+
+    function renderPersona(key) {
+      const d = personaData[key];
+      if (!d) return;
+      document.getElementById("personaTitle").textContent = d.title;
+      document.getElementById("personaCopy").textContent = d.copy;
+      document.getElementById("personaList").innerHTML =
+        d.list.map((t) => `<li><i>✓</i><span>${t}</span></li>`).join("");
+      document.getElementById("personaFlow").innerHTML =
+        d.flow.map(([n, title, sub, meta]) =>
+          `<li><span class="n">${n}</span><span><b>${title}</b><small>${sub}</small></span><em>${meta}</em></li>`
+        ).join("");
+      document.querySelectorAll(".persona-tabs button").forEach((b) => {
+        b.setAttribute("aria-selected", String(b.dataset.persona === key));
+      });
+    }
+
+    document.querySelectorAll(".persona-tabs button").forEach((b) => {
+      b.addEventListener("click", () => renderPersona(b.dataset.persona));
+    });
+
+    renderPersona("expert");
+
+  </script>
 
 
 </body></html>
