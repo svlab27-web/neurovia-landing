@@ -398,7 +398,16 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 
 /* === Оракул в диагностике: 2D-движение === */
 .oracle-stage{display:flex;align-items:center;gap:16px;margin-bottom:18px}
-.oracle-stage img{width:150px;height:150px;object-fit:contain;flex:0 0 auto;will-change:transform,opacity}
+.oracle-float{display:block;flex:0 0 auto;will-change:transform;animation:oracleFloat 3.6s ease-in-out infinite}
+.oracle-stage.is-paused .oracle-float{animation-play-state:paused}
+@keyframes oracleFloat{0%,100%{transform:translateY(0) rotate(0deg)}35%{transform:translateY(-6px) rotate(-1.2deg)}70%{transform:translateY(2px) rotate(.8deg)}}
+@media (prefers-reduced-motion:reduce){.oracle-float{animation:none}}
+/* Оракул в первом экране и в портрете дышит — страница не выглядит статичной */
+#oracleHeroImg,#oraclePortraitImg{will-change:transform;animation:oracleBreathe 5.4s ease-in-out infinite}
+#oraclePortraitImg{animation-duration:6.2s;animation-delay:-2s}
+@keyframes oracleBreathe{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-12px) rotate(-1deg)}}
+@media (prefers-reduced-motion:reduce){#oracleHeroImg,#oraclePortraitImg{animation:none}}
+.oracle-stage img{width:150px;height:150px;object-fit:contain;display:block;will-change:transform,opacity}
 .oracle-who b{display:block;font:700 16px var(--head)}
 .oracle-who span{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
 .oracle-dots{display:flex!important;gap:5px;margin-top:9px}
@@ -477,7 +486,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
             <button class="funnel-row" data-funnel="3" aria-pressed="false" aria-controls="insight"><span class="bar-label">Оплаты <b>12</b></span><span class="bar-track"><span class="bar" style="--amount:12%"></span></span><span class="bar-caption">12 из 24 пока не оплатили</span></button>
           </div>
           <aside class="insight" id="insight" aria-live="polite" aria-atomic="true">
-            <div class="oracle-stage"><img id="oracleShot" alt="Оракул: разбирает причины" width="150" height="150" decoding="async"><div class="oracle-who"><b>Оракул</b><span id="oraclePose">Разбираем причины</span><span class="oracle-dots" id="oracleDots" hidden aria-hidden="true"><i></i><i></i><i></i></span></div></div>
+            <div class="oracle-stage"><span class="oracle-float"><img id="oracleShot" alt="Оракул: разбирает причины" width="150" height="150" decoding="async"></span><div class="oracle-who"><b>Оракул</b><span id="oraclePose">Разбираем причины</span><span class="oracle-dots" id="oracleDots" hidden aria-hidden="true"><i></i><i></i><i></i></span></div></div>
             <p class="metric" id="loss-number">60<span>%</span></p><h3 id="loss-title">обращений не доходят до встречи</h3><p id="loss-copy">Проверьте скорость первого ответа и есть ли у каждой заявки ответственный. Это гипотеза, которую нужно проверить на переписках.</p>
             <div class="recommendation"><span class="eyebrow">Первое действие</span><p id="loss-action">Разберите 10 последних обращений и отметьте, где закончился диалог.</p></div>
             <a href="#week" class="text-link" id="plan-link">Собрать план по этому разрыву <span aria-hidden="true">↗</span></a>
@@ -910,7 +919,7 @@ renderPlan();
     /* ступень воронки → поза Оракула и её движение */
     const ORACLE_BY_STAGE = [
       {asset:'listen',  pose:'Слушает: с чего начнём',        motion:'tilt'},
-      {asset:'clarify', pose:'Уточняет, где обрывается путь', motion:'still'},
+      {asset:'clarify', pose:'Уточняет, где обрывается путь', motion:'lean'},
       {asset:'suggest', pose:'Предлагает первый шаг',         motion:'shift'},
       {asset:'analyze', pose:'Сопоставляет предложения и оплаты', motion:'think'}
     ];
@@ -937,10 +946,13 @@ renderPlan();
       function motion(kind) {
         if (reducedMotion.matches) return;
         if (kind === 'tilt')
-          play(shot, [{transform:'rotate(0deg)'},{transform:'rotate(-2deg)'},{transform:'rotate(0deg)'}], {duration:650});
+          play(shot, [{transform:'rotate(0deg)'},{transform:'rotate(-6deg)'},{transform:'rotate(1.5deg)'},{transform:'rotate(0deg)'}], {duration:900});
+        else if (kind === 'lean')
+          play(shot, [{transform:'translateY(0) scale(1)'},{transform:'translateY(5px) scale(1.05)'},{transform:'translateY(0) scale(1)'}], {duration:700});
         else if (kind === 'shift')
-          play(shot, [{transform:'translateX(6px)'},{transform:'translateX(-4px)'},{transform:'translateX(0)'}], {duration:400});
+          play(shot, [{transform:'translateX(0)'},{transform:'translateX(14px)'},{transform:'translateX(-9px)'},{transform:'translateX(0)'}], {duration:620});
         else if (kind === 'think') {
+          play(shot, [{transform:'translateY(0)'},{transform:'translateY(5px) scale(.985)'},{transform:'translateY(0) scale(1)'}], {duration:520});
           dots.hidden = false;
           dots.querySelectorAll('i').forEach((d, k) =>
             play(d, [{opacity:.35},{opacity:1},{opacity:.35}], {duration:700, delay:k*100, iterations:3}));
@@ -963,6 +975,24 @@ renderPlan();
       };
 
       document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
+
+      /* Оракул оживает, когда блок появляется на экране, и замирает за его пределами */
+      const stage = shot.closest('.oracle-stage');
+      let seen = false;
+      if (stage && 'IntersectionObserver' in window) {
+        stage.classList.add('is-paused');
+        new IntersectionObserver((entries) => {
+          for (const e of entries) {
+            stage.classList.toggle('is-paused', !e.isIntersecting);
+            if (e.isIntersecting && !seen) {
+              seen = true;
+              motion((ORACLE_BY_STAGE[selectedFunnel] || ORACLE_BY_STAGE[0]).motion);
+            } else if (!e.isIntersecting) {
+              stop();
+            }
+          }
+        }, {threshold: .4}).observe(stage);
+      }
 
       const prevSelect = selectFunnel;
       selectFunnel = function (index) { prevSelect(index); window.setOracle(index); };
