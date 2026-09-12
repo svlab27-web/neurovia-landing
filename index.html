@@ -327,31 +327,34 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 .plan.featured .plan-price small{color:var(--silver)}
 @media (max-width:900px){.plans{grid-template-columns:1fr;gap:16px}.plan{padding:24px 22px}}
 
-/* === Кольцо 6П в шапке трека === */
+/* === Кольцо 6П: тёмная панель в шапке трека === */
 .track-head{align-items:center;gap:56px}
 .track-head .lead{margin-top:18px;max-width:420px}
-.cycle-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;max-width:360px;
-  justify-self:end;color:var(--navy)}
+.cycle-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;max-width:380px;
+  justify-self:end;background:var(--navy);border-radius:14px;padding:22px 18px 18px;
+  box-shadow:0 20px 44px rgba(10,22,40,.22)}
 .cycle{width:100%;height:auto}
+.cycle-ring{stroke:var(--gold);stroke-opacity:.3;stroke-width:1.4;fill:none}
 .cycle-nodes .cnode{cursor:pointer}
-.cycle-nodes circle{fill:var(--warm);stroke:var(--navy);stroke-width:1.2;transition:fill .2s,stroke .2s}
-.cycle-nodes text{font:600 12px var(--mono);fill:var(--navy);text-anchor:middle;pointer-events:none;transition:fill .2s}
-.cnode:hover circle{stroke:var(--gold);stroke-width:2}
+.cycle-nodes circle{fill:#16283f;stroke:var(--gold);stroke-opacity:.55;stroke-width:1.3;
+  transition:fill .22s,stroke-opacity .22s,r .22s}
+.cycle-nodes text{font:600 12px var(--mono);fill:var(--gold);text-anchor:middle;pointer-events:none;transition:fill .22s}
+.cnode:hover circle{stroke-opacity:1;r:18.5}
 .cnode:focus-visible{outline:none}
-.cnode:focus-visible circle{stroke:var(--gold);stroke-width:2.6}
-.cnode.is-active circle{fill:var(--navy);stroke:var(--navy);stroke-width:1.2}
-.cnode.is-active text{fill:var(--gold)}
-.cycle-labels text{font:500 10.5px var(--mono);fill:var(--muted);letter-spacing:.05em}
-.cycle-mid{font:800 27px var(--head);fill:var(--navy)}
-.cycle-sub{font:500 8.5px var(--mono);fill:var(--muted);letter-spacing:.1em}
-.cycle-return{opacity:0;transition:opacity .3s}
+.cnode:focus-visible circle{stroke-opacity:1;stroke-width:2.4}
+.cnode.is-active circle{fill:var(--gold);stroke:var(--gold);stroke-opacity:1;r:19}
+.cnode.is-active text{fill:var(--ink)}
+.cycle-labels text{font:500 10.5px var(--mono);fill:var(--silver);letter-spacing:.05em}
+.cycle-mid{font:800 27px var(--head);fill:var(--warm)}
+.cycle-sub{font:500 8.5px var(--mono);fill:var(--gold);fill-opacity:.75;letter-spacing:.1em}
+.cycle-return{opacity:0;stroke:var(--gold);stroke-width:3;stroke-linecap:round;fill:none;transition:opacity .3s}
 .cycle-wrap.show-return .cycle-return{opacity:1}
-.cycle-hint{font:500 12px/1.45 var(--head);color:var(--muted);text-align:center;margin:0;max-width:300px;min-height:35px}
+.cycle-hint{font:500 12px/1.45 var(--head);color:var(--silver);text-align:center;margin:0;max-width:300px;min-height:35px}
 .cycle-loop{grid-column:1/-1;margin:20px 0 0;padding-left:14px;border-left:3px solid var(--gold);
   font:500 14px var(--head);color:var(--ink)}
 .cycle-dot{fill:var(--gold);offset-path:path('M 190,72 A 86,86 0 1,1 190,244 A 86,86 0 1,1 190,72');offset-rotate:0deg}
-.cycle-dot.trail{opacity:.28}
-.cycle-dot.head{fill:#fff9dd;stroke:var(--gold);stroke-width:2}
+.cycle-dot.trail{opacity:.32}
+.cycle-dot.head{fill:#fff6cf;stroke:var(--gold);stroke-width:2}
 @media (prefers-reduced-motion: no-preference){
   .cycle-wrap.is-live .cycle-dot{animation:cycleRun 9s linear infinite}
   .cycle-wrap.is-live .cycle-dot.trail{animation-delay:-.3s}
@@ -360,12 +363,13 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 @keyframes cycleRun{to{offset-distance:100%}}
 @media (max-width:1000px){
   .track-head{gap:32px}
-  .cycle-wrap{justify-self:start;max-width:320px}
+  .cycle-wrap{justify-self:start;max-width:340px}
 }
 @media (max-width:700px){
-  .cycle-wrap{max-width:300px;margin-inline:auto}
+  .cycle-wrap{max-width:320px;margin-inline:auto;padding:18px 14px 14px}
   .cycle-labels text{font-size:9.5px}
   .cycle-hint{font-size:11.5px;min-height:0}
+}
 }
 </style>
 </head>
@@ -451,8 +455,8 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
     <section class="section track-section" id="track"><div class="wrap">
       <div class="section-heading track-head"><div><p class="eyebrow">02 / Пройти маршрут</p><h2>Шесть шагов.<br>Одна система роста.</h2><p class="lead">На каждом этапе Вы создаёте конкретный результат. Он становится основой следующего шага.</p></div><div class="cycle-wrap">
         <svg class="cycle" viewBox="-24 0 428 306" role="img" aria-label="Цикл 6П: шесть шагов, шестой возвращает к первому">
-          <circle cx="190" cy="158" r="86" fill="none" stroke="currentColor" stroke-opacity=".2" stroke-width="1.4"/>
-          <path class="cycle-return" d="M 116,115 A 86,86 0 0,1 190,72" fill="none" stroke="#eec830" stroke-width="2.4" stroke-linecap="round"/>
+          <circle class="cycle-ring" cx="190" cy="158" r="86"/>
+          <path class="cycle-return" d="M 116,115 A 86,86 0 0,1 190,72"/>
           <g class="cycle-nodes">
             <g class="cnode" data-node="0"><circle cx="190" cy="72"  r="17"/><text x="190" y="77">01</text></g>
             <g class="cnode" data-node="1"><circle cx="264" cy="115" r="17"/><text x="264" y="120">02</text></g>
