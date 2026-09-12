@@ -326,6 +326,47 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 .plan.featured .plan-price{color:var(--gold)}
 .plan.featured .plan-price small{color:var(--silver)}
 @media (max-width:900px){.plans{grid-template-columns:1fr;gap:16px}.plan{padding:24px 22px}}
+
+/* === Кольцо 6П в шапке трека === */
+.track-head{align-items:center;gap:56px}
+.track-head .lead{margin-top:18px;max-width:420px}
+.cycle-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;max-width:360px;
+  justify-self:end;color:var(--navy)}
+.cycle{width:100%;height:auto}
+.cycle-nodes .cnode{cursor:pointer}
+.cycle-nodes circle{fill:var(--warm);stroke:var(--navy);stroke-width:1.2;transition:fill .2s,stroke .2s}
+.cycle-nodes text{font:600 12px var(--mono);fill:var(--navy);text-anchor:middle;pointer-events:none;transition:fill .2s}
+.cnode:hover circle{stroke:var(--gold);stroke-width:2}
+.cnode:focus-visible{outline:none}
+.cnode:focus-visible circle{stroke:var(--gold);stroke-width:2.6}
+.cnode.is-active circle{fill:var(--navy);stroke:var(--navy);stroke-width:1.2}
+.cnode.is-active text{fill:var(--gold)}
+.cycle-labels text{font:500 10.5px var(--mono);fill:var(--muted);letter-spacing:.05em}
+.cycle-mid{font:800 27px var(--head);fill:var(--navy)}
+.cycle-sub{font:500 8.5px var(--mono);fill:var(--muted);letter-spacing:.1em}
+.cycle-return{opacity:0;transition:opacity .3s}
+.cycle-wrap.show-return .cycle-return{opacity:1}
+.cycle-hint{font:500 12px/1.45 var(--head);color:var(--muted);text-align:center;margin:0;max-width:300px;min-height:35px}
+.cycle-loop{grid-column:1/-1;margin:20px 0 0;padding-left:14px;border-left:3px solid var(--gold);
+  font:500 14px var(--head);color:var(--ink)}
+.cycle-dot{fill:var(--gold);offset-path:path('M 190,72 A 86,86 0 1,1 190,244 A 86,86 0 1,1 190,72');offset-rotate:0deg}
+.cycle-dot.trail{opacity:.28}
+.cycle-dot.head{fill:#fff9dd;stroke:var(--gold);stroke-width:2}
+@media (prefers-reduced-motion: no-preference){
+  .cycle-wrap.is-live .cycle-dot{animation:cycleRun 9s linear infinite}
+  .cycle-wrap.is-live .cycle-dot.trail{animation-delay:-.3s}
+}
+.cycle-wrap:not(.is-live) .cycle-dot{opacity:0}
+@keyframes cycleRun{to{offset-distance:100%}}
+@media (max-width:1000px){
+  .track-head{gap:32px}
+  .cycle-wrap{justify-self:start;max-width:320px}
+}
+@media (max-width:700px){
+  .cycle-wrap{max-width:300px;margin-inline:auto}
+  .cycle-labels text{font-size:9.5px}
+  .cycle-hint{font-size:11.5px;min-height:0}
+}
 </style>
 </head>
 <body>
@@ -408,7 +449,33 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
     </div></section>
 
     <section class="section track-section" id="track"><div class="wrap">
-      <div class="section-heading"><div><p class="eyebrow">02 / Пройти маршрут</p><h2>Шесть шагов.<br>Одна система роста.</h2></div><p class="lead">На каждом этапе Вы создаёте конкретный результат. Он становится основой следующего шага.</p></div>
+      <div class="section-heading track-head"><div><p class="eyebrow">02 / Пройти маршрут</p><h2>Шесть шагов.<br>Одна система роста.</h2><p class="lead">На каждом этапе Вы создаёте конкретный результат. Он становится основой следующего шага.</p></div><div class="cycle-wrap">
+        <svg class="cycle" viewBox="-24 0 428 306" role="img" aria-label="Цикл 6П: шесть шагов, шестой возвращает к первому">
+          <circle cx="190" cy="158" r="86" fill="none" stroke="currentColor" stroke-opacity=".2" stroke-width="1.4"/>
+          <path class="cycle-return" d="M 116,115 A 86,86 0 0,1 190,72" fill="none" stroke="#eec830" stroke-width="2.4" stroke-linecap="round"/>
+          <g class="cycle-nodes">
+            <g class="cnode" data-node="0"><circle cx="190" cy="72"  r="17"/><text x="190" y="77">01</text></g>
+            <g class="cnode" data-node="1"><circle cx="264" cy="115" r="17"/><text x="264" y="120">02</text></g>
+            <g class="cnode" data-node="2"><circle cx="264" cy="201" r="17"/><text x="264" y="206">03</text></g>
+            <g class="cnode" data-node="3"><circle cx="190" cy="244" r="17"/><text x="190" y="249">04</text></g>
+            <g class="cnode" data-node="4"><circle cx="116" cy="201" r="17"/><text x="116" y="206">05</text></g>
+            <g class="cnode" data-node="5"><circle cx="116" cy="115" r="17"/><text x="116" y="120">06</text></g>
+          </g>
+          <g class="cycle-labels">
+            <text x="190" y="44"  text-anchor="middle">ПОНЯТЬ</text>
+            <text x="290" y="107" text-anchor="start">ПРЕДЛОЖИТЬ</text>
+            <text x="290" y="209" text-anchor="start">ПРИВЛЕЧЬ</text>
+            <text x="190" y="280" text-anchor="middle">ПРОДАТЬ</text>
+            <text x="90"  y="209" text-anchor="end">ПОСЧИТАТЬ</text>
+            <text x="90"  y="107" text-anchor="end">ПЕРЕСОБРАТЬ</text>
+          </g>
+          <text class="cycle-mid" x="190" y="155" text-anchor="middle">6П</text>
+          <text class="cycle-sub" x="190" y="174" text-anchor="middle">ЗАМКНУТЫЙ ЦИКЛ</text>
+          <circle class="cycle-dot trail" r="7"/>
+          <circle class="cycle-dot head" r="5"/>
+        </svg>
+        <p class="cycle-hint" id="cycleHint">Данные идут по кругу: результат шага становится входом следующего.</p>
+      </div></div>
       <div class="track-tabs" role="tablist" aria-label="Маршрут 6П">
         <button id="step-0" role="tab" aria-selected="true" aria-controls="track-panel" tabindex="0" data-step="0"><span>01</span>Понять</button>
         <button id="step-1" role="tab" aria-selected="false" aria-controls="track-panel" tabindex="-1" data-step="1"><span>02</span>Предложить</button>
@@ -420,7 +487,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
       <div class="track-panel" id="track-panel" role="tabpanel" aria-labelledby="step-0" tabindex="0">
         <div><p class="eyebrow" id="step-count">Шаг 01 / 06</p><h3 id="step-title">Понять, что мешает росту</h3><p id="step-copy">Соберите факты о клиентах, продукте и продажах. Выберите проблему, с которой начнётся работа.</p><div class="artifact-label">Ваш результат <span aria-hidden="true">↗</span></div><strong id="step-artifact">Карта разрывов и приоритетов</strong></div>
         <div class="artifact-preview"><div class="tool-header"><b id="artifact-title">Карта разрывов</b><span class="sample">Пример результата</span></div><ul id="artifact-rows"><li><span>Проблема</span><b>Заявки без следующего шага</b></li><li><span>Гипотеза</span><b>Нет ответственного за ответ</b></li><li><span>Приоритет</span><b>Проверить 10 диалогов</b></li></ul></div>
-      </div>
+      <p class="cycle-loop" id="cycleLoop" hidden>Новый приоритет возвращается в шаг 01 «Понять» — цикл начинается заново.</p></div>
     </div></section>
 
     <section class="section" id="week"><div class="wrap">
@@ -741,6 +808,50 @@ renderPlan();
       } else {
         applyNumbers(100, 40, 24, 12, '1 месяц', false);
       }
+    })();
+
+  
+    /* ===== Кольцо 6П: навигация и возврат к первому шагу ===== */
+    (function cycleRing() {
+      const wrap = document.querySelector('.cycle-wrap');
+      if (!wrap) return;
+      const nodes = [...wrap.querySelectorAll('.cnode')];
+      const hint = document.getElementById('cycleHint');
+      const loop = document.getElementById('cycleLoop');
+      if (!reducedMotion.matches) wrap.classList.add('is-live');
+
+      function stopPulse() { wrap.classList.remove('is-live'); }
+
+      function markCycle(index) {
+        nodes.forEach((n, i) => n.classList.toggle('is-active', i === index));
+        const last = index === nodes.length - 1;
+        wrap.classList.toggle('show-return', last);
+        if (loop) loop.hidden = !last;
+        if (hint) hint.textContent = last
+          ? 'Шестой шаг возвращает в первый: новый приоритет снова идёт в «Понять».'
+          : 'Данные идут по кругу: результат шага становится входом следующего.';
+      }
+
+      nodes.forEach((node, i) => {
+        node.setAttribute('role', 'button');
+        node.setAttribute('tabindex', '0');
+        node.setAttribute('aria-label', 'Шаг ' + String(i + 1).padStart(2, '0'));
+        const go = () => { stopPulse(); selectStep(i); };
+        node.addEventListener('click', go);
+        node.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
+        });
+      });
+
+      document.querySelectorAll('[data-step]').forEach((b) =>
+        b.addEventListener('click', stopPulse));
+
+      const originalSelectStep = selectStep;
+      selectStep = function (index, focus) {
+        originalSelectStep(index, focus);
+        markCycle(index);
+      };
+      markCycle(0);
     })();
 
   </script>
