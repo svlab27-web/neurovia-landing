@@ -328,15 +328,14 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 @media (max-width:900px){.plans{grid-template-columns:1fr;gap:16px}.plan{padding:24px 22px}}
 
 /* === Кольцо 6П: тёмная панель в шапке трека === */
-.track-head{align-items:center;gap:56px}
+.track-head{align-items:center;gap:48px;grid-template-columns:1fr 1fr}
 .track-head .lead{margin-top:18px;max-width:420px}
-.cycle-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;max-width:380px;
-  justify-self:end;background:var(--navy);border-radius:14px;padding:22px 18px 18px;
-  box-shadow:0 20px 44px rgba(10,22,40,.22)}
+.cycle-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;width:100%;max-width:480px;
+  justify-self:end;background:none;border:0;padding:0}
 .cycle{width:100%;height:auto}
 .cycle-ring{stroke:var(--gold);stroke-opacity:.3;stroke-width:1.4;fill:none}
 .cycle-nodes .cnode{cursor:pointer}
-.cycle-nodes circle{fill:#16283f;stroke:var(--gold);stroke-opacity:.55;stroke-width:1.3;
+.cycle-nodes circle{fill:var(--navy);stroke:var(--gold);stroke-opacity:.55;stroke-width:1.3;
   transition:fill .22s,stroke-opacity .22s,r .22s}
 .cycle-nodes text{font:600 12px var(--mono);fill:var(--gold);text-anchor:middle;pointer-events:none;transition:fill .22s}
 .cnode:hover circle{stroke-opacity:1;r:18.5}
@@ -344,12 +343,15 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 .cnode:focus-visible circle{stroke-opacity:1;stroke-width:2.4}
 .cnode.is-active circle{fill:var(--gold);stroke:var(--gold);stroke-opacity:1;r:19}
 .cnode.is-active text{fill:var(--ink)}
-.cycle-labels text{font:500 10.5px var(--mono);fill:var(--silver);letter-spacing:.05em}
-.cycle-mid{font:800 27px var(--head);fill:var(--warm)}
+.cycle-labels text{font:500 11.5px var(--mono);fill:var(--silver);letter-spacing:.06em;
+  cursor:pointer;transition:fill .22s,font-weight .22s}
+.cycle-labels text:hover{fill:var(--warm)}
+.cycle-labels text.is-active{fill:var(--gold);font-weight:700}
+.cycle-mid{font:800 30px var(--head);fill:var(--warm)}
 .cycle-sub{font:500 8.5px var(--mono);fill:var(--gold);fill-opacity:.75;letter-spacing:.1em}
 .cycle-return{opacity:0;stroke:var(--gold);stroke-width:3;stroke-linecap:round;fill:none;transition:opacity .3s}
 .cycle-wrap.show-return .cycle-return{opacity:1}
-.cycle-hint{font:500 12px/1.45 var(--head);color:var(--silver);text-align:center;margin:0;max-width:300px;min-height:35px}
+.cycle-hint{font:500 12.5px/1.45 var(--head);color:var(--silver);text-align:center;margin:0;max-width:330px;min-height:36px}
 .cycle-loop{grid-column:1/-1;margin:20px 0 0;padding-left:14px;border-left:3px solid var(--gold);
   font:500 14px var(--head);color:var(--ink)}
 .cycle-dot{fill:var(--gold);offset-path:path('M 190,72 A 86,86 0 1,1 190,244 A 86,86 0 1,1 190,72');offset-rotate:0deg}
@@ -362,11 +364,11 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 .cycle-wrap:not(.is-live) .cycle-dot{opacity:0}
 @keyframes cycleRun{to{offset-distance:100%}}
 @media (max-width:1000px){
-  .track-head{gap:32px}
-  .cycle-wrap{justify-self:start;max-width:340px}
+  .track-head{gap:32px;grid-template-columns:1fr}
+  .cycle-wrap{justify-self:start;max-width:400px}
 }
 @media (max-width:700px){
-  .cycle-wrap{max-width:320px;margin-inline:auto;padding:18px 14px 14px}
+  .cycle-wrap{max-width:340px;margin-inline:auto}
   .cycle-labels text{font-size:9.5px}
   .cycle-hint{font-size:11.5px;min-height:0}
 }
@@ -387,7 +389,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 .track-section #step-artifact{color:var(--gold)}
 .track-section .cycle-loop{color:var(--warm)}
 /* панель кольца отделяется от фона на полтона */
-.track-section .cycle-wrap{background:#16283f;box-shadow:none;border:1px solid rgba(238,200,48,.18)}
+.track-section .cycle-wrap{background:none;border:0;box-shadow:none}
 /* карточка результата остаётся светлой — читается как документ */
 .track-section .artifact-preview{background:var(--warm);border-color:transparent;color:var(--ink)}
 .track-section .artifact-preview .tool-header b{color:var(--ink)}
@@ -486,12 +488,12 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
             <g class="cnode" data-node="5"><circle cx="116" cy="115" r="17"/><text x="116" y="120">06</text></g>
           </g>
           <g class="cycle-labels">
-            <text x="190" y="44"  text-anchor="middle">ПОНЯТЬ</text>
-            <text x="290" y="107" text-anchor="start">ПРЕДЛОЖИТЬ</text>
-            <text x="290" y="209" text-anchor="start">ПРИВЛЕЧЬ</text>
-            <text x="190" y="280" text-anchor="middle">ПРОДАТЬ</text>
-            <text x="90"  y="209" text-anchor="end">ПОСЧИТАТЬ</text>
-            <text x="90"  y="107" text-anchor="end">ПЕРЕСОБРАТЬ</text>
+            <text class="clabel" data-label="0" x="190" y="44"  text-anchor="middle">ПОНЯТЬ</text>
+            <text class="clabel" data-label="1" x="290" y="107" text-anchor="start">ПРЕДЛОЖИТЬ</text>
+            <text class="clabel" data-label="2" x="290" y="209" text-anchor="start">ПРИВЛЕЧЬ</text>
+            <text class="clabel" data-label="3" x="190" y="280" text-anchor="middle">ПРОДАТЬ</text>
+            <text class="clabel" data-label="4" x="90"  y="209" text-anchor="end">ПОСЧИТАТЬ</text>
+            <text class="clabel" data-label="5" x="90"  y="107" text-anchor="end">ПЕРЕСОБРАТЬ</text>
           </g>
           <text class="cycle-mid" x="190" y="155" text-anchor="middle">6П</text>
           <text class="cycle-sub" x="190" y="174" text-anchor="middle">ЗАМКНУТЫЙ ЦИКЛ</text>
@@ -846,8 +848,11 @@ renderPlan();
 
       function stopPulse() { wrap.classList.remove('is-live'); }
 
+      const labels = [...wrap.querySelectorAll('.clabel')];
+
       function markCycle(index) {
         nodes.forEach((n, i) => n.classList.toggle('is-active', i === index));
+        labels.forEach((l, i) => l.classList.toggle('is-active', i === index));
         const last = index === nodes.length - 1;
         wrap.classList.toggle('show-return', last);
         if (loop) loop.hidden = !last;
@@ -865,6 +870,10 @@ renderPlan();
         node.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
         });
+      });
+
+      labels.forEach((label, i) => {
+        label.addEventListener('click', () => { stopPulse(); selectStep(i); });
       });
 
       document.querySelectorAll('[data-step]').forEach((b) =>
