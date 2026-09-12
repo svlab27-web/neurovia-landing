@@ -370,7 +370,27 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
   .cycle-labels text{font-size:9.5px}
   .cycle-hint{font-size:11.5px;min-height:0}
 }
-}
+
+/* === Трек целиком на тёмно-синем, как шапка === */
+.track-section{background:var(--navy);color:var(--warm)}
+.track-section .section-heading .eyebrow{color:var(--silver)}
+.track-section .lead{color:#c4ccd6}
+.track-section .track-tabs{border-bottom-color:rgba(244,243,240,.22)}
+.track-section .track-tabs button{color:var(--warm)}
+.track-section .track-tabs button span{color:var(--silver)}
+.track-section .track-tabs button:hover{background:rgba(244,243,240,.06)}
+.track-section .track-tabs button[aria-selected="true"]{border-bottom-color:var(--gold);background:rgba(244,243,240,.07)}
+.track-section .track-tabs button[aria-selected="true"] span{background:var(--gold);color:var(--ink)}
+.track-section .track-panel h3{color:var(--warm)}
+.track-section .track-panel p:not(.eyebrow){color:#c4ccd6}
+.track-section .artifact-label{color:var(--silver)}
+.track-section #step-artifact{color:var(--gold)}
+.track-section .cycle-loop{color:var(--warm)}
+/* панель кольца отделяется от фона на полтона */
+.track-section .cycle-wrap{background:#16283f;box-shadow:none;border:1px solid rgba(238,200,48,.18)}
+/* карточка результата остаётся светлой — читается как документ */
+.track-section .artifact-preview{background:var(--warm);border-color:transparent;color:var(--ink)}
+.track-section .artifact-preview .tool-header b{color:var(--ink)}
 </style>
 </head>
 <body>
