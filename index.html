@@ -397,6 +397,9 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 @media (prefers-reduced-motion: no-preference){
   .cycle-wrap.is-live .cycle-dot{animation:cycleRun 18s linear infinite}
 .cycle-wrap.is-off .cycle-dot{animation-play-state:paused}
+/* человек взял управление: шарики замирают и гаснут, через 10с возвращаются */
+.cycle-wrap.is-held .cycle-dot{animation-play-state:paused;opacity:0}
+.cycle-dot{transition:opacity .45s ease}
   .cycle-wrap.is-live .cycle-dot.trail{animation-delay:-.55s}
 }
 .cycle-wrap:not(.is-live) .cycle-dot{opacity:0}
@@ -955,13 +958,16 @@ renderPlan();
       const wrap = document.querySelector('.cycle-wrap');
       if (!wrap) return;
       const nodes = [...wrap.querySelectorAll('.cnode')];
+      const labels = [...wrap.querySelectorAll('.clabel')];
       const hint = document.getElementById('cycleHint');
       const loop = document.getElementById('cycleLoop');
+      const head = wrap.querySelector('.cycle-dot.head');
+      const RUN = 18000;   // полный круг, мс
+      const WINDOW = 0.16; // насколько близко к узлу считается «попал»
+      const HOLD = 10000;  // через сколько шарики возвращаются после клика
+      let lastHit = -1, holdTimer = 0;
+
       if (!reducedMotion.matches) wrap.classList.add('is-live');
-
-      function stopPulse() { wrap.classList.remove('is-live'); }
-
-      const labels = [...wrap.querySelectorAll('.clabel')];
 
       function markCycle(index) {
         nodes.forEach((n, i) => n.classList.toggle('is-active', i === index));
@@ -973,30 +979,6 @@ renderPlan();
           ? 'Шестой шаг возвращает в первый: новый приоритет снова идёт в «Понять».'
           : 'Данные идут по кругу: результат шага становится входом следующего.';
       }
-
-      nodes.forEach((node, i) => {
-        node.setAttribute('role', 'button');
-        node.setAttribute('tabindex', '0');
-        node.setAttribute('aria-label', 'Шаг ' + String(i + 1).padStart(2, '0'));
-        const go = () => { stopPulse(); selectStep(i); };
-        node.addEventListener('click', go);
-        node.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
-        });
-      });
-
-      labels.forEach((label, i) => {
-        label.addEventListener('click', () => { stopPulse(); selectStep(i); });
-      });
-
-      document.querySelectorAll('[data-step]').forEach((b) =>
-        b.addEventListener('click', stopPulse));
-
-      /* ===== шарик догоняет узел — узел и надпись загораются ===== */
-      const head = wrap.querySelector('.cycle-dot.head');
-      const RUN = 18000;            // полный круг, мс
-      const WINDOW = 0.16;          // насколько близко к узлу считается «попал»
-      let lastHit = -1, raf = 0;
 
       function setHit(i) {
         if (i === lastHit) return;
@@ -1010,12 +992,43 @@ renderPlan();
         nodes.forEach((n) => n.classList.remove('is-hit'));
         labels.forEach((l) => l.classList.remove('is-hit'));
       }
+
+      /* человек взял управление — шарики замирают, но возвращаются сами */
+      function holdPulse() {
+        wrap.classList.add('is-held');
+        clearHit();
+        clearTimeout(holdTimer);
+        if (!reducedMotion.matches) holdTimer = setTimeout(releasePulse, HOLD);
+      }
+      function releasePulse() { wrap.classList.remove('is-held'); }
+      function stopPulse() { holdPulse(); }
+
+      nodes.forEach((node, i) => {
+        node.setAttribute('role', 'button');
+        node.setAttribute('tabindex', '0');
+        node.setAttribute('aria-label', 'Шаг ' + String(i + 1).padStart(2, '0'));
+        const go = () => { holdPulse(); selectStep(i); };
+        node.addEventListener('click', go);
+        node.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
+        });
+      });
+
+      labels.forEach((label, i) => {
+        label.addEventListener('click', () => { holdPulse(); selectStep(i); });
+      });
+
+      document.querySelectorAll('[data-step]').forEach((b) =>
+        b.addEventListener('click', () => holdPulse()));
+
+      /* ===== шарик догоняет узел — узел и надпись загораются ===== */
       function watchDot() {
-        raf = requestAnimationFrame(watchDot);
-        if (!wrap.classList.contains('is-live') || wrap.classList.contains('is-off')) return;
+        requestAnimationFrame(watchDot);
+        if (!wrap.classList.contains('is-live')) return;
+        if (wrap.classList.contains('is-off') || wrap.classList.contains('is-held')) return;
         const a = head && head.getAnimations()[0];
         if (!a || a.currentTime == null) return;
-        const pos = (((a.currentTime % RUN) / RUN) % 1 + 1) % 1 * nodes.length;
+        const pos = ((((a.currentTime % RUN) / RUN) % 1) + 1) % 1 * nodes.length;
         const near = Math.round(pos) % nodes.length;
         if (Math.abs(pos - Math.round(pos)) < WINDOW) setHit(near); else clearHit();
       }
@@ -1030,9 +1043,6 @@ renderPlan();
           });
         }, {threshold: .25}).observe(wrap);
       }
-
-      const originalStopPulse = stopPulse;
-      stopPulse = function () { originalStopPulse(); clearHit(); cancelAnimationFrame(raf); };
 
       const originalSelectStep = selectStep;
       selectStep = function (index, focus) {
