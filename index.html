@@ -374,6 +374,11 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 .cnode:focus-visible{outline:none}
 .cnode:focus-visible circle{stroke-opacity:1;stroke-width:2.4}
 .cnode.is-active circle{fill:var(--gold);stroke:var(--gold);stroke-opacity:1;r:19}
+/* шарик дошёл до узла — кружок и надпись загораются */
+.cnode.is-hit circle{fill:var(--gold);stroke:var(--gold);stroke-opacity:1;r:19.5}
+.cnode.is-hit text{fill:var(--ink)}
+.cycle-labels text.is-hit{fill:var(--gold);font-weight:700;animation:clabelBlink .45s ease-in-out 2}
+@keyframes clabelBlink{0%,100%{fill-opacity:1}50%{fill-opacity:.2}}
 .cnode.is-active text{fill:var(--ink)}
 .cycle-labels text{font:500 12px var(--mono);fill:var(--silver);letter-spacing:.06em;
   cursor:pointer;transition:fill .22s,font-weight .22s}
@@ -390,8 +395,9 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 .cycle-dot.trail{opacity:.32}
 .cycle-dot.head{fill:#fff6cf;stroke:var(--gold);stroke-width:2}
 @media (prefers-reduced-motion: no-preference){
-  .cycle-wrap.is-live .cycle-dot{animation:cycleRun 9s linear infinite}
-  .cycle-wrap.is-live .cycle-dot.trail{animation-delay:-.3s}
+  .cycle-wrap.is-live .cycle-dot{animation:cycleRun 18s linear infinite}
+.cycle-wrap.is-off .cycle-dot{animation-play-state:paused}
+  .cycle-wrap.is-live .cycle-dot.trail{animation-delay:-.55s}
 }
 .cycle-wrap:not(.is-live) .cycle-dot{opacity:0}
 @keyframes cycleRun{to{offset-distance:100%}}
@@ -985,6 +991,48 @@ renderPlan();
 
       document.querySelectorAll('[data-step]').forEach((b) =>
         b.addEventListener('click', stopPulse));
+
+      /* ===== шарик догоняет узел — узел и надпись загораются ===== */
+      const head = wrap.querySelector('.cycle-dot.head');
+      const RUN = 18000;            // полный круг, мс
+      const WINDOW = 0.16;          // насколько близко к узлу считается «попал»
+      let lastHit = -1, raf = 0;
+
+      function setHit(i) {
+        if (i === lastHit) return;
+        lastHit = i;
+        nodes.forEach((n, k) => n.classList.toggle('is-hit', k === i));
+        labels.forEach((l, k) => l.classList.toggle('is-hit', k === i));
+      }
+      function clearHit() {
+        if (lastHit < 0) return;
+        lastHit = -1;
+        nodes.forEach((n) => n.classList.remove('is-hit'));
+        labels.forEach((l) => l.classList.remove('is-hit'));
+      }
+      function watchDot() {
+        raf = requestAnimationFrame(watchDot);
+        if (!wrap.classList.contains('is-live') || wrap.classList.contains('is-off')) return;
+        const a = head && head.getAnimations()[0];
+        if (!a || a.currentTime == null) return;
+        const pos = (((a.currentTime % RUN) / RUN) % 1 + 1) % 1 * nodes.length;
+        const near = Math.round(pos) % nodes.length;
+        if (Math.abs(pos - Math.round(pos)) < WINDOW) setHit(near); else clearHit();
+      }
+      if (!reducedMotion.matches) watchDot();
+
+      /* за пределами экрана кольцо замирает */
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver((en) => {
+          en.forEach((e) => {
+            wrap.classList.toggle('is-off', !e.isIntersecting);
+            if (!e.isIntersecting) clearHit();
+          });
+        }, {threshold: .25}).observe(wrap);
+      }
+
+      const originalStopPulse = stopPulse;
+      stopPulse = function () { originalStopPulse(); clearHit(); cancelAnimationFrame(raf); };
 
       const originalSelectStep = selectStep;
       selectStep = function (index, focus) {
