@@ -296,7 +296,14 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 .persona-panel{display:grid;grid-template-columns:1fr 1fr;gap:32px;padding-top:24px}
 .persona-copy h3{font-size:20px;line-height:1.25;margin:0 0 10px}
 .persona-copy p{color:var(--muted);font-size:15px;line-height:1.6;margin:0}
-.persona-copy ul{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:9px}
+.persona-offer{margin:18px 0 0;padding-left:16px;border-left:3px solid var(--gold);font:600 16px/1.5 var(--head);color:var(--ink)}
+.persona-more{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
+.persona-more summary{cursor:pointer;font:600 14px var(--head);color:var(--navy);list-style:none;display:flex;align-items:center;gap:9px}
+.persona-more summary::-webkit-details-marker{display:none}
+.persona-more summary::before{content:"+";font:700 16px var(--mono);color:var(--gold);line-height:1}
+.persona-more[open] summary::before{content:"–"}
+.persona-more summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.persona-copy ul{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:9px}
 .persona-copy li{display:grid;grid-template-columns:16px 1fr;gap:10px;align-items:start;
   font-size:14px;line-height:1.45;color:var(--muted)}
 .persona-copy li i{font-style:normal;color:var(--navy);font-weight:700}
@@ -545,7 +552,11 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
           <div class="persona-copy">
             <h3 id="personaTitle"></h3>
             <p id="personaCopy"></p>
-            <ul id="personaList"></ul>
+            <p class="persona-offer" id="personaOffer" hidden></p>
+            <details class="persona-more" id="personaMore">
+              <summary id="personaMoreTitle">На платформе Вы сможете в одном месте</summary>
+              <ul id="personaList"></ul>
+            </details>
           </div>
           <div class="persona-flow">
             <h4>Первый маршрут</h4>
@@ -777,9 +788,15 @@ renderPlan();
 
     const personaData = {
       expert: {
-        title: "Эксперт упёрся в потолок личного времени",
-        copy: "Вы продаёте консультации и каждый раз объясняете ценность заново. Оракул помогает собрать продукт, оффер и первый трек продаж.",
-        list: ["упаковать опыт в продукт", "собрать понятный оффер", "проверить спрос без большого запуска"],
+        title: "Превратите накопленный опыт в востребованный онлайн-продукт",
+        copy: "У Вас много знаний и практического опыта, но непонятно, какую экспертность продавать, как упаковать её в продукт и где находить клиентов?",
+        offer: "От накопленного опыта — к готовому продукту, системе привлечения клиентов и стабильным онлайн-продажам.",
+        list: ["определить самую востребованную и прибыльную часть своей экспертности",
+               "выбрать целевую аудиторию и понять её реальные потребности",
+               "упаковать знания в понятный онлайн-продукт",
+               "создать автоворонку и техническую инфраструктуру",
+               "найти эффективные каналы привлечения клиентов",
+               "анализировать результаты и масштабировать продажи"],
         flow: [["01","Диагностика","где теряется ценность","вечер"],
                ["02","Оффер","что покупает клиент","1 цикл"],
                ["03","Контент","план под боли аудитории","неделя"]]
@@ -815,6 +832,10 @@ renderPlan();
       if (!d) return;
       document.getElementById("personaTitle").textContent = d.title;
       document.getElementById("personaCopy").textContent = d.copy;
+      const offer = document.getElementById("personaOffer");
+      offer.textContent = d.offer || "";
+      offer.hidden = !d.offer;
+      document.getElementById("personaMore").open = false;
       document.getElementById("personaList").innerHTML =
         d.list.map((t) => `<li><i>✓</i><span>${t}</span></li>`).join("");
       document.getElementById("personaFlow").innerHTML =
