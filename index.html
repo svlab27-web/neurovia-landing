@@ -791,15 +791,14 @@ renderPlan();
         title: "Превратите накопленный опыт в востребованный онлайн-продукт",
         copy: "У Вас много знаний и практического опыта, но непонятно, какую экспертность продавать, как упаковать её в продукт и где находить клиентов?",
         offer: "От накопленного опыта — к готовому продукту, системе привлечения клиентов и стабильным онлайн-продажам.",
-        list: ["определить самую востребованную и прибыльную часть своей экспертности",
-               "выбрать целевую аудиторию и понять её реальные потребности",
-               "упаковать знания в понятный онлайн-продукт",
-               "создать автоворонку и техническую инфраструктуру",
-               "найти эффективные каналы привлечения клиентов",
-               "анализировать результаты и масштабировать продажи"],
-        flow: [["01","Диагностика","где теряется ценность","вечер"],
-               ["02","Оффер","что покупает клиент","1 цикл"],
-               ["03","Контент","план под боли аудитории","неделя"]]
+        list: [],
+        flowTitle: "Что Вы пройдёте на платформе",
+        flow: [["01","Экспертность","определить самую востребованную и прибыльную часть",""],
+               ["02","Аудитория","выбрать целевую и понять её реальные потребности",""],
+               ["03","Продукт","упаковать знания в понятный онлайн-продукт",""],
+               ["04","Автоворонка","и техническая инфраструктура",""],
+               ["05","Привлечение","найти эффективные каналы",""],
+               ["06","Масштаб","анализировать результаты и наращивать продажи",""]]
       },
       small: {
         title: "Малый бизнес теряет заявки в переписках",
@@ -835,12 +834,15 @@ renderPlan();
       const offer = document.getElementById("personaOffer");
       offer.textContent = d.offer || "";
       offer.hidden = !d.offer;
-      document.getElementById("personaMore").open = false;
+      const more = document.getElementById("personaMore");
+      more.open = false;
+      more.hidden = !(d.list && d.list.length);
       document.getElementById("personaList").innerHTML =
-        d.list.map((t) => `<li><i>✓</i><span>${t}</span></li>`).join("");
+        (d.list || []).map((t) => `<li><i>✓</i><span>${t}</span></li>`).join("");
+      document.querySelector(".persona-flow h4").textContent = d.flowTitle || "Первый маршрут";
       document.getElementById("personaFlow").innerHTML =
         d.flow.map(([n, title, sub, meta]) =>
-          `<li><span class="n">${n}</span><span><b>${title}</b><small>${sub}</small></span><em>${meta}</em></li>`
+          `<li><span class="n">${n}</span><span><b>${title}</b><small>${sub}</small></span>${meta ? `<em>${meta}</em>` : ""}</li>`
         ).join("");
       document.querySelectorAll(".persona-tabs button").forEach((b) => {
         b.setAttribute("aria-selected", String(b.dataset.persona === key));
