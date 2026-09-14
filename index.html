@@ -295,6 +295,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 .persona-copy{display:flex;flex-direction:column;justify-content:center;gap:20px}
 .persona-copy h3{font-size:26px;line-height:1.22;margin:0;max-width:21ch}
 .persona-copy p{color:var(--muted);font-size:16px;line-height:1.65;margin:0;max-width:42ch}
+#personaCopy{display:grid;gap:14px}
 .persona-offer{margin:0;padding-left:16px;border-left:3px solid var(--gold);font:600 17px/1.5 var(--head);color:var(--ink);max-width:40ch}
 .persona-more{margin:0;border-top:1px solid var(--line);padding-top:14px}
 .persona-more summary{cursor:pointer;font:600 14px var(--head);color:var(--navy);list-style:none;display:flex;align-items:center;gap:9px}
@@ -551,7 +552,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
         <div class="persona-panel">
           <div class="persona-copy">
             <h3 id="personaTitle"></h3>
-            <p id="personaCopy"></p>
+            <div id="personaCopy"></div>
             <p class="persona-offer" id="personaOffer" hidden></p>
             <details class="persona-more" id="personaMore">
               <summary id="personaMoreTitle">На платформе Вы сможете в одном месте</summary>
@@ -840,8 +841,9 @@ renderPlan();
       },
       tracker: {
         title: "Ведите больше клиентов, не добавляя часов",
-        copy: "Между сессиями клиент теряет темп, а Вы — контекст. Перед каждой встречей приходится вспоминать, где он остановился, и заново собирать цифры по таблицам и переписке.",
-        offer: "Данные всех клиентов в одном месте. Меньше подготовки к сессиям. Больше внимания решениям клиента.",
+        copy: ["Между встречами важно сохранить договорённости и довести действия до проверки. NeuroVia помогает связать цель клиента, выбранный приоритет, задачи и результаты в его проекте.",
+               "Оракул помогает клиенту готовить материалы и разбирать вопросы по ходу работы. Вы используете этот контекст на следующей сессии: что сделано, где возникло затруднение и какое решение нужно принять."],
+        offer: "Одна цель. Понятный шаг между встречами. Следующая сессия — с опорой на факты.",
         list: [],
         flowTitle: "Маршрут",
         flow: [["01","Диагностика","общий вход: где у клиента теряются деньги",""],
@@ -857,7 +859,8 @@ renderPlan();
       const d = personaData[key];
       if (!d) return;
       document.getElementById("personaTitle").textContent = d.title;
-      document.getElementById("personaCopy").textContent = d.copy;
+      document.getElementById("personaCopy").innerHTML =
+        (Array.isArray(d.copy) ? d.copy : [d.copy]).map((t) => `<p>${t}</p>`).join("");
       const offer = document.getElementById("personaOffer");
       offer.textContent = d.offer || "";
       offer.hidden = !d.offer;
