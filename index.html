@@ -1037,6 +1037,7 @@ renderPlan();
         lastHit = i;
         nodes.forEach((n, k) => n.classList.toggle('is-hit', k === i));
         labels.forEach((l, k) => l.classList.toggle('is-hit', k === i));
+        selectStep(i);   // шарик дошёл до узла — открывается его шаг
       }
       function clearHit() {
         if (lastHit < 0) return;
