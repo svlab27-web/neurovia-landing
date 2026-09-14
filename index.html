@@ -294,10 +294,11 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 .persona-tabs button[aria-selected="true"] span{color:var(--ink)}
 .persona-tabs button:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
 .persona-panel{display:grid;grid-template-columns:1fr 1fr;gap:32px;padding-top:24px}
-.persona-copy h3{font-size:20px;line-height:1.25;margin:0 0 10px}
+.persona-copy{display:flex;flex-direction:column;justify-content:space-between;gap:22px}
+.persona-copy h3{font-size:20px;line-height:1.25;margin:0}
 .persona-copy p{color:var(--muted);font-size:15px;line-height:1.6;margin:0}
-.persona-offer{margin:18px 0 0;padding-left:16px;border-left:3px solid var(--gold);font:600 16px/1.5 var(--head);color:var(--ink)}
-.persona-more{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
+.persona-offer{margin:0;padding-left:16px;border-left:3px solid var(--gold);font:600 16px/1.5 var(--head);color:var(--ink)}
+.persona-more{margin:0;border-top:1px solid var(--line);padding-top:14px}
 .persona-more summary{cursor:pointer;font:600 14px var(--head);color:var(--navy);list-style:none;display:flex;align-items:center;gap:9px}
 .persona-more summary::-webkit-details-marker{display:none}
 .persona-more summary::before{content:"+";font:700 16px var(--mono);color:var(--gold);line-height:1}
