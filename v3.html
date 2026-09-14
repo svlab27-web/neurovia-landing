@@ -119,6 +119,7 @@ section[id]{scroll-margin-top:86px}
 .audience{background:var(--mist);border-bottom:1px solid #d7d4cd;padding:56px 0 64px}
 #personas{border-bottom:0;gap:12px;flex-wrap:wrap;overflow:visible;padding:2px 0 6px}
 #personas button{
+  position:relative;
   border:1px solid var(--line);border-radius:10px;background:#fff;
   padding:16px 24px;font-weight:600;font-size:16px;color:var(--ink);
   box-shadow:0 1px 0 rgba(10,22,40,.05);
@@ -128,6 +129,11 @@ section[id]{scroll-margin-top:86px}
   background:var(--navy);border-color:var(--navy);color:#fff;
   transform:translateY(-2px);box-shadow:0 12px 26px rgba(15,28,46,.24)}
 #personas button:focus-visible{outline:3px solid #9d7b00;outline-offset:3px}
+/* клювик от активной вкладки к панели */
+#personas button[aria-selected=true]::after{
+  content:"";position:absolute;left:50%;bottom:-10px;margin-left:-10px;
+  border:10px solid transparent;border-bottom:0;border-top-color:var(--navy)}
+@media (max-width:700px){#personas button[aria-selected=true]::after{display:none}}
 .persona-panel{padding-top:34px}
 #persona-link{
   display:inline-flex;align-items:center;gap:14px;
