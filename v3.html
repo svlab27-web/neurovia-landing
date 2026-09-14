@@ -374,7 +374,7 @@ $('download').addEventListener('click',()=>{const url=URL.createObjectURL(new Bl
     var head   = wrap.querySelector('.cycle-dot.head');
     var tabs   = [].slice.call(document.querySelectorAll('#steps button'));
     var RUN = 18000, WINDOW = 0.16, HOLD = 10000;
-    var lastHit = -1, holdTimer = 0, auto = false;
+    var lastHit = -1, holdTimer = 0, auto = false, hovering = false;
 
     if (!less.matches) wrap.classList.add('is-live');
 
@@ -400,12 +400,26 @@ $('download').addEventListener('click',()=>{const url=URL.createObjectURL(new Bl
       nodes.forEach(function (n) { n.classList.remove('is-hit'); });
       labels.forEach(function (l) { l.classList.remove('is-hit'); });
     }
+    function release() { if (!hovering) wrap.classList.remove('is-held'); }
     function holdPulse() {
       wrap.classList.add('is-held');
       clearHit();
       clearTimeout(holdTimer);
-      if (!less.matches) holdTimer = setTimeout(function () { wrap.classList.remove('is-held'); }, HOLD);
+      if (!less.matches) holdTimer = setTimeout(release, HOLD);
     }
+    /* пока человек читает карточку шага — круг стоит */
+    ['route-panel', 'steps'].forEach(function (id) {
+      var box = document.getElementById(id);
+      if (!box) return;
+      box.addEventListener('mouseenter', function () {
+        hovering = true; clearTimeout(holdTimer);
+        wrap.classList.add('is-held'); clearHit();
+      });
+      box.addEventListener('mouseleave', function () {
+        hovering = false; clearTimeout(holdTimer);
+        if (!less.matches) holdTimer = setTimeout(release, 2000);
+      });
+    });
     function goStep(i) { if (tabs[i]) tabs[i].click(); }
 
     nodes.forEach(function (node, i) {
