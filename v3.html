@@ -374,7 +374,7 @@ $('download').addEventListener('click',()=>{const url=URL.createObjectURL(new Bl
     var head   = wrap.querySelector('.cycle-dot.head');
     var tabs   = [].slice.call(document.querySelectorAll('#steps button'));
     var RUN = 18000, WINDOW = 0.16, HOLD = 10000;
-    var lastHit = -1, holdTimer = 0;
+    var lastHit = -1, holdTimer = 0, auto = false;
 
     if (!less.matches) wrap.classList.add('is-live');
 
@@ -392,6 +392,7 @@ $('download').addEventListener('click',()=>{const url=URL.createObjectURL(new Bl
       lastHit = i;
       nodes.forEach(function (n, k) { n.classList.toggle('is-hit', k === i); });
       labels.forEach(function (l, k) { l.classList.toggle('is-hit', k === i); });
+      if (tabs[i]) { auto = true; tabs[i].click(); auto = false; }
     }
     function clearHit() {
       if (lastHit < 0) return;
@@ -421,7 +422,7 @@ $('download').addEventListener('click',()=>{const url=URL.createObjectURL(new Bl
       label.addEventListener('click', function () { holdPulse(); goStep(i); markCycle(i); });
     });
     tabs.forEach(function (b, i) {
-      b.addEventListener('click', function () { holdPulse(); markCycle(i); });
+      b.addEventListener('click', function () { if (!auto) holdPulse(); markCycle(i); });
     });
 
     function watchDot() {
