@@ -289,9 +289,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 .persona-tabs button{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;
   padding:14px 8px 16px;background:none;border:0;border-bottom:3px solid transparent;
   font:600 15px var(--head);color:var(--ink);cursor:pointer}
-.persona-tabs button span{font:400 11px/1.35 var(--mono);color:var(--muted);min-height:2.7em}
 .persona-tabs button[aria-selected="true"]{border-bottom-color:var(--navy);background:rgba(244,243,240,.5)}
-.persona-tabs button[aria-selected="true"] span{color:var(--ink)}
 .persona-tabs button:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
 .persona-panel{display:grid;grid-template-columns:1fr 1fr;gap:32px;padding-top:24px}
 .persona-copy{display:flex;flex-direction:column;justify-content:center;gap:20px}
@@ -544,10 +542,10 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
       <h2 id="audience-title">Когда пора<br>собрать систему</h2>
       <div class="persona">
         <div class="persona-tabs" role="tablist" aria-label="Кому подходит">
-          <button type="button" role="tab" data-persona="expert"  aria-selected="true">Эксперт<span>есть опыт,<br>нет системы продаж</span></button>
-          <button type="button" role="tab" data-persona="small"   aria-selected="false">Стартап<span>заявки есть,<br>контроль слабый</span></button>
-          <button type="button" role="tab" data-persona="founder" aria-selected="false">Действующий бизнес<span>есть продукт,<br>нужны цифры</span></button>
-          <button type="button" role="tab" data-persona="agency"  aria-selected="false">Агентство<span>несколько клиентов<br>и проектов</span></button>
+          <button type="button" role="tab" data-persona="expert"  aria-selected="true">Эксперт</button>
+          <button type="button" role="tab" data-persona="small"   aria-selected="false">Стартап</button>
+          <button type="button" role="tab" data-persona="founder" aria-selected="false">Действующий бизнес</button>
+          <button type="button" role="tab" data-persona="agency"  aria-selected="false">Агентство</button>
         </div>
         <div class="persona-panel">
           <div class="persona-copy">
