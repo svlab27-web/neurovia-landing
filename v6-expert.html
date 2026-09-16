@@ -144,6 +144,12 @@ section{padding:84px 0}
   font-size:clamp(21px,2.5vw,31px);line-height:1.35;font-weight:800;letter-spacing:-.015em;max-width:26ch;
   width:max-content;max-width:min(100%,24ch)}
 @media (min-width:861px){.pain-note{max-width:min(100%,46ch)}}
+.pain-note{display:block;transition:transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s}
+.pain-note:hover{transform:translateY(-4px);box-shadow:0 22px 46px rgba(15,28,46,.32)}
+.pain-go{display:flex;align-items:center;gap:10px;margin-top:20px;padding-top:16px;
+  border-top:1px solid rgba(255,255,255,.16);font:700 15px var(--head);color:var(--gold);letter-spacing:0}
+.pain-go em{font-style:normal;transition:transform .25s}
+.pain-note:hover .pain-go em{transform:translateX(6px)}
 .pain-note b{color:var(--gold)}
 @media (max-width:860px){.road{grid-template-columns:1fr 1fr}.road .stop:nth-child(2n)::after{display:none}}
 @media (max-width:560px){.road{grid-template-columns:1fr;gap:16px}
@@ -283,12 +289,12 @@ footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
 
     <div class="switch reveal" role="group" aria-label="Сравнение подходов">
       <button type="button" data-road="bad" aria-pressed="true">Как обычно</button>
-      <button type="button" data-road="good" aria-pressed="false">Как здесь</button>
+      <button type="button" data-road="good" aria-pressed="false">NeuroVia Labs</button>
     </div>
 
     <div class="road bad reveal" id="road"></div>
 
-    <p class="pain-note reveal">Сначала проверьте гипотезу сами — быстро и без бюджета. Нашли <b>прибыльную связку</b> — тогда решайте: нанимать команду или работать самостоятельно.</p>
+    <a class="pain-note reveal" href="#price">Сначала проверьте гипотезу сами — быстро и без бюджета. Нашли <b>прибыльную связку</b> — тогда решайте: нанимать команду или работать самостоятельно.<span class="pain-go">Посмотреть тарифы <em>→</em></span></a>
   </div>
 </section>
 
@@ -416,9 +422,9 @@ footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
     ],
     good: [
       ["Неделя 1", "Оракул разбирает Ваш опыт: тема, сегмент, проблема, за которую платят."],
-      ["Неделя 2", "Собираете продукт и цену-гипотезу — минимальную версию для проверки."],
-      ["Неделя 3–4", "Контент под боли клиента, один канал, первые отклики и заявки."],
-      ["Итог", "Видно по цифрам, что работает. Команду нанимаете под проверенное."]
+      ["Неделя 2", "Собираете продуктовую линейку и цену-гипотезу — минимальную версию для проверки."],
+      ["Неделя 3–4", "Контент под боли клиента, первые отклики и заявки."],
+      ["Итог", "Видно по цифрам, что работает, а что нет."]
     ]
   };
 
