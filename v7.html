@@ -929,6 +929,7 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
           <div class="diag-actions">
             <button type="submit" class="button">Посчитать мою воронку</button>
             <button type="button" class="button ghost" id="diagReset">Показать пример</button>
+            <button type="button" class="button ghost" id="diagZero">У меня ещё нет цифр</button>
             <p class="diag-error" id="diagError" role="alert"></p>
           </div>
         </form>
@@ -1649,6 +1650,36 @@ renderPlan();
       if (error) return;
       applyNumbers(data.o, data.v, data.p, data.d, data.period, true);
       saveState();
+      $('insight').scrollIntoView({behavior: reducedMotion.matches ? 'auto' : 'smooth', block: 'center'});
+    });
+
+    $('diagZero').addEventListener('click', () => {
+      ['fO','fV','fP','fD'].forEach((id) => { $(id).value = ''; });
+      $('diagError').textContent = '';
+      const mode = $('dataMode');
+      mode.textContent = 'Старт с нуля';
+      mode.classList.remove('is-own');
+      document.querySelectorAll('[data-funnel]').forEach((btn) => {
+        btn.classList.remove('selected');
+        btn.setAttribute('aria-pressed', 'false');
+        btn.querySelector('.bar').style.setProperty('--amount', '1.5%');
+        btn.querySelector('.bar-label').innerHTML = `${STAGE_NAMES[[...document.querySelectorAll('[data-funnel]')].indexOf(btn)]} <b>—</b>`;
+        btn.querySelector('.bar-caption').textContent = 'пока нет данных';
+      });
+      $('loss-number').innerHTML = '0<span></span>';
+      $('loss-title').textContent = 'цифр пока нет — это нормально';
+      $('loss-copy').textContent = 'Считать нечего, пока нет первых контактов. Начните с шага 01: выберите один сегмент и соберите первые 20 контактов. Через неделю в этой форме появятся Ваши первые числа.';
+      $('loss-action').textContent = 'Выбрать один сегмент и написать 20 контактам.';
+      const link = $('plan-link');
+      if (link) {
+        link.textContent = 'Открыть шаг 01 «Понять» ';
+        link.setAttribute('href', '#audience');
+        link.onclick = () => {
+          const items = document.querySelectorAll('#personaFlow details');
+          items.forEach((d, k) => { d.open = k === 0; });
+          if (items[0]) items[0].scrollIntoView({behavior: reducedMotion.matches ? 'auto' : 'smooth', block: 'center'});
+        };
+      }
       $('insight').scrollIntoView({behavior: reducedMotion.matches ? 'auto' : 'smooth', block: 'center'});
     });
 
