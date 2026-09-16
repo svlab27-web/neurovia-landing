@@ -1199,17 +1199,47 @@ renderPlan();
                  "собирает обновлённую гипотезу и передаёт её в «Понять» или «Предложить» — цикл замыкается, следующий заход начинается не с нуля"]]]
       },
       small: {
-        title: "От идеи — к продукту, который покупают",
-        copy: "У Вас есть большая идея. Но непонятно, нужна ли она рынку, как проверить это без крупных вложений и на чём здесь зарабатывать.",
+        title: "Проверить идею дешевле, чем её построить",
+        copy: [],
         offer: "Сначала проверенная гипотеза, потом первые оплаты, потом экономика, которая сходится.",
         list: [],
         flowTitle: "Маршрут",
-        flow: [["01","Идея","что она решает и для кого",""],
-               ["02","Гипотезы","разложить идею на проверяемые предположения",""],
-               ["03","Проверка","интервью и тест с ограниченным бюджетом",""],
-               ["04","MVP","минимальный продукт, которого хватает для проверки",""],
-               ["05","Первые продажи","протестировать спрос и собрать данные рынка",""],
-               ["06","Экономика","рассчитать финансовую модель",""]]
+        flow: [["01","Идея","Оракул помогает свести идею к одной проверяемой фразе: кто, какая проблема и какой результат","",
+                ["разбирает идею: кому она и от какой боли спасает",
+                 "сужает до одного сегмента, на котором можно проверить",
+                 "формулирует проблему словами клиента, а не терминами продукта",
+                 "смотрит, кто уже решает эту проблему и чем",
+                 "оставляет одну формулировку, которую можно опровергнуть"]],
+               ["02","Гипотезы","Оракул раскладывает идею на предположения и показывает, какое из них убьёт проект первым","",
+                ["выписывает, во что Вы верите: клиент, проблема, цена, канал",
+                 "отделяет факты от догадок",
+                 "расставляет предположения по риску — с чего начинать проверку",
+                 "формулирует, что считать подтверждением, а что опровержением",
+                 "назначает срок и цифру, по которой будет виден ответ"]],
+               ["03","Проверка","Оракул помогает поговорить с рынком до того, как деньги ушли в разработку","",
+                ["помогает собрать список тех, у кого эта боль есть сегодня",
+                 "подсказывает, о чём спрашивать, чтобы услышать правду, а не вежливость",
+                 "отличает «интересно» от «готов заплатить»",
+                 "собирает ответы в каталог болей — на них потом строится оффер",
+                 "показывает, подтвердилась гипотеза или её надо менять"]],
+               ["04","MVP","Оракул помогает собрать минимальный продукт, которого хватает для проверки спроса","",
+                ["оставляет одну функцию, которая закрывает главную боль",
+                 "переносит остальное в «потом» — до первых оплат",
+                 "помогает поставить цену-гипотезу: её задача — проверить спрос, а не заработать",
+                 "собирает карточку продукта: обещание, состав, цена",
+                 "формирует ссылку на оплату — гипотезу можно проверить деньгами"]],
+               ["05","Первые продажи","Оракул помогает довести первых людей до оплаты и увидеть, откуда они пришли","",
+                ["помогает выбрать один канал и проверить на нём, а не распыляться",
+                 "собирает сообщения под боли, которые Вы услышали на разговорах",
+                 "заявка превращается в заказ: видно, кто купил и за что",
+                 "считает, во сколько обошёлся один пришедший",
+                 "показывает, что сработало, а что только казалось"]],
+               ["06","Экономика","Оракул считает финмодель и показывает, сходится ли всё это в деньгах","",
+                ["сводит выручку, расходы и налоги — видно, сколько остаётся",
+                 "считает точку безубыточности: сколько продаж нужно, чтобы выйти в плюс",
+                 "считает стоимость клиента и его ценность — окупается ли привлечение",
+                 "строит прогноз на год и сценарии «что будет, если»",
+                 "собирает документ для инвестора — если решите идти за деньгами"]]]
       },
       founder: {
         title: "Посмотрите на бизнес по-новому — прежде чем вкладывать больше или закрывать его",
@@ -1295,7 +1325,7 @@ renderPlan();
         else a.removeAttribute("aria-current");
       });
       window.__persona = key;
-      document.querySelectorAll(".x-only").forEach((el) => { el.hidden = key !== "expert"; });
+      if (window.__renderBlocks) window.__renderBlocks(key);
       document.querySelectorAll(".general-only").forEach((el) => { el.hidden = true; });
       if (window.__applyPersonaFunnel) window.__applyPersonaFunnel(key);
     }
@@ -1336,67 +1366,127 @@ renderPlan();
 
   
 
-    /* ===== экспертные блоки: дороги, Оракул между болями, тест ===== */
-    (function expertBlocks() {
-      var reduce = reducedMotion;
-      var ROADS = {
-        bad: [
-          ["Месяц 0", "Нанимаете специалиста. Он берёт предоплату и бюджет на тест."],
-          ["Месяц 1–2", "Специалист проверяет свои гипотезы за Ваш счёт."],
-          ["Месяц 3–6", "Связка так и не нашлась. Бюджет кончился, силы тоже."],
-          ["Итог", "Вывод: «маркетинг не работает». Данные и деньги остались у подрядчика."]
+    /* ===== блоки раздела: боли, дороги, тест — по аудиториям ===== */
+    var PB = {
+      expert: {
+        cards: [
+          ["Знакомо?", "Нанимали подрядчиков, покупали курсы, слили бюджет — а клиентов так и нет?", "Почему так выходит"],
+          ["Или так?", "За плечами годы практики — но непонятно, что из этого продавать и как упаковать в продукт?", "С чего начать"]
         ],
-        good: [
-          ["Неделя 1", "Оракул разбирает Ваш опыт: тема, сегмент, проблема, за которую платят."],
-          ["Неделя 2", "Собираете продуктовую линейку и цену-гипотезу — минимальную версию для проверки."],
-          ["Неделя 3–4", "Контент под боли клиента, первые отклики и заявки."],
-          ["Итог", "Видно по цифрам, что работает, а что нет."]
+        facts: [["3–", "4", "6", "месяцев уходит на чужие гипотезы"],
+                ["до ", "300 000", "1500000", "работа и бюджет, пока ищут связку"]],
+        roadsTitle: "Дело не в специалистах. Дело в порядке.",
+        roadsLead: "Любая работа с подрядчиком начинается с гипотез. Вопрос только в том, кто за них платит и сколько это длится.",
+        roads: {
+          bad: [
+            ["Месяц 0", "Нанимаете специалиста. Он берёт предоплату и бюджет на тест."],
+            ["Месяц 1–2", "Специалист проверяет свои гипотезы за Ваш счёт."],
+            ["Месяц 3–6", "Связка так и не нашлась. Бюджет кончился, силы тоже."],
+            ["Итог", "Вывод: «маркетинг не работает». Данные и деньги остались у подрядчика."]
+          ],
+          good: [
+            ["Неделя 1", "Оракул разбирает Ваш опыт: тема, сегмент, проблема, за которую платят."],
+            ["Неделя 2", "Собираете продуктовую линейку и цену-гипотезу — минимальную версию для проверки."],
+            ["Неделя 3–4", "Контент под боли клиента, первые отклики и заявки."],
+            ["Итог", "Видно по цифрам, что работает, а что нет."]
+          ]
+        },
+        note: 'Сначала проверьте гипотезу сами — быстро и без бюджета. Нашли <b>прибыльную связку</b> — тогда решайте: нанимать команду или работать самостоятельно.',
+        mirrorTitle: "Опыт есть. Продукта нет.",
+        mirrorLead: "Отметьте, что про Вас — покажу, с какого шага начинать. Это займёт двадцать секунд.",
+        names: ["Понять", "Предложить", "Привлечь", "Продать", "Посчитать", "Пересобрать"],
+        mirror: [
+          ["Экспертности хватает, а что именно продавать — непонятно", 0],
+          ["Курс записан, купили трое — и двое из них знакомые", 1],
+          ["Пишу в канал, а в ответ тишина", 2],
+          ["Спрашивают цену — и пропадают", 3],
+          ["Деньги приходят, но сколько остаётся — не считал", 4],
+          ["Уже пробовал менять — не помогло", 5]
+        ],
+        verdicts: [
+          ["Начните с шага «Понять»", "Пока не выбрана одна тема, один сегмент и одна проблема, всё остальное будет стрелять по площадям."],
+          ["Начните с шага «Предложить»", "Продукт есть, но собран из Вашей логики, а не из клиентской. Соберём метод, линейку и минимальный продукт для проверки."],
+          ["Начните с шага «Привлечь»", "Тишина в ответ — это не про канал, это про формулировку. Разберём боли клиента и соберём контент, в котором он узнает себя."],
+          ["Начните с шага «Продать»", "Интерес есть, а маршрута до оплаты нет. Выстроим путь: заявка, карточка продукта, цена вовремя и ссылка на оплату."],
+          ["Начните с шага «Посчитать»", "Продажи без цифр — это ощущения. Посчитаем прибыль с налогами, средний чек и точку безубыточности."],
+          ["Начните с шага «Пересобрать»", "Меняли наугад и сразу всё — поэтому непонятно, что сработало. Найдём бутылочное горлышко и одну правку, которая его закрывает."]
         ]
-      };
-      var MIRROR = [
-        ["Экспертности хватает, а что именно продавать — непонятно", 0],
-        ["Курс записан, купили трое — и двое из них знакомые", 1],
-        ["Пишу в канал, а в ответ тишина", 2],
-        ["Спрашивают цену — и пропадают", 3],
-        ["Деньги приходят, но сколько остаётся — не считал", 4],
-        ["Уже пробовал менять — не помогло", 5]
-      ];
-      var VERDICTS = [
-        ["Начните с шага «Понять»", "Пока не выбрана одна тема, один сегмент и одна проблема, всё остальное будет стрелять по площадям."],
-        ["Начните с шага «Предложить»", "Продукт есть, но собран из Вашей логики, а не из клиентской. Соберём метод, линейку и минимальный продукт для проверки."],
-        ["Начните с шага «Привлечь»", "Тишина в ответ — это не про канал, это про формулировку. Разберём боли клиента и соберём контент, в котором он узнает себя."],
-        ["Начните с шага «Продать»", "Интерес есть, а маршрута до оплаты нет. Выстроим путь: заявка, карточка продукта, цена вовремя и ссылка на оплату."],
-        ["Начните с шага «Посчитать»", "Продажи без цифр — это ощущения. Посчитаем прибыль с налогами, средний чек и точку безубыточности."],
-        ["Начните с шага «Пересобрать»", "Меняли наугад и сразу всё — поэтому непонятно, что сработало. Найдём бутылочное горлышко и одну правку, которая его закрывает."]
-      ];
-      var NAMES = ["Понять","Предложить","Привлечь","Продать","Посчитать","Пересобрать"];
+      },
+      small: {
+        cards: [
+          ["Знакомо?", "Идея есть — а денег на её проверку нет, и непонятно, где их взять?", "Как проверить без вложений"],
+          ["Или так?", "Как понять, что идея выстрелит, а не сгорит вместе с вложениями?", "С чего начать"]
+        ],
+        facts: [["3–", "4", "6", "месяцев до первого пользователя, если начинать с разработки"],
+                ["до ", "500 000", "3000000", "стоит MVP на заказ — до того, как спрос проверен"]],
+        roadsTitle: "Дело не в идее. Дело в порядке.",
+        roadsLead: "Идею невозможно оценить заранее — её можно только проверить. Вопрос в том, чем Вы платите за проверку: месяцами разработки или неделями разговоров.",
+        roads: {
+          bad: [
+            ["Месяц 0", "Находите разработчика и платите за MVP. Спрос пока никто не проверял."],
+            ["Месяц 1–3", "Продукт пишется по Вашему представлению о клиенте."],
+            ["Месяц 4–6", "Запуск. Пользователи не идут, деньги кончились."],
+            ["Итог", "Вывод: «идея не зашла». Почему именно — так и не понятно."]
+          ],
+          good: [
+            ["Неделя 1", "Оракул раскладывает идею на гипотезы и показывает, какая из них убьёт проект первой."],
+            ["Неделя 2", "Говорите с сегментом до разработки — и слышите, за что готовы платить."],
+            ["Неделя 3–4", "Собираете минимальный продукт и берёте первые оплаты."],
+            ["Итог", "Финмодель показывает, сходится экономика или нет — до крупных вложений."]
+          ]
+        },
+        note: 'Проверить идею дешевле, чем её построить. Сначала <b>подтверждённая гипотеза</b> — потом разработка, команда и деньги инвестора.',
+        mirrorTitle: "Идея есть. Подтверждения нет.",
+        mirrorLead: "Отметьте, что про Вас — покажу, с какого шага начинать. Это займёт двадцать секунд.",
+        names: ["Идея", "Гипотезы", "Проверка", "MVP", "Первые продажи", "Экономика"],
+        mirror: [
+          ["Идея есть, но в одну фразу её сформулировать не могу", 0],
+          ["Уверен, что нужно всем — а кому именно, не решил", 1],
+          ["Спрашивал у знакомых: все хвалят, никто не платит", 2],
+          ["Жду, пока допилим продукт, — тогда и покажем", 3],
+          ["Показывали: интерес есть, оплат нет", 4],
+          ["Не считал, сколько стоит клиент и когда выйдем в плюс", 5]
+        ],
+        verdicts: [
+          ["Начните с шага «Идея»", "Пока идея не сведена к одной фразе — кто, какая проблема, какой результат — проверять нечего."],
+          ["Начните с шага «Гипотезы»", "«Нужно всем» проверить невозможно. Разложим идею на предположения и начнём с того, что убьёт проект первым."],
+          ["Начните с шага «Проверка»", "Похвала знакомых — не спрос. Поговорим с теми, у кого эта боль есть сегодня, и отличим «интересно» от «готов платить»."],
+          ["Начните с шага «MVP»", "Спрос проверяется не готовым продуктом, а минимальным. Оставим одну функцию и цену-гипотезу."],
+          ["Начните с шага «Первые продажи»", "Интерес без оплат — это не проверка. Доведём первых людей до оплаты и увидим, откуда они пришли."],
+          ["Начните с шага «Экономика»", "Без финмодели непонятно, бизнес это или дорогое хобби. Посчитаем точку безубыточности, стоимость клиента и прогноз."]
+        ]
+      }
+    };
 
+    (function personaBlocks() {
+      var reduce = reducedMotion;
       var road = document.getElementById("road");
       var duo = document.getElementById("duo");
       var checksEl = document.getElementById("checks");
       if (!road || !duo || !checksEl) return;
 
-      /* --- дороги --- */
+      var D = null;                 // конфигурация текущей аудитории
+      var hotIndex = -1, hotTimer = null;
+      var duoSide = 1, duoTimer = null;
+      var picked = [];
+
+      function openFlowStep(i) {
+        var items = document.querySelectorAll("#personaFlow details");
+        items.forEach(function (d, k) { d.open = k === i; });
+        if (items[i]) items[i].scrollIntoView({ behavior: reduce.matches ? "auto" : "smooth", block: "center" });
+      }
+
+      /* ---- дороги ---- */
       function paintRoad(kind) {
+        if (!D) return;
         road.className = "road " + kind + (road.classList.contains("live") ? " live" : "");
-        road.innerHTML = ROADS[kind].map(function (r) {
+        road.innerHTML = D.roads[kind].map(function (r) {
           return '<div class="stop"><span class="t">' + r[0] + '</span><p>' + r[1] + "</p></div>";
         }).join("");
       }
-      document.querySelectorAll(".switch button").forEach(function (b) {
-        b.addEventListener("click", function () {
-          document.querySelectorAll(".switch button").forEach(function (x) {
-            x.setAttribute("aria-pressed", String(x === b));
-          });
-          paintRoad(b.dataset.road);
-          restartHot();
-        });
-      });
-      paintRoad("bad");
-
-      var hotIndex = -1, hotTimer = null;
       function stepHot() {
         var cards = road.children;
+        if (!cards.length) return;
         hotIndex = (hotIndex + 1) % cards.length;
         for (var i = 0; i < cards.length; i++) cards[i].classList.toggle("hot", i === hotIndex);
       }
@@ -1410,20 +1500,28 @@ renderPlan();
         [].forEach.call(road.children, function (c) { c.classList.remove("hot"); });
       }
       function restartHot() { if (hotTimer) { stopHot(); startHot(); } }
+      document.querySelectorAll(".switch button").forEach(function (b) {
+        b.addEventListener("click", function () {
+          document.querySelectorAll(".switch button").forEach(function (x) {
+            x.setAttribute("aria-pressed", String(x === b));
+          });
+          paintRoad(b.dataset.road);
+          restartHot();
+        });
+      });
       if ("IntersectionObserver" in window && !reduce.matches) {
         new IntersectionObserver(function (es) {
           es.forEach(function (e) { e.isIntersecting ? startHot() : stopHot(); });
         }, { threshold: 0.15 }).observe(road);
       }
 
-      /* --- Оракул поворачивается к боли --- */
+      /* ---- Оракул между болями ---- */
       var cards = [].slice.call(duo.querySelectorAll(".pcard"));
-      var side = 1, duoTimer = null;
       function flip() {
-        side = 1 - side;
-        duo.classList.toggle("to-left", side === 0);
-        duo.classList.toggle("to-right", side === 1);
-        cards.forEach(function (c, i) { c.classList.toggle("hot", i === side); });
+        duoSide = 1 - duoSide;
+        duo.classList.toggle("to-left", duoSide === 0);
+        duo.classList.toggle("to-right", duoSide === 1);
+        cards.forEach(function (c, i) { c.classList.toggle("hot", i === duoSide); });
       }
       function duoStart() { if (!duoTimer && !reduce.matches) { flip(); duoTimer = setInterval(flip, 3000); } }
       function duoStop() {
@@ -1445,43 +1543,32 @@ renderPlan();
         }, { threshold: 0.2 }).observe(duo);
       }
 
-      /* --- тест «отметьте, что про Вас» --- */
-      var picked = [];
-      checksEl.innerHTML = MIRROR.map(function (m, i) {
-        return '<button class="check" type="button" aria-pressed="false" data-i="' + i +
-          '"><span class="box" aria-hidden="true">✓</span><span>' + m[0] + "</span></button>";
-      }).join("");
+      /* ---- тест ---- */
       function renderVerdict() {
-        var steps = picked.map(function (i) { return MIRROR[i][1]; }).sort(function (a, b) { return a - b; });
-        document.getElementById("vSteps").innerHTML = NAMES.map(function (n, k) {
+        if (!D) return;
+        var steps = picked.map(function (i) { return D.mirror[i][1]; }).sort(function (a, b) { return a - b; });
+        document.getElementById("vSteps").innerHTML = D.names.map(function (n, k) {
           return '<button type="button" data-vstep="' + k + '" class="' + (steps.indexOf(k) > -1 ? "on" : "") + '">' +
             String(k + 1).padStart(2, "0") + " " + n + "</button>";
         }).join("");
-        var go = document.getElementById("vGo");
+        var go = document.getElementById("vGo"), price = document.getElementById("vPrice");
         if (!steps.length) {
           document.getElementById("vTitle").textContent = "Отметьте хотя бы одно";
           document.getElementById("vCopy").textContent = "Каждая ситуация в списке — это шаг маршрута 6П. Отметьте свои, и я покажу, с какого начинать.";
-          go.hidden = true; document.getElementById("vPrice").hidden = true; return;
+          go.hidden = true; if (price) price.hidden = true; return;
         }
         var first = steps[0];
-        document.getElementById("vTitle").textContent = VERDICTS[first][0];
-        document.getElementById("vCopy").textContent = VERDICTS[first][1] +
+        document.getElementById("vTitle").textContent = D.verdicts[first][0];
+        document.getElementById("vCopy").textContent = D.verdicts[first][1] +
           (steps.length > 1 ? " Остальное закрывается дальше по маршруту — он замкнутый." : "");
-        go.hidden = false;
-        document.getElementById("vPrice").hidden = false;
-        go.textContent = "Открыть шаг " + String(first + 1).padStart(2, "0") + " «" + NAMES[first] + "»";
+        go.hidden = false; if (price) price.hidden = false;
+        go.textContent = "Открыть шаг " + String(first + 1).padStart(2, "0") + " «" + D.names[first] + "»";
         go.onclick = function () { openFlowStep(first); };
-      }
-      function openFlowStep(i) {
-        var items = document.querySelectorAll("#personaFlow details");
-        items.forEach(function (d, k) { d.open = k === i; });
-        if (items[i]) items[i].scrollIntoView({ behavior: reduce.matches ? "auto" : "smooth", block: "center" });
       }
       document.getElementById("vSteps").addEventListener("click", function (e) {
         var b = e.target.closest("[data-vstep]");
         if (b) openFlowStep(Number(b.dataset.vstep));
       });
-
       checksEl.addEventListener("click", function (e) {
         var b = e.target.closest(".check");
         if (!b) return;
@@ -1490,9 +1577,48 @@ renderPlan();
         if (on) picked = picked.filter(function (x) { return x !== i; }); else picked.push(i);
         renderVerdict();
       });
-      renderVerdict();
 
-      /* --- кольцо 6П рядом с маршрутом --- */
+      /* ---- счётчики ---- */
+      var mEl = document.getElementById("cMonths"), sEl = document.getElementById("cMoney");
+      var counted = false, done = false, cTimer = null;
+      var fmtN = function (n) { return new Intl.NumberFormat("ru-RU").format(n).replace(/ /g, " "); };
+      function finishCounters() {
+        if (done || !D) return;
+        done = true;
+        mEl.textContent = D.facts[0][2];
+        sEl.textContent = fmtN(Number(D.facts[1][2]));
+        var b = sEl.closest(".f"); if (b) b.classList.remove("counting");
+      }
+      function runCounters() {
+        if (counted || !D) return;
+        counted = true;
+        if (reduce.matches) { finishCounters(); return; }
+        var from = Number(String(D.facts[1][1]).replace(/\D/g, "")), to = Number(D.facts[1][2]);
+        var m0 = Number(D.facts[0][1]), m1 = Number(D.facts[0][2]);
+        var start = null, D_MON = 1600, D_SUM = 5200, box = sEl.closest(".f");
+        function frame(ts) {
+          if (start === null) start = ts;
+          var t = ts - start;
+          var km = Math.min(t / D_MON, 1), em = 1 - Math.pow(1 - km, 3);
+          mEl.textContent = String(Math.round(m0 + em * (m1 - m0)));
+          var ks = Math.min(t / D_SUM, 1), es = 1 - Math.pow(1 - ks, 1.5);
+          sEl.textContent = fmtN(Math.round((from + es * (to - from)) / 10000) * 10000);
+          if (box) box.classList.toggle("counting", ks < 1);
+          if (km < 1 || ks < 1) requestAnimationFrame(frame); else finishCounters();
+        }
+        requestAnimationFrame(frame);
+        cTimer = setTimeout(finishCounters, D_SUM + 400);
+      }
+      var xf = document.getElementById("xfacts");
+      if (xf && "IntersectionObserver" in window) {
+        new IntersectionObserver(function (es) {
+          es.forEach(function (e) {
+            if (e.isIntersecting) runCounters(); else if (counted) finishCounters();
+          });
+        }, { threshold: 0.25 }).observe(xf);
+      }
+
+      /* ---- кольцо 6П рядом с маршрутом ---- */
       (function ringCopy() {
         var src = document.querySelector('#track .cycle-wrap');
         var host = document.querySelector('.persona-copy');
@@ -1519,45 +1645,45 @@ renderPlan();
         }
       })();
 
-      /* --- счётчики под болями --- */
-      var mEl = document.getElementById("cMonths"), sEl = document.getElementById("cMoney");
-      var counted = false, done = false;
-      var fmtN = function (n) { return new Intl.NumberFormat("ru-RU").format(n).replace(/\u00a0/g, " "); };
-      function finishCounters() {
-        if (done || !mEl || !sEl) return;
-        done = true;
-        mEl.textContent = "6";
-        sEl.textContent = fmtN(1500000);
-        var b = sEl.closest(".f"); if (b) b.classList.remove("counting");
-      }
-      function runCounters() {
-        if (counted || !mEl || !sEl) return;
-        counted = true;
-        var fmt = fmtN;
-        if (reduce.matches) { finishCounters(); return; }
-        var start = null, D_MON = 1600, D_SUM = 5200, box = sEl.closest(".f");
-        function frame(ts) {
-          if (start === null) start = ts;
-          var t = ts - start;
-          var km = Math.min(t / D_MON, 1), em = 1 - Math.pow(1 - km, 3);
-          mEl.textContent = String(Math.round(4 + em * 2));
-          var ks = Math.min(t / D_SUM, 1), es = 1 - Math.pow(1 - ks, 1.5);
-          sEl.textContent = fmt(Math.round((300000 + es * 1200000) / 10000) * 10000);
-          if (box) box.classList.toggle("counting", ks < 1);
-          if (km < 1 || ks < 1) requestAnimationFrame(frame); else finishCounters();
-        }
-        requestAnimationFrame(frame);
-        setTimeout(finishCounters, D_SUM + 400);
-      }
-      var xf = document.getElementById("xfacts");
-      if (xf && "IntersectionObserver" in window) {
-        new IntersectionObserver(function (es) {
-          es.forEach(function (e) {
-            if (e.isIntersecting) runCounters();
-            else if (counted) finishCounters();
-          });
-        }, { threshold: 0.25 }).observe(xf);
-      } else { runCounters(); finishCounters(); }
+      /* ---- сборка раздела под аудиторию ---- */
+      window.__renderBlocks = function (key) {
+        D = PB[key] || null;
+        var on = !!D;
+        document.querySelectorAll(".x-only").forEach(function (el) { el.hidden = !on; });
+        if (!on) return;
+
+        duo.querySelector('[data-side="left"] .ptag').textContent = D.cards[0][0];
+        duo.querySelector('[data-side="left"] b').textContent = D.cards[0][1];
+        duo.querySelector('[data-side="left"] .pgo').innerHTML = D.cards[0][2] + ' <em>&#8594;</em>';
+        duo.querySelector('[data-side="right"] .ptag').textContent = D.cards[1][0];
+        duo.querySelector('[data-side="right"] b').textContent = D.cards[1][1];
+        duo.querySelector('[data-side="right"] .pgo').innerHTML = D.cards[1][2] + ' <em>&#8594;</em>';
+
+        document.querySelector("#xfacts .f:nth-child(1) b").innerHTML = D.facts[0][0] + '<i id="cMonths">' + D.facts[0][1] + '</i>';
+        document.querySelector("#xfacts .f:nth-child(1) span").textContent = D.facts[0][3];
+        document.querySelector("#xfacts .f:nth-child(2) b").innerHTML = D.facts[1][0] + '<i id="cMoney">' + D.facts[1][1] + '</i> ₸';
+        document.querySelector("#xfacts .f:nth-child(2) span").textContent = D.facts[1][3];
+        mEl = document.getElementById("cMonths"); sEl = document.getElementById("cMoney");
+        counted = false; done = false; if (cTimer) clearTimeout(cTimer);
+
+        document.querySelector("#roads h3").textContent = D.roadsTitle;
+        document.querySelector("#roads .roads-lead").textContent = D.roadsLead;
+        document.querySelector(".roads-note").innerHTML = D.note +
+          '<span class="roads-go">Посмотреть тарифы <em>&#8594;</em></span>';
+        document.querySelectorAll(".switch button").forEach(function (x) {
+          x.setAttribute("aria-pressed", String(x.dataset.road === "bad"));
+        });
+        paintRoad("bad"); restartHot();
+
+        document.querySelector("#mirror h3").textContent = D.mirrorTitle;
+        document.querySelector("#mirror .roads-lead").textContent = D.mirrorLead;
+        picked = [];
+        checksEl.innerHTML = D.mirror.map(function (m, i) {
+          return '<button class="check" type="button" aria-pressed="false" data-i="' + i +
+            '"><span class="box" aria-hidden="true">✓</span><span>' + m[0] + "</span></button>";
+        }).join("");
+        renderVerdict();
+      };
     })();
 
     /* ===== Диагностика на реальных цифрах ===== */
