@@ -560,7 +560,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 @keyframes factGlow{0%,100%{box-shadow:0 0 0 0 rgba(238,200,48,0)}50%{box-shadow:0 0 0 7px rgba(238,200,48,.16)}}
 @media (prefers-reduced-motion:reduce){.xfacts .accent{animation:none}}
 @media (max-width:640px){.xfacts .f{border-left:0;padding:10px 0;min-width:0}.xfacts .accent{margin-left:0;padding:12px 18px}}
-.audience > .persona{grid-column:2 / -1}
+.audience > .persona{grid-column:1 / -1;margin-top:38px;padding-top:32px;border-top:1px solid var(--line)}
 @media (max-width:900px){.audience > .persona{grid-column:1 / -1}}
 .oracle-dots i{width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:.35}
 @media (max-width:700px){.oracle-stage img{width:112px;height:112px}}
@@ -780,25 +780,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
         <a class="f accent" href="#personaFlow"><b>6 шагов</b><span>проверить самому →</span></a>
       </div>
 
-      <div class="persona" id="persona" hidden>
-        <button type="button" class="persona-back" id="personaBack">← Выбрать другой раздел</button>
-        <div class="persona-panel">
-          <div class="persona-copy">
-            <h3 id="personaTitle"></h3>
-            <div id="personaCopy"></div>
-            <p class="persona-offer" id="personaOffer" hidden></p>
-            <details class="persona-more" id="personaMore">
-              <summary id="personaMoreTitle">На платформе Вы сможете в одном месте</summary>
-              <ul id="personaList"></ul>
-              <div id="personaCompare"></div>
-            </details>
-          </div>
-          <div class="persona-flow">
-            <h4>Первый маршрут</h4>
-            <ol id="personaFlow"></ol>
-          </div>
-        </div>
-      </div>
+
 
       <div class="roads x-only" id="roads" hidden>
         <h3>Дело не в специалистах. Дело в порядке.</h3>
@@ -824,6 +806,26 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
             <button class="button" type="button" id="vGo" hidden>Открыть этот шаг</button>
             <a class="vprice" href="#pricing" id="vPrice" hidden>Сколько это стоит <em>→</em></a>
           </aside>
+        </div>
+      </div>
+
+      <div class="persona" id="persona" hidden>
+        <button type="button" class="persona-back" id="personaBack">← Выбрать другой раздел</button>
+        <div class="persona-panel">
+          <div class="persona-copy">
+            <h3 id="personaTitle"></h3>
+            <div id="personaCopy"></div>
+            <p class="persona-offer" id="personaOffer" hidden></p>
+            <details class="persona-more" id="personaMore">
+              <summary id="personaMoreTitle">На платформе Вы сможете в одном месте</summary>
+              <ul id="personaList"></ul>
+              <div id="personaCompare"></div>
+            </details>
+          </div>
+          <div class="persona-flow">
+            <h4>Первый маршрут</h4>
+            <ol id="personaFlow"></ol>
+          </div>
         </div>
       </div>
     </section>
