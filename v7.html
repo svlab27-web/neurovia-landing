@@ -944,7 +944,7 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
             <div class="oracle-stage"><span class="oracle-float"><img id="oracleShot" alt="Оракул: разбирает причины" width="150" height="150" decoding="async"></span><div class="oracle-who"><b>Оракул</b><span id="oraclePose">Разбираем причины</span><span class="oracle-dots" id="oracleDots" hidden aria-hidden="true"><i></i><i></i><i></i></span></div></div>
             <p class="metric" id="loss-number">55<span>%</span></p><h3 id="loss-title">обратившихся не записались</h3><p id="loss-copy">55 из 100 написали, но не назначили встречу. Обычно дело в скорости первого ответа и в том, что человек не понял, зачем идти дальше.</p>
             <div class="recommendation"><span class="eyebrow">Первое действие</span><p id="loss-action">Разберите 10 последних диалогов и отметьте, на какой фразе разговор оборвался.</p></div>
-            <a href="#week" class="text-link" id="plan-link">Собрать план по этому разрыву <span aria-hidden="true">↗</span></a>
+            <a href="#pricing" class="text-link" id="plan-link">Посмотреть тарифы <span aria-hidden="true">↗</span></a>
           </aside>
         </div>
       </div>
@@ -1494,12 +1494,20 @@ renderPlan();
 
       /* --- счётчики под болями --- */
       var mEl = document.getElementById("cMonths"), sEl = document.getElementById("cMoney");
-      var counted = false;
+      var counted = false, done = false;
+      var fmtN = function (n) { return new Intl.NumberFormat("ru-RU").format(n).replace(/\u00a0/g, " "); };
+      function finishCounters() {
+        if (done || !mEl || !sEl) return;
+        done = true;
+        mEl.textContent = "6";
+        sEl.textContent = fmtN(1500000);
+        var b = sEl.closest(".f"); if (b) b.classList.remove("counting");
+      }
       function runCounters() {
         if (counted || !mEl || !sEl) return;
         counted = true;
-        var fmt = function (n) { return new Intl.NumberFormat("ru-RU").format(n).replace(/\u00a0/g, " "); };
-        if (reduce.matches) { mEl.textContent = "6"; sEl.textContent = fmt(1500000); return; }
+        var fmt = fmtN;
+        if (reduce.matches) { finishCounters(); return; }
         var start = null, D_MON = 1600, D_SUM = 5200, box = sEl.closest(".f");
         function frame(ts) {
           if (start === null) start = ts;
@@ -1509,16 +1517,20 @@ renderPlan();
           var ks = Math.min(t / D_SUM, 1), es = 1 - Math.pow(1 - ks, 1.5);
           sEl.textContent = fmt(Math.round((300000 + es * 1200000) / 10000) * 10000);
           if (box) box.classList.toggle("counting", ks < 1);
-          if (km < 1 || ks < 1) requestAnimationFrame(frame);
+          if (km < 1 || ks < 1) requestAnimationFrame(frame); else finishCounters();
         }
         requestAnimationFrame(frame);
+        setTimeout(finishCounters, D_SUM + 400);
       }
       var xf = document.getElementById("xfacts");
       if (xf && "IntersectionObserver" in window) {
         new IntersectionObserver(function (es) {
-          es.forEach(function (e) { if (e.isIntersecting) runCounters(); });
-        }, { threshold: 0.4 }).observe(xf);
-      } else { runCounters(); }
+          es.forEach(function (e) {
+            if (e.isIntersecting) runCounters();
+            else if (counted) finishCounters();
+          });
+        }, { threshold: 0.25 }).observe(xf);
+      } else { runCounters(); finishCounters(); }
     })();
 
     /* ===== Диагностика на реальных цифрах ===== */
