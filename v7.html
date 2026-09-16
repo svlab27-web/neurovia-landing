@@ -334,9 +334,9 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
   font:600 15px var(--head);color:var(--ink);cursor:pointer}
 .persona-tabs button[aria-selected="true"]{border-bottom-color:var(--navy);background:rgba(244,243,240,.5)}
 .persona-tabs button:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
-.persona-panel{display:grid;grid-template-columns:minmax(280px,.78fr) 1.22fr;gap:28px;padding-top:24px;align-items:start}
-.persona-copy{display:flex;flex-direction:column;gap:18px;background:var(--navy);color:var(--warm);
-  border-radius:16px;padding:26px 24px 28px;position:sticky;top:96px}
+.persona-panel{display:grid;grid-template-columns:minmax(280px,.78fr) 1.22fr;gap:28px;padding-top:24px;align-items:stretch}
+.persona-copy{display:flex;flex-direction:column;justify-content:center;gap:22px;background:var(--navy);
+  color:var(--warm);border-radius:16px;padding:32px 26px;height:100%}
 .persona-copy h3{font-size:24px;line-height:1.2;margin:0;max-width:20ch;color:#fff}
 .persona-copy p{color:#cfd8e3;font-size:15.5px;line-height:1.6;margin:0;max-width:42ch}
 #personaCopy{display:grid;gap:14px}
@@ -678,11 +678,11 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 .vsteps button.on{background:var(--gold);color:var(--ink)}
 .vsteps button.on:hover{background:#f5d45a;color:var(--ink)}
 .verdict .button{width:100%;justify-content:center}
-.cycle-mini{max-width:270px;margin:0 auto 6px;display:block}
+.cycle-mini{max-width:300px;margin:0 auto 10px;display:block;width:100%}
 .cycle-mini .clabel{fill:#cfd8e3}
 .persona-copy .persona-more{border-top-color:rgba(255,255,255,.16)}
 .persona-copy .persona-more summary{color:#fff}
-@media (max-width:900px){.persona-copy{position:static}}
+@media (max-width:900px){.persona-copy{height:auto;padding:26px 22px}}
 .cycle-mini .cnode,.cycle-mini .clabel{cursor:pointer}
 .flow-cta{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:20px;
   min-height:52px;padding:14px 24px;border-radius:8px;background:var(--gold);color:var(--ink);
