@@ -138,14 +138,15 @@ section{padding:84px 0}
   70%{box-shadow:0 14px 30px rgba(15,28,46,.28),0 0 0 18px rgba(238,200,48,0)}
   100%{box-shadow:0 8px 22px rgba(15,28,46,.24),0 0 0 0 rgba(238,200,48,0)}
 }
-.road.live .stop{animation:stopBeat 5.6s cubic-bezier(.2,.7,.3,1) infinite}
-.road.live.good .stop{animation-name:stopBeatGold}
-.road.live .stop:nth-child(1){animation-delay:0s}
-.road.live .stop:nth-child(2){animation-delay:.85s}
-.road.live .stop:nth-child(3){animation-delay:1.7s}
-.road.live .stop:nth-child(4){animation-delay:2.55s}
-.road.live .stop:last-child{animation:finalPulseBad 2s ease-out 3.1s infinite}
-.road.live.good .stop:last-child{animation:finalPulseGood 2s ease-out 3.1s infinite}
+/* остановка загорается по очереди */
+.road .stop.hot{transform:translateY(-12px) scale(1.04);z-index:4;
+  box-shadow:0 26px 52px rgba(15,28,46,.28),0 0 0 2px var(--navy)}
+.road.bad .stop.hot{background:#fff}
+.road.good .stop.hot{box-shadow:0 26px 52px rgba(15,28,46,.45),0 0 0 2px var(--gold);background:#132540}
+.road .stop.hot .t{background:var(--navy);color:var(--warm)}
+.road.good .stop.hot .t{background:var(--gold);color:var(--ink)}
+.road.live .stop:last-child{animation:finalPulseBad 2.2s ease-out infinite}
+.road.live.good .stop:last-child{animation:finalPulseGood 2.2s ease-out infinite}
 .road.bad .stop:last-child{border-color:var(--navy);background:#fff}
 .road.bad .stop:last-child .t{color:var(--warm);background:var(--navy)}
 .road.bad .stop:last-child p{color:var(--ink);font-weight:600}
@@ -536,15 +537,38 @@ footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
         x.setAttribute("aria-pressed", String(x === b));
       });
       paintRoad(b.dataset.road);
-      if (!reduce.matches) { road.classList.remove("live"); void road.offsetWidth; road.classList.add("live"); }
+      if (window.__restartHot) window.__restartHot();
     });
   });
   paintRoad("bad");
 
+  /* подсветка остановок по очереди */
+  var hotIndex = -1, hotTimer = null;
+  function stepHot() {
+    var cards = road.children;
+    hotIndex = (hotIndex + 1) % cards.length;
+    for (var i = 0; i < cards.length; i++) cards[i].classList.toggle("hot", i === hotIndex);
+  }
+  function startHot() {
+    if (hotTimer || reduce.matches) return;
+    road.classList.add("live");
+    stepHot();
+    hotTimer = setInterval(stepHot, 1400);
+  }
+  function stopHot() {
+    if (hotTimer) { clearInterval(hotTimer); hotTimer = null; }
+    road.classList.remove("live");
+    hotIndex = -1;
+    [].forEach.call(road.children, function (c) { c.classList.remove("hot"); });
+  }
+  window.__restartHot = function () { if (hotTimer) { stopHot(); startHot(); } };
+
   if ("IntersectionObserver" in window && !reduce.matches) {
     new IntersectionObserver(function (es) {
-      es.forEach(function (e) { road.classList.toggle("live", e.isIntersecting); });
-    }, { threshold: 0.35 }).observe(road);
+      es.forEach(function (e) { e.isIntersecting ? startHot() : stopHot(); });
+    }, { threshold: 0.15 }).observe(road);
+  } else {
+    startHot();
   }
 
   /* ---------- маршрут 6П ---------- */
