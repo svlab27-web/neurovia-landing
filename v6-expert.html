@@ -95,8 +95,10 @@ section{padding:84px 0}
 .road.good .stop{border-color:rgba(238,200,48,.55);box-shadow:inset 3px 0 0 var(--gold);background:#fffdf4}
 .road.good .stop .t{color:#8a6f10}
 .road.bad .stop p{color:var(--muted)}
-.pain-note{margin-top:30px;padding:22px 26px;border-radius:12px;background:var(--navy);color:var(--warm);
-  font-size:19px;line-height:1.5;font-weight:600;max-width:70ch}
+.pain-note{margin-top:34px;padding:30px 34px;border-radius:14px;background:var(--navy);color:var(--warm);
+  font-size:clamp(21px,2.5vw,31px);line-height:1.35;font-weight:800;letter-spacing:-.015em;max-width:26ch;
+  width:max-content;max-width:min(100%,24ch)}
+@media (min-width:861px){.pain-note{max-width:min(100%,46ch)}}
 .pain-note b{color:var(--gold)}
 @media (max-width:860px){.road{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.road{grid-template-columns:1fr}}
@@ -240,7 +242,7 @@ footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
 
     <div class="road bad reveal" id="road"></div>
 
-    <p class="pain-note reveal">Сначала проверьте гипотезу сами — быстро и без бюджета. Найдёте <b>прибыльную связку</b> — тогда и нанимайте команду, уже под готовое.</p>
+    <p class="pain-note reveal">Сначала проверьте гипотезу сами — быстро и без бюджета. Нашли <b>прибыльную связку</b> — тогда решайте: нанимать команду или работать самостоятельно.</p>
   </div>
 </section>
 
