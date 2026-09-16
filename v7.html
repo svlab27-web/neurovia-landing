@@ -631,10 +631,10 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
         <div class="tool-header"><b>Путь клиента</b><span class="sample" id="dataMode">Пример данных · 1 месяц</span></div>
         <form class="diag-form" id="diagForm" novalidate>
           <div class="diag-fields">
-            <label>Обращения<input type="number" id="fO" min="1" step="1" inputmode="numeric" placeholder="100"></label>
-            <label>Встречи<input type="number" id="fV" min="0" step="1" inputmode="numeric" placeholder="40"></label>
-            <label>Предложения<input type="number" id="fP" min="0" step="1" inputmode="numeric" placeholder="24"></label>
-            <label>Оплаты<input type="number" id="fD" min="0" step="1" inputmode="numeric" placeholder="12"></label>
+            <label>Обратились<input type="number" id="fO" min="1" step="1" inputmode="numeric" placeholder="100"></label>
+            <label>Записались<input type="number" id="fV" min="0" step="1" inputmode="numeric" placeholder="45"></label>
+            <label>Дошли<input type="number" id="fP" min="0" step="1" inputmode="numeric" placeholder="28"></label>
+            <label>Купили<input type="number" id="fD" min="0" step="1" inputmode="numeric" placeholder="12"></label>
             <label>Период<select id="fPeriod"><option>1 месяц</option><option>3 месяца</option><option>полгода</option></select></label>
           </div>
           <div class="diag-actions">
@@ -645,15 +645,15 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
         </form>
         <div class="diagnostic-layout">
           <div class="funnel" role="group" aria-label="Этапы воронки">
-            <button class="funnel-row" data-funnel="0" aria-pressed="false" aria-controls="insight"><span class="bar-label">Обращения <b>100</b></span><span class="bar-track"><span class="bar" style="--amount:100%"></span></span><span class="bar-caption">Начало пути</span></button>
-            <button class="funnel-row selected" data-funnel="1" aria-pressed="true" aria-controls="insight"><span class="bar-label">Встречи <b>40</b></span><span class="bar-track"><span class="bar" style="--amount:40%"></span></span><span class="bar-caption">60 из 100 не дошли до встречи</span></button>
-            <button class="funnel-row" data-funnel="2" aria-pressed="false" aria-controls="insight"><span class="bar-label">Предложения <b>24</b></span><span class="bar-track"><span class="bar" style="--amount:24%"></span></span><span class="bar-caption">16 из 40 не получили предложение</span></button>
-            <button class="funnel-row" data-funnel="3" aria-pressed="false" aria-controls="insight"><span class="bar-label">Оплаты <b>12</b></span><span class="bar-track"><span class="bar" style="--amount:12%"></span></span><span class="bar-caption">12 из 24 пока не оплатили</span></button>
+            <button class="funnel-row" data-funnel="0" aria-pressed="false" aria-controls="insight"><span class="bar-label">Обратились <b>100</b></span><span class="bar-track"><span class="bar" style="--amount:100%"></span></span><span class="bar-caption">написали, позвонили или оставили заявку</span></button>
+            <button class="funnel-row selected" data-funnel="1" aria-pressed="true" aria-controls="insight"><span class="bar-label">Записались <b>45</b></span><span class="bar-track"><span class="bar" style="--amount:45%"></span></span><span class="bar-caption">55 из 100 не записались</span></button>
+            <button class="funnel-row" data-funnel="2" aria-pressed="false" aria-controls="insight"><span class="bar-label">Дошли <b>28</b></span><span class="bar-track"><span class="bar" style="--amount:28%"></span></span><span class="bar-caption">17 из 45 не дошли до встречи</span></button>
+            <button class="funnel-row" data-funnel="3" aria-pressed="false" aria-controls="insight"><span class="bar-label">Купили <b>12</b></span><span class="bar-track"><span class="bar" style="--amount:12%"></span></span><span class="bar-caption">16 из 28 пока не купили</span></button>
           </div>
           <aside class="insight" id="insight" aria-live="polite" aria-atomic="true">
             <div class="oracle-stage"><span class="oracle-float"><img id="oracleShot" alt="Оракул: разбирает причины" width="150" height="150" decoding="async"></span><div class="oracle-who"><b>Оракул</b><span id="oraclePose">Разбираем причины</span><span class="oracle-dots" id="oracleDots" hidden aria-hidden="true"><i></i><i></i><i></i></span></div></div>
-            <p class="metric" id="loss-number">60<span>%</span></p><h3 id="loss-title">обращений не доходят до встречи</h3><p id="loss-copy">Проверьте скорость первого ответа и есть ли у каждой заявки ответственный. Это гипотеза, которую нужно проверить на переписках.</p>
-            <div class="recommendation"><span class="eyebrow">Первое действие</span><p id="loss-action">Разберите 10 последних обращений и отметьте, где закончился диалог.</p></div>
+            <p class="metric" id="loss-number">55<span>%</span></p><h3 id="loss-title">обратившихся не записались</h3><p id="loss-copy">55 из 100 написали, но не назначили встречу. Обычно дело в скорости первого ответа и в том, что человек не понял, зачем идти дальше.</p>
+            <div class="recommendation"><span class="eyebrow">Первое действие</span><p id="loss-action">Разберите 10 последних диалогов и отметьте, на какой фразе разговор оборвался.</p></div>
             <a href="#week" class="text-link" id="plan-link">Собрать план по этому разрыву <span aria-hidden="true">↗</span></a>
           </aside>
         </div>
@@ -1166,9 +1166,9 @@ renderPlan();
       applyNumbers(ex[0], ex[1], ex[2], ex[3], '1 месяц', false);
     });
 
-    function applyPersonaFunnel(key) {
+    function applyPersonaFunnel(key, force) {
       const cfg = FUNNEL_SETS.default;
-      if (cfg === FCFG) return;
+      if (cfg === FCFG && !force) return;
       FCFG = cfg;
       STAGE_NAMES = cfg.stages;
       const head = document.querySelector('#diagnostic .section-heading h2');
@@ -1186,7 +1186,7 @@ renderPlan();
       applyNumbers(ex[0], ex[1], ex[2], ex[3], $('fPeriod').value || '1 месяц', false);
     }
     window.__applyPersonaFunnel = applyPersonaFunnel;
-    applyPersonaFunnel(window.__persona || 'default');
+    applyPersonaFunnel('default', true);
 
     (function restore() {
       let saved = null;
