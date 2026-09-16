@@ -745,6 +745,24 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 
 /* оффер в узкой колонке дышит */
 .persona-offer{font-size:16px;line-height:1.62;padding:16px 18px}
+
+/* дорога NeuroVia: тёмные карточки, подсветка светлая, без золота */
+.road.good .stop{background:var(--navy);border-color:rgba(255,255,255,.18)}
+.road.good .stop .t{color:#cfd8e3;background:rgba(255,255,255,.1)}
+.road.good .stop::after{border-color:rgba(255,255,255,.35)}
+.road.good .stop:hover{border-color:rgba(255,255,255,.55)}
+.road.good .stop:last-child{border-color:rgba(255,255,255,.75);background:#0b1626}
+.road.good .stop:last-child .t{background:#fff;color:var(--ink)}
+.road.good .stop:last-child p{color:#fff}
+.road.good .stop.hot{background:#16294a;border-color:#fff;
+  box-shadow:var(--sh-lift),0 0 0 2px rgba(255,255,255,.92)}
+.road.good .stop.hot p{color:#fff;font-weight:600}
+.road.good .stop.hot .t{background:#fff;color:var(--ink)}
+@keyframes finalPulseLight{
+  0%{box-shadow:0 8px 22px rgba(15,28,46,.24),0 0 0 0 rgba(255,255,255,.45)}
+  70%{box-shadow:0 14px 30px rgba(15,28,46,.28),0 0 0 17px rgba(255,255,255,0)}
+  100%{box-shadow:0 8px 22px rgba(15,28,46,.24),0 0 0 0 rgba(255,255,255,0)}}
+.road.live.good .stop:last-child{animation:finalPulseLight 2.2s ease-out infinite}
 </style>
 </head>
 <body>
