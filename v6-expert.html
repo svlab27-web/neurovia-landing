@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NeuroVia Labs · v6 «Эксперт» | Сначала проверьте гипотезу сами</title>
+<meta name="description" content="Таргетолог, маркетолог, продюсер — каждый начинает с проверки гипотез за Ваш счёт. Проверьте гипотезу сами: маршрут 6П и Оракул рядом на каждом шаге.">
+<meta property="og:title" content="Сначала проверьте гипотезу сами — потом нанимайте команду">
+<meta property="og:description" content="Маршрут 6П для экспертов: понять, предложить, привлечь, продать, посчитать, пересобрать. Оракул помогает на каждом шаге.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0f1c2e; --ink:#0a1628; --warm:#f4f3f0; --gold:#eec830;
+  --silver:#8a9bb0; --muted:#46566b; --line:#d8d6d1; --mist:#e8e6e1;
+  --head:'Manrope',system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --maxw:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--warm);color:var(--ink);font:400 17px/1.6 var(--head);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{margin:0;font-weight:800;letter-spacing:-.02em;line-height:1.08}
+p{margin:0}
+.wrap{width:min(100% - 40px,var(--maxw));margin-inline:auto}
+.eyebrow{font:500 12px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.eyebrow.dark{color:var(--muted)}
+
+/* ---------- кнопки ---------- */
+.btn{display:inline-flex;align-items:center;gap:12px;min-height:54px;padding:14px 26px;border:0;border-radius:8px;
+  background:var(--gold);color:var(--ink);font:700 16px var(--head);cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(238,200,48,.32)}
+.btn.ghost{background:transparent;color:var(--warm);box-shadow:inset 0 0 0 1px rgba(244,243,240,.34)}
+.btn.ghost:hover{box-shadow:inset 0 0 0 1px var(--gold);color:var(--gold)}
+.btn.dark{background:var(--navy);color:var(--warm)}
+.btn.dark:hover{box-shadow:0 10px 26px rgba(15,28,46,.28)}
+
+/* ---------- шапка ---------- */
+header{position:sticky;top:0;z-index:40;background:rgba(15,28,46,.95);backdrop-filter:blur(8px);
+  color:var(--warm);border-bottom:1px solid rgba(255,255,255,.1)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:70px}
+.logo{font:800 22px var(--head);white-space:nowrap}
+.logo span{color:var(--gold)}
+.logo small{font:500 9px var(--mono);letter-spacing:.2em;margin-left:7px;color:var(--silver)}
+.nav-links{display:flex;gap:26px;font-size:14px;color:#cfd8e3}
+.nav-links a:hover{color:var(--gold)}
+.nav .btn{min-height:42px;padding:10px 18px;font-size:14px}
+@media (max-width:900px){.nav-links{display:none}}
+
+/* ---------- герой ---------- */
+.hero{position:relative;background:var(--navy);color:var(--warm);overflow:hidden}
+.hero::after{content:"";position:absolute;inset:auto -10% -40% 40%;height:70%;
+  background:radial-gradient(60% 60% at 50% 50%,rgba(238,200,48,.14),transparent 70%);pointer-events:none}
+.hero-in{display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:center;padding:74px 0 66px;position:relative;z-index:2}
+.hero h1{font-size:clamp(34px,4.8vw,62px);margin:18px 0 22px}
+.hero h1 b{color:var(--gold);font-weight:800}
+.hero .lead{font-size:clamp(17px,1.5vw,20px);color:#d3dbe4;max-width:38ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
+.hero-fact{display:flex;gap:28px;margin-top:40px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14);flex-wrap:wrap}
+.hero-fact div{min-width:106px}
+.hero-fact b{display:block;font:800 26px var(--head);color:var(--gold)}
+.hero-fact span{font-size:13px;color:var(--silver)}
+.hero-art{position:relative;justify-self:end}
+.hero-art img{height:clamp(260px,34vw,430px);width:auto;filter:drop-shadow(0 24px 50px rgba(0,0,0,.45))}
+.hero-art figcaption{text-align:center;margin-top:-14px;font-size:13px;color:var(--silver)}
+.hero-art figcaption b{display:block;font:700 18px var(--head);color:var(--warm)}
+@media (max-width:860px){.hero-in{grid-template-columns:1fr;padding:48px 0 44px}.hero-art{justify-self:center;order:-1}
+  .hero-art img{height:210px}.hero-art figcaption{display:none}}
+
+/* ---------- секции ---------- */
+section{padding:84px 0}
+.sec-head{max-width:46ch;margin-bottom:42px}
+.sec-head h2{font-size:clamp(28px,3.4vw,44px);margin:14px 0 16px}
+.sec-head p{color:var(--muted);font-size:18px}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+/* ---------- боль 1: две дороги ---------- */
+.pain{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.switch{display:inline-flex;background:var(--mist);border-radius:10px;padding:5px;gap:4px;margin-bottom:30px}
+.switch button{border:0;background:transparent;font:600 15px var(--head);color:var(--muted);
+  padding:11px 22px;border-radius:7px;cursor:pointer;transition:background .2s,color .2s}
+.switch button[aria-pressed="true"]{background:var(--navy);color:var(--warm)}
+.road{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.road .stop{background:var(--warm);border:1px solid var(--line);border-radius:12px;padding:20px 18px;position:relative;
+  transition:transform .4s ease,opacity .4s ease,border-color .3s}
+.road .stop .t{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px}
+.road .stop p{font-size:16px;line-height:1.5}
+.road.good .stop{border-color:rgba(238,200,48,.55);box-shadow:inset 3px 0 0 var(--gold);background:#fffdf4}
+.road.good .stop .t{color:#8a6f10}
+.road.bad .stop p{color:var(--muted)}
+.pain-note{margin-top:30px;padding:22px 26px;border-radius:12px;background:var(--navy);color:var(--warm);
+  font-size:19px;line-height:1.5;font-weight:600;max-width:70ch}
+.pain-note b{color:var(--gold)}
+@media (max-width:860px){.road{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.road{grid-template-columns:1fr}}
+
+/* ---------- боль 2: узнайте себя ---------- */
+.mirror-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:start}
+.checks{display:grid;gap:12px}
+.check{display:flex;gap:14px;align-items:flex-start;text-align:left;width:100%;cursor:pointer;
+  background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;font:500 16.5px/1.45 var(--head);
+  color:var(--ink);transition:border-color .2s,box-shadow .2s,background .2s}
+.check:hover{border-color:var(--silver)}
+.check .box{flex:0 0 22px;height:22px;margin-top:1px;border-radius:6px;border:2px solid var(--line);
+  display:grid;place-items:center;font-size:13px;color:transparent;transition:.2s}
+.check[aria-pressed="true"]{border-color:var(--gold);background:#fffdf4;box-shadow:0 6px 18px rgba(238,200,48,.18)}
+.check[aria-pressed="true"] .box{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.verdict{position:sticky;top:96px;background:var(--navy);color:var(--warm);border-radius:16px;padding:30px 28px;min-height:260px}
+.verdict .eyebrow{color:var(--gold)}
+.verdict h3{font-size:24px;margin:12px 0 12px}
+.verdict p{color:#cfd8e3;font-size:16px}
+.verdict .steps{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 22px}
+.verdict .steps span{font:500 12px var(--mono);padding:7px 11px;border-radius:6px;
+  background:rgba(255,255,255,.08);color:var(--silver)}
+.verdict .steps span.on{background:var(--gold);color:var(--ink)}
+.verdict .btn{width:100%;justify-content:center}
+@media (max-width:900px){.mirror-grid{grid-template-columns:1fr}.verdict{position:static}}
+
+/* ---------- маршрут 6П ---------- */
+.route{background:var(--navy);color:var(--warm)}
+.route .sec-head p{color:#c3cdd9}
+.route-grid{display:grid;grid-template-columns:260px 1fr;gap:34px;align-items:start}
+.route-tabs{display:grid;gap:8px;position:sticky;top:96px}
+.route-tabs button{display:flex;align-items:center;gap:14px;text-align:left;width:100%;cursor:pointer;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;
+  padding:14px 16px;color:#cfd8e3;font:600 16px var(--head);transition:.2s}
+.route-tabs button i{font:500 12px var(--mono);font-style:normal;color:var(--silver);
+  background:rgba(255,255,255,.08);border-radius:5px;padding:5px 8px}
+.route-tabs button:hover{background:rgba(255,255,255,.1);color:#fff}
+.route-tabs button[aria-selected="true"]{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.route-tabs button[aria-selected="true"] i{background:rgba(10,22,40,.16);color:var(--ink)}
+.route-panel{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:34px 34px 30px;min-height:380px}
+.route-panel .n{font:500 12px var(--mono);letter-spacing:.14em;color:var(--gold)}
+.route-panel h3{font-size:clamp(22px,2.4vw,30px);margin:12px 0 18px;max-width:30ch}
+.route-panel .sub{font-size:18px;line-height:1.55;color:#dbe3ec;max-width:62ch;padding-left:16px;border-left:2px solid var(--gold)}
+.route-panel ul{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:12px}
+.route-panel li{display:flex;gap:14px;align-items:flex-start;color:#c9d3df;font-size:16.5px;line-height:1.5}
+.route-panel li::before{content:"";flex:0 0 7px;height:7px;margin-top:10px;border-radius:50%;background:var(--gold)}
+.route-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:28px;
+  padding-top:20px;border-top:1px solid rgba(255,255,255,.12);font-size:14px;color:var(--silver);flex-wrap:wrap}
+.route-foot button{background:transparent;border:0;color:var(--gold);font:600 15px var(--head);cursor:pointer}
+@media (max-width:900px){.route-grid{grid-template-columns:1fr}.route-tabs{position:static;grid-template-columns:repeat(3,1fr);display:grid}
+  .route-tabs button{flex-direction:column;align-items:flex-start;gap:8px;font-size:14px}.route-panel{padding:24px 20px}}
+
+/* ---------- оракул ---------- */
+.oracle{background:#fff;border-top:1px solid var(--line)}
+.oracle-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:44px;align-items:center}
+.oracle-grid img{height:clamp(220px,26vw,330px);width:auto;margin-inline:auto}
+.roles{display:grid;gap:14px;margin:26px 0 0}
+.roles div{background:var(--warm);border-radius:12px;padding:16px 20px;border:1px solid var(--line)}
+.roles b{display:block;font-size:16px;margin-bottom:3px}
+.roles span{color:var(--muted);font-size:15.5px}
+.oracle .note{margin-top:22px;font-size:16px;color:var(--muted)}
+.oracle .note b{color:var(--ink)}
+@media (max-width:860px){.oracle-grid{grid-template-columns:1fr}}
+
+/* ---------- цена ---------- */
+.price-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:stretch}
+.price-card{border-radius:16px;padding:32px 30px;border:1px solid var(--line);background:#fff}
+.price-card.alt{background:var(--mist);border-style:dashed}
+.price-card h3{font-size:21px;margin-bottom:16px}
+.price-card ul{list-style:none;margin:0 0 20px;padding:0;display:grid;gap:10px;color:var(--muted);font-size:16px}
+.price-card li{display:flex;gap:10px}
+.price-card li::before{content:"—";color:var(--silver)}
+.price-card .sum{font:800 34px var(--head);margin:6px 0 4px}
+.price-card.alt .sum{color:var(--muted)}
+.price-card .sub{font-size:14px;color:var(--muted);margin-bottom:22px}
+@media (max-width:760px){.price-grid{grid-template-columns:1fr}}
+
+/* ---------- финал ---------- */
+.final{background:var(--navy);color:var(--warm);text-align:center}
+.final h2{font-size:clamp(28px,3.6vw,46px);margin-bottom:18px}
+.final p{color:#c8d2de;max-width:52ch;margin:0 auto 30px}
+footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
+.footline{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo">Neuro<span>Via</span> <small>LABS</small></div>
+    <nav class="nav-links">
+      <a href="#pain">Почему не сработало</a>
+      <a href="#mirror">Узнать себя</a>
+      <a href="#route">Маршрут 6П</a>
+      <a href="#oracle">Оракул</a>
+      <a href="#price">Цена</a>
+    </nav>
+    <a class="btn" href="#mirror">Начать бесплатно</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ======= ГЕРОЙ ======= -->
+<section class="hero" style="padding:0">
+  <div class="wrap hero-in">
+    <div>
+      <p class="eyebrow">Для экспертов · от идеи до первых продаж</p>
+      <h1>Гипотезы проверяют<br><b>за Ваш счёт</b></h1>
+      <p class="lead">Таргетолог, маркетолог, продюсер — каждый начинает с проверки гипотез. Это его нормальная работа. Ненормально то, что платите за неё Вы.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#mirror">Узнать, с чего начать</a>
+        <a class="btn ghost" href="#route">Посмотреть маршрут 6П</a>
+      </div>
+      <div class="hero-fact">
+        <div><b>3–6</b><span>месяцев на чужие гипотезы</span></div>
+        <div><b>от 300 000 ₸</b><span>одна гипотеза чужими руками</span></div>
+        <div><b>6 шагов</b><span>проверить самому</span></div>
+      </div>
+    </div>
+    <figure class="hero-art">
+      <img src="assets/welcome.webp" alt="Оракул приветствует поднятой ладонью" width="1024" height="1024" fetchpriority="high">
+      <figcaption><b>Оракул</b>Ваш помощник на маршруте</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ======= БОЛЬ 1 ======= -->
+<section class="pain" id="pain">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow dark">Боль первая</p>
+      <h2>Дело не в специалистах.<br>Дело в порядке.</h2>
+      <p>Любая работа с подрядчиком начинается с гипотез. Вопрос только в том, кто за них платит и сколько это длится.</p>
+    </div>
+
+    <div class="switch reveal" role="group" aria-label="Сравнение подходов">
+      <button type="button" data-road="bad" aria-pressed="true">Как обычно</button>
+      <button type="button" data-road="good" aria-pressed="false">Как здесь</button>
+    </div>
+
+    <div class="road bad reveal" id="road"></div>
+
+    <p class="pain-note reveal">Сначала проверьте гипотезу сами — быстро и без бюджета. Найдёте <b>прибыльную связку</b> — тогда и нанимайте команду, уже под готовое.</p>
+  </div>
+</section>
+
+<!-- ======= БОЛЬ 2 ======= -->
+<section id="mirror">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow dark">Боль вторая</p>
+      <h2>Знаний много.<br>Продукта нет.</h2>
+      <p>Отметьте, что про Вас — покажу, с какого шага начинать. Это займёт двадцать секунд.</p>
+    </div>
+
+    <div class="mirror-grid">
+      <div class="checks reveal" id="checks"></div>
+      <aside class="verdict reveal" id="verdict" aria-live="polite">
+        <p class="eyebrow">Ваш вход в маршрут</p>
+        <h3 id="vTitle">Отметьте хотя бы одно</h3>
+        <p id="vCopy">Каждая ситуация в списке — это конкретный шаг маршрута 6П. Отметьте свои, и я покажу, с какого начинать и что там происходит.</p>
+        <div class="steps" id="vSteps"></div>
+        <button class="btn" type="button" id="vGo" hidden>Открыть этот шаг</button>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ======= МАРШРУТ 6П ======= -->
+<section class="route" id="route">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Маршрут</p>
+      <h2>Шесть шагов.<br>Замкнутый цикл.</h2>
+      <p>На каждом шаге появляется конкретный результат — он становится входом следующего. Шестой возвращает Вас в первый, но уже с проверенными цифрами.</p>
+    </div>
+    <div class="route-grid">
+      <div class="route-tabs" role="tablist" aria-label="Шаги маршрута" id="routeTabs"></div>
+      <div class="route-panel" id="routePanel" role="tabpanel" tabindex="0"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= ОРАКУЛ ======= -->
+<section class="oracle" id="oracle">
+  <div class="wrap oracle-grid">
+    <img src="assets/calm.webp" alt="Оракул с планшетом" width="1024" height="1024" loading="lazy" class="reveal">
+    <div class="reveal">
+      <p class="eyebrow dark">Рядом на всём пути</p>
+      <h2 style="font-size:clamp(26px,3vw,38px);margin:14px 0 14px">Знакомьтесь, Оракул</h2>
+      <p style="color:var(--muted)">Помнит Вашу цель, разбирает Ваши цифры и возвращает внимание к следующему действию.</p>
+      <div class="roles">
+        <div><b>Перед выбором</b><span>Помогает сравнить гипотезы и выбрать приоритет.</span></div>
+        <div><b>Во время работы</b><span>Готовит черновики и связывает задачи с целью.</span></div>
+        <div><b>После проверки</b><span>Помогает увидеть результат и скорректировать план.</span></div>
+      </div>
+      <p class="note"><b>Решения остаются за Вами.</b> Оракул помогает, направляет и анализирует — но не делает выбор вместо Вас.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======= ЦЕНА ======= -->
+<section id="price">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow dark">Цена вопроса</p>
+      <h2>Посчитайте сами</h2>
+      <p>Сравнение простое: сколько стоит одна гипотеза чужими руками и сколько — месяц работы самому.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card alt reveal">
+        <h3>Гипотеза чужими руками</h3>
+        <p class="sum">от 300 000 ₸</p>
+        <p class="sub">работа специалиста плюс рекламный бюджет</p>
+        <ul>
+          <li>одна гипотеза, без гарантии результата</li>
+          <li>3–6 месяцев до понятного ответа</li>
+          <li>данные остаются у подрядчика</li>
+          <li>не сработало — начинаете сначала</li>
+        </ul>
+      </div>
+      <div class="price-card reveal">
+        <h3>Начать одному</h3>
+        <p class="sum">59 900 ₸ <span style="font:500 16px var(--head);color:var(--muted)">/ месяц</span></p>
+        <p class="sub">диагностика бесплатна на любом сценарии</p>
+        <ul>
+          <li>маршрут 6П от продукта до первых оплат</li>
+          <li>Оракул рядом на каждом шаге</li>
+          <li>контент, заказы, оплаты и расчёт прибыли в одном месте</li>
+          <li>данные и выводы остаются у Вас</li>
+        </ul>
+        <a class="btn dark" href="#mirror">Узнать, с чего начать</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= ФИНАЛ ======= -->
+<section class="final">
+  <div class="wrap">
+    <h2 class="reveal">Проверьте гипотезу сами.<br>Команду наймёте потом.</h2>
+    <p class="reveal">Двадцать секунд на то, чтобы понять, с какого шага начинать именно Вам.</p>
+    <a class="btn reveal" href="#mirror">Узнать, с чего начать</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap footline">
+    <span>NeuroVia Labs · бизнес-трекинг с AI-помощником</span>
+    <span>Цифры на странице — демонстрационные. Роста выручки не обещаем.</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  /* ---------- данные ---------- */
+  var ROADS = {
+    bad: [
+      ["Месяц 0", "Нанимаете специалиста. Он берёт предоплату и бюджет на тест."],
+      ["Месяц 1–2", "Он проверяет свои гипотезы — на Ваших деньгах и Вашей аудитории."],
+      ["Месяц 3–6", "Связка так и не нашлась. Бюджет кончился, силы тоже."],
+      ["Итог", "Вывод: «маркетинг не работает». Данные остались у подрядчика."]
+    ],
+    good: [
+      ["Неделя 1", "Оракул разбирает Ваш опыт: тема, сегмент, проблема, за которую платят."],
+      ["Неделя 2", "Собираете продукт и цену-гипотезу — минимальную версию для проверки."],
+      ["Неделя 3–4", "Контент под боли клиента, один канал, первые отклики и заявки."],
+      ["Итог", "Видно по цифрам, что работает. Команду нанимаете под проверенное."]
+    ]
+  };
+
+  var STEPS = [
+    { n: "01", name: "Понять",
+      sub: "Оракул разбирает Ваш опыт и помогает выбрать одну тему, один сегмент и одну проблему, за которую готовы платить клиенты",
+      points: [
+        "разбирает опыт: кому помогали, с какой проблемой, какой результат получен",
+        "сравнивает темы и ищет, где Вы наиболее сильны",
+        "сужает рынок до сегмента, где можно найти людей и проверить спрос",
+        "формулирует проблему словами клиента, а не экспертными тезисами",
+        "проверяет, за что клиенты готовы платить сегодня"
+      ] },
+    { n: "02", name: "Предложить",
+      sub: "Оракул помогает выстроить Ваш метод, собрать первый продукт и оффер, который можно проверить",
+      points: [
+        "находит, чем Вы отличаетесь от других экспертов ниши, и собирает именно Ваш метод",
+        "помогает выстроить продуктовую линейку: что даёте бесплатно, что продаёте первым, что основным",
+        "выбирает из линейки один минимальный продукт для тестирования рынка",
+        "помогает поставить цену-гипотезу: её задача — проверить спрос, а не заработать",
+        "проверяет, что обещание, метод и сегмент говорят об одном"
+      ] },
+    { n: "03", name: "Привлечь",
+      sub: "Оракул помогает превратить боли клиента в контент и собрать первые заявки без рекламного бюджета",
+      points: [
+        "составляет портрет клиента: кто он, что у него болит и какими словами он об этом говорит",
+        "раскладывает аудиторию по готовности к покупке — от «не знает о проблеме» до «готов купить» по лестнице Ханта",
+        "готовит контент под выбранный портрет: холодному — про боль, горячему — оффер",
+        "анализирует, что обещают конкуренты и с чем клиент приходит после них, — это и есть самые сильные темы",
+        "собирает всё это в посты на неделю для Вашего канала — проверяем на одном канале, а не распыляемся на все сразу"
+      ] },
+    { n: "04", name: "Продать",
+      sub: "Оракул выстраивает маршрут продажи: заявка не теряется, цена звучит вовремя, оплата проходит по ссылке",
+      points: [
+        "помогает решить, куда приходит заявка и за какой срок Вы отвечаете",
+        "помогает собрать карточку продукта: название, описание, результат и цена",
+        "формирует ссылку на оплату — человек переходит и платит",
+        "оплата становится заказом: видно, кто купил, что и когда",
+        "деньги получены, и клиент знает свой первый шаг"
+      ] },
+    { n: "05", name: "Посчитать",
+      sub: "Оракул анализирует цифры и помогает понять, работает ли то, что Вы собрали",
+      points: [
+        "сводит заказы: сколько продали, средний чек, откуда пришли",
+        "считает прибыль с налогами и комиссиями — видно, сколько остаётся на самом деле",
+        "отвечает по Вашим цифрам: что будет, если поднять цену или взять меньше клиентов",
+        "считает точку безубыточности: сколько продаж нужно, чтобы выйти в плюс",
+        "помогает решить, что подтвердилось деньгами, а что только словами"
+      ] },
+    { n: "06", name: "Пересобрать",
+      sub: "Оракул помогает найти бутылочное горлышко: где сломалось, почему нет желаемого результата и какую гипотезу проверить заново",
+      points: [
+        "проходит цепочку назад, от оплаты к сегменту, и находит, где потеря сильнее всего расходится с ожидаемой",
+        "отличает проблему трафика от проблемы предложения, а её — от проблемы доставки",
+        "предлагает минимальное изменение, которое закрывает горлышко, — и не даёт менять всё сразу",
+        "помогает повторить проверку в тех же условиях — цифры до и после показывают, сработала правка",
+        "собирает обновлённую гипотезу и передаёт её в «Понять» или «Предложить» — цикл замыкается, следующий заход начинается не с нуля"
+      ] }
+  ];
+
+  var MIRROR = [
+    { t: "Знаний много, а что именно продавать — непонятно", s: 0 },
+    { t: "Курс записан, купили трое — и двое из них знакомые", s: 1 },
+    { t: "Пишу в канал, а в ответ тишина", s: 2 },
+    { t: "Спрашивают цену — и пропадают", s: 3 },
+    { t: "Деньги приходят, но сколько остаётся — не считал", s: 4 },
+    { t: "Уже пробовал менять — не помогло", s: 5 }
+  ];
+
+  var VERDICTS = [
+    ["Начните с шага «Понять»", "Пока не выбрана одна тема, один сегмент и одна проблема, всё остальное будет стрелять по площадям. Здесь маршрут и начинается."],
+    ["Начните с шага «Предложить»", "Продукт есть, но он собран из Вашей логики, а не из клиентской. Соберём метод, линейку и минимальный продукт для проверки."],
+    ["Начните с шага «Привлечь»", "Тишина в ответ — это не про канал, это про формулировку. Разберём боли клиента и соберём контент, в котором он узнает себя."],
+    ["Начните с шага «Продать»", "Интерес есть, а маршрута до оплаты нет. Выстроим путь: заявка, карточка продукта, цена вовремя и ссылка на оплату."],
+    ["Начните с шага «Посчитать»", "Продажи без цифр — это ощущения. Посчитаем прибыль с налогами, средний чек и точку безубыточности."],
+    ["Начните с шага «Пересобрать»", "Меняли наугад и сразу всё — поэтому непонятно, что сработало. Найдём бутылочное горлышко и одну правку, которая его закрывает."]
+  ];
+
+  function $(id) { return document.getElementById(id); }
+
+  /* ---------- боль 1: переключатель дорог ---------- */
+  var road = $("road");
+  function paintRoad(kind) {
+    road.className = "road " + kind + " reveal in";
+    road.innerHTML = ROADS[kind].map(function (r) {
+      return '<div class="stop"><span class="t">' + r[0] + '</span><p>' + r[1] + "</p></div>";
+    }).join("");
+    if (!reduce.matches) {
+      [].forEach.call(road.children, function (el, i) {
+        el.animate([{ opacity: 0, transform: "translateY(14px)" }, { opacity: 1, transform: "none" }],
+          { duration: 420, delay: i * 70, easing: "cubic-bezier(.2,.7,.3,1)", fill: "both" });
+      });
+    }
+  }
+  [].forEach.call(document.querySelectorAll(".switch button"), function (b) {
+    b.addEventListener("click", function () {
+      [].forEach.call(document.querySelectorAll(".switch button"), function (x) {
+        x.setAttribute("aria-pressed", String(x === b));
+      });
+      paintRoad(b.dataset.road);
+    });
+  });
+  paintRoad("bad");
+
+  /* ---------- маршрут 6П ---------- */
+  var tabs = $("routeTabs"), panel = $("routePanel"), current = 0;
+  tabs.innerHTML = STEPS.map(function (s, i) {
+    return '<button type="button" role="tab" data-step="' + i + '" aria-selected="' + (i === 0) +
+      '"><i>' + s.n + "</i>" + s.name + "</button>";
+  }).join("");
+
+  function showStep(i, scroll) {
+    current = i;
+    [].forEach.call(tabs.children, function (b, k) { b.setAttribute("aria-selected", String(k === i)); });
+    var s = STEPS[i];
+    panel.innerHTML = '<p class="n">Шаг ' + s.n + " / 06</p><h3>" + s.name + "</h3>" +
+      '<p class="sub">' + s.sub + "</p><ul>" +
+      s.points.map(function (p) { return "<li><span>" + p + "</span></li>"; }).join("") +
+      '</ul><div class="route-foot"><span>Результат шага становится входом следующего</span>' +
+      '<button type="button" id="nextStep">' + (i === 5 ? "Вернуться к шагу 01 →" : "Следующий шаг →") + "</button></div>";
+    if (!reduce.matches) {
+      panel.animate([{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }],
+        { duration: 340, easing: "ease-out" });
+    }
+    $("nextStep").addEventListener("click", function () { showStep((i + 1) % 6, false); });
+    if (scroll) document.getElementById("route").scrollIntoView({ behavior: reduce.matches ? "auto" : "smooth", block: "start" });
+  }
+  tabs.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-step]");
+    if (b) showStep(Number(b.dataset.step), false);
+  });
+  tabs.addEventListener("keydown", function (e) {
+    var map = { ArrowDown: (current + 1) % 6, ArrowUp: (current + 5) % 6, ArrowRight: (current + 1) % 6, ArrowLeft: (current + 5) % 6, Home: 0, End: 5 };
+    if (map[e.key] !== undefined) {
+      e.preventDefault(); showStep(map[e.key], false); tabs.children[current].focus();
+    }
+  });
+  showStep(0, false);
+
+  /* ---------- боль 2: узнайте себя ---------- */
+  var checksEl = $("checks"), picked = [];
+  checksEl.innerHTML = MIRROR.map(function (m, i) {
+    return '<button class="check" type="button" aria-pressed="false" data-i="' + i +
+      '"><span class="box" aria-hidden="true">✓</span><span>' + m.t + "</span></button>";
+  }).join("");
+
+  function renderVerdict() {
+    var steps = picked.map(function (i) { return MIRROR[i].s; }).sort(function (a, b) { return a - b; });
+    var box = $("vSteps");
+    box.innerHTML = STEPS.map(function (s, k) {
+      return '<span class="' + (steps.indexOf(k) > -1 ? "on" : "") + '">' + s.n + " " + s.name + "</span>";
+    }).join("");
+    if (!steps.length) {
+      $("vTitle").textContent = "Отметьте хотя бы одно";
+      $("vCopy").textContent = "Каждая ситуация в списке — это конкретный шаг маршрута 6П. Отметьте свои, и я покажу, с какого начинать и что там происходит.";
+      $("vGo").hidden = true;
+      return;
+    }
+    var first = steps[0];
+    $("vTitle").textContent = VERDICTS[first][0];
+    $("vCopy").textContent = VERDICTS[first][1] +
+      (steps.length > 1 ? " Остальное, что Вы отметили, закрывается дальше по маршруту — он замкнутый." : "");
+    var go = $("vGo");
+    go.hidden = false;
+    go.textContent = "Открыть шаг " + STEPS[first].n + " «" + STEPS[first].name + "»";
+    go.onclick = function () { showStep(first, true); };
+  }
+  checksEl.addEventListener("click", function (e) {
+    var b = e.target.closest(".check");
+    if (!b) return;
+    var i = Number(b.dataset.i), on = b.getAttribute("aria-pressed") === "true";
+    b.setAttribute("aria-pressed", String(!on));
+    if (on) picked = picked.filter(function (x) { return x !== i; });
+    else picked.push(i);
+    renderVerdict();
+  });
+  renderVerdict();
+
+  /* ---------- появление блоков ---------- */
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    [].forEach.call(document.querySelectorAll(".reveal"), function (el) { io.observe(el); });
+  } else {
+    [].forEach.call(document.querySelectorAll(".reveal"), function (el) { el.classList.add("in"); });
+  }
+})();
+</script>
+</body>
+</html>
