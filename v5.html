@@ -76,13 +76,18 @@ h1 { font-size: 60px; }
 .hero-character img { width: 100%; height: 465px; object-fit: contain; }
 .hero-character figcaption { display: flex; flex-direction: column; text-align: center; margin-top: -30px; font-size: 13px; color: rgb(196, 204, 214); }
 .hero-character figcaption b { color: var(--warm); font: 700 20px var(--head); }
-.hero-route { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; list-style: none; margin: 54px 0px 0px; padding: 0px; z-index: 2; }
-.hero-route li { border-top: 1px solid rgba(255, 255, 255, 0.208); padding-top: 15px; display: flex; gap: 18px; font-size: 14px; }
+.hero-route { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 18px; row-gap: 14px; list-style: none; margin: 44px 0px 0px; padding: 0px; z-index: 2; }
+.hero-route li { border-top: 1px solid rgba(255, 255, 255, 0.208); font-size: 14px; transition: border-color .2s; }
+.hero-route a { display: flex; gap: 14px; padding-top: 13px; color: rgb(212, 219, 227); }
+.hero-route li:hover { border-top-color: var(--gold); }
+.hero-route a:hover { color: rgb(255, 255, 255); }
 .hero-route span { color: var(--gold); font-family: var(--mono); }
 .hero-route li { animation: 0.5s ease 0s 1 normal both running route-in; }
 .hero-route li:nth-child(2) { animation-delay: 0.15s; }
 .hero-route li:nth-child(3) { animation-delay: 0.3s; }
 .hero-route li:nth-child(4) { animation-delay: 0.45s; }
+.hero-route li:nth-child(5) { animation-delay: 0.6s; }
+.hero-route li:nth-child(6) { animation-delay: 0.75s; }
 @keyframes route-in { 
   0% { opacity: 0; transform: translateY(8px); }
   100% { opacity: 1; transform: none; }
@@ -239,8 +244,9 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
   .hero-character img { height: 220px; width: 220px; }
   .hero-character figcaption { margin: 0px; text-align: left; max-width: 110px; font-size: 11px; }
   .hero-character figcaption b { font-size: 17px; }
-  .hero-route { margin-top: 8px; gap: 10px; grid-template-columns: repeat(2, 1fr); }
-  .hero-route li { font-size: 12px; padding-top: 9px; gap: 12px; }
+  .hero-route { margin-top: 8px; column-gap: 10px; row-gap: 8px; grid-template-columns: repeat(2, 1fr); }
+  .hero-route li { font-size: 12px; }
+  .hero-route a { padding-top: 8px; gap: 10px; }
   .audience { grid-template-columns: 1fr 1fr; padding-block: 28px; gap: 24px; }
   .audience h2 { font-size: 22px; }
   .audience p { font-size: 13px; }
@@ -553,7 +559,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
   }
   if(img.complete) run(); else img.addEventListener("load",run,{once:true});
 })();</script>
-        <ol class="hero-route" aria-label="Ваш путь"><li><span>01</span>Диагностика</li><li><span>02</span>Приоритет</li><li><span>03</span>Действие</li><li><span>04</span>Результат</li></ol>
+        <ol class="hero-route" aria-label="Маршрут 6П"><li><a href="#track" data-hero-step="0"><span>01</span>Понять</a></li><li><a href="#track" data-hero-step="1"><span>02</span>Предложить</a></li><li><a href="#track" data-hero-step="2"><span>03</span>Привлечь</a></li><li><a href="#track" data-hero-step="3"><span>04</span>Продать</a></li><li><a href="#track" data-hero-step="4"><span>05</span>Посчитать</a></li><li><a href="#track" data-hero-step="5"><span>06</span>Пересобрать</a></li></ol>
       </div>
     </section>
 
@@ -788,6 +794,9 @@ function selectStep(index, focus = false) {
   enter($('track-panel'));
 }
 document.querySelectorAll('[data-funnel]').forEach(button => button.addEventListener('click',() => selectFunnel(Number(button.dataset.funnel))));
+document.querySelectorAll('[data-hero-step]').forEach(link => {
+  link.addEventListener('click',() => selectStep(Number(link.dataset.heroStep)));
+});
 document.querySelectorAll('[data-step]').forEach(button => {
   button.addEventListener('click',() => selectStep(Number(button.dataset.step)));
   button.addEventListener('keydown',event => {
