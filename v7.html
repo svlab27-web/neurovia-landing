@@ -95,6 +95,16 @@ h1 b { color: var(--gold); font-weight: 800; }
 .hero-doors button:nth-child(3) { animation-delay: .16s; }
 .hero-doors button:nth-child(4) { animation-delay: .24s; }
 .hero-doors button:nth-child(5) { animation-delay: .32s; }
+.hero-doors button.is-soon { background: rgba(244,243,240,.3); color: rgba(244,243,240,.62);
+  border-style: dashed; cursor: default; display: inline-flex; align-items: baseline; gap: 8px; }
+.hero-doors button.is-soon i { font: 500 9px var(--mono); font-style: normal; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--gold); opacity: .85; }
+.hero-doors button.is-soon:hover { transform: none; box-shadow: none; background: rgba(244,243,240,.3);
+  border-color: rgba(255,255,255,.22); }
+.nav-personas .is-soon { color: rgba(207,216,227,.5); cursor: default; display: inline-flex;
+  align-items: baseline; gap: 6px; }
+.nav-personas .is-soon i { font: 500 8px var(--mono); font-style: normal; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--gold); opacity: .8; }
 .hero-doors button:hover { background: #fff; border-color: var(--gold); transform: translateY(-3px);
   box-shadow: 0 14px 30px rgba(0,0,0,.34); }
 .hero-doors button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
@@ -653,7 +663,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
   <a class="skip" href="#main">К содержимому</a>
   <header><div class="wrap nav-row">
     <a class="wordmark" href="#" aria-label="NeuroVia Labs, главная">Neuro<span>Via</span><small>LABS</small></a>
-    <nav class="nav-personas" aria-label="Кому подходит"><a href="#audience" data-persona="expert">Эксперт</a><a href="#audience" data-persona="small">Стартап</a><a href="#audience" data-persona="founder">Действующий бизнес</a><a href="#audience" data-persona="agency">Агентство</a><a href="#audience" data-persona="tracker">Бизнес-трекеры</a></nav>
+    <nav class="nav-personas" aria-label="Кому подходит"><a href="#audience" data-persona="expert">Эксперт</a><a href="#audience" data-persona="small">Стартап</a><a href="#audience" data-persona="founder">Действующий бизнес</a><span class="is-soon">Агентство<i>скоро</i></span><span class="is-soon">Бизнес-трекеры<i>скоро</i></span></nav>
     <a class="button small" href="#diagnostic">Найти точку роста <span aria-hidden="true">↗</span></a>
   </div></header>
   <main id="main">
@@ -716,8 +726,8 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
           <button type="button" data-persona="expert">Я эксперт</button>
           <button type="button" data-persona="small">У меня стартап</button>
           <button type="button" data-persona="founder">У меня действующий бизнес</button>
-          <button type="button" data-persona="agency">У меня агентство</button>
-          <button type="button" data-persona="tracker">Я бизнес-трекер</button>
+          <button type="button" class="is-soon" disabled aria-disabled="true">У меня агентство<i>скоро</i></button>
+          <button type="button" class="is-soon" disabled aria-disabled="true">Я бизнес-трекер<i>скоро</i></button>
         </div>
       </div>
     </section>
