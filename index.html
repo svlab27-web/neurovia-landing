@@ -310,8 +310,19 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 .persona-flow{background:var(--warm);border:1px solid var(--line);border-radius:8px;align-self:start}
 .persona-flow h4{font:600 13px var(--head);margin:0;padding:16px 20px 0}
 .persona-flow ol{list-style:none;margin:0;padding:4px 20px}
-.persona-flow li{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;
-  padding:13px 0;border-bottom:1px solid var(--line)}
+.persona-flow li{border-bottom:1px solid var(--line)}
+.persona-flow li.plain{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;padding:13px 0}
+.persona-flow summary{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;
+  padding:13px 0;cursor:pointer;list-style:none}
+.persona-flow summary::-webkit-details-marker{display:none}
+.persona-flow summary::after{content:"+";font:700 15px var(--mono);color:var(--gold);line-height:1}
+.persona-flow details[open] summary::after{content:"\2013"}
+.persona-flow summary:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.persona-flow details ul{list-style:none;margin:0 0 14px;padding:0 0 0 46px;display:grid;gap:7px}
+.persona-flow details ul li{border:0;padding:0 0 0 14px;position:relative;
+  font-size:13px;line-height:1.45;color:var(--muted)}
+.persona-flow details ul li::before{content:"";position:absolute;left:0;top:7px;
+  width:5px;height:5px;border-radius:50%;background:var(--gold)}
 .persona-flow li:last-child{border-bottom:0}
 .persona-flow .n{display:grid;place-items:center;width:34px;height:34px;border-radius:8px;
   background:var(--navy);color:var(--gold);font:600 12px var(--mono)}
@@ -794,12 +805,35 @@ renderPlan();
         offer: "От накопленного опыта — к готовому продукту, системе привлечения клиентов и стабильным онлайн-продажам.",
         list: [],
         flowTitle: "Маршрут",
-        flow: [["01","Понять","кто Вы, для кого и какую проблему решаете",""],
-               ["02","Предложить","авторский метод, первый продукт и оффер",""],
-               ["03","Привлечь","живые разговоры и первая ручная воронка",""],
-               ["04","Продать","заявки, оплаты и доказательства результата",""],
-               ["05","Посчитать","что подтвердили цифры и пора ли автоматизировать",""],
-               ["06","Пересобрать","одна правка и повторная проверка",""]]
+        flow: [["01","Понять","кто Вы, для кого и с какой проблемой работаете","",
+                ["кто я как эксперт",
+                 "какую проблему я решаю",
+                 "какой результат я даю",
+                 "кто мой идеальный клиент"]],
+               ["02","Предложить","метод, первый продукт и оффер","",
+                ["как именно я решаю эту проблему — мой метод",
+                 "чем я отличаюсь от альтернатив",
+                 "с какого продукта начинаем",
+                 "цена и оффер, который можно проверить"]],
+               ["03","Привлечь","первые разговоры и ручная воронка","",
+                ["где находятся мои клиенты",
+                 "что сказать при первом контакте",
+                 "как собрать заявки без рекламы",
+                 "какой канал проверяем первым"]],
+               ["04","Продать","заявки, оплаты и доказательства","",
+                ["как вести разговор, который приводит к решению",
+                 "кому отказать и почему",
+                 "как довести до оплаты",
+                 "какие доказательства результата собрать"]],
+               ["05","Посчитать","что подтвердили цифры","",
+                ["что подтвердилось, а что осталось догадкой",
+                 "сходится ли экономика продукта",
+                 "пора автоматизировать или рано"]],
+               ["06","Пересобрать","одна правка и повторная проверка","",
+                ["где именно узкое место",
+                 "одна правка вместо десяти",
+                 "повторный тест по тому же критерию",
+                 "что забираем в следующий цикл"]]]
       },
       small: {
         title: "От идеи — к продукту, который покупают",
@@ -870,9 +904,13 @@ renderPlan();
         (d.list || []).map((t) => `<li><i>✓</i><span>${t}</span></li>`).join("");
       document.querySelector(".persona-flow h4").textContent = d.flowTitle || "Первый маршрут";
       document.getElementById("personaFlow").innerHTML =
-        d.flow.map(([n, title, sub, meta]) =>
-          `<li><span class="n">${n}</span><span><b>${title}</b><small>${sub}</small></span>${meta ? `<em>${meta}</em>` : ""}</li>`
-        ).join("");
+        d.flow.map(([n, title, sub, meta, points]) => {
+          const head = `<span class="n">${n}</span><span><b>${title}</b><small>${sub}</small></span>${meta ? `<em>${meta}</em>` : ""}`;
+          if (!points || !points.length) return `<li class="plain">${head}</li>`;
+          return `<li><details><summary>${head}</summary><ul>${
+            points.map((t) => `<li>${t}</li>`).join("")
+          }</ul></details></li>`;
+        }).join("");
       document.querySelectorAll(".persona-tabs button").forEach((b) => {
         b.setAttribute("aria-selected", String(b.dataset.persona === key));
       });
