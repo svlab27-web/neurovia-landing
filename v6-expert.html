@@ -87,6 +87,10 @@ section{padding:84px 0}
 .switch button{border:0;background:transparent;font:600 15px var(--head);color:var(--muted);
   padding:11px 22px;border-radius:7px;cursor:pointer;transition:background .2s,color .2s}
 .switch button[aria-pressed="true"]{background:var(--navy);color:var(--warm)}
+.switch button.brand{font:800 16px var(--head);letter-spacing:-.01em;color:var(--ink)}
+.switch button.brand span{color:var(--gold)}
+.switch button.brand small{font:500 9px var(--mono);letter-spacing:.2em;margin-left:5px;color:var(--silver);vertical-align:2px}
+.switch button.brand[aria-pressed="true"]{color:#fff}
 .road{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;perspective:1000px}
 .road .stop{background:var(--warm);border:1px solid var(--line);border-radius:14px;padding:22px 20px;position:relative;
   box-shadow:0 2px 10px rgba(10,22,40,.06);transform-style:preserve-3d;
@@ -289,7 +293,7 @@ footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
 
     <div class="switch reveal" role="group" aria-label="Сравнение подходов">
       <button type="button" data-road="bad" aria-pressed="true">Как обычно</button>
-      <button type="button" data-road="good" aria-pressed="false">NeuroVia Labs</button>
+      <button type="button" data-road="good" aria-pressed="false" class="brand">Neuro<span>Via</span> <small>LABS</small></button>
     </div>
 
     <div class="road bad reveal" id="road"></div>
