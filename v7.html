@@ -83,7 +83,10 @@ h1 { font-size: 60px; }
 .hero-oracle-link:hover span { color: rgb(226, 232, 240); }
 .hero-oracle-link span { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; text-decoration-color: rgba(214, 168, 78, 0.55); transition: text-decoration-color .2s; }
 .hero-oracle-link:hover span { text-decoration-color: var(--gold); }
-.hero-doors { position: relative; display: flex; flex-wrap: wrap; gap: 10px; margin: 40px 0 0; z-index: 2; }
+.doors-label { position: relative; z-index: 2; margin: 38px 0 14px; padding-top: 22px;
+  border-top: 1px solid rgba(255,255,255,.18); font: 500 12px var(--mono); letter-spacing: .12em;
+  text-transform: uppercase; color: var(--gold); }
+.hero-doors { position: relative; display: flex; flex-wrap: wrap; gap: 10px; margin: 0; z-index: 2; }
 .hero-doors button { animation: .5s ease both route-in; cursor: pointer; border: 1px solid rgba(255,255,255,.22); border-radius: 10px;
   background: rgba(244,243,240,.94); color: var(--ink); padding: 14px 20px;
   font: 700 15px var(--head); transition: transform .2s, box-shadow .2s, background .2s, border-color .2s; }
@@ -706,6 +709,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
   }
   if(img.complete) run(); else img.addEventListener("load",run,{once:true});
 })();</script>
+        <p class="doors-label">Выберите, кто Вы — и увидите свой маршрут</p>
         <div class="hero-doors" role="group" aria-label="Выберите, кто Вы">
           <button type="button" data-persona="expert">Я эксперт</button>
           <button type="button" data-persona="small">У меня стартап</button>
@@ -716,19 +720,9 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
       </div>
     </section>
 
-    <section class="audience wrap" id="audience" aria-labelledby="audience-title">
+    <section class="audience wrap" id="audience" aria-labelledby="audience-title" hidden>
       <h2 id="audience-title">Собираем<br>систему</h2>
 
-      <div class="chooser" id="chooser">
-        <p class="chooser-lead">Платформа работает под задачу. Выберите, кто Вы — и увидите свой маршрут, свои боли и свой первый шаг.</p>
-        <div class="chooser-row">
-          <button type="button" data-persona="expert">Я эксперт</button>
-          <button type="button" data-persona="small">У меня стартап</button>
-          <button type="button" data-persona="founder">У меня действующий бизнес</button>
-          <button type="button" data-persona="agency">У меня агентство</button>
-          <button type="button" data-persona="tracker">Я бизнес-трекер</button>
-        </div>
-      </div>
 
       <div class="duo x-only" id="duo" hidden>
         <button type="button" class="pcard" data-side="left" data-open="roads">
@@ -1168,13 +1162,13 @@ renderPlan();
     document.querySelectorAll(".nav-personas a").forEach((a) => {
       a.addEventListener("click", () => openPersona(a.dataset.persona));
     });
-    document.querySelectorAll(".chooser-row button, .hero-doors button").forEach((b) => {
+    document.querySelectorAll(".hero-doors button").forEach((b) => {
       b.addEventListener("click", () => openPersona(b.dataset.persona, true));
     });
     document.getElementById("personaBack").addEventListener("click", closePersona);
 
     function openPersona(key, scroll) {
-      document.getElementById("chooser").hidden = true;
+      document.getElementById("audience").hidden = false;
       document.getElementById("persona").hidden = false;
       renderPersona(key);
       if (scroll !== false) {
@@ -1186,10 +1180,10 @@ renderPlan();
     function closePersona() {
       document.getElementById("persona").hidden = true;
       document.querySelectorAll(".x-only").forEach((el) => { el.hidden = true; });
-      document.getElementById("chooser").hidden = false;
+      document.getElementById("audience").hidden = true;
       document.querySelectorAll(".nav-personas a").forEach((a) => a.removeAttribute("aria-current"));
       window.__persona = null;
-      document.getElementById("audience").scrollIntoView({
+      document.querySelector(".hero").scrollIntoView({
         behavior: reducedMotion.matches ? "auto" : "smooth", block: "start"
       });
     }
