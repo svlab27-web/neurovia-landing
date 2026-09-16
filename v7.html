@@ -1675,6 +1675,13 @@ renderPlan();
         });
         paintRoad("bad"); restartHot();
 
+        var mini = document.querySelector('.cycle-mini');
+        if (mini) {
+          [].forEach.call(mini.querySelectorAll('.clabel'), function (l, i) {
+            if (D.names[i]) l.textContent = D.names[i].toUpperCase();
+          });
+        }
+
         document.querySelector("#mirror h3").textContent = D.mirrorTitle;
         document.querySelector("#mirror .roads-lead").textContent = D.mirrorLead;
         picked = [];
