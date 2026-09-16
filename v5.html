@@ -52,6 +52,10 @@ header { position: sticky; top: 0px; background: var(--navy); color: var(--warm)
 .wordmark small { font: 500 10px var(--mono); margin-left: 8px; }
 nav { display: flex; gap: 25px; font-size: 14px; }
 nav a { color: rgb(212, 219, 227); }
+.nav-personas { gap: 22px; white-space: nowrap; }
+.nav-personas a { padding: 6px 0; border-bottom: 2px solid transparent; transition: color .2s, border-color .2s; }
+.nav-personas a:hover { color: #fff; }
+.nav-personas a[aria-current] { color: var(--gold); border-bottom-color: var(--gold); }
 .button { display: inline-flex; align-items: center; justify-content: center; gap: 20px; min-height: 50px; padding: 12px 22px; background: var(--gold); color: var(--ink); border: 0px; border-radius: 6px; font: 700 15px/1.4 var(--head); }
 .button.small { font-size: 13px; min-height: 42px; padding: 10px 16px; }
 .text-link { display: inline-flex; gap: 15px; align-items: center; font-weight: 600; border-bottom: 1px solid; padding-bottom: 3px; }
@@ -219,7 +223,10 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
   .wordmark { font-size: 22px; }
   .wordmark small { font-size: 8px; margin-left: 5px; }
   nav { gap: 16px; font-size: 12px; }
-  nav a:nth-child(1), nav a:nth-child(3), nav a:nth-child(4) { display: none; }
+  nav:not(.nav-personas) a:nth-child(1), nav:not(.nav-personas) a:nth-child(3), nav:not(.nav-personas) a:nth-child(4) { display: none; }
+  .nav-row { flex-wrap: wrap; }
+  .nav-personas { order: 3; width: 100%; gap: 18px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 2px; scrollbar-width: none; }
+  .nav-personas::-webkit-scrollbar { display: none; }
   .hero-inner { padding-top: 30px; min-height: 0px; }
   .hero-copy { width: 100%; }
   h1 { font-size: 38px; }
@@ -487,7 +494,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
   <a class="skip" href="#main">К содержимому</a>
   <header><div class="wrap nav-row">
     <a class="wordmark" href="#" aria-label="NeuroVia Labs, главная">Neuro<span>Via</span><small>LABS</small></a>
-    <nav aria-label="Основная навигация"><a href="#diagnostic">Диагностика</a><a href="#track">Трек 6П</a><a href="#oracle">Оракул</a><a href="#pricing">Тарифы</a><a href="#start">Начать</a></nav>
+    <nav class="nav-personas" aria-label="Кому подходит"><a href="#audience" data-persona="expert">Эксперт</a><a href="#audience" data-persona="small">Стартап</a><a href="#audience" data-persona="founder">Действующий бизнес</a><a href="#audience" data-persona="agency">Агентство</a><a href="#audience" data-persona="tracker">Бизнес-трекеры</a></nav>
     <a class="button small" href="#diagnostic">Найти точку роста <span aria-hidden="true">↗</span></a>
   </div></header>
   <main id="main">
@@ -550,7 +557,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
       </div>
     </section>
 
-    <section class="audience wrap" aria-labelledby="audience-title">
+    <section class="audience wrap" id="audience" aria-labelledby="audience-title">
       <h2 id="audience-title">Когда пора<br>собрать систему</h2>
       <div class="persona">
         <div class="persona-tabs" role="tablist" aria-label="Кому подходит">
@@ -751,7 +758,7 @@ function renderPlan() {
     checkbox.addEventListener('change', () => {completions[selectedFunnel][index] = checkbox.checked; updateProgress(); if (typeof saveState === 'function') saveState();});
     const content = document.createElement('span');
     const strong = document.createElement('b'); strong.textContent = title;
-    const small = document.createElement('small'); small.textContent = ['Понедельник · Владелец проекта','Среда · Владелец проекта','Пятница · Владелец проекта'][index];
+    const small = document.createElement('small'); small.textContent = ['Понедельник','Среда','Пятница'][index] + ' · ' + FCFG.owner;
     content.append(strong,small); label.append(checkbox,content); return label;
   }));
   updateProgress();
@@ -921,10 +928,20 @@ renderPlan();
       document.querySelectorAll(".persona-tabs button").forEach((b) => {
         b.setAttribute("aria-selected", String(b.dataset.persona === key));
       });
+      document.querySelectorAll(".nav-personas a").forEach((a) => {
+        if (a.dataset.persona === key) a.setAttribute("aria-current", "true");
+        else a.removeAttribute("aria-current");
+      });
+      window.__persona = key;
+      if (window.__applyPersonaFunnel) window.__applyPersonaFunnel(key);
     }
 
     document.querySelectorAll(".persona-tabs button").forEach((b) => {
       b.addEventListener("click", () => renderPersona(b.dataset.persona));
+    });
+
+    document.querySelectorAll(".nav-personas a").forEach((a) => {
+      a.addEventListener("click", () => renderPersona(a.dataset.persona));
     });
 
     renderPersona("expert");
@@ -932,10 +949,81 @@ renderPlan();
   
     /* ===== Диагностика на реальных цифрах ===== */
     const NUM = (n) => new Intl.NumberFormat('ru-RU').format(Math.round(n));
-    const STAGE_NAMES = ['Обращения','Встречи','Предложения','Оплаты'];
     const STORE = 'nvl-diagnostic';
 
+    const FUNNEL_SETS = {
+      default: {
+        heading: 'Больше заявок?<br>Сначала найдём потери.',
+        stages: ['Обращения','Встречи','Предложения','Оплаты'],
+        example: [100, 40, 24, 12],
+        owner: 'Владелец проекта',
+        caps: (o, v, p, d, NUM) => ['Начало пути',
+          `${NUM(o - v)} из ${NUM(o)} не дошли до встречи`,
+          `${NUM(v - p)} из ${NUM(v)} не получили предложение`,
+          `${NUM(p - d)} из ${NUM(p)} пока не оплатили`],
+        build: (o, v, p, d, NUM, pct) => [
+        {number: NUM(o), unit: '', title: 'обращений за период',
+         copy: `Количество обращений само по себе не показывает качество спроса. Сравните каналы и запросы клиентов, прежде чем увеличивать бюджет.`,
+         action: 'Отметьте источник и запрос в 10 последних обращениях.',
+         priority: 'Понять качество обращений', metric: 'Показатель: доля обращений от целевой аудитории.',
+         tasks: ['Собрать 10 последних обращений','Отметить источник и запрос клиента','Выбрать канал для проверки гипотезы']},
+        {number: String(pct(o - v, o)), unit: '%', title: 'обращений не доходят до встречи',
+         copy: `${NUM(o - v)} из ${NUM(o)} обращений не дошли до встречи. Проверьте скорость первого ответа и есть ли у каждой заявки ответственный. Это гипотеза, которую нужно проверить на переписках.`,
+         action: 'Разберите 10 последних обращений и отметьте, где закончился диалог.',
+         priority: 'Довести обращения до встречи', metric: 'Показатель: доля обращений с назначенной встречей.',
+         tasks: ['Разобрать 10 последних обращений','Назначить ответственного за первый ответ','Проверить, скольким клиентам назначили встречу']},
+        {number: String(pct(v - p, v)), unit: '%', title: 'встреч не заканчиваются предложением',
+         copy: `Из ${NUM(v)} встреч только ${NUM(p)} привели к предложению. Проверьте, удалось ли уточнить задачу клиента и согласовать следующий шаг.`,
+         action: 'Сопоставьте итоги 5 встреч с отправленными предложениями.',
+         priority: 'Связать встречу с предложением', metric: 'Показатель: доля встреч с отправленным предложением.',
+         tasks: ['Разобрать итоги 5 встреч','Собрать шаблон предложения под задачу клиента','Проверить отправку и получение предложений']},
+        {number: String(pct(p - d, p)), unit: '%', title: 'предложений пока не оплачены',
+         copy: `Из ${NUM(p)} предложений оплачены ${NUM(d)}. Причиной могут быть цена, сроки или отсутствие повторного контакта. Уточните причину до изменения оффера.`,
+         action: 'Свяжитесь с 5 клиентами без оплаты и уточните, что мешает решению.',
+         priority: 'Понять причины неоплаченных предложений', metric: 'Показатель: доля предложений, завершившихся оплатой.',
+         tasks: ['Выбрать 5 предложений без оплаты','Уточнить у клиентов причину паузы','Согласовать следующий контакт и проверить оплаты']}]
+      },
+      expert: {
+        heading: 'Пишете, но не покупают?<br>Найдём, где обрывается путь.',
+        stages: ['Контакты','Отклики','Разговоры','Оплаты'],
+        example: [60, 18, 7, 2],
+        owner: 'Вы',
+        caps: (o, v, p, d, NUM) => ['Начало пути',
+          `${NUM(o - v)} из ${NUM(o)} не ответили`,
+          `${NUM(v - p)} из ${NUM(v)} не дошли до разговора`,
+          `${NUM(p - d)} из ${NUM(p)} пока не оплатили`],
+        build: (o, v, p, d, NUM, pct) => [
+        {number: NUM(o), unit: '', title: 'контактов за период',
+         copy: `Само число контактов ещё ничего не говорит о спросе. Важно, из какого канала они пришли и на какое сообщение отвечали — иначе непонятно, что именно проверять дальше.`,
+         action: 'Отметьте у 10 последних контактов канал и сообщение, на которое они пришли.',
+         priority: 'Понять, кому и где Вы пишете', metric: 'Показатель: доля контактов из выбранного сегмента.',
+         tasks: ['Выбрать один канал и один сегмент','Отметить у 10 контактов канал и сообщение','Оставить для проверки один канал, а не все сразу']},
+        {number: String(pct(o - v, o)), unit: '%', title: 'контактов не отвечают',
+         copy: `${NUM(o - v)} из ${NUM(o)} не ответили. Это про формулировку: человек не узнал в сообщении свою проблему. Проверяется не размышлением, а тремя разными формулировками одной боли.`,
+         action: 'Напишите 3 формулировки одной боли и отправьте каждую 20 контактам с кодовым словом.',
+         priority: 'Получить отклик от своего сегмента', metric: 'Показатель: доля контактов, которые ответили.',
+         tasks: ['Выбрать одну боль и написать под неё 3 формулировки','Отправить каждую 20 контактам со своим кодовым словом','Сравнить, какая формулировка собрала больше ответов']},
+        {number: String(pct(v - p, v)), unit: '%', title: 'откликов не доходят до разговора',
+         copy: `Из ${NUM(v)} откликнувшихся до разговора дошли ${NUM(p)}. Обычно человек не понимает, что он получит на созвоне и сколько это займёт, — и переписка затухает.`,
+         action: 'Напишите одно приглашение: что будет на разговоре, сколько он длится и что человек унесёт с собой.',
+         priority: 'Довести отклик до разговора', metric: 'Показатель: доля откликов с назначенным разговором.',
+         tasks: ['Собрать переписки, которые оборвались после отклика','Написать одно приглашение: что будет, сколько займёт, что человек получит','Назначить разговоры и отметить, кто дошёл']},
+        {number: String(pct(p - d, p)), unit: '%', title: 'разговоров не заканчиваются оплатой',
+         copy: `Из ${NUM(p)} разговоров оплатили ${NUM(d)}. Причина почти всегда одна из трёх: непонятен результат, цена прозвучала в самом конце или после разговора человеку некуда нажать.`,
+         action: 'Соберите карточку продукта с ценой и ссылкой на оплату и отправляйте её в тот же день после разговора.',
+         priority: 'Довести разговор до оплаты', metric: 'Показатель: доля разговоров, завершившихся оплатой.',
+         tasks: ['Собрать карточку продукта: результат, состав, цена','Сформировать ссылку на оплату','Отправлять её в тот же день после разговора']}]
+      }
+    };
+
+    let FCFG = FUNNEL_SETS.default;
+    let STAGE_NAMES = FCFG.stages;
+
     function buildFunnel(o, v, p, d) {
+      const pct = (lost, base) => base > 0 ? Math.round(lost / base * 100) : 0;
+      return FCFG.build(o, v, p, d, NUM, pct);
+    }
+    const __unusedFunnel = () => {
       const pct = (lost, base) => base > 0 ? Math.round(lost / base * 100) : 0;
       return [
         {number: NUM(o), unit: '', title: 'обращений за период',
@@ -959,14 +1047,11 @@ renderPlan();
          priority: 'Понять причины неоплаченных предложений', metric: 'Показатель: доля предложений, завершившихся оплатой.',
          tasks: ['Выбрать 5 предложений без оплаты','Уточнить у клиентов причину паузы','Согласовать следующий контакт и проверить оплаты']}
       ];
-    }
+    };
 
     function paintFunnel(o, v, p, d) {
       const vals = [o, v, p, d];
-      const caps = ['Начало пути',
-        `${NUM(o - v)} из ${NUM(o)} не дошли до встречи`,
-        `${NUM(v - p)} из ${NUM(v)} не получили предложение`,
-        `${NUM(p - d)} из ${NUM(p)} пока не оплатили`];
+      const caps = FCFG.caps(o, v, p, d, NUM);
       document.querySelectorAll('[data-funnel]').forEach((btn, i) => {
         btn.querySelector('.bar-label').innerHTML = `${STAGE_NAMES[i]} <b>${NUM(vals[i])}</b>`;
         btn.querySelector('.bar').style.setProperty('--amount', (o > 0 ? Math.max(vals[i] / o * 100, 1.5) : 0) + '%');
@@ -1001,17 +1086,17 @@ renderPlan();
     function validate({o, v, p, d}) {
       if ([o, v, p, d].some((x) => x === null || Number.isNaN(x))) return 'Заполните все четыре поля.';
       if ([o, v, p, d].some((x) => x < 0)) return 'Числа не могут быть отрицательными.';
-      if (o < 1) return 'Обращений должно быть хотя бы одно.';
-      if (v > o) return 'Встреч не может быть больше, чем обращений.';
-      if (p > v) return 'Предложений не может быть больше, чем встреч.';
-      if (d > p) return 'Оплат не может быть больше, чем предложений.';
+      if (o < 1) return `«${STAGE_NAMES[0]}» — должно быть хотя бы одно.`;
+      if (v > o) return `«${STAGE_NAMES[1]}» не может быть больше, чем «${STAGE_NAMES[0]}».`;
+      if (p > v) return `«${STAGE_NAMES[2]}» не может быть больше, чем «${STAGE_NAMES[1]}».`;
+      if (d > p) return `«${STAGE_NAMES[3]}» не может быть больше, чем «${STAGE_NAMES[2]}».`;
       return '';
     }
 
     function saveState() {
       try {
         const data = readForm();
-        localStorage.setItem(STORE, JSON.stringify({...data, completions}));
+        localStorage.setItem(STORE, JSON.stringify({...data, completions, persona: window.__persona || 'expert'}));
       } catch (e) {}
     }
 
@@ -1031,12 +1116,36 @@ renderPlan();
       $('fPeriod').value = '1 месяц'; $('diagError').textContent = '';
       try { localStorage.removeItem(STORE); } catch (e) {}
       completions.forEach((row) => row.fill(false));
-      applyNumbers(100, 40, 24, 12, '1 месяц', false);
+      const ex = FCFG.example;
+      applyNumbers(ex[0], ex[1], ex[2], ex[3], '1 месяц', false);
     });
+
+    function applyPersonaFunnel(key) {
+      const cfg = FUNNEL_SETS[key] || FUNNEL_SETS.default;
+      if (cfg === FCFG) return;
+      FCFG = cfg;
+      STAGE_NAMES = cfg.stages;
+      const head = document.querySelector('#diagnostic .section-heading h2');
+      if (head) head.innerHTML = cfg.heading;
+      const labels = document.querySelectorAll('#diagForm .diag-fields > label');
+      ['fO', 'fV', 'fP', 'fD'].forEach((id, i) => {
+        const field = $(id);
+        field.value = '';
+        field.placeholder = String(cfg.example[i]);
+        if (labels[i] && labels[i].firstChild) labels[i].firstChild.nodeValue = cfg.stages[i];
+      });
+      $('diagError').textContent = '';
+      completions.forEach((row) => row.fill(false));
+      const ex = cfg.example;
+      applyNumbers(ex[0], ex[1], ex[2], ex[3], $('fPeriod').value || '1 месяц', false);
+    }
+    window.__applyPersonaFunnel = applyPersonaFunnel;
+    applyPersonaFunnel(window.__persona || 'expert');
 
     (function restore() {
       let saved = null;
       try { saved = JSON.parse(localStorage.getItem(STORE) || 'null'); } catch (e) {}
+      if (saved && saved.persona && saved.persona !== (window.__persona || 'expert')) saved = null;
       if (saved && saved.o) {
         $('fO').value = saved.o; $('fV').value = saved.v; $('fP').value = saved.p; $('fD').value = saved.d;
         if (saved.period) $('fPeriod').value = saved.period;
@@ -1044,8 +1153,6 @@ renderPlan();
           if (Array.isArray(row)) completions[i] = row.slice(0, 3);
         });
         applyNumbers(saved.o, saved.v, saved.p, saved.d, saved.period || '1 месяц', true);
-      } else {
-        applyNumbers(100, 40, 24, 12, '1 месяц', false);
       }
     })();
 
