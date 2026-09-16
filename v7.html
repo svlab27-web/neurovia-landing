@@ -763,6 +763,21 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
   70%{box-shadow:0 14px 30px rgba(15,28,46,.28),0 0 0 17px rgba(255,255,255,0)}
   100%{box-shadow:0 8px 22px rgba(15,28,46,.24),0 0 0 0 rgba(255,255,255,0)}}
 .road.live.good .stop:last-child{animation:finalPulseLight 2.2s ease-out infinite}
+
+/* ===== внутри платформы ===== */
+.inside-section{background:var(--navy);color:var(--warm)}
+.inside-section h2{color:#fff}
+.inside-section .lead{color:#c3cdd9}
+.inside-section .eyebrow{color:var(--gold)}
+.shots{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.shots figure{margin:0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);
+  border-radius:var(--r);overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s}
+.shots figure:hover{transform:translateY(-6px);border-color:rgba(238,200,48,.55);box-shadow:0 26px 52px rgba(0,0,0,.4)}
+.shots img{width:100%;height:auto;display:block;border-bottom:1px solid rgba(255,255,255,.1)}
+.shots figcaption{padding:18px 20px 22px;font-size:14.5px;line-height:1.5;color:#b9c5d3}
+.shots figcaption b{display:block;font:700 17px var(--head);color:#fff;margin-bottom:6px}
+@media (max-width:900px){.shots{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.shots{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -1004,6 +1019,18 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
       <details><summary>Что нужно для диагностики?</summary><p>Описание продукта, клиентов и текущего процесса продаж. Если цифр пока нет, первым шагом станет сбор данных.</p></details>
       <details><summary>Эти цифры показывают результат клиентов?</summary><p>Нет. Воронка и план на этой странице содержат демонстрационные данные. Они показывают логику работы, а не обещают рост выручки.</p></details>
     </div></div></section>
+    <section class="section inside-section" id="inside"><div class="wrap">
+      <div class="section-heading"><div><p class="eyebrow">Внутри платформы</p><h2>Вот так это<br>выглядит внутри.</h2></div><p class="lead">Не чат с ботом, а рабочий кабинет: диагностика, каталог болей клиентов, продукт, воронка, заказы и деньги — в одном месте.</p></div>
+      <div class="shots">
+        <figure><img src="assets/app-diagnostic.webp" width="1400" height="674" loading="lazy" decoding="async" alt="Экран диагностики в кабинете NeuroVia Labs">
+          <figcaption><b>Диагностика</b>Определяем точку А: десять шагов, на выходе AI собирает Вашу методику на основе ответов.</figcaption></figure>
+        <figure><img src="assets/app-wizard.webp" width="1400" height="674" loading="lazy" decoding="async" alt="Первый шаг диагностики: вопросы про опыт и клиентов">
+          <figcaption><b>Ваш опыт и клиенты</b>Кто к Вам приходит, с какой проблемой и какой результат получал — из этих ответов строится всё остальное.</figcaption></figure>
+        <figure><img src="assets/app-pains.webp" width="1400" height="674" loading="lazy" decoding="async" alt="Каталог болей клиентов в кабинете">
+          <figcaption><b>Боли клиентов</b>Каталог проблем: по ним подбираются офферы и темы контента.</figcaption></figure>
+      </div>
+    </div></section>
+
     <section class="section pricing-section" id="pricing"><div class="wrap">
       <div class="section-heading"><div><p class="eyebrow">Тарифы</p><h2>Выберите сценарий,<br>а не список функций</h2></div><p class="lead">Диагностика бесплатна на любом сценарии.</p></div>
       <div class="plans">
