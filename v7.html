@@ -532,6 +532,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 .oracle-who span{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
 .oracle-dots{display:flex!important;gap:5px;margin-top:9px}
 .oracle-dots[hidden]{display:none!important}
+.duo,.roads,.mirror{grid-column:1 / -1}
 .oracle-dots i{width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:.35}
 @media (max-width:700px){.oracle-stage img{width:112px;height:112px}}
 
@@ -708,7 +709,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
   }
   if(img.complete) run(); else img.addEventListener("load",run,{once:true});
 })();</script>
-        <p class="doors-label">Выберите, кто Вы — и увидите свой маршрут</p>
+        <p class="doors-label">Выберите, кто Вы — и постройте свой маршрут к цели</p>
         <div class="hero-doors" role="group" aria-label="Выберите, кто Вы">
           <button type="button" data-persona="expert">Я эксперт</button>
           <button type="button" data-persona="small">У меня стартап</button>
