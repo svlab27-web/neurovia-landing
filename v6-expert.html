@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NeuroVia Labs · v6 «Эксперт» | Сначала проверьте гипотезу сами</title>
+<title>NeuroVia Labs · v6 | Общая страница и разделы по аудиториям</title>
 <meta name="description" content="Таргетолог, маркетолог, продюсер — каждый начинает с проверки гипотез за Ваш счёт. Проверьте гипотезу сами: маршрут 6П и Оракул рядом на каждом шаге.">
 <meta property="og:title" content="Сначала проверьте гипотезу сами — потом нанимайте команду">
 <meta property="og:description" content="Маршрут 6П для экспертов: понять, предложить, привлечь, продать, посчитать, пересобрать. Оракул помогает на каждом шаге.">
@@ -126,7 +126,11 @@ span.aud{opacity:.55}
 .duo.to-right .duo-oracle::before{transform:translateX(26px)}
 .duo-oracle figcaption{margin-top:6px;font-size:13px;color:var(--silver)}
 .duo-oracle figcaption b{display:block;font:700 17px var(--head);color:var(--warm)}
-.hero-below{margin-top:52px;max-width:760px}
+.hero-below{margin-top:52px;max-width:780px}
+.p-offer{margin:20px 0 0;padding:16px 22px;border-left:3px solid var(--gold);
+  background:rgba(238,200,48,.08);border-radius:0 10px 10px 0;
+  font:700 clamp(17px,1.6vw,21px)/1.45 var(--head);color:#fff;max-width:62ch}
+.duo[hidden],.hero-fact[hidden],.only-expert[hidden]{display:none}
 .hero-below h1{margin-bottom:18px}
 @media (prefers-reduced-motion:reduce){.duo-oracle img,.duo-oracle::before{transition:none}}
 @media (max-width:980px){.duo{grid-template-columns:1fr;gap:16px}
@@ -373,11 +377,11 @@ footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
   <div class="wrap nav">
     <div class="logo">Neuro<span>Via</span> <small>LABS</small></div>
     <nav class="nav-links nav-aud" aria-label="Кому подходит">
-      <a class="is-on" href="#gate">Эксперт</a>
-      <span title="Раздел в работе">Стартап</span>
-      <span title="Раздел в работе">Действующий бизнес</span>
-      <span title="Раздел в работе">Агентство</span>
-      <span title="Раздел в работе">Бизнес-трекеры</span>
+      <a class="is-on" href="#gate" data-persona="expert">Эксперт</a>
+      <a href="#gate" data-persona="small">Стартап</a>
+      <a href="#gate" data-persona="founder">Действующий бизнес</a>
+      <a href="#gate" data-persona="agency">Агентство</a>
+      <a href="#gate" data-persona="tracker">Бизнес-трекеры</a>
     </nav>
     <a class="btn" href="#mirror">Начать бесплатно</a>
   </div>
@@ -406,36 +410,35 @@ footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
 
 <section class="hero" id="gate" style="padding:0">
   <div class="wrap hero-in">
-    <p class="eyebrow center">Для экспертов · от накопленного опыта до первых продаж</p>
+    <p class="eyebrow center" id="pTag"></p>
 
-    <div class="duo" id="duo">
+    <div class="duo" id="duo" hidden>
       <a class="pcard" data-side="left" href="#pain">
-        <span class="ptag">Знакомо?</span>
-        <h2>Нанимали подрядчиков, покупали курсы, слили бюджет — а клиентов так и нет?</h2>
-        <span class="pgo">Почему так выходит <em>&#8594;</em></span>
+        <span class="ptag" id="cardTagL"></span>
+        <h2 id="cardQL"></h2>
+        <span class="pgo" id="cardGoL"></span>
       </a>
-
       <figure class="duo-oracle">
         <img id="heroOracle" src="assets/suggest.webp" width="1024" height="1024" fetchpriority="high"
              alt="Оракул показывает то на одну ситуацию, то на другую">
         <figcaption><b>Оракул</b><span>Ваш помощник на маршруте</span></figcaption>
       </figure>
-
       <a class="pcard" data-side="right" href="#mirror">
-        <span class="ptag">Или так?</span>
-        <h2>Знаний и практики много — но непонятно, как это продавать и упаковать в продукт?</h2>
-        <span class="pgo">С чего начать <em>&#8594;</em></span>
+        <span class="ptag" id="cardTagR"></span>
+        <h2 id="cardQR"></h2>
+        <span class="pgo" id="cardGoR"></span>
       </a>
     </div>
 
     <div class="hero-below">
-      <h1>У Вас до сих пор нет связки, <b>которая приносит клиентов</b></h1>
-      <p class="lead">Одни платят за её поиск подрядчикам и ждут полгода. Другие не начинали искать — не решили, что продавать. Результат одинаковый: клиентов нет.</p>
+      <h1 id="pTitle"></h1>
+      <p class="lead" id="pLead"></p>
+      <p class="p-offer" id="pOffer"></p>
       <div class="hero-cta">
-        <a class="btn" href="#mirror">Узнать, с чего начать</a>
-        <a class="btn ghost" href="#route">Посмотреть маршрут 6П</a>
+        <a class="btn" href="#route">Посмотреть маршрут 6П</a>
+        <a class="btn ghost" href="#price">Сколько это стоит</a>
       </div>
-      <div class="hero-fact">
+      <div class="hero-fact" id="pFacts" hidden>
         <div class="f"><b>3–<i id="cMonths">4</i></b><span>месяцев на чужие гипотезы</span></div>
         <div class="f"><b>до <i id="cMoney">300 000</i> ₸</b><span>работа и бюджет, пока ищут связку</span></div>
         <a class="f accent" href="#mirror"><b>6 шагов</b><span>проверить самому &#8594;</span></a>
@@ -445,7 +448,7 @@ footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
 </section>
 
 <!-- ======= БОЛЬ 1 ======= -->
-<section class="pain" id="pain">
+<section class="pain only-expert" id="pain">
   <div class="wrap">
     <div class="sec-head reveal">
       <p class="eyebrow dark">Боль первая</p>
@@ -465,7 +468,7 @@ footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
 </section>
 
 <!-- ======= БОЛЬ 2 ======= -->
-<section id="mirror">
+<section id="mirror" class="only-expert">
   <div class="wrap">
     <div class="sec-head reveal">
       <p class="eyebrow dark">Боль вторая</p>
@@ -594,7 +597,7 @@ footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
     ]
   };
 
-  var STEPS = [
+  var EXPERT_STEPS = [
     { n: "01", name: "Понять",
       sub: "Оракул разбирает Ваш опыт и помогает выбрать одну тему, один сегмент и одну проблему, за которую готовы платить клиенты",
       points: [
@@ -651,6 +654,79 @@ footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
       ] }
   ];
 
+  var PERSONAS = {
+    expert: {
+      tag: "Для экспертов · от накопленного опыта до первых продаж",
+      title: 'У Вас до сих пор нет связки, <b>которая приносит клиентов</b>',
+      lead: "Одни платят за её поиск подрядчикам и ждут полгода. Другие не начинали искать — не решили, что продавать. Результат одинаковый: клиентов нет.",
+      offer: "От накопленного опыта — к готовому продукту, системе привлечения клиентов и стабильным онлайн-продажам.",
+      cards: [
+        ["Знакомо?", "Нанимали подрядчиков, покупали курсы, слили бюджет — а клиентов так и нет?", "Почему так выходит", "#pain"],
+        ["Или так?", "Знаний и практики много — но непонятно, как это продавать и упаковать в продукт?", "С чего начать", "#mirror"]
+      ],
+      facts: true,
+      steps: EXPERT_STEPS
+    },
+    small: {
+      tag: "Для стартапов · от идеи до первых продаж",
+      title: 'От идеи — <b>к продукту, который покупают</b>',
+      lead: "У Вас есть большая идея. Но непонятно, нужна ли она рынку, как проверить это без крупных вложений и на чём здесь зарабатывать.",
+      offer: "Сначала проверенная гипотеза, потом первые оплаты, потом экономика, которая сходится.",
+      steps: [
+        { n: "01", name: "Идея", sub: "что она решает и для кого" },
+        { n: "02", name: "Гипотезы", sub: "разложить идею на проверяемые предположения" },
+        { n: "03", name: "Проверка", sub: "интервью и тест с ограниченным бюджетом" },
+        { n: "04", name: "MVP", sub: "минимальный продукт, которого хватает для проверки" },
+        { n: "05", name: "Первые продажи", sub: "протестировать спрос и собрать данные рынка" },
+        { n: "06", name: "Экономика", sub: "рассчитать финансовую модель" }
+      ]
+    },
+    founder: {
+      tag: "Для действующего бизнеса · новая точка зрения и следующий шаг",
+      title: 'Посмотрите на бизнес по-новому — <b>прежде чем вкладывать больше или закрывать его</b>',
+      lead: "Если продажи падают, маркетинг перестал работать, а кассовые разрывы стали нормой — проблема может быть глубже, чем продукт или отдел продаж.",
+      offer: "Не очередное универсальное решение, а новая точка зрения на Ваш бизнес и понятный следующий шаг.",
+      steps: [
+        { n: "01", name: "Потери", sub: "найти, где бизнес теряет деньги" },
+        { n: "02", name: "Разрывы", sub: "понять истинную причину кассовых разрывов" },
+        { n: "03", name: "Микрошаг", sub: "определить первый, без больших вложений" },
+        { n: "04", name: "Модель", sub: "пересобрать свою роль и бизнес-модель под новые условия" },
+        { n: "05", name: "Решение", sub: "развивать, менять модель или закрывать бизнес" }
+      ]
+    },
+    agency: {
+      tag: "Для агентств · больше клиентов без роста ФОТ",
+      title: 'Масштабируйте агентство <b>без потери качества и роста ФОТ</b>',
+      lead: "Когда клиентов становится больше, данные распадаются между таблицами, отчётами, GPT и другими ИИ-сервисами. Команда перегружена, качество снижается, растёт ФОТ.",
+      offer: "Берите больше клиентов, сохраняя качество, прибыль и контроль над каждым проектом.",
+      steps: [
+        { n: "01", name: "Аналитика", sub: "сквозная — от продукта и маркетинга до рекламы и продаж" },
+        { n: "02", name: "Данные", sub: "клиентские данные, проекты и отчёты в одном месте" },
+        { n: "03", name: "Автоматизация", sub: "процессы без ручной работы и лишних затрат на ФОТ" },
+        { n: "04", name: "Рынок", sub: "постоянный анализ конкурентов, трендов и новых технологий" },
+        { n: "05", name: "Гипотезы", sub: "быстрая проверка и корректировка стратегии" },
+        { n: "06", name: "Результат", sub: "рост результатов клиентов, лояльности и срока сотрудничества" }
+      ]
+    },
+    tracker: {
+      tag: "Для бизнес-трекеров · данные клиента в одной системе",
+      title: 'Все данные клиента в одной системе, <b>а не в разрозненных отчётах</b>',
+      lead: "Платформа помогает бизнес-трекерам вести больше клиентов, не теряя глубины и качества работы.",
+      offer: "Аналитика и история работы с клиентом собраны вместе. Меньше времени на сбор информации, больше — на решения и рост бизнеса.",
+      steps: [
+        { n: "01", name: "Картина", sub: "видеть всю ситуацию в бизнесе клиента" },
+        { n: "02", name: "Показатели и точки роста", sub: "ключевые метрики, их динамика и причины проблем" },
+        { n: "03", name: "Фиксация и контроль", sub: "цели, гипотезы, решения, результаты спринтов и выполнение договорённостей" },
+        { n: "04", name: "ИИ-анализ", sub: "разбор данных и подготовка рекомендаций" },
+        { n: "05", name: "Подготовка", sub: "быстрый выход на трекшн-сессию" },
+        { n: "06", name: "Результат", sub: "измеримый, который видит клиент" }
+      ]
+    }
+  };
+
+  var STEPS = PERSONAS.expert.steps;
+  var currentPersona = "expert";
+
   var MIRROR = [
     { t: "Знаний много, а что именно продавать — непонятно", s: 0 },
     { t: "Курс записан, купили трое — и двое из них знакомые", s: 1 },
@@ -674,6 +750,50 @@ footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
   /* ---------- шаги 6П с общего экрана ---------- */
   document.querySelectorAll("[data-jump]").forEach(function (a) {
     a.addEventListener("click", function () { showStep(Number(a.dataset.jump), false); });
+  });
+
+  /* ---------- переключение разделов по аудиториям ---------- */
+  function renderPersona(key) {
+    var d = PERSONAS[key];
+    if (!d) return;
+    currentPersona = key;
+    STEPS = d.steps;
+
+    $("pTag").textContent = d.tag;
+    $("pTitle").innerHTML = d.title;
+    $("pLead").textContent = d.lead;
+    $("pOffer").textContent = d.offer || "";
+    $("pOffer").hidden = !d.offer;
+
+    var duo = $("duo");
+    if (d.cards) {
+      duo.hidden = false;
+      $("cardTagL").textContent = d.cards[0][0];
+      $("cardQL").textContent = d.cards[0][1];
+      $("cardGoL").innerHTML = d.cards[0][2] + ' <em>&#8594;</em>';
+      duo.querySelector('[data-side="left"]').setAttribute("href", d.cards[0][3]);
+      $("cardTagR").textContent = d.cards[1][0];
+      $("cardQR").textContent = d.cards[1][1];
+      $("cardGoR").innerHTML = d.cards[1][2] + ' <em>&#8594;</em>';
+      duo.querySelector('[data-side="right"]').setAttribute("href", d.cards[1][3]);
+    } else {
+      duo.hidden = true;
+    }
+
+    $("pFacts").hidden = !d.facts;
+    [].forEach.call(document.querySelectorAll(".only-expert"), function (el) {
+      el.hidden = key !== "expert";
+    });
+    [].forEach.call(document.querySelectorAll(".nav-aud a"), function (a) {
+      a.classList.toggle("is-on", a.dataset.persona === key);
+    });
+
+    paintTabs();
+    showStep(0, false);
+  }
+
+  [].forEach.call(document.querySelectorAll(".nav-aud a"), function (a) {
+    a.addEventListener("click", function () { renderPersona(a.dataset.persona); });
   });
 
   /* ---------- Оракул показывает то влево, то вправо ---------- */
@@ -782,25 +902,30 @@ footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
 
   /* ---------- маршрут 6П ---------- */
   var tabs = $("routeTabs"), panel = $("routePanel"), current = 0;
-  tabs.innerHTML = STEPS.map(function (s, i) {
-    return '<button type="button" role="tab" data-step="' + i + '" aria-selected="' + (i === 0) +
-      '"><i>' + s.n + "</i>" + s.name + "</button>";
-  }).join("");
+  function paintTabs() {
+    tabs.innerHTML = STEPS.map(function (s, i) {
+      return '<button type="button" role="tab" data-step="' + i + '" aria-selected="' + (i === 0) +
+        '"><i>' + s.n + "</i>" + s.name + "</button>";
+    }).join("");
+  }
+  paintTabs();
 
   function showStep(i, scroll) {
+    if (i >= STEPS.length) i = 0;
     current = i;
     [].forEach.call(tabs.children, function (b, k) { b.setAttribute("aria-selected", String(k === i)); });
-    var s = STEPS[i];
-    panel.innerHTML = '<p class="n">Шаг ' + s.n + " / 06</p><h3>" + s.name + "</h3>" +
-      '<p class="sub">' + s.sub + "</p><ul>" +
-      s.points.map(function (p) { return "<li><span>" + p + "</span></li>"; }).join("") +
-      '</ul><div class="route-foot"><span>Результат шага становится входом следующего</span>' +
-      '<button type="button" id="nextStep">' + (i === 5 ? "Вернуться к шагу 01 →" : "Следующий шаг →") + "</button></div>";
+    var s = STEPS[i], last = STEPS.length - 1;
+    var total = String(STEPS.length).padStart(2, "0");
+    panel.innerHTML = '<p class="n">Шаг ' + s.n + " / " + total + "</p><h3>" + s.name + "</h3>" +
+      '<p class="sub">' + s.sub + "</p>" +
+      (s.points ? "<ul>" + s.points.map(function (p) { return "<li><span>" + p + "</span></li>"; }).join("") + "</ul>" : "") +
+      '<div class="route-foot"><span>Результат шага становится входом следующего</span>' +
+      '<button type="button" id="nextStep">' + (i === last ? "Вернуться к шагу 01 →" : "Следующий шаг →") + "</button></div>";
     if (!reduce.matches) {
       panel.animate([{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }],
         { duration: 340, easing: "ease-out" });
     }
-    $("nextStep").addEventListener("click", function () { showStep((i + 1) % 6, false); });
+    $("nextStep").addEventListener("click", function () { showStep((i + 1) % STEPS.length, false); });
     if (scroll) document.getElementById("route").scrollIntoView({ behavior: reduce.matches ? "auto" : "smooth", block: "start" });
   }
   tabs.addEventListener("click", function (e) {
@@ -808,7 +933,8 @@ footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
     if (b) showStep(Number(b.dataset.step), false);
   });
   tabs.addEventListener("keydown", function (e) {
-    var map = { ArrowDown: (current + 1) % 6, ArrowUp: (current + 5) % 6, ArrowRight: (current + 1) % 6, ArrowLeft: (current + 5) % 6, Home: 0, End: 5 };
+    var L = STEPS.length;
+    var map = { ArrowDown: (current + 1) % L, ArrowUp: (current + L - 1) % L, ArrowRight: (current + 1) % L, ArrowLeft: (current + L - 1) % L, Home: 0, End: L - 1 };
     if (map[e.key] !== undefined) {
       e.preventDefault(); showStep(map[e.key], false); tabs.children[current].focus();
     }
@@ -853,6 +979,8 @@ footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
     renderVerdict();
   });
   renderVerdict();
+
+  renderPersona("expert");
 
   /* ---------- появление блоков ---------- */
   if ("IntersectionObserver" in window) {
