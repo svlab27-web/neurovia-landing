@@ -87,10 +87,12 @@ section{padding:84px 0}
 .switch button{border:0;background:transparent;font:600 15px var(--head);color:var(--muted);
   padding:11px 22px;border-radius:7px;cursor:pointer;transition:background .2s,color .2s}
 .switch button[aria-pressed="true"]{background:var(--navy);color:var(--warm)}
-.switch button.brand{font:800 16px var(--head);letter-spacing:-.01em;color:var(--ink)}
+.switch button.brand{font:800 16px var(--head);letter-spacing:-.01em;color:#fff;background:var(--navy)}
 .switch button.brand span{color:var(--gold)}
 .switch button.brand small{font:500 9px var(--mono);letter-spacing:.2em;margin-left:5px;color:var(--silver);vertical-align:2px}
-.switch button.brand[aria-pressed="true"]{color:#fff}
+.switch button.brand[aria-pressed="true"]{box-shadow:0 0 0 2px var(--gold)}
+.switch button.brand[aria-pressed="false"]{opacity:.72}
+.switch button.brand:hover{opacity:1}
 .road{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;perspective:1000px}
 .road .stop{background:var(--warm);border:1px solid var(--line);border-radius:14px;padding:22px 20px;position:relative;
   box-shadow:0 2px 10px rgba(10,22,40,.06);transform-style:preserve-3d;
@@ -103,9 +105,14 @@ section{padding:84px 0}
 .road .stop::after{content:"";position:absolute;top:50%;right:-17px;width:11px;height:11px;margin-top:-6px;
   border-right:2px solid var(--line);border-top:2px solid var(--line);transform:rotate(45deg);transition:border-color .3s}
 .road .stop:last-child::after{display:none}
-.road.good .stop{border-color:rgba(238,200,48,.55);background:#fffdf4}
-.road.good .stop .t{color:#8a6f10;background:rgba(238,200,48,.18)}
-.road.good .stop::after{border-color:rgba(238,200,48,.7)}
+.road.good .stop{background:var(--navy);border-color:rgba(238,200,48,.28);box-shadow:0 8px 22px rgba(15,28,46,.22)}
+.road.good .stop p{color:#dbe3ec}
+.road.good .stop .t{color:var(--gold);background:rgba(238,200,48,.14)}
+.road.good .stop::after{border-color:rgba(238,200,48,.55)}
+.road.good .stop:hover{border-color:var(--gold)}
+.road.good .stop:last-child{border-color:var(--gold);background:#0b1626}
+.road.good .stop:last-child .t{background:var(--gold);color:var(--ink)}
+.road.good .stop:last-child p{color:#fff;font-weight:600}
 .road.bad .stop p{color:var(--muted)}
 
 /* ---- пульсация: остановки загораются по очереди ---- */
@@ -116,10 +123,10 @@ section{padding:84px 0}
   22%{transform:none;box-shadow:0 2px 10px rgba(10,22,40,.06)}
 }
 @keyframes stopBeatGold{
-  0%,100%{transform:none;box-shadow:0 2px 10px rgba(10,22,40,.06)}
-  5%{transform:translateY(-7px) scale(1.025);box-shadow:0 20px 40px rgba(238,200,48,.4)}
-  13%{transform:translateY(-3px) scale(1.01);box-shadow:0 12px 26px rgba(238,200,48,.26)}
-  22%{transform:none;box-shadow:0 2px 10px rgba(10,22,40,.06)}
+  0%,100%{transform:none;box-shadow:0 8px 22px rgba(15,28,46,.22)}
+  5%{transform:translateY(-7px) scale(1.025);box-shadow:0 22px 44px rgba(15,28,46,.34),0 0 0 1px var(--gold)}
+  13%{transform:translateY(-3px) scale(1.01);box-shadow:0 14px 28px rgba(15,28,46,.26)}
+  22%{transform:none;box-shadow:0 8px 22px rgba(15,28,46,.22)}
 }
 @keyframes finalPulseBad{
   0%{box-shadow:0 2px 10px rgba(10,22,40,.08),0 0 0 0 rgba(15,28,46,.4)}
@@ -127,9 +134,9 @@ section{padding:84px 0}
   100%{box-shadow:0 2px 10px rgba(10,22,40,.08),0 0 0 0 rgba(15,28,46,0)}
 }
 @keyframes finalPulseGood{
-  0%{box-shadow:0 2px 10px rgba(10,22,40,.08),0 0 0 0 rgba(238,200,48,.55)}
-  70%{box-shadow:0 10px 24px rgba(238,200,48,.22),0 0 0 18px rgba(238,200,48,0)}
-  100%{box-shadow:0 2px 10px rgba(10,22,40,.08),0 0 0 0 rgba(238,200,48,0)}
+  0%{box-shadow:0 8px 22px rgba(15,28,46,.24),0 0 0 0 rgba(238,200,48,.5)}
+  70%{box-shadow:0 14px 30px rgba(15,28,46,.28),0 0 0 18px rgba(238,200,48,0)}
+  100%{box-shadow:0 8px 22px rgba(15,28,46,.24),0 0 0 0 rgba(238,200,48,0)}
 }
 .road.live .stop{animation:stopBeat 5.6s cubic-bezier(.2,.7,.3,1) infinite}
 .road.live.good .stop{animation-name:stopBeatGold}
