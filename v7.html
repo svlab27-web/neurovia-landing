@@ -810,7 +810,6 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
       </div>
 
       <div class="persona" id="persona" hidden>
-        <button type="button" class="persona-back" id="personaBack">← Выбрать другой раздел</button>
         <div class="persona-panel">
           <div class="persona-copy">
             <h3 id="personaTitle"></h3>
@@ -1207,7 +1206,6 @@ renderPlan();
     document.querySelectorAll(".hero-doors button").forEach((b) => {
       b.addEventListener("click", () => openPersona(b.dataset.persona, true));
     });
-    document.getElementById("personaBack").addEventListener("click", closePersona);
 
     function openPersona(key, scroll) {
       document.getElementById("audience").hidden = false;
