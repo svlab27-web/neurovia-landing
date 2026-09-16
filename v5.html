@@ -322,6 +322,14 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 .persona-more summary::-webkit-details-marker{display:none}
 .persona-more summary::before{content:"+";font:700 16px var(--mono);color:var(--gold);line-height:1}
 .persona-more[open] summary::before{content:"–"}
+.cmp{margin-top:14px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.cmp-head,.cmp-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line)}
+.cmp-head span,.cmp-row span{background:#fff;padding:10px 14px;font-size:14px;line-height:1.45}
+.cmp-head span{font:600 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:rgba(244,243,240,.75)}
+.cmp-row span:first-child{color:var(--muted)}
+.cmp-row span:last-child{color:var(--ink);font-weight:500;box-shadow:inset 3px 0 0 var(--gold)}
+.cmp-note{margin:12px 0 0;font-size:15px;line-height:1.55;color:var(--ink);font-weight:500}
+@media (max-width:700px){.cmp-head{display:none}.cmp-row{grid-template-columns:1fr}.cmp-row span:first-child{text-decoration:line-through;opacity:.75}}
 .persona-more summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 .persona-copy ul{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:9px}
 .persona-copy li{display:grid;grid-template-columns:16px 1fr;gap:10px;align-items:start;
@@ -581,6 +589,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
             <details class="persona-more" id="personaMore">
               <summary id="personaMoreTitle">На платформе Вы сможете в одном месте</summary>
               <ul id="personaList"></ul>
+              <div id="personaCompare"></div>
             </details>
           </div>
           <div class="persona-flow">
@@ -819,7 +828,17 @@ renderPlan();
     const personaData = {
       expert: {
         title: "Превратите накопленный опыт в востребованный онлайн-продукт",
-        copy: "У Вас много знаний и практики. Но непонятно, какую экспертность продавать, как упаковать её в продукт и где находить клиентов.",
+        copy: ["Вы уже нанимали таргетолога, маркетолога, продюсера. Покупали курсы. Каждый специалист начинает с проверки гипотез — это его нормальная работа. Ненормально то, что проверка идёт за Ваш счёт: три-шесть месяцев, бюджет, силы. Связка не нашлась — остаётся вывод «маркетинг не работает».",
+               "У Вас много знаний и практики. Но непонятно, какую экспертность продавать, как упаковать её в продукт и где находить клиентов."],
+        moreTitle: "Почему так выходит — и как иначе",
+        compare: {
+          left: "Как обычно", right: "Как здесь",
+          rows: [["Нанимаете специалиста", "Проверяете гипотезу сами"],
+                 ["Он проверяет гипотезы за Ваш счёт", "Проверка стоит недели, а не бюджет"],
+                 ["3–6 месяцев — деньги кончились", "Прибыльная связка найдена, видно по цифрам"],
+                 ["Вывод: «маркетинг не работает»", "Нанимаете команду под проверенное"]],
+          note: "Сначала проверьте гипотезу сами — быстро и без бюджета. Найдёте прибыльную связку — тогда и нанимайте команду, уже под готовое."
+        },
         offer: "От накопленного опыта — к готовому продукту, системе привлечения клиентов и стабильным онлайн-продажам.",
         list: [],
         flowTitle: "Маршрут",
@@ -924,9 +943,22 @@ renderPlan();
       offer.hidden = !d.offer;
       const more = document.getElementById("personaMore");
       more.open = false;
-      more.hidden = !(d.list && d.list.length);
+      more.hidden = !((d.list && d.list.length) || d.compare);
+      document.getElementById("personaMoreTitle").textContent =
+        d.moreTitle || "На платформе Вы сможете в одном месте";
       document.getElementById("personaList").innerHTML =
         (d.list || []).map((t) => `<li><i>✓</i><span>${t}</span></li>`).join("");
+      const cmp = document.getElementById("personaCompare");
+      if (d.compare) {
+        cmp.hidden = false;
+        cmp.innerHTML =
+          `<div class="cmp"><div class="cmp-head"><span>${d.compare.left}</span><span>${d.compare.right}</span></div>` +
+          d.compare.rows.map(([a, b]) => `<div class="cmp-row"><span>${a}</span><span>${b}</span></div>`).join("") +
+          `</div>` + (d.compare.note ? `<p class="cmp-note">${d.compare.note}</p>` : "");
+      } else {
+        cmp.hidden = true;
+        cmp.innerHTML = "";
+      }
       document.querySelector(".persona-flow h4").textContent = d.flowTitle || "Первый маршрут";
       document.getElementById("personaFlow").innerHTML =
         d.flow.map(([n, title, sub, meta, points]) => {
