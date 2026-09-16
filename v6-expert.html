@@ -99,7 +99,9 @@ section{padding:84px 0}
   transition:transform .35s cubic-bezier(.2,.7,.3,1),box-shadow .35s,border-color .3s,background .3s}
 .road .stop:hover{transform:translateY(-8px) rotateX(3deg);box-shadow:0 22px 44px rgba(10,22,40,.2);border-color:var(--silver);z-index:3}
 .road .stop .t{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
-  display:inline-block;margin-bottom:12px;padding:5px 9px;border-radius:6px;background:rgba(10,22,40,.06)}
+  display:inline-block;min-width:112px;text-align:center;margin-bottom:12px;padding:6px 10px;
+  border-radius:6px;background:rgba(10,22,40,.06)}
+.road .stop:last-child .t{font-size:13px;font-weight:700;letter-spacing:.16em}
 .road .stop p{font-size:16px;line-height:1.5}
 /* стрелки между остановками */
 .road .stop::after{content:"";position:absolute;top:50%;right:-17px;width:11px;height:11px;margin-top:-6px;
