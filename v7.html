@@ -865,17 +865,58 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
             <div class="oracle-stage"><span class="oracle-float"><img id="oracleShot" alt="Оракул: разбирает причины" width="150" height="150" decoding="async"></span><div class="oracle-who"><b>Оракул</b><span id="oraclePose">Разбираем причины</span><span class="oracle-dots" id="oracleDots" hidden aria-hidden="true"><i></i><i></i><i></i></span></div></div>
             <p class="metric" id="loss-number">55<span>%</span></p><h3 id="loss-title">обратившихся не записались</h3><p id="loss-copy">55 из 100 написали, но не назначили встречу. Обычно дело в скорости первого ответа и в том, что человек не понял, зачем идти дальше.</p>
             <div class="recommendation"><span class="eyebrow">Первое действие</span><p id="loss-action">Разберите 10 последних диалогов и отметьте, на какой фразе разговор оборвался.</p></div>
-            <a href="#pricing" class="text-link" id="plan-link">Посмотреть тарифы <span aria-hidden="true">↗</span></a>
+            <a href="#week" class="text-link" id="plan-link">Собрать план по этому разрыву <span aria-hidden="true">↗</span></a>
           </aside>
         </div>
       </div>
     </div></section>
 
-    
+    <section class="section track-section" id="track"><div class="wrap">
+      <div class="section-heading track-head"><div><p class="eyebrow">02 / Пройти маршрут</p><h2>Шесть шагов.<br>Одна система роста.</h2><p class="lead">На каждом этапе Вы создаёте конкретный результат. Он становится основой следующего шага.</p></div><div class="cycle-wrap">
+        <svg class="cycle" viewBox="-24 0 428 306" role="img" aria-label="Цикл 6П: шесть шагов, шестой возвращает к первому">
+          <circle class="cycle-ring" cx="190" cy="158" r="86"/>
+          <path class="cycle-return" d="M 116,115 A 86,86 0 0,1 190,72"/>
+          <g class="cycle-nodes">
+            <g class="cnode" data-node="0"><circle cx="190" cy="72"  r="17"/><text x="190" y="77">01</text></g>
+            <g class="cnode" data-node="1"><circle cx="264" cy="115" r="17"/><text x="264" y="120">02</text></g>
+            <g class="cnode" data-node="2"><circle cx="264" cy="201" r="17"/><text x="264" y="206">03</text></g>
+            <g class="cnode" data-node="3"><circle cx="190" cy="244" r="17"/><text x="190" y="249">04</text></g>
+            <g class="cnode" data-node="4"><circle cx="116" cy="201" r="17"/><text x="116" y="206">05</text></g>
+            <g class="cnode" data-node="5"><circle cx="116" cy="115" r="17"/><text x="116" y="120">06</text></g>
+          </g>
+          <g class="cycle-labels">
+            <text class="clabel" data-label="0" x="190" y="44"  text-anchor="middle">ПОНЯТЬ</text>
+            <text class="clabel" data-label="1" x="290" y="107" text-anchor="start">ПРЕДЛОЖИТЬ</text>
+            <text class="clabel" data-label="2" x="290" y="209" text-anchor="start">ПРИВЛЕЧЬ</text>
+            <text class="clabel" data-label="3" x="190" y="280" text-anchor="middle">ПРОДАТЬ</text>
+            <text class="clabel" data-label="4" x="90"  y="209" text-anchor="end">ПОСЧИТАТЬ</text>
+            <text class="clabel" data-label="5" x="90"  y="107" text-anchor="end">ПЕРЕСОБРАТЬ</text>
+          </g>
+          <text class="cycle-mid" x="190" y="155" text-anchor="middle">6П</text>
+          <text class="cycle-sub" x="190" y="174" text-anchor="middle">ЗАМКНУТЫЙ ЦИКЛ</text>
+          <circle class="cycle-dot trail" r="7"/>
+          <circle class="cycle-dot head" r="5"/>
+        </svg>
+        <p class="cycle-hint" id="cycleHint">Данные идут по кругу: результат шага становится входом следующего.</p>
+      </div></div>
+      <p class="cycle-loop" id="cycleLoop" hidden>Новый приоритет возвращается в шаг 01 «Понять» — цикл начинается заново.</p></div>
+    </div></section>
 
-    
+    <section class="section" id="week"><div class="wrap">
+      <div class="section-heading"><div><p class="eyebrow">03 / Сделать следующий шаг</p><h2>Большая цель.<br>Понятная неделя.</h2></div><p class="lead">Один приоритет, три действия и показатель, который Вы проверите вместе с Оракулом.</p></div>
+      <div class="week-tool"><div class="tool-header"><b>План на неделю</b><span class="sample">Пример · изменения до перезагрузки</span></div>
+        <div class="week-layout"><div class="week-summary"><span class="eyebrow">Приоритет</span><h3 id="week-title">Довести обращения до встречи</h3><p id="week-metric">Показатель: доля обращений с назначенной встречей.</p><div class="progress-line"><span id="progress-text" role="status">Выполнено 0 из 3</span><progress id="progress" max="3" value="0" aria-label="Выполнение плана"></progress></div></div><div class="tasks" id="tasks"></div></div>
+        <p class="week-note" id="week-note">В конце недели сравните показатель с началом и решите, что менять дальше.</p>
+      </div>
+    </div></section>
 
-    
+    <section class="section oracle-section" id="oracle"><div class="wrap oracle-layout">
+      <figure class="oracle-portrait"><span class="oracle-breathe"><img id="oraclePortraitImg" alt="Оракул с готовым планом действий" width="1024" height="1024" loading="lazy"></span><figcaption>Оракул / AI-помощник NeuroVia Labs</figcaption></figure>
+      <div><p class="eyebrow">Рядом на всём пути</p><h2>Знакомьтесь,<br>Оракул.</h2><p class="lead">Помнит Вашу цель, помогает разобраться в цифрах и возвращает внимание к следующему действию.</p>
+        <dl class="oracle-roles"><div><dt>Перед выбором</dt><dd>Помогает сравнить гипотезы и выбрать приоритет.</dd></div><div><dt>Во время работы</dt><dd>Готовит черновики и связывает задачи с целью.</dd></div><div><dt>После проверки</dt><dd>Помогает увидеть результат и скорректировать план.</dd></div></dl>
+        <p class="muted">Решения остаются за Вами. Для сложных вопросов можно подключить живого бизнес-трекера.</p>
+      </div>
+    </div></section>
 
 
     <section class="section faq-section"><div class="wrap faq-layout"><h2>До первого шага</h2><div>
@@ -943,7 +984,6 @@ function updateProgress() {
     : 'В конце недели сравните показатель с началом и решите, что менять дальше.';
 }
 function renderPlan() {
-  if (!document.getElementById('week-title')) return;
   const data = funnelData[selectedFunnel];
   $('week-title').textContent = data.priority;
   $('week-metric').textContent = data.metric;
