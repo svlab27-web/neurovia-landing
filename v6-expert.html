@@ -52,6 +52,39 @@ header{position:sticky;top:0;z-index:40;background:rgba(15,28,46,.95);backdrop-f
 .nav .btn{min-height:42px;padding:10px 18px;font-size:14px}
 @media (max-width:900px){.nav-links{display:none}}
 
+/* ---------- общий первый экран ---------- */
+.top{background:var(--navy);color:var(--warm);position:relative;overflow:hidden;padding:0}
+.top::after{content:"";position:absolute;inset:auto -10% -50% 42%;height:80%;
+  background:radial-gradient(60% 60% at 50% 50%,rgba(238,200,48,.12),transparent 70%);pointer-events:none}
+.top-in{display:grid;grid-template-columns:1.12fr .88fr;gap:28px;align-items:center;padding:62px 0 34px;position:relative;z-index:2}
+.top-promise{font:800 clamp(30px,4.4vw,56px)/1.06 var(--head);letter-spacing:-.025em;margin:16px 0 20px}
+.top-promise b{color:var(--gold);font-weight:800}
+.top-route{display:grid;grid-template-columns:repeat(3,1fr);column-gap:18px;row-gap:12px;list-style:none;padding:0;margin:40px 0 0}
+.top-route li{border-top:1px solid rgba(255,255,255,.2);transition:border-color .2s}
+.top-route a{display:flex;gap:12px;padding-top:12px;font-size:14px;color:#cfd8e3}
+.top-route span{font:500 12px var(--mono);color:var(--gold)}
+.top-route li:hover{border-top-color:var(--gold)}
+.top-route li:hover a{color:#fff}
+.top-art{margin:0;justify-self:end;position:relative;z-index:2;text-align:center}
+.top-art img{height:clamp(230px,30vw,380px);width:auto;filter:drop-shadow(0 22px 46px rgba(0,0,0,.45))}
+.top-art figcaption{margin-top:-10px;font-size:13px;color:var(--silver)}
+.top-art figcaption b{display:block;font:700 19px var(--head);color:var(--warm)}
+.top-art figcaption span{text-decoration:underline;text-underline-offset:5px;text-decoration-color:rgba(238,200,48,.55)}
+.top-art figcaption a:hover b{color:var(--gold)}
+.aud-row{display:flex;gap:10px;flex-wrap:wrap;padding-bottom:26px;position:relative;z-index:2}
+.aud{display:flex;flex-direction:column;gap:2px;padding:12px 18px;border-radius:10px;font:600 15px var(--head);
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);color:#c7d1dd}
+.aud i{font:500 10px var(--mono);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--silver);opacity:.75}
+.aud.is-on{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+a.aud:hover{background:rgba(255,255,255,.12);color:#fff}
+a.aud.is-on:hover{background:var(--gold);color:var(--ink)}
+span.aud{opacity:.55}
+.top .hero-cta{margin-top:26px}
+.top span.btn[aria-disabled="true"]{cursor:default}
+@media (max-width:860px){.top-in{grid-template-columns:1fr;padding:38px 0 24px}
+  .top-art{order:-1;justify-self:center}.top-art img{height:190px}.top-art figcaption{display:none}
+  .top-route{grid-template-columns:repeat(2,1fr);margin-top:26px}}
+
 /* ---------- герой ---------- */
 .hero{position:relative;background:var(--navy);color:var(--warm);overflow:hidden}
 .hero::after{content:"";position:absolute;inset:auto -10% -40% 40%;height:70%;
@@ -334,6 +367,7 @@ footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
   <div class="wrap nav">
     <div class="logo">Neuro<span>Via</span> <small>LABS</small></div>
     <nav class="nav-links">
+      <a href="#gate">Эксперт</a>
       <a href="#pain">Почему не сработало</a>
       <a href="#mirror">Узнать себя</a>
       <a href="#route">Маршрут 6П</a>
@@ -347,6 +381,39 @@ footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
 <main>
 
 <!-- ======= ГЕРОЙ ======= -->
+<!-- ======= ОБЩИЙ ПЕРВЫЙ ЭКРАН ======= -->
+<section class="top" id="top">
+  <div class="wrap top-in">
+    <div class="top-copy">
+      <p class="eyebrow">От идеи до первых продаж с AI-помощником</p>
+      <p class="top-promise">Есть идея и цель?<br><b>Теперь будет и маршрут.</b></p>
+      <p class="lead">Найдите, где теряются клиенты и деньги. Выберите приоритет и соберите план действий. Оракул поможет пройти этот путь шаг за шагом.</p>
+      <div class="hero-cta"><span class="btn" role="button" aria-disabled="true">Начать бесплатно <span aria-hidden="true">&#8599;</span></span></div>
+      <ol class="top-route" aria-label="Маршрут 6П">
+        <li><a href="#route" data-jump="0"><span>01</span>Понять</a></li>
+        <li><a href="#route" data-jump="1"><span>02</span>Предложить</a></li>
+        <li><a href="#route" data-jump="2"><span>03</span>Привлечь</a></li>
+        <li><a href="#route" data-jump="3"><span>04</span>Продать</a></li>
+        <li><a href="#route" data-jump="4"><span>05</span>Посчитать</a></li>
+        <li><a href="#route" data-jump="5"><span>06</span>Пересобрать</a></li>
+      </ol>
+    </div>
+    <figure class="top-art">
+      <img src="assets/welcome.webp" width="1024" height="1024" fetchpriority="high"
+           alt="Оракул приветствует поднятой ладонью">
+      <figcaption><a href="#oracle"><b>Оракул</b><span>Ваш помощник на бизнес-треке</span></a></figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap aud-row" aria-label="Кому подходит">
+    <a class="aud is-on" href="#gate">Эксперт</a>
+    <span class="aud">Стартап<i>раздел в работе</i></span>
+    <span class="aud">Действующий бизнес<i>раздел в работе</i></span>
+    <span class="aud">Агентство<i>раздел в работе</i></span>
+    <span class="aud">Бизнес-трекеры<i>раздел в работе</i></span>
+  </div>
+</section>
+
 <section class="hero" id="gate" style="padding:0">
   <div class="wrap hero-in">
     <p class="eyebrow center">Для экспертов · от идеи до первых продаж</p>
@@ -613,6 +680,11 @@ footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
   ];
 
   function $(id) { return document.getElementById(id); }
+
+  /* ---------- шаги 6П с общего экрана ---------- */
+  document.querySelectorAll("[data-jump]").forEach(function (a) {
+    a.addEventListener("click", function () { showStep(Number(a.dataset.jump), false); });
+  });
 
   /* ---------- Оракул показывает то влево, то вправо ---------- */
   (function duo() {
