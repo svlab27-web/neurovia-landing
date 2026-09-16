@@ -74,6 +74,8 @@ header{position:sticky;top:0;z-index:40;background:rgba(15,28,46,.95);backdrop-f
 .hero-fact .accent b{color:var(--gold)}
 .hero-fact .accent span{color:var(--gold);opacity:.9}
 .hero-fact .accent:hover{transform:translateY(-3px);background:rgba(238,200,48,.16)}
+.hero-fact .f.counting b{color:var(--gold);text-shadow:0 0 22px rgba(238,200,48,.35)}
+.hero-fact .f b{transition:color .5s,text-shadow .5s}
 @keyframes factGlow{
   0%,100%{box-shadow:0 0 0 0 rgba(238,200,48,0)}
   50%{box-shadow:0 0 0 7px rgba(238,200,48,.13)}
@@ -544,14 +546,16 @@ footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
     if (!mEl || !sEl) return;
     var fmt = function (n) { return new Intl.NumberFormat("ru-RU").format(n).replace(/\u00a0/g, " "); };
     if (reduce.matches) { mEl.textContent = "6"; sEl.textContent = fmt(1500000); return; }
-    var start = null, DUR = 1600;
+    var start = null, D_MON = 1600, D_SUM = 5200;
     function frame(ts) {
       if (start === null) start = ts;
-      var k = Math.min((ts - start) / DUR, 1);
-      var e = 1 - Math.pow(1 - k, 3);
-      mEl.textContent = String(Math.round(4 + e * 2));
-      sEl.textContent = fmt(Math.round((300000 + e * 1200000) / 10000) * 10000);
-      if (k < 1) requestAnimationFrame(frame);
+      var t = ts - start;
+      var km = Math.min(t / D_MON, 1), em = 1 - Math.pow(1 - km, 3);
+      mEl.textContent = String(Math.round(4 + em * 2));
+      var ks = Math.min(t / D_SUM, 1), es = 1 - Math.pow(1 - ks, 1.5);
+      sEl.textContent = fmt(Math.round((300000 + es * 1200000) / 10000) * 10000);
+      sEl.parentNode.parentNode.classList.toggle("counting", ks < 1);
+      if (km < 1 || ks < 1) requestAnimationFrame(frame);
     }
     setTimeout(function () { requestAnimationFrame(frame); }, 450);
   })();
