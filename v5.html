@@ -758,7 +758,7 @@ function renderPlan() {
     checkbox.addEventListener('change', () => {completions[selectedFunnel][index] = checkbox.checked; updateProgress(); if (typeof saveState === 'function') saveState();});
     const content = document.createElement('span');
     const strong = document.createElement('b'); strong.textContent = title;
-    const small = document.createElement('small'); small.textContent = ['Понедельник','Среда','Пятница'][index] + ' · ' + FCFG.owner;
+    const small = document.createElement('small'); small.textContent = ['Понедельник','Среда','Пятница'][index] + ' · ' + ((FCFG && FCFG.owner) || 'Владелец проекта');
     content.append(strong,small); label.append(checkbox,content); return label;
   }));
   updateProgress();
@@ -804,6 +804,8 @@ document.querySelectorAll('[data-step]').forEach(button => {
   });
 });
 renderPlan();
+
+    var FCFG, STAGE_NAMES;
 
     const personaData = {
       expert: {
@@ -1016,8 +1018,8 @@ renderPlan();
       }
     };
 
-    let FCFG = FUNNEL_SETS.default;
-    let STAGE_NAMES = FCFG.stages;
+    FCFG = FUNNEL_SETS.default;
+    STAGE_NAMES = FCFG.stages;
 
     function buildFunnel(o, v, p, d) {
       const pct = (lost, base) => base > 0 ? Math.round(lost / base * 100) : 0;
