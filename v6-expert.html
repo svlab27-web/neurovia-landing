@@ -61,10 +61,26 @@ header{position:sticky;top:0;z-index:40;background:rgba(15,28,46,.95);backdrop-f
 .hero h1 b{color:var(--gold);font-weight:800}
 .hero .lead{font-size:clamp(17px,1.5vw,20px);color:#d3dbe4;max-width:38ch}
 .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
-.hero-fact{display:flex;gap:28px;margin-top:40px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14);flex-wrap:wrap}
-.hero-fact div{min-width:106px}
-.hero-fact b{display:block;font:800 26px var(--head);color:var(--gold)}
-.hero-fact span{font-size:13px;color:var(--silver)}
+.hero-fact{display:flex;gap:0;margin-top:40px;padding-top:26px;border-top:1px solid rgba(255,255,255,.14);flex-wrap:wrap}
+.hero-fact .f{display:block;padding:6px 26px;border-left:1px solid rgba(255,255,255,.14);min-width:150px}
+.hero-fact .f:first-child{padding-left:0;border-left:0}
+.hero-fact b{display:block;font:800 clamp(26px,2.6vw,34px) var(--head);color:#fff;letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.hero-fact b i{font-style:normal}
+.hero-fact span{display:block;margin-top:6px;font-size:14.5px;line-height:1.35;color:#b9c5d3;max-width:19ch}
+.hero-fact .accent{border-radius:10px;padding:10px 22px;margin-left:12px;background:rgba(238,200,48,.08);
+  border:1px solid rgba(238,200,48,.45);border-left:1px solid rgba(238,200,48,.45);
+  animation:factGlow 2.8s ease-in-out infinite;transition:transform .25s,background .25s}
+.hero-fact .accent b{color:var(--gold)}
+.hero-fact .accent span{color:var(--gold);opacity:.9}
+.hero-fact .accent:hover{transform:translateY(-3px);background:rgba(238,200,48,.16)}
+@keyframes factGlow{
+  0%,100%{box-shadow:0 0 0 0 rgba(238,200,48,0)}
+  50%{box-shadow:0 0 0 7px rgba(238,200,48,.13)}
+}
+@media (prefers-reduced-motion:reduce){.hero-fact .accent{animation:none}}
+@media (max-width:640px){.hero-fact .f{border-left:0;padding:10px 0;min-width:0}
+  .hero-fact .accent{margin-left:0;padding:12px 18px}}
 .hero-art{position:relative;justify-self:end}
 .hero-art img{height:clamp(260px,34vw,430px);width:auto;filter:drop-shadow(0 24px 50px rgba(0,0,0,.45))}
 .hero-art figcaption{text-align:center;margin-top:-14px;font-size:13px;color:var(--silver)}
@@ -283,9 +299,9 @@ footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
         <a class="btn ghost" href="#route">Посмотреть маршрут 6П</a>
       </div>
       <div class="hero-fact">
-        <div><b>3–6</b><span>месяцев на чужие гипотезы</span></div>
-        <div><b>от 300 000 ₸</b><span>одна гипотеза чужими руками</span></div>
-        <div><b>6 шагов</b><span>проверить самому</span></div>
+        <div class="f"><b>3–<i id="cMonths">4</i></b><span>месяцев на чужие гипотезы</span></div>
+        <div class="f"><b>до <i id="cMoney">300 000</i> ₸</b><span>работа и бюджет, пока ищут связку</span></div>
+        <a class="f accent" href="#mirror"><b>6 шагов</b><span>проверить самому →</span></a>
       </div>
     </div>
     <figure class="hero-art">
@@ -381,8 +397,8 @@ footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
     <div class="price-grid">
       <div class="price-card alt reveal">
         <h3>Гипотеза чужими руками</h3>
-        <p class="sum">от 300 000 ₸</p>
-        <p class="sub">работа специалиста плюс рекламный бюджет</p>
+        <p class="sum">300 000 – 1 500 000 ₸</p>
+        <p class="sub">работа специалиста плюс рекламный бюджет за 3–6 месяцев</p>
         <ul>
           <li>одна гипотеза, без гарантии результата</li>
           <li>3–6 месяцев до понятного ответа</li>
@@ -521,6 +537,24 @@ footer{background:var(--ink);color:var(--silver);font-size:13px;padding:26px 0}
   ];
 
   function $(id) { return document.getElementById(id); }
+
+  /* ---------- счётчики на первом экране ---------- */
+  (function counters() {
+    var mEl = document.getElementById("cMonths"), sEl = document.getElementById("cMoney");
+    if (!mEl || !sEl) return;
+    var fmt = function (n) { return new Intl.NumberFormat("ru-RU").format(n).replace(/\u00a0/g, " "); };
+    if (reduce.matches) { mEl.textContent = "6"; sEl.textContent = fmt(1500000); return; }
+    var start = null, DUR = 1600;
+    function frame(ts) {
+      if (start === null) start = ts;
+      var k = Math.min((ts - start) / DUR, 1);
+      var e = 1 - Math.pow(1 - k, 3);
+      mEl.textContent = String(Math.round(4 + e * 2));
+      sEl.textContent = fmt(Math.round((300000 + e * 1200000) / 10000) * 10000);
+      if (k < 1) requestAnimationFrame(frame);
+    }
+    setTimeout(function () { requestAnimationFrame(frame); }, 450);
+  })();
 
   /* ---------- боль 1: переключатель дорог ---------- */
   var road = $("road");
