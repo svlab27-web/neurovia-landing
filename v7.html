@@ -931,7 +931,7 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
       </div>
     </div></section>
 
-    <section class="section track-section" id="track"><div class="wrap">
+    <section class="section track-section general-only" id="track"><div class="wrap">
       <div class="section-heading track-head"><div><p class="eyebrow">Пройти маршрут</p><h2>Шесть шагов.<br>Одна система роста.</h2><p class="lead">На каждом этапе Вы создаёте конкретный результат. Он становится основой следующего шага.</p></div><div class="cycle-wrap">
         <svg class="cycle" viewBox="-24 0 428 306" role="img" aria-label="Цикл 6П: шесть шагов, шестой возвращает к первому">
           <circle class="cycle-ring" cx="190" cy="158" r="86"/>
@@ -962,7 +962,7 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
       <p class="cycle-loop" id="cycleLoop" hidden>Новый приоритет возвращается в шаг 01 «Понять» — цикл начинается заново.</p></div>
     </div></section>
 
-    <section class="section" id="week"><div class="wrap">
+    <section class="section general-only" id="week"><div class="wrap">
       <div class="section-heading"><div><p class="eyebrow">Сделать следующий шаг</p><h2>Большая цель.<br>Понятная неделя.</h2></div><p class="lead">Один приоритет, три действия и показатель, который Вы проверите вместе с Оракулом.</p></div>
       <div class="week-tool"><div class="tool-header"><b>План на неделю</b><span class="sample">Пример · изменения до перезагрузки</span></div>
         <div class="week-layout"><div class="week-summary"><span class="eyebrow">Приоритет</span><h3 id="week-title">Довести обращения до встречи</h3><p id="week-metric">Показатель: доля обращений с назначенной встречей.</p><div class="progress-line"><span id="progress-text" role="status">Выполнено 0 из 3</span><progress id="progress" max="3" value="0" aria-label="Выполнение плана"></progress></div></div><div class="tasks" id="tasks"></div></div>
@@ -970,7 +970,7 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
       </div>
     </div></section>
 
-    <section class="section oracle-section" id="oracle"><div class="wrap oracle-layout">
+    <section class="section oracle-section general-only" id="oracle"><div class="wrap oracle-layout">
       <figure class="oracle-portrait"><span class="oracle-breathe"><img id="oraclePortraitImg" alt="Оракул с готовым планом действий" width="1024" height="1024" loading="lazy"></span><figcaption>Оракул / AI-помощник NeuroVia Labs</figcaption></figure>
       <div><p class="eyebrow">Рядом на всём пути</p><h2>Знакомьтесь,<br>Оракул.</h2><p class="lead">Помнит Вашу цель, помогает разобраться в цифрах и возвращает внимание к следующему действию.</p>
         <dl class="oracle-roles"><div><dt>Перед выбором</dt><dd>Помогает сравнить гипотезы и выбрать приоритет.</dd></div><div><dt>Во время работы</dt><dd>Готовит черновики и связывает задачи с целью.</dd></div><div><dt>После проверки</dt><dd>Помогает увидеть результат и скорректировать план.</dd></div></dl>
@@ -1250,6 +1250,7 @@ renderPlan();
       });
       window.__persona = key;
       document.querySelectorAll(".x-only").forEach((el) => { el.hidden = key !== "expert"; });
+      document.querySelectorAll(".general-only").forEach((el) => { el.hidden = true; });
       if (window.__applyPersonaFunnel) window.__applyPersonaFunnel(key);
     }
 
@@ -1277,6 +1278,7 @@ renderPlan();
     function closePersona() {
       document.getElementById("persona").hidden = true;
       document.querySelectorAll(".x-only").forEach((el) => { el.hidden = true; });
+      document.querySelectorAll(".general-only").forEach((el) => { el.hidden = false; });
       document.getElementById("audience").hidden = true;
       document.querySelectorAll(".nav-personas a").forEach((a) => a.removeAttribute("aria-current"));
       window.__persona = null;
