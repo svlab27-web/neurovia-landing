@@ -673,6 +673,12 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 .vsteps span{font:500 11px var(--mono);padding:6px 10px;border-radius:6px;background:rgba(255,255,255,.08);color:var(--silver)}
 .vsteps span.on{background:var(--gold);color:var(--ink)}
 .verdict .button{width:100%;justify-content:center}
+.flow-cta{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:20px;
+  min-height:52px;padding:14px 24px;border-radius:8px;background:var(--gold);color:var(--ink);
+  font:700 16px var(--head);transition:transform .2s,box-shadow .2s}
+.flow-cta:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(238,200,48,.34)}
+.flow-cta em{font-style:normal;transition:transform .25s}
+.flow-cta:hover em{transform:translateX(5px)}
 .vprice{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:12px;
   font:700 14px var(--head);color:var(--gold)}
 .vprice em{font-style:normal;transition:transform .25s}
@@ -824,6 +830,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
           <div class="persona-flow">
             <h4>Первый маршрут</h4>
             <ol id="personaFlow"></ol>
+            <a class="flow-cta" href="#pricing">Пройти этот маршрут с Оракулом <em>→</em></a>
           </div>
         </div>
       </div>
@@ -1044,17 +1051,7 @@ renderPlan();
     const personaData = {
       expert: {
         title: "Превратите накопленный опыт в востребованный онлайн-продукт",
-        copy: ["Вы уже нанимали таргетолога, маркетолога, продюсера. Покупали курсы. Каждый специалист начинает с проверки гипотез — это его нормальная работа. Ненормально то, что проверка идёт за Ваш счёт: три-шесть месяцев, бюджет, силы. Связка не нашлась — остаётся вывод «маркетинг не работает».",
-               "У Вас много знаний и практики. Но непонятно, какую экспертность продавать, как упаковать её в продукт и где находить клиентов."],
-        moreTitle: "Почему так выходит — и как иначе",
-        compare: {
-          left: "Как обычно", right: "Как здесь",
-          rows: [["Нанимаете специалиста", "Проверяете гипотезу сами"],
-                 ["Он проверяет гипотезы за Ваш счёт", "Проверка стоит недели, а не бюджет"],
-                 ["3–6 месяцев — деньги кончились", "Прибыльная связка найдена, видно по цифрам"],
-                 ["Вывод: «маркетинг не работает»", "Нанимаете команду под проверенное"]],
-          note: "Сначала проверьте гипотезу сами — быстро и без бюджета. Найдёте прибыльную связку — тогда и нанимайте команду, уже под готовое."
-        },
+        copy: [],
         offer: "От накопленного опыта — к готовому продукту, системе привлечения клиентов и стабильным онлайн-продажам.",
         list: [],
         flowTitle: "Маршрут",
