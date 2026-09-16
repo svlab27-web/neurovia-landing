@@ -697,6 +697,54 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 @media (max-width:900px){.mirror-grid{grid-template-columns:1fr}.verdict{position:static}}
 .persona .persona-panel{align-items:stretch!important}
 .persona .persona-flow{align-self:stretch!important}
+
+/* ===== единая дизайн-система ===== */
+:root{--r:14px;--sh:0 8px 26px rgba(10,22,40,.08);--sh-lift:0 20px 44px rgba(10,22,40,.16)}
+
+/* типографика: одна шкала */
+h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
+.roads h3,.mirror h3{font:800 clamp(26px,2.9vw,36px)/1.12 var(--head);letter-spacing:-.022em;margin:0 0 12px}
+.persona-copy h3{font-size:clamp(22px,2.1vw,28px);line-height:1.15;letter-spacing:-.02em}
+.duo .pcard b{font:800 clamp(19px,1.8vw,24px)/1.28 var(--head)}
+.roads-lead{font-size:17px;line-height:1.6;max-width:56ch}
+
+/* один радиус и одна тень */
+.duo .pcard,.road .stop,.check,.verdict,.persona-copy,.persona-flow,.roads-note,
+.xfacts .accent,.hero-doors button,.price-card{border-radius:var(--r)}
+.road .stop,.check{box-shadow:var(--sh)}
+.duo .pcard.hot,.road .stop.hot{box-shadow:var(--sh-lift),0 0 0 2px var(--gold)}
+
+/* меньше золота */
+.persona-flow summary::after{color:var(--silver)}
+.persona-flow details[open] summary::after{color:var(--gold)}
+.ptag::before{width:7px;height:7px;background:var(--silver)}
+.duo .pcard.hot .ptag::before{background:var(--gold)}
+.cycle-mini .clabel{font-size:11px;fill:#dbe3ec}
+.cycle-mini text{font-size:11px}
+
+/* галочки теста — читаются как выбор */
+.check{padding:17px 19px;font-size:16.5px;transition:transform .2s,border-color .2s,box-shadow .2s,background .2s}
+.check .box{flex:0 0 24px;height:24px;border-radius:7px;border-width:2px;font-size:14px}
+.check:hover{transform:translateY(-2px);border-color:var(--silver);box-shadow:var(--sh-lift)}
+.check[aria-pressed="true"]{background:#fffaf0;border-color:var(--gold);box-shadow:0 10px 24px rgba(238,200,48,.22)}
+
+/* ритм отступов */
+.duo{margin-bottom:56px}
+.xfacts{margin:0 0 56px;padding-top:34px}
+.roads,.mirror{margin-top:56px;padding-top:48px}
+.audience > .persona{margin-top:56px;padding-top:48px}
+.roads-note{margin-top:36px}
+
+/* «скоро» тише */
+.nav-personas .is-soon i{font-size:7px;opacity:.6}
+.hero-doors button.is-soon i{font-size:8px;opacity:.7}
+
+/* двери: активные крупнее, закрытые мельче */
+.hero-doors{align-items:center}
+.hero-doors button.is-soon{padding:11px 16px;font-size:13.5px}
+
+/* оффер в узкой колонке дышит */
+.persona-offer{font-size:16px;line-height:1.62;padding:16px 18px}
 </style>
 </head>
 <body>
@@ -704,7 +752,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
   <header><div class="wrap nav-row">
     <a class="wordmark" href="#" aria-label="NeuroVia Labs, главная">Neuro<span>Via</span><small>LABS</small></a>
     <nav class="nav-personas" aria-label="Кому подходит"><a href="#audience" data-persona="expert">Эксперт</a><a href="#audience" data-persona="small">Стартап</a><a href="#audience" data-persona="founder">Действующий бизнес</a><span class="is-soon">Агентство<i>скоро</i></span><span class="is-soon">Бизнес-трекеры<i>скоро</i></span></nav>
-    <a class="button small" href="#diagnostic">Найти точку роста <span aria-hidden="true">↗</span></a>
+    <a class="button small" href="#pricing">Начать бесплатно <span aria-hidden="true">↗</span></a>
   </div></header>
   <main id="main">
     <section class="hero" aria-labelledby="hero-title">
@@ -849,7 +897,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
     </section>
 
     <section class="section" id="diagnostic"><div class="wrap">
-      <div class="section-heading"><div><p class="eyebrow">01 / Найти разрыв</p><h2>Больше заявок?<br>Сначала найдём потери.</h2></div><p class="lead">Диагностика связывает продукт, привлечение, продажи и цифры. На выходе: проблема, её причина и первый шаг.</p></div>
+      <div class="section-heading"><div><p class="eyebrow">Найти разрыв</p><h2>Больше заявок?<br>Сначала найдём потери.</h2></div><p class="lead">Диагностика связывает продукт, привлечение, продажи и цифры. На выходе: проблема, её причина и первый шаг.</p></div>
       <div class="diagnostic-tool">
         <div class="tool-header"><b>Путь клиента</b><span class="sample" id="dataMode">Пример данных · 1 месяц</span></div>
         <form class="diag-form" id="diagForm" novalidate>
@@ -884,7 +932,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
     </div></section>
 
     <section class="section track-section" id="track"><div class="wrap">
-      <div class="section-heading track-head"><div><p class="eyebrow">02 / Пройти маршрут</p><h2>Шесть шагов.<br>Одна система роста.</h2><p class="lead">На каждом этапе Вы создаёте конкретный результат. Он становится основой следующего шага.</p></div><div class="cycle-wrap">
+      <div class="section-heading track-head"><div><p class="eyebrow">Пройти маршрут</p><h2>Шесть шагов.<br>Одна система роста.</h2><p class="lead">На каждом этапе Вы создаёте конкретный результат. Он становится основой следующего шага.</p></div><div class="cycle-wrap">
         <svg class="cycle" viewBox="-24 0 428 306" role="img" aria-label="Цикл 6П: шесть шагов, шестой возвращает к первому">
           <circle class="cycle-ring" cx="190" cy="158" r="86"/>
           <path class="cycle-return" d="M 116,115 A 86,86 0 0,1 190,72"/>
@@ -915,7 +963,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
     </div></section>
 
     <section class="section" id="week"><div class="wrap">
-      <div class="section-heading"><div><p class="eyebrow">03 / Сделать следующий шаг</p><h2>Большая цель.<br>Понятная неделя.</h2></div><p class="lead">Один приоритет, три действия и показатель, который Вы проверите вместе с Оракулом.</p></div>
+      <div class="section-heading"><div><p class="eyebrow">Сделать следующий шаг</p><h2>Большая цель.<br>Понятная неделя.</h2></div><p class="lead">Один приоритет, три действия и показатель, который Вы проверите вместе с Оракулом.</p></div>
       <div class="week-tool"><div class="tool-header"><b>План на неделю</b><span class="sample">Пример · изменения до перезагрузки</span></div>
         <div class="week-layout"><div class="week-summary"><span class="eyebrow">Приоритет</span><h3 id="week-title">Довести обращения до встречи</h3><p id="week-metric">Показатель: доля обращений с назначенной встречей.</p><div class="progress-line"><span id="progress-text" role="status">Выполнено 0 из 3</span><progress id="progress" max="3" value="0" aria-label="Выполнение плана"></progress></div></div><div class="tasks" id="tasks"></div></div>
         <p class="week-note" id="week-note">В конце недели сравните показатель с началом и решите, что менять дальше.</p>
