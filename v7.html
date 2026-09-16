@@ -670,9 +670,14 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 .verdict h4{font:800 22px/1.2 var(--head);margin:10px 0 10px}
 .verdict p{color:#cfd8e3;font-size:15.5px;margin:0}
 .vsteps{display:flex;flex-wrap:wrap;gap:7px;margin:18px 0 18px}
-.vsteps span{font:500 11px var(--mono);padding:6px 10px;border-radius:6px;background:rgba(255,255,255,.08);color:var(--silver)}
-.vsteps span.on{background:var(--gold);color:var(--ink)}
+.vsteps button{font:500 11px var(--mono);padding:7px 11px;border-radius:6px;border:0;cursor:pointer;
+  background:rgba(255,255,255,.08);color:var(--silver);transition:background .2s,color .2s,transform .2s}
+.vsteps button:hover{background:rgba(255,255,255,.2);color:#fff;transform:translateY(-2px)}
+.vsteps button.on{background:var(--gold);color:var(--ink)}
+.vsteps button.on:hover{background:#f5d45a;color:var(--ink)}
 .verdict .button{width:100%;justify-content:center}
+.cycle-mini{max-width:330px;margin:4px auto 20px;display:block}
+.cycle-mini .cnode,.cycle-mini .clabel{cursor:pointer}
 .flow-cta{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:20px;
   min-height:52px;padding:14px 24px;border-radius:8px;background:var(--gold);color:var(--ink);
   font:700 16px var(--head);transition:transform .2s,box-shadow .2s}
@@ -1345,8 +1350,8 @@ renderPlan();
       function renderVerdict() {
         var steps = picked.map(function (i) { return MIRROR[i][1]; }).sort(function (a, b) { return a - b; });
         document.getElementById("vSteps").innerHTML = NAMES.map(function (n, k) {
-          return '<span class="' + (steps.indexOf(k) > -1 ? "on" : "") + '">' +
-            String(k + 1).padStart(2, "0") + " " + n + "</span>";
+          return '<button type="button" data-vstep="' + k + '" class="' + (steps.indexOf(k) > -1 ? "on" : "") + '">' +
+            String(k + 1).padStart(2, "0") + " " + n + "</button>";
         }).join("");
         var go = document.getElementById("vGo");
         if (!steps.length) {
@@ -1361,12 +1366,18 @@ renderPlan();
         go.hidden = false;
         document.getElementById("vPrice").hidden = false;
         go.textContent = "Открыть шаг " + String(first + 1).padStart(2, "0") + " «" + NAMES[first] + "»";
-        go.onclick = function () {
-          var items = document.querySelectorAll("#personaFlow details");
-          items.forEach(function (d, k) { d.open = k === first; });
-          if (items[first]) items[first].scrollIntoView({ behavior: reduce.matches ? "auto" : "smooth", block: "center" });
-        };
+        go.onclick = function () { openFlowStep(first); };
       }
+      function openFlowStep(i) {
+        var items = document.querySelectorAll("#personaFlow details");
+        items.forEach(function (d, k) { d.open = k === i; });
+        if (items[i]) items[i].scrollIntoView({ behavior: reduce.matches ? "auto" : "smooth", block: "center" });
+      }
+      document.getElementById("vSteps").addEventListener("click", function (e) {
+        var b = e.target.closest("[data-vstep]");
+        if (b) openFlowStep(Number(b.dataset.vstep));
+      });
+
       checksEl.addEventListener("click", function (e) {
         var b = e.target.closest(".check");
         if (!b) return;
@@ -1376,6 +1387,28 @@ renderPlan();
         renderVerdict();
       });
       renderVerdict();
+
+      /* --- кольцо 6П рядом с маршрутом --- */
+      (function ringCopy() {
+        var src = document.querySelector('#track .cycle-wrap');
+        var host = document.querySelector('.persona-flow');
+        if (!src || !host) return;
+        var c = src.cloneNode(true);
+        c.querySelectorAll('[id]').forEach(function (e) { e.removeAttribute('id'); });
+        var hint = c.querySelector('.cycle-hint'); if (hint) hint.remove();
+        var loop = c.querySelector('.cycle-loop'); if (loop) loop.remove();
+        c.classList.add('cycle-mini');
+        if (!reduce.matches) c.classList.add('is-live');
+        [].forEach.call(c.querySelectorAll('.cnode'), function (n, i) {
+          n.setAttribute('role', 'button'); n.setAttribute('tabindex', '0');
+          n.addEventListener('click', function () { openFlowStep(i); });
+        });
+        [].forEach.call(c.querySelectorAll('.clabel'), function (l, i) {
+          l.addEventListener('click', function () { openFlowStep(i); });
+        });
+        var ol = host.querySelector('#personaFlow');
+        host.insertBefore(c, ol);
+      })();
 
       /* --- счётчики под болями --- */
       var mEl = document.getElementById("cMonths"), sEl = document.getElementById("cMoney");
