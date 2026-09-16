@@ -542,7 +542,24 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 .oracle-who span{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
 .oracle-dots{display:flex!important;gap:5px;margin-top:9px}
 .oracle-dots[hidden]{display:none!important}
-.duo,.roads,.mirror{grid-column:1 / -1}
+.duo,.roads,.mirror,.xfacts{grid-column:1 / -1}
+.xfacts{display:flex;flex-wrap:wrap;gap:0;margin:0 0 34px;padding-top:26px;border-top:1px solid var(--line)}
+.xfacts .f{display:block;padding:6px 28px;border-left:1px solid var(--line);min-width:160px}
+.xfacts .f:first-child{padding-left:0;border-left:0}
+.xfacts b{display:block;font:800 clamp(26px,2.6vw,34px) var(--head);color:var(--ink);letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;white-space:nowrap;transition:color .5s}
+.xfacts b i{font-style:normal}
+.xfacts span{display:block;margin-top:6px;font-size:14.5px;line-height:1.35;color:var(--muted);max-width:20ch}
+.xfacts .f.counting b{color:#8a6f10}
+.xfacts .accent{border-radius:10px;padding:12px 24px;margin-left:12px;background:rgba(238,200,48,.12);
+  border:1px solid rgba(238,200,48,.5);border-left:1px solid rgba(238,200,48,.5);
+  animation:factGlow 2.8s ease-in-out infinite;transition:transform .25s,background .25s}
+.xfacts .accent b{color:#8a6f10}
+.xfacts .accent span{color:#8a6f10}
+.xfacts .accent:hover{transform:translateY(-3px);background:rgba(238,200,48,.2)}
+@keyframes factGlow{0%,100%{box-shadow:0 0 0 0 rgba(238,200,48,0)}50%{box-shadow:0 0 0 7px rgba(238,200,48,.16)}}
+@media (prefers-reduced-motion:reduce){.xfacts .accent{animation:none}}
+@media (max-width:640px){.xfacts .f{border-left:0;padding:10px 0;min-width:0}.xfacts .accent{margin-left:0;padding:12px 18px}}
 .audience > .persona{grid-column:2 / -1}
 @media (max-width:900px){.audience > .persona{grid-column:1 / -1}}
 .oracle-dots i{width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:.35}
@@ -656,6 +673,10 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 .vsteps span{font:500 11px var(--mono);padding:6px 10px;border-radius:6px;background:rgba(255,255,255,.08);color:var(--silver)}
 .vsteps span.on{background:var(--gold);color:var(--ink)}
 .verdict .button{width:100%;justify-content:center}
+.vprice{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:12px;
+  font:700 14px var(--head);color:var(--gold)}
+.vprice em{font-style:normal;transition:transform .25s}
+.vprice:hover em{transform:translateX(5px)}
 @media (max-width:900px){.mirror-grid{grid-template-columns:1fr}.verdict{position:static}}
 </style>
 </head>
@@ -753,6 +774,12 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
         </button>
       </div>
 
+      <div class="xfacts x-only" id="xfacts" hidden>
+        <div class="f"><b>3–<i id="cMonths">4</i></b><span>месяцев уходит на чужие гипотезы</span></div>
+        <div class="f"><b>до <i id="cMoney">300 000</i> ₸</b><span>работа и бюджет, пока ищут связку</span></div>
+        <a class="f accent" href="#personaFlow"><b>6 шагов</b><span>проверить самому →</span></a>
+      </div>
+
       <div class="persona" id="persona" hidden>
         <button type="button" class="persona-back" id="personaBack">← Выбрать другой раздел</button>
         <div class="persona-panel">
@@ -795,6 +822,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
             <p id="vCopy">Каждая ситуация в списке — это шаг маршрута 6П. Отметьте свои, и я покажу, с какого начинать.</p>
             <div class="vsteps" id="vSteps"></div>
             <button class="button" type="button" id="vGo" hidden>Открыть этот шаг</button>
+            <a class="vprice" href="#pricing" id="vPrice" hidden>Сколько это стоит <em>→</em></a>
           </aside>
         </div>
       </div>
@@ -1328,13 +1356,14 @@ renderPlan();
         if (!steps.length) {
           document.getElementById("vTitle").textContent = "Отметьте хотя бы одно";
           document.getElementById("vCopy").textContent = "Каждая ситуация в списке — это шаг маршрута 6П. Отметьте свои, и я покажу, с какого начинать.";
-          go.hidden = true; return;
+          go.hidden = true; document.getElementById("vPrice").hidden = true; return;
         }
         var first = steps[0];
         document.getElementById("vTitle").textContent = VERDICTS[first][0];
         document.getElementById("vCopy").textContent = VERDICTS[first][1] +
           (steps.length > 1 ? " Остальное закрывается дальше по маршруту — он замкнутый." : "");
         go.hidden = false;
+        document.getElementById("vPrice").hidden = false;
         go.textContent = "Открыть шаг " + String(first + 1).padStart(2, "0") + " «" + NAMES[first] + "»";
         go.onclick = function () {
           var items = document.querySelectorAll("#personaFlow details");
@@ -1351,6 +1380,34 @@ renderPlan();
         renderVerdict();
       });
       renderVerdict();
+
+      /* --- счётчики под болями --- */
+      var mEl = document.getElementById("cMonths"), sEl = document.getElementById("cMoney");
+      var counted = false;
+      function runCounters() {
+        if (counted || !mEl || !sEl) return;
+        counted = true;
+        var fmt = function (n) { return new Intl.NumberFormat("ru-RU").format(n).replace(/\u00a0/g, " "); };
+        if (reduce.matches) { mEl.textContent = "6"; sEl.textContent = fmt(1500000); return; }
+        var start = null, D_MON = 1600, D_SUM = 5200, box = sEl.closest(".f");
+        function frame(ts) {
+          if (start === null) start = ts;
+          var t = ts - start;
+          var km = Math.min(t / D_MON, 1), em = 1 - Math.pow(1 - km, 3);
+          mEl.textContent = String(Math.round(4 + em * 2));
+          var ks = Math.min(t / D_SUM, 1), es = 1 - Math.pow(1 - ks, 1.5);
+          sEl.textContent = fmt(Math.round((300000 + es * 1200000) / 10000) * 10000);
+          if (box) box.classList.toggle("counting", ks < 1);
+          if (km < 1 || ks < 1) requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      }
+      var xf = document.getElementById("xfacts");
+      if (xf && "IntersectionObserver" in window) {
+        new IntersectionObserver(function (es) {
+          es.forEach(function (e) { if (e.isIntersecting) runCounters(); });
+        }, { threshold: 0.4 }).observe(xf);
+      } else { runCounters(); }
     })();
 
     /* ===== Диагностика на реальных цифрах ===== */
