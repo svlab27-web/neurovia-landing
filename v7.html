@@ -1414,8 +1414,8 @@ renderPlan();
       },
       small: {
         cards: [
-          ["Знакомо?", "Идея есть — а денег на её проверку нет, и непонятно, где их взять?", "Как проверить без вложений"],
-          ["Или так?", "Как понять, что идея выстрелит, а не сгорит вместе с вложениями?", "С чего начать"]
+          ["", "Есть идея — а денег на проверку нет, и непонятно, где их взять", "Как проверить без вложений"],
+          ["", "Вложить год и все деньги — и узнать, что это никому не было нужно", "Как не прогореть"]
         ],
         facts: [["3–", "4", "6", "месяцев до первого пользователя, если начинать с разработки"],
                 ["до ", "500 000", "3000000", "стоит MVP на заказ — до того, как спрос проверен"]],
@@ -1652,10 +1652,14 @@ renderPlan();
         document.querySelectorAll(".x-only").forEach(function (el) { el.hidden = !on; });
         if (!on) return;
 
-        duo.querySelector('[data-side="left"] .ptag').textContent = D.cards[0][0];
+        var tagL = duo.querySelector('[data-side="left"] .ptag');
+        tagL.textContent = D.cards[0][0];
+        tagL.hidden = !D.cards[0][0];
         duo.querySelector('[data-side="left"] b').textContent = D.cards[0][1];
         duo.querySelector('[data-side="left"] .pgo').innerHTML = D.cards[0][2] + ' <em>&#8594;</em>';
-        duo.querySelector('[data-side="right"] .ptag').textContent = D.cards[1][0];
+        var tagR = duo.querySelector('[data-side="right"] .ptag');
+        tagR.textContent = D.cards[1][0];
+        tagR.hidden = !D.cards[1][0];
         duo.querySelector('[data-side="right"] b').textContent = D.cards[1][1];
         duo.querySelector('[data-side="right"] .pgo').innerHTML = D.cards[1][2] + ' <em>&#8594;</em>';
 
