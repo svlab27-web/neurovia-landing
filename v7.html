@@ -1397,6 +1397,7 @@ renderPlan();
         c.querySelectorAll('[id]').forEach(function (e) { e.removeAttribute('id'); });
         var hint = c.querySelector('.cycle-hint'); if (hint) hint.remove();
         var loop = c.querySelector('.cycle-loop'); if (loop) loop.remove();
+        c.classList.remove('is-off', 'is-held', 'show-return');
         c.classList.add('cycle-mini');
         if (!reduce.matches) c.classList.add('is-live');
         [].forEach.call(c.querySelectorAll('.cnode'), function (n, i) {
@@ -1408,6 +1409,11 @@ renderPlan();
         });
         var ol = host.querySelector('#personaFlow');
         host.insertBefore(c, ol);
+        if ('IntersectionObserver' in window && !reduce.matches) {
+          new IntersectionObserver(function (es) {
+            es.forEach(function (e) { c.classList.toggle('is-off', !e.isIntersecting); });
+          }, { threshold: 0.1 }).observe(c);
+        }
       })();
 
       /* --- счётчики под болями --- */
