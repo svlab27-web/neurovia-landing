@@ -695,6 +695,8 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 .vprice em{font-style:normal;transition:transform .25s}
 .vprice:hover em{transform:translateX(5px)}
 @media (max-width:900px){.mirror-grid{grid-template-columns:1fr}.verdict{position:static}}
+.persona .persona-panel{align-items:stretch!important}
+.persona .persona-flow{align-self:stretch!important}
 </style>
 </head>
 <body>
@@ -1060,7 +1062,7 @@ renderPlan();
 
     const personaData = {
       expert: {
-        title: "Один маршрут вместо трёх подрядчиков",
+        title: "Один маршрут вместо команды подрядчиков",
         copy: [],
         offer: "Что продавать, откуда клиенты и сколько остаётся денег — шесть шагов, которые Вы проходите сами.",
         list: [],
