@@ -334,12 +334,14 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
   font:600 15px var(--head);color:var(--ink);cursor:pointer}
 .persona-tabs button[aria-selected="true"]{border-bottom-color:var(--navy);background:rgba(244,243,240,.5)}
 .persona-tabs button:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
-.persona-panel{display:grid;grid-template-columns:1fr 1fr;gap:32px;padding-top:24px}
-.persona-copy{display:flex;flex-direction:column;justify-content:center;gap:20px}
-.persona-copy h3{font-size:26px;line-height:1.22;margin:0;max-width:21ch}
-.persona-copy p{color:var(--muted);font-size:16px;line-height:1.65;margin:0;max-width:42ch}
+.persona-panel{display:grid;grid-template-columns:minmax(280px,.78fr) 1.22fr;gap:28px;padding-top:24px;align-items:start}
+.persona-copy{display:flex;flex-direction:column;gap:18px;background:var(--navy);color:var(--warm);
+  border-radius:16px;padding:26px 24px 28px;position:sticky;top:96px}
+.persona-copy h3{font-size:24px;line-height:1.2;margin:0;max-width:20ch;color:#fff}
+.persona-copy p{color:#cfd8e3;font-size:15.5px;line-height:1.6;margin:0;max-width:42ch}
 #personaCopy{display:grid;gap:14px}
-.persona-offer{margin:0;padding-left:16px;border-left:3px solid var(--gold);font:600 17px/1.5 var(--head);color:var(--ink);max-width:40ch}
+.persona-offer{margin:0;padding:14px 16px;border-left:3px solid var(--gold);border-radius:0 10px 10px 0;
+  background:rgba(238,200,48,.1);font:700 16.5px/1.5 var(--head);color:#fff;max-width:40ch}
 .chooser{display:grid;gap:22px}
 .chooser-lead{max-width:56ch;color:var(--muted);font-size:18px;line-height:1.55}
 .chooser-row{display:flex;flex-wrap:wrap;gap:12px}
@@ -676,7 +678,11 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 .vsteps button.on{background:var(--gold);color:var(--ink)}
 .vsteps button.on:hover{background:#f5d45a;color:var(--ink)}
 .verdict .button{width:100%;justify-content:center}
-.cycle-mini{max-width:330px;margin:4px auto 20px;display:block}
+.cycle-mini{max-width:270px;margin:0 auto 6px;display:block}
+.cycle-mini .clabel{fill:#cfd8e3}
+.persona-copy .persona-more{border-top-color:rgba(255,255,255,.16)}
+.persona-copy .persona-more summary{color:#fff}
+@media (max-width:900px){.persona-copy{position:static}}
 .cycle-mini .cnode,.cycle-mini .clabel{cursor:pointer}
 .flow-cta{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:20px;
   min-height:52px;padding:14px 24px;border-radius:8px;background:var(--gold);color:var(--ink);
@@ -1391,7 +1397,7 @@ renderPlan();
       /* --- кольцо 6П рядом с маршрутом --- */
       (function ringCopy() {
         var src = document.querySelector('#track .cycle-wrap');
-        var host = document.querySelector('.persona-flow');
+        var host = document.querySelector('.persona-copy');
         if (!src || !host) return;
         var c = src.cloneNode(true);
         c.querySelectorAll('[id]').forEach(function (e) { e.removeAttribute('id'); });
@@ -1407,8 +1413,7 @@ renderPlan();
         [].forEach.call(c.querySelectorAll('.clabel'), function (l, i) {
           l.addEventListener('click', function () { openFlowStep(i); });
         });
-        var ol = host.querySelector('#personaFlow');
-        host.insertBefore(c, ol);
+        host.insertBefore(c, host.firstChild);
         if ('IntersectionObserver' in window && !reduce.matches) {
           new IntersectionObserver(function (es) {
             es.forEach(function (e) { c.classList.toggle('is-off', !e.isIntersecting); });
