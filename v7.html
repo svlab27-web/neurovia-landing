@@ -862,6 +862,22 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 @media (max-width:1000px){.hero-character{top:30px;right:-24px;width:48%}
   .hero-character img{height:clamp(300px,34vw,420px)}}
 @media (max-width:700px){.hero-character::before{display:none}}
+
+/* ===== 3. кнопка в шапке — контурная, чтобы не спорить с главной ===== */
+.nav-row > .button.small{background:transparent;color:var(--gold);
+  box-shadow:inset 0 0 0 1px rgba(238,200,48,.65);font-weight:600;
+  transition:background .2s,color .2s,box-shadow .2s}
+.nav-row > .button.small:hover{background:var(--gold);color:var(--ink);box-shadow:none}
+
+/* ===== 4. полоса доверия — крупнее и отбита ===== */
+.trust{background:#fff;border-top:3px solid var(--gold);border-bottom:1px solid var(--line)}
+.trust-in{padding:34px 0 30px;align-items:stretch}
+.trust-in > div{padding:4px 40px;min-width:210px}
+.trust-in b{font:800 clamp(28px,2.8vw,38px) var(--head);letter-spacing:-.025em;line-height:1.05}
+.trust-in span{margin-top:7px;font-size:15px;color:var(--muted);max-width:24ch}
+.trust-note{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);
+  font:500 12px var(--mono);letter-spacing:.05em;color:var(--silver)}
+@media (max-width:640px){.trust-in > div{padding:10px 0}.trust-in b{font-size:26px}}
 </style>
 </head>
 <body>
