@@ -1729,7 +1729,8 @@ renderPlan();
         if (done || !D) return;
         done = true;
         mEl.textContent = D.facts[0][2];
-        sEl.textContent = fmtN(Number(String(D.facts[1][2]).replace(/\D/g, "")));
+        var toN = Number(String(D.facts[1][2]).replace(/\D/g, ""));
+        sEl.textContent = toN >= 1000 ? fmtN(toN) : String(toN);
         var b = sEl.closest(".f"); if (b) b.classList.remove("counting");
       }
       function runCounters() {
@@ -1745,7 +1746,10 @@ renderPlan();
           var km = Math.min(t / D_MON, 1), em = 1 - Math.pow(1 - km, 3);
           mEl.textContent = String(Math.round(m0 + em * (m1 - m0)));
           var ks = Math.min(t / D_SUM, 1), es = 1 - Math.pow(1 - ks, 1.5);
-          sEl.textContent = fmtN(Math.round((from + es * (to - from)) / 10000) * 10000);
+          var v = from + es * (to - from);
+          sEl.textContent = to >= 100000
+            ? fmtN(Math.round(v / 10000) * 10000)
+            : (to >= 1000 ? fmtN(Math.round(v)) : String(Math.round(v)));
           if (box) box.classList.toggle("counting", ks < 1);
           if (km < 1 || ks < 1) requestAnimationFrame(frame); else finishCounters();
         }
