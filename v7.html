@@ -929,6 +929,15 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 .wordmark{font-size:30px;letter-spacing:-.02em}
 .wordmark small{font-size:9px;letter-spacing:.22em}
 @media (max-width:700px){.wordmark{font-size:23px}}
+
+/* ===== видео кабинета ===== */
+.shot-video{margin:0 0 24px;border-radius:var(--r);overflow:hidden;
+  border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);
+  box-shadow:0 26px 60px rgba(0,0,0,.42)}
+.shot-video[hidden]{display:none}
+.shot-video video{display:block;width:100%;height:auto;background:#0b1626}
+.shot-video figcaption{padding:16px 22px 20px;font-size:15.5px;line-height:1.55;color:#c3cdd9;
+  border-top:1px solid rgba(255,255,255,.1)}
 </style>
 </head>
 <body>
@@ -1191,6 +1200,10 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 
     <section class="section inside-section" id="inside"><div class="wrap">
       <div class="section-heading"><div><p class="eyebrow">Внутри платформы</p><h2>Вот так это<br>выглядит внутри.</h2></div><p class="lead">Не чат с ботом, а рабочий кабинет: диагностика, каталог болей клиентов, продукт, воронка, заказы и деньги — в одном месте.</p></div>
+      <figure class="shot-video" id="insideVideo" hidden>
+        <video id="insideVideoEl" muted loop playsinline preload="metadata"></video>
+        <figcaption id="insideVideoCap"></figcaption>
+      </figure>
       <div class="shots">
         <figure><img src="assets/app-diagnostic.webp" width="1400" height="674" loading="lazy" decoding="async" alt="Экран диагностики в кабинете NeuroVia Labs">
           <figcaption><b>Диагностика</b>Определяем точку А: десять шагов, на выходе AI собирает Вашу методику на основе ответов.</figcaption></figure>
@@ -1625,6 +1638,7 @@ renderPlan();
         mirrorLead: "Отметьте, что про Вас — покажу, с какого шага начинать. Это займёт двадцать секунд.",
         vEyebrow: "Ваш вход в маршрут",
         insideLead: "Не чат с ботом, а рабочий кабинет: диагностика, каталог болей клиентов, продукт, воронка, заказы и деньги — в одном месте.",
+        video: ["expert.mp4", "expert-video-poster.webp", "Живая запись кабинета: результат диагностики, воронка от лид-магнита до основного продукта и готовая линейка с ценами."],
         inside: [
           ["app-diagnostic.webp", "Диагностика", "Определяем точку А: десять шагов, на выходе AI собирает Вашу методику на основе ответов."],
           ["app-wizard.webp", "Ваш опыт и клиенты", "Кто к Вам приходит, с какой проблемой и какой результат получал — из этих ответов строится всё остальное."],
@@ -1934,6 +1948,18 @@ renderPlan();
         }, { threshold: 0.25 }).observe(xf);
       }
 
+      /* ---- видео играет только на экране ---- */
+      (function videoView() {
+        var v = document.getElementById("insideVideoEl");
+        if (!v || !("IntersectionObserver" in window)) return;
+        new IntersectionObserver(function (es) {
+          es.forEach(function (e) {
+            if (e.isIntersecting && !reduce.matches) { var pr = v.play(); if (pr && pr.catch) pr.catch(function(){}); }
+            else { try { v.pause(); } catch (err) {} }
+          });
+        }, { threshold: 0.25 }).observe(v);
+      })();
+
       /* ---- кольцо 6П рядом с маршрутом ---- */
       (function ringCopy() {
         var src = document.querySelector('#track .cycle-wrap');
@@ -2017,6 +2043,26 @@ renderPlan();
           x.setAttribute("aria-pressed", String(x.dataset.road === "bad"));
         });
         paintRoad("bad"); restartHot();
+
+        var vfig = document.getElementById("insideVideo");
+        var vel = document.getElementById("insideVideoEl");
+        if (vfig && vel) {
+          if (D.video) {
+            vfig.hidden = false;
+            var want = "assets/" + D.video[0];
+            if (!vel.getAttribute("src") || vel.getAttribute("src") !== want) {
+              vel.setAttribute("src", want);
+              vel.setAttribute("poster", "assets/" + D.video[1]);
+              vel.load();
+            }
+            document.getElementById("insideVideoCap").textContent = D.video[2];
+            if (!reduce.matches) { var pr = vel.play(); if (pr && pr.catch) pr.catch(function(){}); }
+          } else {
+            vfig.hidden = true;
+            try { vel.pause(); } catch (e) {}
+            vel.removeAttribute("src");
+          }
+        }
 
         var shots = document.querySelector("#inside .shots");
         var ins = document.querySelector("#inside .lead");
