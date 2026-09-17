@@ -1584,7 +1584,6 @@ renderPlan();
           ["Бухгалтерия", "считает расходы, налоги и остаток на счёте — и он почему-то тает"],
           ["Продукт", "считает сроки и задачи — и всё в работе"]
         ],
-        note: "Все посчитали правильно. Свести это в одну картину не входит в работу ни одного из отделов — поэтому её нет ни у кого.",
         answer: "NeuroVia сводит это в один контур: выгрузка из бухгалтерии, заказы, каналы, продукты и цифры проекта — в одном месте. Выручка, себестоимость, зарплаты и маркетинг разбираются сами, остальное добираем из Ваших таблиц. У отделов остаются свои задачи, а у Вас появляется целое: где заработали, где потеряли и что менять первым."
       },
       roadsTitle: "Решения по ощущениям стоят дороже всего.",
@@ -1863,7 +1862,9 @@ renderPlan();
             document.getElementById("deptGrid").innerHTML = D.depts.items.map(function (x) {
               return '<div><b>' + x[0] + '</b><span>' + x[1] + '</span></div>';
             }).join("");
-            document.getElementById("deptsNote").textContent = D.depts.note;
+            var dn = document.getElementById("deptsNote");
+            dn.textContent = D.depts.note || "";
+            dn.hidden = !D.depts.note;
             document.getElementById("deptsAnswer").textContent = D.depts.answer;
           } else { dep.hidden = true; }
         }
