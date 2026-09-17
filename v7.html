@@ -2305,16 +2305,21 @@ renderPlan();
     applyPersonaFunnel('default', true);
 
     (function restore() {
-      let saved = null;
-      try { saved = JSON.parse(localStorage.getItem(STORE) || 'null'); } catch (e) {}
-      if (saved && saved.persona && saved.persona !== (window.__persona || 'expert')) saved = null;
-      if (saved && saved.o) {
-        $('fO').value = saved.o; $('fV').value = saved.v; $('fP').value = saved.p; $('fD').value = saved.d;
-        if (saved.period) $('fPeriod').value = saved.period;
-        if (Array.isArray(saved.completions)) saved.completions.forEach((row, i) => {
-          if (Array.isArray(row)) completions[i] = row.slice(0, 3);
-        });
-        applyNumbers(saved.o, saved.v, saved.p, saved.d, saved.period || '1 месяц', true);
+      try {
+        let saved = null;
+        try { saved = JSON.parse(localStorage.getItem(STORE) || 'null'); } catch (e) {}
+        if (saved && saved.persona && saved.persona !== (window.__persona || 'expert')) saved = null;
+        if (saved && saved.o) {
+          $('fO').value = saved.o; $('fV').value = saved.v; $('fP').value = saved.p; $('fD').value = saved.d;
+          if (saved.period) $('fPeriod').value = saved.period;
+          if (Array.isArray(saved.completions)) saved.completions.forEach((row, i) => {
+            if (Array.isArray(row)) completions[i] = row.slice(0, 3);
+          });
+          applyNumbers(saved.o, saved.v, saved.p, saved.d, saved.period || '1 месяц', true);
+        }
+      } catch (e) {
+        /* данные из старой версии страницы — просто забываем их, ничего не ломая */
+        try { localStorage.removeItem(STORE); } catch (e2) {}
       }
     })();
 
