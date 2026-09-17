@@ -533,7 +533,14 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
 .oracle-roles > div[role="button"]{cursor:pointer;border-left:2px solid transparent;padding-left:12px;margin-left:-14px;transition:background .18s ease,border-left-color .18s ease}
 .oracle-roles > div[role="button"]:hover{background:rgba(255,255,255,.6)}
 .oracle-roles > div[role="button"]:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-.oracle-roles > div[aria-pressed="true"]{background:#fff;border-left-color:var(--gold)}
+.oracle-roles > div{transition:background .25s ease,border-left-color .25s ease,box-shadow .25s ease,transform .25s ease}
+.oracle-roles > div[aria-pressed="true"]{background:#fff;border-left-color:var(--gold);border-left-width:3px;
+  box-shadow:0 10px 26px rgba(10,22,40,.1);transform:translateX(2px)}
+.oracle-roles > div[aria-pressed="true"] dt::after{content:"";display:inline-block;width:6px;height:6px;
+  margin-left:8px;border-radius:50%;background:var(--gold);vertical-align:middle;
+  animation:rolePing 1.6s ease-out infinite}
+@keyframes rolePing{0%{box-shadow:0 0 0 0 rgba(238,200,48,.6)}70%{box-shadow:0 0 0 7px rgba(238,200,48,0)}100%{box-shadow:0 0 0 0 rgba(238,200,48,0)}}
+@media (prefers-reduced-motion:reduce){.oracle-roles > div[aria-pressed="true"] dt::after{animation:none}}
 .oracle-roles > div[aria-pressed="true"] dt{color:var(--navy)}
 .oracle-roles > div[aria-pressed="true"] dd{color:var(--ink)}
 @keyframes oracleBreathe{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-12px) rotate(-1deg)}}
@@ -2401,15 +2408,39 @@ renderPlan();
     var go = function(){ gesture(r.motion); };
     if (p.decode) p.decode().then(go, go); else go();
   }
+  /* ===== автопереключение: плашки сменяются, Оракул меняет позу ===== */
+  var auto = null, resume = null, cur = -1;
+  function next(){ cur = (cur + 1) % rows.length; pick(cur); }
+  function startAuto(){
+    if (auto || less.matches) return;
+    if (cur < 0) next();
+    auto = setInterval(next, 4200);
+  }
+  function stopAuto(){ if (auto) { clearInterval(auto); auto = null; } }
+  function holdAuto(ms){
+    stopAuto();
+    clearTimeout(resume);
+    resume = setTimeout(startAuto, ms || 15000);
+  }
+
   rows.forEach(function(el,i){
     el.setAttribute('role','button');
     el.setAttribute('tabindex','0');
     el.setAttribute('aria-pressed','false');
-    el.addEventListener('click', function(){ pick(i); });
+    el.addEventListener('click', function(){ cur = i; pick(i); holdAuto(); });
     el.addEventListener('keydown', function(e){
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(i); }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); cur = i; pick(i); holdAuto(); }
     });
+    el.addEventListener('mouseenter', function(){ stopAuto(); });
+    el.addEventListener('mouseleave', function(){ clearTimeout(resume); resume = setTimeout(startAuto, 1200); });
   });
+
+  var roleBox = document.querySelector('.oracle-roles');
+  if (roleBox && 'IntersectionObserver' in window && !less.matches) {
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){ e.isIntersecting ? startAuto() : stopAuto(); });
+    }, {threshold: 0.35}).observe(roleBox);
+  }
 
   /* ===== Финальный блок: Оракул в позе «Предлагает» указывает на кнопку ===== */
   (function(){
