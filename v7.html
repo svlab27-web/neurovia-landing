@@ -2321,7 +2321,7 @@ renderPlan();
   
     /* ===== Кольцо 6П: навигация и возврат к первому шагу ===== */
     (function cycleRing() {
-      const wrap = document.querySelector('.cycle-wrap');
+      const wrap = document.querySelector('#track .cycle-wrap') || document.querySelector('.cycle-wrap');
       if (!wrap) return;
       const nodes = [...wrap.querySelectorAll('.cnode')];
       const labels = [...wrap.querySelectorAll('.clabel')];
