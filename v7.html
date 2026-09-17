@@ -850,6 +850,18 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 .flow-nudge summary::after{box-shadow:0 0 0 0 rgba(238,200,48,.6);animation:plusPulse 2.2s ease-out infinite}
 @keyframes plusPulse{0%{box-shadow:0 0 0 0 rgba(238,200,48,.55)}70%{box-shadow:0 0 0 12px rgba(238,200,48,0)}100%{box-shadow:0 0 0 0 rgba(238,200,48,0)}}
 @media (prefers-reduced-motion:reduce){.flow-nudge summary::after{animation:none}}
+
+/* ===== Оракул на первом экране: крупнее и в фокусе ===== */
+.hero-inner{min-height:clamp(620px,46vw,760px)}
+.hero-character{right:-40px;top:-6px;width:52%}
+.hero-character::before{content:"";position:absolute;left:50%;top:44%;width:min(46vw,620px);height:min(46vw,620px);
+  transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(238,200,48,.16),rgba(238,200,48,.05) 45%,transparent 70%)}
+.hero-character img{height:clamp(380px,41vw,600px);filter:drop-shadow(0 26px 54px rgba(0,0,0,.5));position:relative;z-index:1}
+.hero-character figcaption{position:relative;z-index:2;margin-top:-22px}
+@media (max-width:1000px){.hero-character{top:30px;right:-24px;width:48%}
+  .hero-character img{height:clamp(300px,34vw,420px)}}
+@media (max-width:700px){.hero-character::before{display:none}}
 </style>
 </head>
 <body>
