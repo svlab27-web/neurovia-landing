@@ -821,6 +821,25 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 .mem-grid b{display:block;font:700 18px var(--head);color:#fff;margin-bottom:8px}
 .mem-grid span{font-size:15.5px;line-height:1.55;color:#b9c5d3}
 @media (max-width:900px){.mem-grid{grid-template-columns:1fr}}
+
+/* ===== плюсики как кнопки + подсказка на первом шаге ===== */
+.persona-flow summary::after{content:"+";display:grid;place-items:center;width:28px;height:28px;
+  border-radius:50%;border:1px solid var(--line);background:#fff;
+  font:700 16px/1 var(--mono);color:var(--navy);
+  transition:background .2s,border-color .2s,color .2s,transform .2s}
+.persona-flow summary:hover::after{background:var(--gold);border-color:var(--gold);color:var(--ink);transform:scale(1.08)}
+.persona-flow details[open] summary::after{content:"–";background:var(--navy);border-color:var(--navy);color:#fff}
+.persona-flow li:hover{background:rgba(238,200,48,.06)}
+
+.flow-hint{display:inline-flex;align-items:center;gap:7px;margin:0 0 4px 46px;
+  font:600 12.5px var(--head);color:#8a6f10;background:rgba(238,200,48,.16);
+  border-radius:20px;padding:5px 12px;animation:hintFloat 2.4s ease-in-out infinite}
+.flow-hint i{font-style:normal;font-size:14px;line-height:1}
+@keyframes hintFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@media (prefers-reduced-motion:reduce){.flow-hint{animation:none}}
+.flow-nudge summary::after{box-shadow:0 0 0 0 rgba(238,200,48,.6);animation:plusPulse 2.2s ease-out infinite}
+@keyframes plusPulse{0%{box-shadow:0 0 0 0 rgba(238,200,48,.55)}70%{box-shadow:0 0 0 12px rgba(238,200,48,0)}100%{box-shadow:0 0 0 0 rgba(238,200,48,0)}}
+@media (prefers-reduced-motion:reduce){.flow-nudge summary::after{animation:none}}
 </style>
 </head>
 <body>
@@ -1408,6 +1427,25 @@ renderPlan();
         cmp.innerHTML = "";
       }
       document.querySelector(".persona-flow h4").textContent = d.flowTitle || "Первый маршрут";
+      setTimeout(function () {
+        const flow = document.getElementById("personaFlow");
+        if (!flow) return;
+        const first = flow.querySelector("details");
+        if (!first || window.__flowTouched) return;
+        first.parentElement.classList.add("flow-nudge");
+        const old = flow.parentElement.querySelector(".flow-hint");
+        if (old) old.remove();
+        const hint = document.createElement("p");
+        hint.className = "flow-hint";
+        hint.innerHTML = '<i>\u261D</i> нажмите, чтобы раскрыть шаг';
+        flow.parentElement.insertBefore(hint, flow);
+        flow.addEventListener("click", function once() {
+          window.__flowTouched = true;
+          hint.remove();
+          [].forEach.call(flow.querySelectorAll(".flow-nudge"), function (el) { el.classList.remove("flow-nudge"); });
+          flow.removeEventListener("click", once);
+        });
+      }, 60);
       document.getElementById("personaFlow").innerHTML =
         d.flow.map(([n, title, sub, meta, points]) => {
           const head = `<span class="n">${n}</span><span><b>${title}</b><small>${sub}</small></span>${meta ? `<em>${meta}</em>` : ""}`;
