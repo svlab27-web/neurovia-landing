@@ -938,6 +938,19 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 .shot-video video{display:block;width:100%;height:auto;background:#0b1626}
 .shot-video figcaption{padding:16px 22px 20px;font-size:15.5px;line-height:1.55;color:#c3cdd9;
   border-top:1px solid rgba(255,255,255,.1)}
+
+/* ===== блок «внутри платформы» на светлом: тёмные экраны читаются ===== */
+.inside-section{background:var(--mist);color:var(--ink);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.inside-section h2{color:var(--ink)}
+.inside-section .lead{color:var(--muted)}
+.inside-section .eyebrow{color:var(--muted)}
+.shots figure{background:#fff;border:1px solid var(--line);box-shadow:var(--sh)}
+.shots img{border-bottom:1px solid var(--line)}
+.shots figcaption{color:var(--muted)}
+.shots figcaption b{color:var(--ink)}
+.shots figure:hover{border-color:var(--gold);box-shadow:var(--sh-lift)}
+.shot-video{background:#fff;border:1px solid var(--line);box-shadow:0 22px 50px rgba(10,22,40,.16)}
+.shot-video figcaption{color:var(--muted);border-top:1px solid var(--line)}
 </style>
 </head>
 <body>
