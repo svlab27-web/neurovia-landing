@@ -645,6 +645,20 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
   100%{box-shadow:0 8px 22px rgba(15,28,46,.24),0 0 0 0 rgba(238,200,48,0)}}
 .road.live .stop:last-child{animation:finalPulse 2.2s ease-out infinite}
 .road.live.good .stop:last-child{animation:finalPulseGold 2.2s ease-out infinite}
+.depts{margin-top:56px;padding-top:48px;border-top:1px solid var(--line)}
+.depts h3{font:800 clamp(26px,2.9vw,36px)/1.12 var(--head);letter-spacing:-.022em;margin:0 0 12px}
+.dept-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:26px}
+.dept-grid > div{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px 18px;
+  box-shadow:var(--sh);transition:transform .25s,border-color .25s}
+.dept-grid > div:hover{transform:translateY(-4px);border-color:var(--silver)}
+.dept-grid b{display:block;font:700 17px var(--head);color:var(--ink);margin-bottom:7px}
+.dept-grid span{font-size:15px;line-height:1.5;color:var(--muted)}
+.dept-note{margin:26px 0 0;font:700 clamp(18px,2vw,23px)/1.4 var(--head);color:var(--ink);max-width:60ch;
+  padding-left:18px;border-left:3px solid var(--navy)}
+.dept-answer{margin:22px 0 0;padding:22px 24px;border-radius:var(--r);background:var(--navy);color:#dbe3ec;
+  font-size:16.5px;line-height:1.6;max-width:78ch}
+@media (max-width:1000px){.dept-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.dept-grid{grid-template-columns:1fr}}
 .roads-extra{margin:0 0 24px;padding:16px 20px;border-radius:var(--r);background:rgba(238,200,48,.12);
   border-left:3px solid var(--gold);font:600 16px/1.55 var(--head);color:var(--ink);max-width:70ch}
 .roads-note{display:block;margin-top:28px;padding:26px 30px;border-radius:14px;background:var(--navy);color:var(--warm);
@@ -911,6 +925,14 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
       </div>
 
 
+
+      <div class="depts x-only" id="depts" hidden>
+        <h3 id="deptsTitle"></h3>
+        <p class="roads-lead" id="deptsLead"></p>
+        <div class="dept-grid" id="deptGrid"></div>
+        <p class="dept-note" id="deptsNote"></p>
+        <p class="dept-answer" id="deptsAnswer"></p>
+      </div>
 
       <div class="roads x-only" id="roads" hidden>
         <h3>Дело не в специалистах. Дело в порядке.</h3>
@@ -1553,7 +1575,18 @@ renderPlan();
       ],
       facts: [["2–", "3", "6", "месяцев обычно уходит, чтобы вручную найти, где течёт"],
               ["от ", "1 000 000", "2000000", "по рынку: внешний аудит и консалтинг, который сначала собирает Ваши данные"]],
-      extra: 'Ваши цифры уже есть — просто лежат не там. Выгрузка из бухгалтерии загружается в один клик: выручка, себестоимость, зарплаты и маркетинг разбираются сами. Остальное добираем из заказов, каналов и Ваших таблиц.',
+      depts: {
+        title: "Цифры есть. Картины — нет.",
+        lead: "Часть в бухгалтерии, часть в таблицах, часть в CRM и переписках. Самое важное вообще нигде не записано — оно в головах. Пока целого не видит никто, каждый отдел тянет в свою сторону.",
+        items: [
+          ["Маркетинг", "считает охваты и заявки — и они у него растут"],
+          ["Продажи", "считают сделки и своих клиентов — и план они выполнили"],
+          ["Бухгалтерия", "считает налоги и остаток на счёте — и он почему-то тает"],
+          ["Продукт", "считает сроки и задачи — и всё в работе"]
+        ],
+        note: "У каждого своя правда, и каждый по-своему прав. Общей картины нет ни у кого — кроме владельца, которому её никто не собрал.",
+        answer: "NeuroVia сводит это в один контур: выгрузка из бухгалтерии, заказы, каналы, продукты и цифры проекта — в одном месте. Выручка, себестоимость, зарплаты и маркетинг разбираются сами, остальное добираем из Ваших таблиц. У отделов остаются свои задачи, а у Вас появляется целое: где заработали, где потеряли и что менять первым."
+      },
       roadsTitle: "Решения по ощущениям стоят дороже всего.",
       roadsLead: "Когда прибыль падает, данные обычно разбросаны: часть в бухгалтерии, часть в таблицах и CRM, часть в переписках, а самое важное — в головах у людей. Пока картину собирают вручную, деньги продолжают течь.",
       roads: {
@@ -1821,6 +1854,19 @@ renderPlan();
         document.querySelector("#roads .roads-lead").textContent = D.roadsLead;
         var ex = document.getElementById("roadsExtra");
         if (ex) { ex.innerHTML = D.extra || ""; ex.hidden = !D.extra; }
+        var dep = document.getElementById("depts");
+        if (dep) {
+          if (D.depts) {
+            dep.hidden = false;
+            document.getElementById("deptsTitle").textContent = D.depts.title;
+            document.getElementById("deptsLead").textContent = D.depts.lead;
+            document.getElementById("deptGrid").innerHTML = D.depts.items.map(function (x) {
+              return '<div><b>' + x[0] + '</b><span>' + x[1] + '</span></div>';
+            }).join("");
+            document.getElementById("deptsNote").textContent = D.depts.note;
+            document.getElementById("deptsAnswer").textContent = D.depts.answer;
+          } else { dep.hidden = true; }
+        }
         document.querySelector(".roads-note").innerHTML = D.note +
           '<span class="roads-go">Посмотреть тарифы <em>&#8594;</em></span>';
         document.querySelectorAll(".switch button").forEach(function (x) {
