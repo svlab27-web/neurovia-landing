@@ -904,6 +904,31 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 .section-heading .lead{max-width:44ch;font-size:18px;line-height:1.6}
 @media (max-width:900px){.section-heading{grid-template-columns:1fr;gap:18px}
   .section-heading .lead{max-width:60ch;font-size:17px}}
+
+/* ===== 8. дороги читаются как дорога, а не как таблица ===== */
+@media (min-width:861px){
+  .road{position:relative;padding-top:30px}
+  .road::before{content:"";position:absolute;left:8%;right:8%;top:10px;height:2px;
+    background:var(--line);border-radius:2px}
+  .road.good::before{background:rgba(255,255,255,.28)}
+  .road .stop::before{content:"";position:absolute;top:-26px;left:50%;margin-left:-6px;
+    width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid var(--silver);
+    transition:background .3s,border-color .3s,transform .3s}
+  .road.good .stop::before{background:var(--navy);border-color:rgba(255,255,255,.5)}
+  .road .stop.hot::before{background:var(--navy);border-color:var(--navy);transform:scale(1.35)}
+  .road.good .stop.hot::before{background:#fff;border-color:#fff;transform:scale(1.35)}
+  .road .stop::after{display:none}
+}
+
+/* ===== 9. «6 шагов» в единой системе карточек ===== */
+.xfacts .accent{background:#fff;border:1px solid var(--line);border-left:3px solid var(--gold);
+  border-radius:var(--r);box-shadow:var(--sh);padding:16px 24px}
+.xfacts .accent:hover{background:#fffdf4;border-color:var(--gold);border-left-color:var(--gold)}
+
+/* ===== 10. логотип весомее меню ===== */
+.wordmark{font-size:30px;letter-spacing:-.02em}
+.wordmark small{font-size:9px;letter-spacing:.22em}
+@media (max-width:700px){.wordmark{font-size:23px}}
 </style>
 </head>
 <body>
