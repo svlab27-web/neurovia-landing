@@ -878,6 +878,32 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 .trust-note{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);
   font:500 12px var(--mono);letter-spacing:.05em;color:var(--silver)}
 @media (max-width:640px){.trust-in > div{padding:10px 0}.trust-in b{font-size:26px}}
+
+/* ===== 5. ритм фонов: соседние блоки не сливаются ===== */
+#diagnostic{background:#fff;border-top:1px solid var(--line)}
+#week{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.audience{background:var(--warm)}
+.inside-section{background:#0b1626}
+.faq-section{background:#fff}
+.memory-section{border-bottom:1px solid rgba(255,255,255,.1)}
+
+/* ===== 6. форма диагностики дышит ===== */
+.diag-fields{gap:16px}
+.diag-fields label{gap:8px;font:600 13px var(--head);color:var(--muted);letter-spacing:.01em}
+.diag-fields input,.diag-fields select{min-height:52px;padding:12px 14px;border-radius:10px;
+  font:600 19px var(--head);color:var(--ink);border:1px solid var(--line);transition:border-color .2s,box-shadow .2s}
+.diag-fields select{font-size:16px}
+.diag-fields input::placeholder{color:var(--silver);font-weight:500}
+.diag-fields input:hover,.diag-fields select:hover{border-color:var(--silver)}
+.diag-fields input:focus,.diag-fields select:focus{outline:none;border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(238,200,48,.25)}
+.diag-actions{gap:12px;margin-top:20px}
+
+/* ===== 7. шапки секций: лид не проваливается ===== */
+.section-heading{grid-template-columns:1.1fr .9fr;gap:56px;align-items:end;margin-bottom:40px}
+.section-heading .lead{max-width:44ch;font-size:18px;line-height:1.6}
+@media (max-width:900px){.section-heading{grid-template-columns:1fr;gap:18px}
+  .section-heading .lead{max-width:60ch;font-size:17px}}
 </style>
 </head>
 <body>
