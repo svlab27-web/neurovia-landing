@@ -831,11 +831,14 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 .persona-flow details[open] summary::after{content:"–";background:var(--navy);border-color:var(--navy);color:#fff}
 .persona-flow li:hover{background:rgba(238,200,48,.06)}
 
-.flow-hint{display:inline-flex;align-items:center;gap:7px;margin:0 0 4px 46px;
-  font:600 12.5px var(--head);color:#8a6f10;background:rgba(238,200,48,.16);
-  border-radius:20px;padding:5px 12px;animation:hintFloat 2.4s ease-in-out infinite}
-.flow-hint i{font-style:normal;font-size:14px;line-height:1}
-@keyframes hintFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.persona-flow li{position:relative}
+.flow-hint{position:absolute;right:6px;top:-6px;z-index:3;font-size:23px;line-height:1;
+  pointer-events:none;transform-origin:50% 100%;
+  filter:drop-shadow(0 2px 4px rgba(10,22,40,.25));
+  animation:fingerTap 1.8s ease-in-out infinite}
+@keyframes fingerTap{
+  0%,100%{transform:rotate(-18deg) translateY(-4px)}
+  50%{transform:rotate(-18deg) translateY(2px)}}
 @media (prefers-reduced-motion:reduce){.flow-hint{animation:none}}
 .flow-nudge summary::after{box-shadow:0 0 0 0 rgba(238,200,48,.6);animation:plusPulse 2.2s ease-out infinite}
 @keyframes plusPulse{0%{box-shadow:0 0 0 0 rgba(238,200,48,.55)}70%{box-shadow:0 0 0 12px rgba(238,200,48,0)}100%{box-shadow:0 0 0 0 rgba(238,200,48,0)}}
@@ -1432,13 +1435,15 @@ renderPlan();
         if (!flow) return;
         const first = flow.querySelector("details");
         if (!first || window.__flowTouched) return;
-        first.parentElement.classList.add("flow-nudge");
-        const old = flow.parentElement.querySelector(".flow-hint");
+        const li = first.parentElement;
+        li.classList.add("flow-nudge");
+        const old = flow.querySelector(".flow-hint");
         if (old) old.remove();
-        const hint = document.createElement("p");
+        const hint = document.createElement("span");
         hint.className = "flow-hint";
-        hint.innerHTML = '<i>\u261D</i> нажмите, чтобы раскрыть шаг';
-        flow.parentElement.insertBefore(hint, flow);
+        hint.setAttribute("aria-hidden", "true");
+        hint.textContent = "\uD83D\uDC47";
+        li.appendChild(hint);
         flow.addEventListener("click", function once() {
           window.__flowTouched = true;
           hint.remove();
