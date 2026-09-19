@@ -1082,6 +1082,29 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 #audience .roads-lead{font-weight:400}
 #audience .road .stop p{font-weight:400}
 #audience .road.bad .stop:last-child p,#audience .road.good .stop:last-child p{font-weight:500}
+
+/* v9: отзывы */
+.reviews-section{background:var(--mist);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.reviews{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.rev{margin:0;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px 24px 22px;
+  display:flex;flex-direction:column;gap:16px;box-shadow:var(--sh);position:relative;
+  transition:transform .25s,box-shadow .25s,border-color .25s}
+.rev:hover{transform:translateY(-4px);box-shadow:var(--sh-lift);border-color:var(--gold)}
+.rev::before{content:"“";position:absolute;top:8px;right:20px;font:800 56px var(--head);color:rgba(238,200,48,.35);line-height:1}
+.rev-text{margin:0;font:400 16.5px/1.55 var(--head);color:var(--ink);position:relative;z-index:1}
+.rev-who{display:flex;align-items:center;gap:12px;margin-top:auto}
+.rev-ava{flex:none;width:42px;height:42px;border-radius:50%;background:var(--navy);color:var(--warm);
+  display:grid;place-items:center;font:600 16px var(--head);overflow:hidden}
+.rev-ava img{width:100%;height:100%;object-fit:cover;display:block}
+.rev-name{display:block;font:600 15px var(--head);color:var(--ink)}
+.rev-role{display:block;font-size:13px;color:var(--muted);line-height:1.35}
+.rev-win{margin:0;padding-top:14px;border-top:1px solid var(--line);font:500 13.5px var(--mono);color:var(--gold)}
+.rev.is-empty{border-style:dashed;box-shadow:none;background:rgba(255,255,255,.55)}
+.rev.is-empty:hover{transform:none;box-shadow:none;border-color:var(--line)}
+.rev.is-empty .rev-text,.rev.is-empty .rev-name,.rev.is-empty .rev-role,.rev.is-empty .rev-win{color:var(--silver)}
+.rev.is-empty .rev-ava{background:var(--line);color:var(--muted)}
+@media (max-width:900px){ .reviews{grid-template-columns:1fr 1fr} }
+@media (max-width:620px){ .reviews{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
@@ -1374,6 +1397,38 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
       <details><summary>Эти цифры показывают результат клиентов?</summary><p>Нет. Воронка и план на этой странице содержат демонстрационные данные. Они показывают логику работы, а не обещают рост выручки.</p></details>
     </div></div></section>
 
+    <!-- ОТЗЫВЫ. Чтобы добавить настоящий, скопируйте одну карточку и замените:
+     .rev-text - сам отзыв, .rev-name - имя, .rev-role - кто это, .rev-win - результат в одну строку.
+     Аватар: если есть фото, подставьте <img src="..."> вместо буквы в .rev-ava -->
+    <section class="section reviews-section" id="reviews"><div class="wrap">
+      <div class="section-heading"><div><p class="eyebrow">Отзывы</p><h2>Кто уже прошёл<br>этот маршрут.</h2></div><p class="lead">Люди, которые собрали свой продукт, воронку и первые продажи внутри NeuroVia.</p></div>
+      <div class="reviews">
+        <figure class="rev is-empty">
+          <blockquote class="rev-text">Место для отзыва. Загрузим 20 сентября.</blockquote>
+          <figcaption class="rev-who">
+            <span class="rev-ava">?</span>
+            <span><b class="rev-name">Имя Фамилия</b><span class="rev-role">кто это и чем занимается</span></span>
+          </figcaption>
+          <p class="rev-win">результат в одну строку</p>
+        </figure>
+        <figure class="rev is-empty">
+          <blockquote class="rev-text">Место для отзыва. Загрузим 20 сентября.</blockquote>
+          <figcaption class="rev-who">
+            <span class="rev-ava">?</span>
+            <span><b class="rev-name">Имя Фамилия</b><span class="rev-role">кто это и чем занимается</span></span>
+          </figcaption>
+          <p class="rev-win">результат в одну строку</p>
+        </figure>
+        <figure class="rev is-empty">
+          <blockquote class="rev-text">Место для отзыва. Загрузим 20 сентября.</blockquote>
+          <figcaption class="rev-who">
+            <span class="rev-ava">?</span>
+            <span><b class="rev-name">Имя Фамилия</b><span class="rev-role">кто это и чем занимается</span></span>
+          </figcaption>
+          <p class="rev-win">результат в одну строку</p>
+        </figure>
+      </div>
+    </div></section>
     <section class="section pricing-section" id="pricing"><div class="wrap">
       <div class="section-heading"><div><p class="eyebrow">Тарифы</p><h2>Выберите сценарий,<br>а не список функций</h2></div><p class="lead">Диагностика бесплатна на любом сценарии.</p></div>
       <div class="plans">
