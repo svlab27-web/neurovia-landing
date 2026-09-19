@@ -983,17 +983,25 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
   .hero-doors button:nth-child(4),.hero-doors button:nth-child(5){grid-column:span 1}
 }
 
-/* v9: возможности внутри раздела 6П */
+/* v9: возможности внутри раздела 6П — слово открывает текст */
+.caps-nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.caps-nav button{cursor:pointer;background:none;border:1px solid rgba(255,255,255,.18);border-radius:999px;
+  color:var(--warm);padding:9px 16px;font:600 14.5px var(--head);display:inline-flex;align-items:center;gap:8px;
+  transition:border-color .2s,background .2s,color .2s}
+.caps-nav button i{font:500 10.5px var(--mono);font-style:normal;letter-spacing:.1em;color:var(--silver)}
+.caps-nav button:hover{border-color:rgba(238,200,48,.6)}
+.caps-nav button[aria-selected="true"]{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.caps-nav button[aria-selected="true"] i{color:rgba(20,26,36,.6)}
+.caps-nav button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.caps-panel{border-left:3px solid var(--gold);padding:4px 0 4px 20px;min-height:104px}
+.caps-panel h3{margin:0 0 6px;font:700 21px var(--head);color:#fff}
+.caps-panel .why{margin:0 0 10px;font-size:17px;line-height:1.5;color:#c4ccd6;max-width:60ch}
+.caps-panel .tools{margin:0;font-size:15.5px;line-height:1.6;color:#9fb0c4;max-width:64ch}
+.cycle .cnode,.cycle .clabel{cursor:pointer}
 .caps-inline{margin-top:38px;padding-top:30px;border-top:1px solid rgba(255,255,255,.16)}
 .caps-lead{margin:0 0 20px;font-size:17px;line-height:1.6;color:#c4ccd6;max-width:60ch}
-.caps-grid b i{display:inline-block;font:500 11px var(--mono);font-style:normal;letter-spacing:.12em;color:var(--gold);margin-right:9px;vertical-align:2px}
-.caps-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.caps-grid > div{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:22px 20px;transition:border-color .3s,transform .3s}
-.caps-grid > div:hover{border-color:rgba(238,200,48,.5);transform:translateY(-4px)}
-.caps-grid b{display:block;font:700 17px var(--head);color:#fff;margin-bottom:8px}
-.caps-grid span{font-size:15px;line-height:1.55;color:#b9c5d3}
-@media (max-width:1000px){ .caps-grid{grid-template-columns:1fr 1fr} }
-@media (max-width:640px){ .caps-grid{grid-template-columns:1fr} }
+@media (max-width:1000px){  }
+@media (max-width:640px){  }
 </style>
 </head>
 <body>
@@ -1184,13 +1192,15 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
       </div></div>
       <div class="caps-inline">
         <p class="caps-lead">За каждым шагом стоят инструменты кабинета — то, чем Вы работаете каждый день.</p>
-        <div class="caps-grid">
-          <div><b><i>01</i>Понять</b><span>Диагностика точки А, портреты клиентов, каталог болей, разбор конкурентов, карта пробелов.</span></div>
-          <div><b><i>02</i>Предложить</b><span>Авторская методология, продуктовая матрица, форматы, цены, офферы.</span></div>
-          <div><b><i>03</i>Привлечь</b><span>Бренд-кит, контент под площадки, контент-план, цепочки, кампании, лендинги.</span></div>
-          <div><b><i>04</i>Продать</b><span>Страницы оплаты, заказы, контакты с перепиской, статусы сделок, система автоплатежей.</span></div>
-          <div><b><i>05</i>Посчитать</b><span>Финмодель, юнит-экономика, воронка по источникам, средний чек, возврат покупателей.</span></div>
-          <div><b><i>06</i>Пересобрать</b><span>Гипотезы по степени риска, работы клиента, проверка вариантов, цели план-факт.</span></div>
+        <div class="caps-nav" id="capsNav" role="tablist" aria-label="Шесть шагов">
+          <button type="button" role="tab" data-step="0"><i>01</i>Понять</button>
+          <button type="button" role="tab" data-step="1"><i>02</i>Предложить</button>
+          <button type="button" role="tab" data-step="2"><i>03</i>Привлечь</button>
+          <button type="button" role="tab" data-step="3"><i>04</i>Продать</button>
+          <button type="button" role="tab" data-step="4"><i>05</i>Посчитать</button>
+          <button type="button" role="tab" data-step="5"><i>06</i>Пересобрать</button>
+        </div>
+        <div class="caps-panel" id="capsPanel"></div>
         </div>
       </div>
       <p class="cycle-loop" id="cycleLoop" hidden>Новый приоритет возвращается в шаг 01 «Понять» – цикл начинается заново.</p></div>
@@ -2685,4 +2695,37 @@ renderPlan();
     }, {threshold:.35}).observe(fig);
   }
 })();</script>
+<script>
+(function(){
+  var CAPS = [
+    {t:"Понять",      why:"Где Вы сейчас и кто Ваш клиент.",      tools:"Диагностика точки А, портреты клиентов, каталог болей, разбор конкурентов, карта пробелов."},
+    {t:"Предложить",  why:"Что и за сколько Вы продаёте.",        tools:"Авторская методология, продуктовая матрица, форматы, цены, офферы."},
+    {t:"Привлечь",    why:"Чем Вы говорите с рынком.",            tools:"Бренд-кит, контент под площадки, контент-план, цепочки, кампании, лендинги."},
+    {t:"Продать",     why:"Как деньги доходят до Вас.",           tools:"Страницы оплаты, заказы, контакты с перепиской, статусы сделок, система автоплатежей."},
+    {t:"Посчитать",   why:"Что действительно работает.",          tools:"Финмодель, юнит-экономика, воронка по источникам, средний чек, возврат покупателей."},
+    {t:"Пересобрать", why:"Что менять следующим.",                tools:"Гипотезы по степени риска, работы клиента, проверка вариантов, цели план-факт."}
+  ];
+  var nav = document.getElementById("capsNav"), panel = document.getElementById("capsPanel");
+  if (!nav || !panel) return;
+  var btns = [].slice.call(nav.querySelectorAll("button"));
+  function pick(i){
+    var c = CAPS[i]; if (!c) return;
+    btns.forEach(function(b,j){ b.setAttribute("aria-selected", j===i ? "true" : "false"); });
+    panel.innerHTML = "<h3>" + c.t + "</h3><p class='why'>" + c.why + "</p><p class='tools'>" + c.tools + "</p>";
+  }
+  btns.forEach(function(b,i){ b.addEventListener("click", function(){ pick(i); }); });
+  var ring = document.querySelector("#track .cycle");
+  if (ring){
+    [].forEach.call(ring.querySelectorAll(".cnode"), function(n,i){
+      n.style.cursor = "pointer";
+      n.addEventListener("click", function(){ pick(i); });
+    });
+    [].forEach.call(ring.querySelectorAll(".clabel"), function(l,i){
+      l.style.cursor = "pointer";
+      l.addEventListener("click", function(){ pick(i); });
+    });
+  }
+  pick(0);
+})();
+</script>
 </body></html>
