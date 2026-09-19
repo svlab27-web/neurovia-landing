@@ -990,7 +990,8 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 .ring-row{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:44px;align-items:center;
   margin-top:26px;padding-top:26px;border-top:1px solid rgba(255,255,255,.16)}
 .ring-row .cycle-wrap{margin:0}
-.ring-row .cycle-loop{grid-column:1;margin:10px 0 0;text-align:center;font-size:14px;line-height:1.5;color:#9fb0c4;max-width:38ch;margin-inline:auto}
+.ring-row .cycle-wrap{display:flex;flex-direction:column;align-items:center}
+.ring-row .cycle-loop{margin:12px auto 0;text-align:center;font-size:14px;line-height:1.5;color:#9fb0c4;max-width:34ch}
 .ring-copy .caps-lead{margin:0 0 16px;font-size:15.5px;line-height:1.55;color:#9fb0c4;max-width:52ch}
 .ring-copy .caps-panel{min-height:190px}
 @media (min-width:901px){ .ring-copy .caps-nav{display:none} }
@@ -1201,8 +1202,8 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
           <circle class="cycle-dot trail" r="7"/>
           <circle class="cycle-dot head" r="5"/>
         </svg>
+          <p class="cycle-loop" id="cycleLoop" hidden>Новый приоритет возвращается в шаг 01 «Понять» – цикл начинается заново.</p>
       </div>
-        <p class="cycle-loop" id="cycleLoop" hidden>Новый приоритет возвращается в шаг 01 «Понять» – цикл начинается заново.</p>
         <div class="ring-copy">
         <div class="caps-nav" id="capsNav" role="tablist" aria-label="Шесть шагов">
           <button type="button" role="tab" data-step="0"><i>01</i>Понять</button>
