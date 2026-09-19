@@ -960,12 +960,10 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 @media (min-width: 900px){ .hero .hero-copy{ padding-bottom: 122px; } }
 
 /* v8: плашки выбора несут не роль, а цель — два уровня текста */
-.hero-doors button{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;max-width:270px}
-.hero-doors button b{font:700 15px var(--head);line-height:1.2}
-.hero-doors button span{font:500 13px/1.35 var(--head);opacity:.68;font-weight:500}
-.hero-doors button.is-soon{display:flex}
-.hero-doors button.is-soon b{display:inline-flex;align-items:baseline;gap:8px}
-@media (max-width:760px){ .hero-doors button{max-width:none;width:100%} }
+.hero-doors button:not(.is-soon){display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;max-width:270px}
+.hero-doors button:not(.is-soon) b{font:700 15px var(--head);line-height:1.2}
+.hero-doors button:not(.is-soon) span{font:500 13px/1.35 var(--head);opacity:.68}
+@media (max-width:760px){ .hero-doors button:not(.is-soon){max-width:none;width:100%} }
 </style>
 </head>
 <body>
@@ -1035,8 +1033,8 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
           <button type="button" data-persona="expert"><b>Я эксперт</b><span>Хочу выйти в онлайн-продажи</span></button>
           <button type="button" data-persona="small"><b>У меня стартап</b><span>Хочу протестировать идею без слива бюджета</span></button>
           <button type="button" data-persona="founder"><b>У меня действующий бизнес</b><span>Хочу найти точки роста и избежать кассовых разрывов</span></button>
-          <button type="button" class="is-soon" disabled aria-disabled="true"><b>У меня агентство<i>скоро</i></b><span>Хочу вести проекты клиентов в одном контуре</span></button>
-          <button type="button" class="is-soon" disabled aria-disabled="true"><b>Я бизнес-трекер<i>скоро</i></b><span>Хочу вести подопечных по цифрам, а не по ощущениям</span></button>
+          <button type="button" class="is-soon" disabled aria-disabled="true">У меня агентство<i>скоро</i></button>
+          <button type="button" class="is-soon" disabled aria-disabled="true">Я бизнес-трекер<i>скоро</i></button>
         </div>
       </div>
     </section>
