@@ -1106,7 +1106,9 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 @media (max-width:900px){ .reviews{grid-template-columns:1fr 1fr} }
 @media (max-width:620px){ .reviews{grid-template-columns:1fr} }
 
-/* v9: карточки отделов — не уже 230px, иначе текст сыпется по слову */
+/* v9: блок отделов растягиваем на всю ширину секции — он единственный сидел в узкой колонке */
+#audience .depts{grid-column:1 / -1}
+/* карточки отделов — в ряд, но не уже 230px */
 #audience .dept-grid{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
 #audience .dept-grid b{font-weight:500;font-size:16.5px}
 #audience .dept-grid span{font-weight:400}
