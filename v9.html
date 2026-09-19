@@ -2322,7 +2322,7 @@ renderPlan();
         if (good) label = 'Работает';
         else if (k === 0) label = 'Слабее всего';
         else if (r === best) label = 'Лучше остальных';
-        else label = 'Тоже проседает';
+        else label = 'Требует внимания';
         return '<div class="gap' + (good ? ' is-good' : '') + '">' +
                  '<div class="gap-head"><span class="gap-tag">' + label + '</span>' +
                  '<span class="gap-name">' + r.name + '</span>' +
