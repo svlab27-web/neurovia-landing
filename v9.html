@@ -2284,10 +2284,21 @@ renderPlan();
     }
 
     function biggestGap(o, v, p, d) {
-      const losses = [-1, o - v, v - p, p - d];
+      /* худший этап считаем по доле потерь, а не по их количеству:
+         500 из 1000 (50%) — лучше, чем 180 из 200 (90%) */
+      const rate = (lost, base) => base > 0 ? lost / base : 0;
+      const rel = [-1, rate(o - v, o), rate(v - p, v), rate(p - d, p)];
+      const abs = [-1, o - v, v - p, p - d];
       let best = 1;
-      for (let i = 2; i < 4; i++) if (losses[i] > losses[best]) best = i;
+      for (let i = 2; i < 4; i++) {
+        if (rel[i] > rel[best] + 1e-9) best = i;
+        else if (Math.abs(rel[i] - rel[best]) < 1e-9 && abs[i] > abs[best]) best = i;
+      }
       return best;
+    }
+    function funnelIsFlat(o, v, p, d) {
+      const rate = (lost, base) => base > 0 ? lost / base : 0;
+      return Math.max(rate(o - v, o), rate(v - p, v), rate(p - d, p)) < 0.25;
     }
 
     function applyNumbers(o, v, p, d, period, own) {
@@ -2297,6 +2308,14 @@ renderPlan();
       mode.textContent = own ? `Ваши данные · ${period}` : `Пример данных · ${period}`;
       mode.classList.toggle('is-own', !!own);
       selectFunnel(biggestGap(o, v, p, d));
+      /* ровная воронка: терять почти нечего, узкое место на входе */
+      if (funnelIsFlat(o, v, p, d)) {
+        const total = o > 0 ? Math.round(d / o * 100) : 0;
+        $('loss-number').innerHTML = total + '<span>%</span>';
+        $('loss-title').textContent = 'обращений доходят до покупки';
+        $('loss-copy').textContent = 'Между этапами почти ничего не теряется: путь клиента держится. Значит, дело не в воронке, а во входе — обращений просто мало. Наращивать стоит их количество, а не переделывать процесс.';
+        $('loss-action').textContent = 'Выбрать один канал и удвоить количество касаний за неделю.';
+      }
     }
 
     function readForm() {
