@@ -960,10 +960,28 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 @media (min-width: 900px){ .hero .hero-copy{ padding-bottom: 122px; } }
 
 /* v8: плашки выбора несут не роль, а цель — два уровня текста */
-.hero-doors button:not(.is-soon){display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;max-width:270px}
-.hero-doors button:not(.is-soon) b{font:700 15px var(--head);line-height:1.2}
+.hero-doors{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));align-items:stretch;row-gap:12px}
+.hero-doors button{width:100%;height:100%;max-width:none;text-align:left}
+/* три активных — в ряд, равной ширины и высоты */
+.hero-doors button:not(.is-soon){grid-column:span 2;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:5px}
+.hero-doors button:not(.is-soon) b{font:700 15px/1.2 var(--head)}
 .hero-doors button:not(.is-soon) span{font:500 13px/1.35 var(--head);opacity:.68}
-@media (max-width:760px){ .hero-doors button:not(.is-soon){max-width:none;width:100%} }
+/* две «скоро» — меньше и по центру под ними */
+.hero-doors button.is-soon{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:8px;
+  padding:10px 14px;font-size:13px;height:auto;align-self:center}
+.hero-doors button:nth-child(4){grid-column:2 / span 2}
+.hero-doors button:nth-child(5){grid-column:4 / span 2}
+@media (max-width:1100px){
+  .hero-doors{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero-doors button:not(.is-soon){grid-column:span 1}
+  .hero-doors button:nth-child(3){grid-column:span 2}
+  .hero-doors button:nth-child(4),.hero-doors button:nth-child(5){grid-column:span 1}
+}
+@media (max-width:640px){
+  .hero-doors{grid-template-columns:1fr}
+  .hero-doors button:not(.is-soon),.hero-doors button:nth-child(3),
+  .hero-doors button:nth-child(4),.hero-doors button:nth-child(5){grid-column:span 1}
+}
 </style>
 </head>
 <body>
