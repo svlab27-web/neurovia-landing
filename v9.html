@@ -983,6 +983,8 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
   .hero-doors button:nth-child(4),.hero-doors button:nth-child(5){grid-column:span 1}
 }
 
+/* v9: тонкая строка под заголовком */
+.hero .hero-sub{font-weight:400;letter-spacing:.012em;color:rgba(255,255,255,.9)}
 /* v9: кольцо и панель шага — один блок */
 .track-head{grid-template-columns:1fr !important;gap:14px !important;margin-bottom:0 !important}
 .ring-row{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:44px;align-items:center;
@@ -1023,7 +1025,7 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
     <section class="hero" aria-labelledby="hero-title">
       <div class="wrap hero-inner">
         <div class="hero-copy"><p class="eyebrow">Цифровая экосистема 6П</p>
-          <h1 id="hero-title">Шесть ключевых шагов до результата<br><b>в одной экосистеме.</b></h1>
+          <h1 id="hero-title">Шесть ключевых шагов до результата<br><b>в одной</b> экосистеме.</h1>
           <p class="hero-sub">Без команды, без большого бюджета, без технических навыков</p>
           <div class="actions"><!-- когда откроется публичная регистрация: заменить span на <a class="button" href="АДРЕС" target="_blank" rel="noopener"> --><span class="button" role="button" aria-disabled="true">Начать бесплатно <span aria-hidden="true">↗</span></span></div>
         </div>
@@ -1201,7 +1203,6 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
         <p class="cycle-hint" id="cycleHint">Данные идут по кругу: результат шага становится входом следующего.</p>
       </div>
         <div class="ring-copy">
-          <p class="caps-lead">За каждым шагом стоят инструменты кабинета — то, чем Вы работаете каждый день.</p>
         <div class="caps-nav" id="capsNav" role="tablist" aria-label="Шесть шагов">
           <button type="button" role="tab" data-step="0"><i>01</i>Понять</button>
           <button type="button" role="tab" data-step="1"><i>02</i>Предложить</button>
