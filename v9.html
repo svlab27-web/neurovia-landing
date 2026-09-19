@@ -1953,7 +1953,7 @@ renderPlan();
         answer: "NeuroVia сводит это в один контур: выгрузка из бухгалтерии, заказы, каналы, продукты и цифры проекта - в одном месте. И у собственника появляется полноценный анализ: где заработали, где потеряли, что менять первым."
       },
       roadsTitle: "Решения по ощущениям стоят дороже всего.",
-      roadsLead: "Когда прибыль падает, данные обычно разбросаны: часть в бухгалтерии, часть в таблицах и CRM, часть в переписках, а самое важное - в головах у людей. Пока картину собирают вручную, деньги продолжают течь.",
+      roadsLead: "",
       roads: {
         bad: [
           ["Квартал 1", "Замечаете, что прибыль падает. В бухгалтерии видно налоги и остатки, но не причину."],
@@ -2236,7 +2236,7 @@ renderPlan();
         }, 80);
 
         document.querySelector("#roads h3").textContent = D.roadsTitle;
-        document.querySelector("#roads .roads-lead").textContent = D.roadsLead;
+        var rl = document.querySelector("#roads .roads-lead"); rl.textContent = D.roadsLead || ""; rl.hidden = !D.roadsLead;
         var ex = document.getElementById("roadsExtra");
         if (ex) { ex.innerHTML = D.extra || ""; ex.hidden = !D.extra; }
         var dep = document.getElementById("depts");
