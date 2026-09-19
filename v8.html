@@ -958,6 +958,14 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 /* v8: абзац из первого экрана убран — возвращаем прежнюю высоту колонки,
    чтобы кнопки аудиторий не наезжали на Оракула */
 @media (min-width: 900px){ .hero .hero-copy{ padding-bottom: 122px; } }
+
+/* v8: плашки выбора несут не роль, а цель — два уровня текста */
+.hero-doors button{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;max-width:270px}
+.hero-doors button b{font:700 15px var(--head);line-height:1.2}
+.hero-doors button span{font:500 13px/1.35 var(--head);opacity:.68;font-weight:500}
+.hero-doors button.is-soon{display:flex}
+.hero-doors button.is-soon b{display:inline-flex;align-items:baseline;gap:8px}
+@media (max-width:760px){ .hero-doors button{max-width:none;width:100%} }
 </style>
 </head>
 <body>
@@ -1022,13 +1030,13 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
   }
   if(img.complete) run(); else img.addEventListener("load",run,{once:true});
 })();</script>
-        <p class="doors-label">Выберите, кто Вы – и постройте свой маршрут к цели</p>
-        <div class="hero-doors" role="group" aria-label="Выберите, кто Вы">
-          <button type="button" data-persona="expert">Я эксперт</button>
-          <button type="button" data-persona="small">У меня стартап</button>
-          <button type="button" data-persona="founder">У меня действующий бизнес</button>
-          <button type="button" class="is-soon" disabled aria-disabled="true">У меня агентство<i>скоро</i></button>
-          <button type="button" class="is-soon" disabled aria-disabled="true">Я бизнес-трекер<i>скоро</i></button>
+        <p class="doors-label">Выберите свою цель – и постройте маршрут к результату</p>
+        <div class="hero-doors" role="group" aria-label="Выберите свою цель">
+          <button type="button" data-persona="expert"><b>Я эксперт</b><span>Хочу выйти в онлайн-продажи</span></button>
+          <button type="button" data-persona="small"><b>У меня стартап</b><span>Хочу протестировать идею без слива бюджета</span></button>
+          <button type="button" data-persona="founder"><b>У меня действующий бизнес</b><span>Хочу найти точки роста и избежать кассовых разрывов</span></button>
+          <button type="button" class="is-soon" disabled aria-disabled="true"><b>У меня агентство<i>скоро</i></b><span>Хочу вести проекты клиентов в одном контуре</span></button>
+          <button type="button" class="is-soon" disabled aria-disabled="true"><b>Я бизнес-трекер<i>скоро</i></b><span>Хочу вести подопечных по цифрам, а не по ощущениям</span></button>
         </div>
       </div>
     </section>
