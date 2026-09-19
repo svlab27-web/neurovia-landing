@@ -983,11 +983,10 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
   .hero-doors button:nth-child(4),.hero-doors button:nth-child(5){grid-column:span 1}
 }
 
-/* v9: возможности */
-.caps-section{background:var(--navy);color:var(--warm);border-top:1px solid rgba(255,255,255,.1)}
-.caps-section h2{color:#fff}
-.caps-section .lead{color:#c3cdd9}
-.caps-section .eyebrow{color:var(--gold)}
+/* v9: возможности внутри раздела 6П */
+.caps-inline{margin-top:38px;padding-top:30px;border-top:1px solid rgba(255,255,255,.16)}
+.caps-lead{margin:0 0 20px;font-size:17px;line-height:1.6;color:#c4ccd6;max-width:60ch}
+.caps-grid b i{display:inline-block;font:500 11px var(--mono);font-style:normal;letter-spacing:.12em;color:var(--gold);margin-right:9px;vertical-align:2px}
 .caps-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .caps-grid > div{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:22px 20px;transition:border-color .3s,transform .3s}
 .caps-grid > div:hover{border-color:rgba(238,200,48,.5);transform:translateY(-4px)}
@@ -1183,18 +1182,19 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
         </svg>
         <p class="cycle-hint" id="cycleHint">Данные идут по кругу: результат шага становится входом следующего.</p>
       </div></div>
-      <p class="cycle-loop" id="cycleLoop" hidden>Новый приоритет возвращается в шаг 01 «Понять» – цикл начинается заново.</p></div>
-    </div></section>
-    <section class="section caps-section" id="caps"><div class="wrap">
-      <div class="section-heading"><div><p class="eyebrow">Возможности</p><h2>Что Вы сможете<br>делать внутри.</h2></div><p class="lead">Шесть шагов — это не схема на картинке. За каждым стоят инструменты, которыми Вы работаете каждый день.</p></div>
-      <div class="caps-grid">
-        <div><b>Понять</b><span>Диагностика точки А, портреты клиентов, каталог болей, разбор конкурентов, карта пробелов.</span></div>
-        <div><b>Предложить</b><span>Авторская методология, продуктовая матрица, форматы, цены, офферы.</span></div>
-        <div><b>Привлечь</b><span>Бренд-кит, контент под площадки, контент-план, цепочки, кампании, лендинги.</span></div>
-        <div><b>Продать</b><span>Страницы оплаты, заказы, контакты с перепиской, статусы сделок, система автоплатежей.</span></div>
-        <div><b>Посчитать</b><span>Финмодель, юнит-экономика, воронка по источникам, средний чек, возврат покупателей.</span></div>
-        <div><b>Пересобрать</b><span>Гипотезы по степени риска, работы клиента, проверка вариантов, цели план-факт.</span></div>
+      <div class="caps-inline">
+        <p class="caps-lead">За каждым шагом стоят инструменты кабинета — то, чем Вы работаете каждый день.</p>
+        <div class="caps-grid">
+          <div><b><i>01</i>Понять</b><span>Диагностика точки А, портреты клиентов, каталог болей, разбор конкурентов, карта пробелов.</span></div>
+          <div><b><i>02</i>Предложить</b><span>Авторская методология, продуктовая матрица, форматы, цены, офферы.</span></div>
+          <div><b><i>03</i>Привлечь</b><span>Бренд-кит, контент под площадки, контент-план, цепочки, кампании, лендинги.</span></div>
+          <div><b><i>04</i>Продать</b><span>Страницы оплаты, заказы, контакты с перепиской, статусы сделок, система автоплатежей.</span></div>
+          <div><b><i>05</i>Посчитать</b><span>Финмодель, юнит-экономика, воронка по источникам, средний чек, возврат покупателей.</span></div>
+          <div><b><i>06</i>Пересобрать</b><span>Гипотезы по степени риска, работы клиента, проверка вариантов, цели план-факт.</span></div>
+        </div>
       </div>
+      <p class="cycle-loop" id="cycleLoop" hidden>Новый приоритет возвращается в шаг 01 «Понять» – цикл начинается заново.</p></div>
+    
     </div></section>
     <section class="section general-only" id="diagnostic"><div class="wrap">
       <div class="section-heading"><div><p class="eyebrow">Найти разрыв</p><h2>Больше заявок?<br>Сначала найдём потери.</h2></div><p class="lead">Диагностика связывает продукт, привлечение, продажи и цифры. На выходе: проблема, её причина и первый шаг.</p></div>
