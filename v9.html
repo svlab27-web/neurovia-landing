@@ -2713,17 +2713,37 @@ renderPlan();
     btns.forEach(function(b,j){ b.setAttribute("aria-selected", j===i ? "true" : "false"); });
     panel.innerHTML = "<h3>" + c.t + "</h3><p class='why'>" + c.why + "</p><p class='tools'>" + c.tools + "</p>";
   }
-  btns.forEach(function(b,i){ b.addEventListener("click", function(){ pick(i); }); });
+  var wrapEl = document.querySelector("#track .cycle-wrap");
+  var holdT = 0;
+  /* человек выбрал сам — шарики замирают на 10 секунд, потом идут дальше */
+  function hold(){
+    if (!wrapEl) return;
+    wrapEl.classList.add("is-held");
+    clearTimeout(holdT);
+    holdT = setTimeout(function(){ wrapEl.classList.remove("is-held"); }, 10000);
+  }
+  btns.forEach(function(b,i){ b.addEventListener("click", function(){ hold(); pick(i); }); });
+
   var ring = document.querySelector("#track .cycle");
   if (ring){
-    [].forEach.call(ring.querySelectorAll(".cnode"), function(n,i){
-      n.style.cursor = "pointer";
-      n.addEventListener("click", function(){ pick(i); });
-    });
-    [].forEach.call(ring.querySelectorAll(".clabel"), function(l,i){
-      l.style.cursor = "pointer";
-      l.addEventListener("click", function(){ pick(i); });
-    });
+    var nodes = [].slice.call(ring.querySelectorAll(".cnode"));
+    var labels = [].slice.call(ring.querySelectorAll(".clabel"));
+    nodes.forEach(function(n,i){ n.style.cursor="pointer"; n.addEventListener("click", function(){ hold(); pick(i); }); });
+    labels.forEach(function(l,i){ l.style.cursor="pointer"; l.addEventListener("click", function(){ hold(); pick(i); }); });
+
+    /* синхронизация: шарик добежал до узла — открывается его панель */
+    if (window.MutationObserver){
+      var obs = new MutationObserver(function(muts){
+        for (var k=0;k<muts.length;k++){
+          var el = muts[k].target;
+          if (el.classList && el.classList.contains("is-hit")){
+            var idx = nodes.indexOf(el);
+            if (idx >= 0) pick(idx);
+          }
+        }
+      });
+      nodes.forEach(function(n){ obs.observe(n, {attributes:true, attributeFilter:["class"]}); });
+    }
   }
   pick(0);
 })();
