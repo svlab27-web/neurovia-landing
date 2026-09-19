@@ -2314,10 +2314,15 @@ renderPlan();
         return {i: i, conv: conv, base: base, next: next,
                 name: names[i] + ' \u2192 ' + names[i + 1], tip: GAP_TIPS[i]};
       }).sort(function (a, b) { return a.conv - b.conv; });
+      const GOOD = 70;   /* с какой конверсии участок считаем рабочим */
       const best = rows[rows.length - 1];
       box.innerHTML = rows.map(function (r, k) {
-        const good = r === best;
-        const label = good ? 'Работает' : (k === 0 ? 'Слабее всего' : 'Тоже проседает');
+        const good = r.conv >= GOOD;
+        let label;
+        if (good) label = 'Работает';
+        else if (k === 0) label = 'Слабее всего';
+        else if (r === best) label = 'Лучше остальных';
+        else label = 'Тоже проседает';
         return '<div class="gap' + (good ? ' is-good' : '') + '">' +
                  '<div class="gap-head"><span class="gap-tag">' + label + '</span>' +
                  '<span class="gap-name">' + r.name + '</span>' +
