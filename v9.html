@@ -1039,6 +1039,19 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 .bar-label b{font-size:18px}
 .funnel{padding:14px 18px}
 .funnel-row{padding:9px 10px}
+
+/* v9: разбор трёх переходов воронки */
+.gaps{display:flex;flex-direction:column;gap:10px;margin:18px 0 16px;padding-top:16px;border-top:1px solid var(--line)}
+.gap{padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff}
+.gap.is-good{border-color:rgba(46,125,91,.35);background:rgba(46,125,91,.05)}
+.gap-head{display:flex;align-items:baseline;gap:10px}
+.gap-tag{font:600 9.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  border:1px solid var(--line);border-radius:3px;padding:2px 6px;white-space:nowrap}
+.gap.is-good .gap-tag{color:#2e7d5b;border-color:rgba(46,125,91,.4)}
+.gap-name{font:500 13px var(--head);color:var(--ink)}
+.gap-num{margin-left:auto;font:500 17px var(--mono);color:var(--ink)}
+.gap.is-good .gap-num{color:#2e7d5b}
+.gap-tip{margin:6px 0 0;font-size:12.5px;line-height:1.45;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -1275,7 +1288,8 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
             <div class="oracle-stage"><span class="oracle-float"><img id="oracleShot" alt="Оракул: разбирает причины" width="150" height="150" decoding="async"></span><div class="oracle-who"><b>Оракул</b><span id="oraclePose">Разбираем причины</span><span class="oracle-dots" id="oracleDots" hidden aria-hidden="true"><i></i><i></i><i></i></span></div></div>
             <p class="metric" id="loss-number">55<span>%</span></p><h3 id="loss-title">обратившихся не записались</h3><p id="loss-copy">55 из 100 написали, но не назначили встречу. Обычно дело в скорости первого ответа и в том, что человек не понял, зачем идти дальше.</p>
             <div class="recommendation"><span class="eyebrow">Первое действие</span><p id="loss-action">Разберите 10 последних диалогов и отметьте, на какой фразе разговор оборвался.</p></div>
-            <a href="#pricing" class="text-link" id="plan-link">Посмотреть тарифы <span aria-hidden="true">↗</span></a>
+            <div class="gaps" id="gaps"></div>
+          <a href="#pricing" class="text-link" id="plan-link">Посмотреть тарифы <span aria-hidden="true">↗</span></a>
           </aside>
         </div>
       </div>
@@ -2283,6 +2297,37 @@ renderPlan();
       });
     }
 
+    /* разбор всех трёх переходов: два слабых и один сильный */
+    const GAP_TIPS = [
+      'Отвечайте на заявку в первый час и закрепите ответственного за каждым обращением.',
+      'Напоминайте о встрече за день и за час: что будет и сколько времени займёт.',
+      'Отправляйте цену и ссылку на оплату в тот же день, пока разговор свежий.'
+    ];
+    function renderBreakdown(o, v, p, d) {
+      const box = $('gaps');
+      if (!box) return;
+      const names = (typeof STAGE_NAMES !== 'undefined' && STAGE_NAMES) || ['Обратились','Записались','Дошли','Купили'];
+      const pairs = [[o, v], [v, p], [p, d]];
+      const rows = pairs.map(function (pair, i) {
+        const base = pair[0], next = pair[1];
+        const conv = base > 0 ? Math.round(next / base * 100) : 0;
+        return {i: i, conv: conv, base: base, next: next,
+                name: names[i] + ' \u2192 ' + names[i + 1], tip: GAP_TIPS[i]};
+      }).sort(function (a, b) { return a.conv - b.conv; });
+      const best = rows[rows.length - 1];
+      box.innerHTML = rows.map(function (r, k) {
+        const good = r === best;
+        const label = good ? 'Работает' : (k === 0 ? 'Слабее всего' : 'Тоже проседает');
+        return '<div class="gap' + (good ? ' is-good' : '') + '">' +
+                 '<div class="gap-head"><span class="gap-tag">' + label + '</span>' +
+                 '<span class="gap-name">' + r.name + '</span>' +
+                 '<b class="gap-num">' + r.conv + '%</b></div>' +
+                 '<p class="gap-tip">' + (good
+                    ? 'Здесь ничего не трогайте: этот участок держит всю воронку.'
+                    : r.tip) + '</p>' +
+               '</div>';
+      }).join('');
+    }
     function biggestGap(o, v, p, d) {
       /* худший этап считаем по доле потерь, а не по их количеству:
          500 из 1000 (50%) — лучше, чем 180 из 200 (90%) */
@@ -2308,6 +2353,7 @@ renderPlan();
       mode.textContent = own ? `Ваши данные · ${period}` : `Пример данных · ${period}`;
       mode.classList.toggle('is-own', !!own);
       selectFunnel(biggestGap(o, v, p, d));
+      renderBreakdown(o, v, p, d);
       /* ровная воронка: терять почти нечего, узкое место на входе */
       if (funnelIsFlat(o, v, p, d)) {
         const total = o > 0 ? Math.round(d / o * 100) : 0;
