@@ -983,14 +983,7 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
   .hero-doors button:nth-child(4),.hero-doors button:nth-child(5){grid-column:span 1}
 }
 
-/* v9: реальный пример и возможности */
-.chain-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.chain-grid > div{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px 20px 22px;box-shadow:var(--sh);transition:border-color .3s,transform .3s}
-.chain-grid > div:hover{border-color:var(--gold);transform:translateY(-4px)}
-.chain-grid .n{display:block;font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
-.chain-grid b{display:block;font:700 16.5px var(--head);margin:9px 0 7px;color:var(--ink)}
-.chain-grid span:not(.n){display:block;font-size:15px;line-height:1.55;color:var(--muted)}
-.chain-note{margin:22px 0 0;font-size:16px;line-height:1.6;color:var(--ink);font-weight:600;max-width:64ch}
+/* v9: возможности */
 .caps-section{background:var(--navy);color:var(--warm);border-top:1px solid rgba(255,255,255,.1)}
 .caps-section h2{color:#fff}
 .caps-section .lead{color:#c3cdd9}
@@ -1000,8 +993,8 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 .caps-grid > div:hover{border-color:rgba(238,200,48,.5);transform:translateY(-4px)}
 .caps-grid b{display:block;font:700 17px var(--head);color:#fff;margin-bottom:8px}
 .caps-grid span{font-size:15px;line-height:1.55;color:#b9c5d3}
-@media (max-width:1000px){ .chain-grid,.caps-grid{grid-template-columns:1fr 1fr} }
-@media (max-width:640px){ .chain-grid,.caps-grid{grid-template-columns:1fr} }
+@media (max-width:1000px){ .caps-grid{grid-template-columns:1fr 1fr} }
+@media (max-width:640px){ .caps-grid{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
@@ -1162,21 +1155,6 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
         </div>
       </div>
     </section>
-
-    
-
-    <section class="section chain-section" id="example"><div class="wrap">
-      <div class="section-heading"><div><p class="eyebrow">Реальный пример</p><h2>Один ответ доходит<br>до денег.</h2></div><p class="lead">Как связаны данные и материалы: то, что Вы сказали на первом шаге, живёт во всех остальных. Ничего не нужно вводить второй раз.</p></div>
-      <div class="chain-grid">
-        <div><span class="n">01 · Диагностика</span><b>Ваш ответ своими словами</b><span>«Ко мне приходят руководители среднего звена, которые застряли перед переходом в топ».</span></div>
-        <div><span class="n">02 · Клиент</span><b>Портрет и боль</b><span>Заполняются из этого ответа. Сегмент и его проблема зафиксированы, а не придуманы заново.</span></div>
-        <div><span class="n">03 · Продукт</span><b>Линейка и цена</b><span>Разбор карьерной стратегии собирается под этот сегмент. Цена появляется здесь и дальше берётся отсюда.</span></div>
-        <div><span class="n">04 · Материалы</span><b>Пост и лендинг</b><span>Написаны под этот сегмент и эту боль, а не «вообще про карьеру». Метка источника проставлена сама.</span></div>
-        <div><span class="n">05 · Оплата</span><b>Страница оплаты</b><span>Берёт цену у продукта. Касса оформлена на Вас, деньги приходят напрямую.</span></div>
-        <div><span class="n">06 · Отчёт</span><b>Что сработало</b><span>Видно: этот материал привёл этого клиента и окупился вот настолько.</span></div>
-      </div>
-      <p class="chain-note">Одна запись из первого шага доходит до последнего. Это и есть экосистема: данные не пересобираются на каждом участке.</p>
-    </div></section>
     <section class="section track-section general-only" id="track"><div class="wrap">
       <div class="section-heading track-head"><div><p class="eyebrow">Пройти маршрут</p><h2>Шесть шагов.<br>Одна система роста.</h2><p class="lead">На каждом этапе Вы создаёте конкретный результат. Он становится основой следующего шага.</p></div><div class="cycle-wrap">
         <svg class="cycle" viewBox="-24 0 428 306" role="img" aria-label="Цикл 6П: шесть шагов, шестой возвращает к первому">
