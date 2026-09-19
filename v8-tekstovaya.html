@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NeuroVia Labs — весь бизнес в одном кабинете</title>
+<meta name="description" content="Диагностика покажет, где вы теряете. Дальше платформа соберёт продукт, аудиторию, контент, приём оплат и аналитику — связанные между собой. 30 минут, бесплатно.">
+<meta property="og:title" content="NeuroVia Labs — весь бизнес в одном кабинете">
+<meta property="og:description" content="Не ещё один ИИ, который пишет тексты. Кабинет, где ваш бизнес собран целиком — и видно, что приносит деньги.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://svlab27-web.github.io/neurovia-landing/v6.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Golos+Text:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --paper:#FBFAF7; --panel:#FFFFFF; --sunk:#F2EFE8;
+    --ink:#16191E; --soft:#565C66; --faint:#8A8F98;
+    --line:#E5E1D7; --strong:#C9C4B6;
+    --gold:#9A6A1C; --gold-bg:#F5EBD8;
+    --ok:#2E6B4F;
+    --display:"Unbounded", Georgia, serif;
+    --body:"Golos Text", -apple-system, "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#111419; --panel:#181C22; --sunk:#1E232A;
+      --ink:#ECEAE4; --soft:#A8AEB6; --faint:#7C828A;
+      --line:#272C34; --strong:#3A414A;
+      --gold:#D9AD62; --gold-bg:#2A2314;
+      --ok:#7FBE97;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#111419; --panel:#181C22; --sunk:#1E232A;
+    --ink:#ECEAE4; --soft:#A8AEB6; --faint:#7C828A;
+    --line:#272C34; --strong:#3A414A;
+    --gold:#D9AD62; --gold-bg:#2A2314;
+    --ok:#7FBE97;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--body); font-size:17px; line-height:1.6}
+  img{max-width:100%}
+  .wrap{max-width:900px; margin:0 auto; padding:0 24px}
+  section{padding:64px 0; border-top:1px solid var(--line)}
+  section:first-of-type{border-top:none}
+
+  h1{font-family:var(--display); font-weight:800; font-size:clamp(32px,5.2vw,52px); line-height:1.08; letter-spacing:-.025em; margin:0; text-wrap:balance}
+  h2{font-family:var(--display); font-weight:600; font-size:clamp(24px,3.4vw,32px); line-height:1.18; letter-spacing:-.02em; margin:0 0 10px; text-wrap:balance}
+  h3{font-size:18px; font-weight:600; margin:0 0 5px; letter-spacing:-.005em}
+  p{margin:0 0 16px; max-width:64ch}
+  .lead{font-size:19px; color:var(--soft); max-width:60ch}
+  .kicker{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:14px}
+  .sub{color:var(--soft); max-width:62ch; margin:0 0 28px}
+
+  /* hero */
+  .hero{padding:52px 0 60px}
+  .brand{display:flex; align-items:center; gap:9px; margin-bottom:38px; font-weight:600; font-size:15px; letter-spacing:-.01em}
+  .brand i{width:9px; height:9px; background:var(--gold); border-radius:2px; display:block; transform:rotate(45deg)}
+  .hero p.lead{margin:22px 0 30px}
+  .cta{display:flex; flex-wrap:wrap; gap:12px 16px; align-items:center}
+  .btn{
+    display:inline-block; background:var(--ink); color:var(--paper); text-decoration:none;
+    font-weight:600; font-size:17px; padding:15px 28px; border-radius:4px;
+  }
+  .btn:hover{opacity:.88}
+  .btn.ghost{background:none; color:var(--ink); border:1px solid var(--strong); padding:14px 22px}
+  .cta .note{font-size:14.5px; color:var(--faint)}
+  .who{margin-top:34px; padding-top:20px; border-top:1px solid var(--line); font-size:14.5px; color:var(--faint)}
+  .who b{color:var(--soft); font-weight:500}
+
+  /* боли */
+  .mirror{display:flex; flex-direction:column; gap:0; margin:0 0 26px}
+  .mirror div{padding:14px 0; border-bottom:1px solid var(--line); font-size:18px; line-height:1.45; max-width:62ch}
+  .mirror div:first-child{border-top:1px solid var(--line)}
+  .punch{font-size:20px; font-weight:600; line-height:1.45; max-width:58ch; margin:0; letter-spacing:-.01em}
+
+  /* 6П */
+  .steps{display:flex; flex-direction:column; border-top:1px solid var(--line)}
+  .step{display:grid; grid-template-columns:150px minmax(0,1fr); gap:6px 24px; padding:16px 0; border-bottom:1px solid var(--line); align-items:baseline}
+  .step b{font-family:var(--display); font-size:17px; font-weight:600; letter-spacing:-.01em}
+  .step .r{color:var(--soft); font-size:16px; line-height:1.5}
+  .step .r em{font-style:normal; color:var(--ink); font-weight:500}
+
+  /* список артефактов */
+  .got{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:0 32px}
+  .got div{padding:12px 0; border-bottom:1px solid var(--line); font-size:16.5px; line-height:1.45; display:flex; gap:11px}
+  .got div::before{content:"—"; color:var(--gold); flex:none}
+
+  /* сравнение */
+  .vs{border:1px solid var(--line); background:var(--panel); border-radius:4px; overflow:hidden}
+  .vs .row{display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid var(--line)}
+  .vs .row:last-child{border-bottom:none}
+  .vs .row.h{background:var(--sunk); font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); font-weight:600}
+  .vs .c{padding:14px 18px; font-size:16px; line-height:1.45}
+  .vs .c:first-child{border-right:1px solid var(--line); color:var(--soft)}
+  .vs .row:not(.h) .c:last-child{font-weight:500}
+
+  /* для кого */
+  .aud{display:flex; flex-direction:column; border-top:1px solid var(--line)}
+  .aud div{padding:15px 0; border-bottom:1px solid var(--line); display:grid; grid-template-columns:190px minmax(0,1fr); gap:5px 24px; align-items:baseline}
+  .aud b{font-size:16.5px; font-weight:600}
+  .aud span{color:var(--soft); font-size:16px; line-height:1.5}
+
+  /* доверие */
+  .trust{background:var(--gold-bg); border-radius:4px; padding:26px 28px}
+  .trust h2{margin-bottom:16px}
+  .trust div{padding:11px 0; border-top:1px solid rgba(154,106,28,.22); font-size:16.5px; line-height:1.5; max-width:64ch}
+  .trust div:first-of-type{border-top:none; padding-top:0}
+  .trust b{font-weight:600}
+
+  /* тарифы */
+  .price{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; margin-bottom:20px}
+  .pl{border:1px solid var(--line); border-radius:4px; padding:20px; background:var(--panel); display:flex; flex-direction:column; gap:7px}
+  .pl .n{font-family:var(--display); font-size:17px; font-weight:600}
+  .pl .v{font-size:24px; font-weight:700; letter-spacing:-.02em}
+  .pl .v span{font-size:14px; font-weight:400; color:var(--faint)}
+  .pl .d{font-size:15px; color:var(--soft); line-height:1.45}
+  .trial{border:1px dashed var(--strong); border-radius:4px; padding:16px 20px; font-size:16.5px}
+  .trial b{font-weight:600}
+
+  /* возражения */
+  .obj{display:flex; flex-direction:column; border-top:1px solid var(--line)}
+  .obj div{padding:15px 0; border-bottom:1px solid var(--line)}
+  .obj b{display:block; font-size:16.5px; font-weight:600; margin-bottom:4px}
+  .obj span{color:var(--soft); font-size:16px; line-height:1.5; display:block; max-width:64ch}
+
+  /* финал */
+  .final{text-align:left; padding:70px 0 90px}
+  .final h2{font-size:clamp(26px,4vw,38px); margin-bottom:14px}
+  footer{border-top:1px solid var(--line); padding:26px 0 44px; font-size:14px; color:var(--faint)}
+
+  @media (max-width:640px){
+    body{font-size:16px}
+    section{padding:48px 0}
+    .step{grid-template-columns:1fr; gap:3px}
+    .aud div{grid-template-columns:1fr; gap:3px}
+    .vs .row{grid-template-columns:1fr}
+    .vs .c:first-child{border-right:none; border-bottom:1px solid var(--line)}
+    .vs .row.h{display:none}
+    .btn{display:block; text-align:center}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="brand"><i></i>NeuroVia Labs</div>
+    <h1>Весь бизнес — в одном кабинете. И наконец видно, что приносит деньги</h1>
+    <p class="lead">Диагностика покажет, где вы теряете прямо сейчас. Дальше платформа соберёт продукт, аудиторию, контент, приём оплат и аналитику — так, что каждый шаг знает предыдущий.</p>
+    <div class="cta">
+      <a class="btn" href="https://neurovialabs.io/app/diagnostic">Пройти диагностику</a>
+      <a class="btn ghost" href="#kak">Посмотреть, как устроено</a>
+      <span class="note">30 минут · бесплатно · без карты</span>
+    </div>
+    <div class="who"><b>Для кого:</b> эксперты и практики · стартапы · действующий бизнес · агентства · бизнес-трекеры</div>
+  </header>
+
+  <section>
+    <div class="kicker">Знакомо?</div>
+    <h2>Вы делаете много. Складывается мало</h2>
+    <div class="mirror">
+      <div>Контент выходит регулярно — заявок больше не стало.</div>
+      <div>Клиенты в WhatsApp, в Telegram и в голове. Кто на какой стадии — вспоминаете по переписке.</div>
+      <div>Цену поставили на глаз и не считаете, что от неё остаётся.</div>
+      <div>Реклама крутится, но откуда пришёл последний клиент — точно не скажете.</div>
+      <div>ИИ пишет тексты за минуту. Денег от этого не прибавилось.</div>
+    </div>
+    <p class="punch">Дело не в том, что вы мало делаете. Дело в том, что сделанное не связано между собой — поэтому не складывается в продажи и не поддаётся счёту.</p>
+  </section>
+
+  <section id="kak">
+    <div class="kicker">Что мы делаем иначе</div>
+    <h2>Мы связываем</h2>
+    <p class="sub">Платформа держит ваше дело как одну картину: кто ваш клиент, какую боль он несёт, какой продукт её закрывает, каким текстом об этом сказать, по какой ссылке он заплатит и сколько вы на этом заработали. Каждый следующий шаг берёт данные предыдущего — поэтому контент попадает в сегмент, цена сходится с экономикой, а заявка доходит до оплаты.</p>
+
+    <div class="steps">
+      <div class="step"><b>Понять</b><span class="r">Где вы сейчас и кто ваш клиент. <em>Диагностика, портреты аудитории, каталог болей, разбор конкурентов.</em></span></div>
+      <div class="step"><b>Предложить</b><span class="r">Что и за сколько вы продаёте. <em>Авторская методика, матрица продуктов по ступеням, бренд.</em></span></div>
+      <div class="step"><b>Привлечь</b><span class="r">Чем вы говорите с рынком. <em>Контент под ваши площадки, план и цепочки, кампании.</em></span></div>
+      <div class="step"><b>Продать</b><span class="r">Как деньги доходят до вас. <em>Страница оплаты, заказы, карточка клиента с перепиской и платежами.</em></span></div>
+      <div class="step"><b>Посчитать</b><span class="r">Что действительно работает. <em>Путь от клика до оплаты, источники, средний чек, возврат покупателей.</em></span></div>
+      <div class="step"><b>Пересобрать</b><span class="r">Что менять следующим. <em>Гипотезы по степени риска, проверки вариантов, карта пробелов.</em></span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">Результат</div>
+    <h2>Что у вас будет на руках</h2>
+    <p class="sub">Не советы и не конспект сессии. Готовые вещи, которыми можно пользоваться завтра.</p>
+    <div class="got">
+      <div>Позиционирование в одну фразу и авторская методика</div>
+      <div>3–5 портретов клиентов с их болями</div>
+      <div>Матрица продуктов: бесплатный вход → первая покупка → основной, с ценами</div>
+      <div>Бренд: голос, правила, палитра</div>
+      <div>Контент-план и первые материалы под ваши площадки</div>
+      <div>Страница оплаты, которую можно разослать ссылкой</div>
+      <div>Карточки клиентов: переписка и платежи одного человека в одной строке</div>
+      <div>Дашборд: просмотры → лиды → продажи, по источникам</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">Главный вопрос</div>
+    <h2>«У меня же есть ИИ-чат. Зачем платформа?»</h2>
+    <p class="sub">Затем, что чат помогает думать, а продажи делают действия и цифры.</p>
+    <div class="vs">
+      <div class="row h"><div class="c">ИИ-чат</div><div class="c">NeuroVia</div></div>
+      <div class="row"><div class="c">Помнит разговор, пока открыта вкладка</div><div class="c">Помнит ваш бизнес: клиентов, продукты, боли, цены</div></div>
+      <div class="row"><div class="c">Пишет текст</div><div class="c">Публикует, отправляет клиенту, принимает оплату</div></div>
+      <div class="row"><div class="c">Считает числа словами</div><div class="c">Считает калькулятором и выгружает в файл</div></div>
+      <div class="row"><div class="c">Не знает, сработал ли его совет</div><div class="c">Показывает путь от клика до денег</div></div>
+      <div class="row"><div class="c">Отвечает на заданный вопрос</div><div class="c">Говорит то, о чём вы спросить не догадались</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">Для кого</div>
+    <h2>Шаги одни. Содержание — ваше</h2>
+    <div class="aud">
+      <div><b>Эксперт, практик</b><span>Перестать объяснять, чем вы отличаетесь: методика и воронка соберутся из ваших же ответов.</span></div>
+      <div><b>Стартап</b><span>Проверить идею до трат: финмодель, гипотезы по степени риска, первые продажи руками.</span></div>
+      <div><b>Действующий бизнес</b><span>Увидеть, какой канал приносит деньги, и перестать платить за остальные.</span></div>
+      <div><b>Агентство</b><span>Вести несколько проектов в одном контуре и отдавать клиенту отчёт с цифрами, а не пересказ.</span></div>
+      <div><b>Бизнес-трекер</b><span>Работать с подопечным по данным, а не по ощущениям: у каждого свой кабинет и общая картина.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="trust">
+      <h2>Деньги и доступы остаются вашими</h2>
+      <div><b>Касса оформлена на вас.</b> Оплаты от ваших клиентов приходят на ваш счёт напрямую. Мы передаём данные и не берём процент с вашего оборота.</div>
+      <div><b>Ключи ваши.</b> Подключаете свои ключи к моделям и сервисам — значения видите только вы, хранятся в зашифрованном виде.</div>
+      <div><b>Ваши инструменты остаются с вами.</b> 38 интеграций: оплаты, мессенджеры, соцсети, рекламные кабинеты, CRM, телефония, аналитика. Bitrix24 и amoCRM подключаются, а не заменяются.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">Сколько стоит</div>
+    <h2>Платите за проект, а не за набор функций</h2>
+    <div class="price">
+      <div class="pl"><span class="n">Старт</span><span class="v">59 900 ₸<span> / мес</span></span><span class="d">Один проект. Весь маршрут: от диагностики до приёма оплат.</span></div>
+      <div class="pl"><span class="n">Рост</span><span class="v">125 000 ₸<span> / мес</span></span><span class="d">Несколько направлений и работа в команде.</span></div>
+      <div class="pl"><span class="n">Бизнес</span><span class="v">от 280 000 ₸<span> / мес</span></span><span class="d">Агентствам и сетям. Состав собираем под вашу задачу.</span></div>
+    </div>
+    <div class="trial"><b>7 дней на тарифе «Бизнес» — бесплатно, без карты.</b> Полный доступ ко всем инструментам, чтобы решать по факту, а не по описанию.</div>
+  </section>
+
+  <section>
+    <div class="kicker">Сомнения</div>
+    <h2>Что обычно спрашивают</h2>
+    <div class="obj">
+      <div><b>«Я не технарь»</b><span>Подключение по шагам, с проверкой связи на каждом. Программировать не нужно ничего.</span></div>
+      <div><b>«Нет времени на настройку»</b><span>Начните с диагностики — это один вечер. Остальное подключается по мере надобности, а не сразу.</span></div>
+      <div><b>«У меня уже есть сайт и CRM»</b><span>Оставьте их. Платформа встраивается в то, что у вас работает, и забирает на себя то, чего не хватает.</span></div>
+      <div><b>«А если не подойдёт»</b><span>Семь дней полного доступа без карты. Всё, что вы заполнили, остаётся вашим и выгружается.</span></div>
+      <div><b>«Это же просто обёртка над ИИ»</b><span>ИИ здесь один из инструментов. Деньги приносит связанность: продукт знает цену, контент знает сегмент, оплата знает клиента, отчёт знает источник.</span></div>
+    </div>
+  </section>
+
+  <section class="final">
+    <h2>Начните с того, что ничего не стоит</h2>
+    <p class="lead">Диагностика определит вашу точку А и покажет ближайшее слабое место. Даже если дальше вы не пойдёте — вы будете знать, где именно теряете.</p>
+    <div class="cta" style="margin-top:26px">
+      <a class="btn" href="https://neurovialabs.io/app/diagnostic">Пройти диагностику</a>
+      <span class="note">30 минут · бесплатно · без карты</span>
+    </div>
+  </section>
+
+  <footer>
+    NeuroVia Labs · платформа для запуска и роста бизнеса · Казахстан
+  </footer>
+
+</div>
+</body>
+</html>
