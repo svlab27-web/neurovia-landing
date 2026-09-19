@@ -983,7 +983,15 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
   .hero-doors button:nth-child(4),.hero-doors button:nth-child(5){grid-column:span 1}
 }
 
-/* v9: возможности внутри раздела 6П — слово открывает текст */
+/* v9: кольцо и панель шага — один блок */
+.track-head{grid-template-columns:1fr !important;gap:14px !important;margin-bottom:0 !important}
+.ring-row{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:44px;align-items:center;
+  margin-top:26px;padding-top:26px;border-top:1px solid rgba(255,255,255,.16)}
+.ring-row .cycle-wrap{margin:0}
+.ring-copy .caps-lead{margin:0 0 16px;font-size:15.5px;line-height:1.55;color:#9fb0c4;max-width:52ch}
+.ring-copy .caps-panel{min-height:190px}
+@media (min-width:901px){ .ring-copy .caps-nav{display:none} }
+@media (max-width:900px){ .ring-row{grid-template-columns:1fr;gap:26px} .ring-copy .caps-panel{min-height:0} }
 .caps-nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
 .caps-nav button{cursor:pointer;background:none;border:1px solid rgba(255,255,255,.18);border-radius:999px;
   color:var(--warm);padding:9px 16px;font:600 14.5px var(--head);display:inline-flex;align-items:center;gap:8px;
@@ -1163,7 +1171,9 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
       </div>
     </section>
     <section class="section track-section general-only" id="track"><div class="wrap">
-      <div class="section-heading track-head"><div><p class="eyebrow">Пройти маршрут</p><h2>Шесть шагов.<br>Одна система роста.</h2><p class="lead">На каждом этапе Вы создаёте конкретный результат. Он становится основой следующего шага.</p></div><div class="cycle-wrap">
+      <div class="section-heading track-head"><div><p class="eyebrow">Пройти маршрут</p><h2>Шесть шагов.<br>Одна система роста.</h2><p class="lead">На каждом этапе Вы создаёте конкретный результат. Он становится основой следующего шага.</p></div></div>
+      <div class="ring-row">
+        <div class="cycle-wrap">
         <svg class="cycle" viewBox="-24 0 428 306" role="img" aria-label="Цикл 6П: шесть шагов, шестой возвращает к первому">
           <circle class="cycle-ring" cx="190" cy="158" r="86"/>
           <path class="cycle-return" d="M 116,115 A 86,86 0 0,1 190,72"/>
@@ -1189,9 +1199,9 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
           <circle class="cycle-dot head" r="5"/>
         </svg>
         <p class="cycle-hint" id="cycleHint">Данные идут по кругу: результат шага становится входом следующего.</p>
-      </div></div>
-      <div class="caps-inline">
-        <p class="caps-lead">За каждым шагом стоят инструменты кабинета — то, чем Вы работаете каждый день.</p>
+      </div>
+        <div class="ring-copy">
+          <p class="caps-lead">За каждым шагом стоят инструменты кабинета — то, чем Вы работаете каждый день.</p>
         <div class="caps-nav" id="capsNav" role="tablist" aria-label="Шесть шагов">
           <button type="button" role="tab" data-step="0"><i>01</i>Понять</button>
           <button type="button" role="tab" data-step="1"><i>02</i>Предложить</button>
@@ -1201,6 +1211,8 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
           <button type="button" role="tab" data-step="5"><i>06</i>Пересобрать</button>
         </div>
         <div class="caps-panel" id="capsPanel"></div>
+        </div>
+      </div>
         </div>
       </div>
       <p class="cycle-loop" id="cycleLoop" hidden>Новый приоритет возвращается в шаг 01 «Понять» – цикл начинается заново.</p></div>
