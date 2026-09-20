@@ -52,9 +52,15 @@
   .hero .promise{font-size:20px; line-height:1.5; font-weight:600; color:var(--warm); margin:22px 0 0; max-width:46ch}
   .hero .lead{font-size:19px; line-height:1.55; color:#C8D2DE; max-width:52ch; margin:24px 0 0}
   .hero .small{font-size:15.5px; color:var(--silver); margin:14px 0 0; max-width:50ch}
-  .tasks{margin:26px 0 0; display:flex; flex-direction:column; gap:16px; max-width:56ch}
-  .tasks p{margin:0; font-size:16.5px; line-height:1.55; color:#C8D2DE; padding-left:16px; border-left:2px solid rgba(238,200,48,.5)}
-  .tasks p span{display:block; font:700 12px var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:6px}
+  .tasks{margin:26px 0 0; display:flex; flex-direction:column; gap:18px; max-width:58ch}
+  .task-you{margin:0; font-size:16.5px; line-height:1.55; color:#C8D2DE; padding-left:16px; border-left:2px solid rgba(238,200,48,.5)}
+  .tasks span{display:block; font:700 12px var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:6px}
+  .task-oracle{padding-left:16px; border-left:2px solid var(--gold)}
+  .task-oracle ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:7px}
+  .task-oracle li{font-size:16.5px; line-height:1.45; color:#C8D2DE}
+  .task-oracle li b{color:#fff; font-weight:600}
+  .task-oracle .loop{margin:12px 0 0; padding-top:11px; border-top:1px solid rgba(255,255,255,.12);
+    font-size:15px; line-height:1.5; color:var(--silver)}
   .cta{display:flex; flex-wrap:wrap; gap:14px; align-items:center; margin-top:30px}
   .cta .note{font:500 13.5px var(--mono); color:var(--silver)}
 
@@ -156,8 +162,17 @@
       <h1>Экосистема для твоего <b>старта в онлайн</b></h1>
       <p class="promise">Без знания маркетинга и методологии. Без большого бюджета и большой команды.</p>
       <div class="tasks">
-        <p><span>Твоя задача</span>Выгрузить все исходные данные: из головы, таблиц, идей и разных приложений.</p>
-        <p><span>Задача Оракула</span>Проанализировать их и создать маркетинговую стратегию, проанализировать конкурентов, разобрать целевую аудиторию и её боли. На основании этого создать продуктовую линейку, подготовить контент, выстроить воронку продаж и подключить приём оплат.</p>
+        <p class="task-you"><span>Твоя задача</span>Рассказать, как есть: про клиентов, продукт и деньги. Всё, что сейчас в голове, в таблицах и в переписках. Один вечер честных ответов.</p>
+        <div class="task-oracle">
+          <span>Задача Оракула</span>
+          <ul>
+            <li><b>Изучить рынок</b> — конкурентов, аудиторию и то, за что люди платят</li>
+            <li><b>Собрать продукт</b> — линейку, цены и оффер</li>
+            <li><b>Сделать контент</b> — под найденные боли и твои площадки</li>
+            <li><b>Довести до денег</b> — воронка, приём оплат, первые продажи</li>
+          </ul>
+          <p class="loop">А потом посчитать, найти узкое место и показать, что менять на следующем круге.</p>
+        </div>
       </div>
       <div class="cta">
         <a class="btn" href="https://neurovialabs.io/app/diagnostic">Начать бесплатно ↗</a>
