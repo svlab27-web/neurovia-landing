@@ -52,6 +52,9 @@
   .hero .promise{font-size:20px; line-height:1.5; font-weight:600; color:var(--warm); margin:22px 0 0; max-width:46ch}
   .hero .lead{font-size:19px; line-height:1.55; color:#C8D2DE; max-width:52ch; margin:24px 0 0}
   .hero .small{font-size:15.5px; color:var(--silver); margin:14px 0 0; max-width:50ch}
+  .tasks{margin:26px 0 0; display:flex; flex-direction:column; gap:16px; max-width:56ch}
+  .tasks p{margin:0; font-size:16.5px; line-height:1.55; color:#C8D2DE; padding-left:16px; border-left:2px solid rgba(238,200,48,.5)}
+  .tasks p span{display:block; font:700 12px var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:6px}
   .cta{display:flex; flex-wrap:wrap; gap:14px; align-items:center; margin-top:30px}
   .cta .note{font:500 13.5px var(--mono); color:var(--silver)}
 
@@ -149,11 +152,13 @@
 <div class="hero">
   <div class="wrap hero-grid">
     <div>
-      <p class="eyebrow">NVL · площадка для старта в онлайне</p>
+      <p class="eyebrow">NVL · экосистема 6П</p>
       <h1>Экосистема для твоего <b>старта в онлайн</b></h1>
       <p class="promise">Без знания маркетинга и методологии. Без большого бюджета и большой команды.</p>
-      <p class="lead">Оракул задаёт вопросы — ты отвечаешь. Дальше платформа собирает стратегию, упаковывает продукт, пишет контент, строит воронку и подключает приём оплат.</p>
-      <p class="small">Твоя задача — рассказать правду о своём деле.</p>
+      <div class="tasks">
+        <p><span>Твоя задача</span>Выгрузить все исходные данные: из головы, таблиц, идей и разных приложений.</p>
+        <p><span>Задача Оракула</span>Проанализировать их и создать маркетинговую стратегию, проанализировать конкурентов, разобрать целевую аудиторию и её боли. На основании этого создать продуктовую линейку, подготовить контент, выстроить воронку продаж и подключить приём оплат.</p>
+      </div>
       <div class="cta">
         <a class="btn" href="https://neurovialabs.io/app/diagnostic">Начать бесплатно ↗</a>
         <a class="btn ghost" href="#delaet">Что делает платформа ↓</a>
@@ -163,10 +168,10 @@
 
     <div class="mock">
       <div class="top"><span>NVL · Оракул</span><span class="tag">пример</span></div>
-      <h2>Вы отвечаете — платформа собирает</h2>
+      <h2>Ты отвечаешь — платформа собирает</h2>
       <div class="qa">
         <div class="q">Оракул спрашивает</div>
-        <p>Кто к вам приходит чаще всего и с какой проблемой?</p>
+        <p>Кто к тебе приходит чаще всего и с какой проблемой?</p>
         <div class="ans">Руководители отделов, которые выгорели и хотят уйти в консалтинг</div>
       </div>
       <div class="steps">
