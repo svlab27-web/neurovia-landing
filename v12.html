@@ -134,10 +134,11 @@
   .cycle-note{margin:20px 0 0; font-size:16px; color:var(--muted); max-width:66ch}
 
   /* ——— движение ——— */
-  .qa .ans{opacity:0; transform:translateY(4px); transition:opacity .5s ease, transform .5s ease}
-  .qa.is-on .ans{opacity:1; transform:none}
-  .steps > div{opacity:.35; transform:translateY(6px); transition:opacity .45s ease, transform .45s ease, border-color .45s ease, background .45s ease}
-  .steps > div.is-on{opacity:1; transform:none; border-color:rgba(238,200,48,.45); background:rgba(238,200,48,.07)}
+  .qa .ans,.steps > div{transition:opacity .5s ease, transform .5s ease, border-color .45s ease, background .45s ease}
+  .mock.playing .qa .ans{opacity:0; transform:translateY(4px)}
+  .mock.playing .qa.is-on .ans{opacity:1; transform:none}
+  .mock.playing .steps > div{opacity:.35; transform:translateY(6px)}
+  .mock.playing .steps > div.is-on{opacity:1; transform:none; border-color:rgba(238,200,48,.45); background:rgba(238,200,48,.07)}
   .steps > div .tick{color:var(--silver); transition:color .3s ease, transform .3s ease}
   .steps > div.is-on .tick{color:var(--gold); transform:scale(1.15)}
   .mock{position:relative; overflow:hidden}
@@ -356,12 +357,15 @@
   } else {
     blocks.forEach(function(b){ b.classList.add('seen'); });
   }
+  setTimeout(function(){ blocks.forEach(function(b){ b.classList.add('seen'); }); }, 2500);
 
   /* сцена в макете: вопрос -> ответ -> четыре результата */
   var qa = document.getElementById('qa'), steps = document.getElementById('steps');
   if (qa && steps && !reduce.matches){
     var rows = [].slice.call(steps.children), timers = [];
+    var mock = document.querySelector('.mock');
     function play(){
+      mock.classList.add('playing');
       timers.forEach(clearTimeout); timers = [];
       qa.classList.remove('is-on');
       rows.forEach(function(r){ r.classList.remove('is-on'); });
