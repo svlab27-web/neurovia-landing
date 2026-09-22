@@ -1270,6 +1270,60 @@ header{background:var(--warm);color:var(--ink);border-bottom:1px solid var(--lin
 
 /* пустое место под кнопкой осталось от прежней раскладки — двери поднимаются выше */
 .hero-copy{padding-bottom:10px}
+
+/* ===================== v13: результат, отличие, факты Оракула ===================== */
+.caps-panel .out{margin-top:12px;padding-top:12px;border-top:1px dashed rgba(244,243,240,.22);
+  font-size:14.5px;line-height:1.5}
+.caps-panel .out b{color:var(--gold);font-weight:600}
+
+.result-section{background:var(--navy);color:var(--warm);border-top:1px solid rgba(255,255,255,.1)}
+.result-section .eyebrow{color:var(--gold)}
+.result-section .lead{color:#c4ccd6}
+.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.res-item{display:grid;grid-template-columns:38px 1fr;gap:14px;align-items:start;
+  padding:17px 20px;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:rgba(255,255,255,.05)}
+.res-item>span{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;
+  background:rgba(238,200,48,.16);color:var(--gold);font:600 12px var(--mono)}
+.res-item b{display:block;font:700 16.5px var(--head);margin-bottom:4px}
+.res-item p{font-size:14px;line-height:1.5;color:#c4ccd6}
+.res-note{margin-top:20px;padding:16px 20px;border-left:3px solid var(--gold);border-radius:0 10px 10px 0;
+  background:rgba(255,255,255,.06);font-size:15.5px;line-height:1.55;color:#dfe4ea}
+
+.oracle-facts{grid-column:1 / -1;margin-top:34px}
+.of-lead{font:600 16px/1.5 var(--head);max-width:62ch}
+.of-split{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:16px;
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+.of-col{padding:18px 20px}
+.of-fact{border-right:1px solid var(--line)}
+.of-tag{display:inline-block;margin-bottom:11px;padding:4px 10px;border-radius:6px;
+  font:600 10.5px var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.of-fact .of-tag{background:#e7f2ec;color:#2a6549}
+.of-hyp .of-tag{background:#f7ecd0;color:#8a6a10}
+.of-col p{font-size:14.5px;line-height:1.55;color:var(--muted)}
+.of-col p + p{margin-top:12px}
+.of-note{margin-top:12px;font:600 14px var(--head);color:var(--muted)}
+
+.diff-section{background:var(--navy);color:var(--warm);border-top:1px solid rgba(255,255,255,.1)}
+.diff-section .eyebrow{color:var(--gold)}
+.diff-section .lead{color:#c4ccd6}
+.diff-wrap{overflow-x:auto}
+.diff-table{width:100%;min-width:640px;border-collapse:collapse;
+  border:1px solid rgba(255,255,255,.14);border-radius:12px;overflow:hidden}
+.diff-table th{text-align:left;padding:13px 18px;background:rgba(255,255,255,.07);
+  font:600 10.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--silver)}
+.diff-table td{padding:15px 18px;border-top:1px solid rgba(255,255,255,.12);
+  font-size:14.5px;line-height:1.5;color:#c4ccd6;vertical-align:top}
+.diff-table td:first-child{font:700 15px var(--head);color:#fff;white-space:nowrap}
+.diff-concl{margin-top:22px;font:600 clamp(17px,1.8vw,21px)/1.4 var(--head);color:#fff;text-align:center}
+
+.feat-section{background:var(--mist)}
+.feat-section .feature-card{background:#fff}
+
+@media (max-width:820px){
+  .res-grid{grid-template-columns:1fr}
+  .of-split{grid-template-columns:1fr}
+  .of-fact{border-right:0;border-bottom:1px solid var(--line)}
+}
 </style>
 </head>
 <body>
@@ -1344,7 +1398,7 @@ header{background:var(--warm);color:var(--ink);border-bottom:1px solid var(--lin
       </div>
     </section>
 
-    <section class="ribbon general-only"><div class="wrap"><span>Один проект — один контекст</span><span>Инструменты связаны между собой</span><span>Оракул рядом на каждом шаге</span></div></section>
+    
 
     <section class="section aud-section general-only" id="audiences"><div class="wrap">
       <div class="section-heading"><div><p class="eyebrow">Для кого</p><h2>Пять маршрутов.<br>Разные точки старта — одна система.</h2></div><p class="lead">Маршрут подстраивается под то, что у Вас уже есть: опыт, идея или действующие продажи. Сам бизнес может быть любым — услуги, товар или digital. Онлайн здесь только канал: воронку и оплаты NeuroVia собирает в мессенджерах, соцсетях и на сайте.</p></div>
@@ -1435,7 +1489,7 @@ header{background:var(--warm);color:var(--ink);border-bottom:1px solid var(--lin
       </div>
     </section>
 
-    <section class="section chapter general-only" id="create"><div class="wrap split">
+    <section class="section chapter general-only" id="create" hidden><div class="wrap split">
       <div>
         <p class="eyebrow">Создать продукт</p>
         <h2>Сначала — спрос.<br>Затем — продукт,<br>который можно продать.</h2>
@@ -1545,10 +1599,20 @@ header{background:var(--warm);color:var(--ink);border-bottom:1px solid var(--lin
       <div class="block-cta"><a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Пройти диагностику в NVL <span aria-hidden="true">↗</span></a><span class="block-cta-note">Бесплатно, на своих цифрах</span></div>
     </div></section>
 
-    <section class="section feat-section general-only" id="features"><div class="wrap">
-      <div class="section-heading"><div><p class="eyebrow">Возможности</p><h2>Всё, что нужно для следующего шага Вашего бизнеса.</h2></div><p class="lead">Выберите задачу, с которой сейчас тяжелее всего. Остальное подключайте по мере роста — осваивать всю платформу сразу не нужно.</p></div>
-      <div class="feat-grid" id="featGrid"></div>
-      <div class="block-cta"><a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Посмотреть возможности внутри <span aria-hidden="true">↗</span></a><span class="block-cta-note">Регистрация — 2 минуты, диагностика бесплатна</span></div>
+    <section class="section result-section general-only" id="result"><div class="wrap">
+      <div class="section-heading"><div><p class="eyebrow">Результат</p><h2>Что останется<br>у Вас после маршрута.</h2></div><p class="lead">Не конспект и не запись вебинара. В проекте будет собрано и связано между собой:</p></div>
+      <div class="res-grid">
+        <div class="res-item"><span>01</span><div><b>Продукт</b><p>Состав, формат, цена и ответ: какую задачу клиента он решает и почему за это платят.</p></div></div>
+        <div class="res-item"><span>02</span><div><b>Предложение</b><p>Одна формулировка: что продаёте, кому и почему покупают именно у Вас.</p></div></div>
+        <div class="res-item"><span>03</span><div><b>Портрет клиента</b><p>Сегмент, ситуация, боли, возражения и альтернативы — из Ваших фактов, а не из догадок.</p></div></div>
+        <div class="res-item"><span>04</span><div><b>Путь клиента</b><p>От первого касания до решения о покупке, с точками, где человек уходит.</p></div></div>
+        <div class="res-item"><span>05</span><div><b>Воронка</b><p>Последовательность касаний: что человек получает, в каком порядке и в каком канале.</p></div></div>
+        <div class="res-item"><span>06</span><div><b>Контент под этот путь</b><p>Темы и форматы, которые двигают клиента к решению, а не просто набирают охваты.</p></div></div>
+        <div class="res-item"><span>07</span><div><b>Подключённый приём оплат</b><p>Платёжные системы, страница после оплаты и каналы для касаний.</p></div></div>
+        <div class="res-item"><span>08</span><div><b>Финмодель</b><p>Экономика одной продажи, воронка в цифрах и ответ, что окупается.</p></div></div>
+      </div>
+      <p class="res-note">Всё связано между собой: то, что Вы решили про клиента, работает в продукте, оффере, контенте, воронке и в расчётах.</p>
+      <div class="block-cta"><a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Собрать это в своём проекте <span aria-hidden="true">↗</span></a></div>
     </div></section>
 
     <section class="section general-only" id="week" hidden><div class="wrap">
@@ -1564,6 +1628,18 @@ header{background:var(--warm);color:var(--ink);border-bottom:1px solid var(--lin
       <div><p class="eyebrow">Рядом на всём пути</p><h2>Знакомьтесь,<br>Оракул.</h2><p class="lead">Оракул держит все шесть шагов вместе. Он помнит, что Вы решили на предыдущем, и подставляет это в следующий: продукт собирается из Вашего исследования, контент говорит с Вашим сегментом, отчёт считается по Вашим заказам.</p>
         <dl class="oracle-roles"><div><dt>Связывает шаги</dt><dd>Результат каждого шага подставляет в следующий, поэтому ничего не приходится вводить дважды и пересказывать заново.</dd></div><div><dt>Готовит черновики</dt><dd>Методику, продуктовую линейку, тексты, воронку и план на неделю собирает не с нуля, а на Ваших данных.</dd></div><div><dt>Показывает потери</dt><dd>Считает по цифрам заказов и каналов, находит, где обрывается путь клиента, и называет одно первое действие вместо списка советов.</dd></div></dl>
         <p class="muted">Решения остаются за Вами. Для сложных вопросов можно подключить живого бизнес-трекера.</p>
+      </div>
+      <div class="oracle-facts">
+        <p class="of-lead">Оракул не выдаёт догадку за факт. Видно, где Ваши данные, а где предположение машины.</p>
+        <div class="of-split">
+          <div class="of-col of-fact"><span class="of-tag">Ваши факты</span>
+            <p>Из 100 обращений записались 45, дошли 28, купили 12.</p>
+            <p>Отказ был из-за срока, а не из-за цены.</p></div>
+          <div class="of-col of-hyp"><span class="of-tag">Гипотезы Оракула</span>
+            <p>Основная потеря — между записью и встречей.</p>
+            <p>Стоит проверить напоминание за сутки.</p></div>
+        </div>
+        <p class="of-note">Что из гипотез проверять — решаете Вы.</p>
       </div>
     
       <div class="block-cta"><a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Открыть NVL с Оракулом <span aria-hidden="true">↗</span></a></div>
@@ -1598,6 +1674,29 @@ header{background:var(--warm);color:var(--ink);border-bottom:1px solid var(--lin
     
       <div class="block-cta"><a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Зайти в кабинет <span aria-hidden="true">↗</span></a></div>
     </div></section>
+
+    <section class="section diff-section general-only" id="difference"><div class="wrap">
+      <div class="section-heading"><div><p class="eyebrow">Отличие</p><h2>Почему курсы, чат-боты<br>и сервисы не складываются<br>в систему.</h2></div><p class="lead">Каждый инструмент закрывает свой кусок пути. Вопрос в том, кто соединяет куски между собой.</p></div>
+      <div class="diff-wrap"><table class="diff-table">
+        <thead><tr><th>Инструмент</th><th>Что делает</th><th>Чего не делает</th></tr></thead>
+        <tbody>
+          <tr><td>Курс</td><td>Даёт знания</td><td>Не хранит Ваши решения — после него снова пустой документ</td></tr>
+          <tr><td>Чат с ИИ</td><td>Отвечает на отдельный запрос</td><td>Не проверяет, сходятся ли между собой клиент, оффер и воронка</td></tr>
+          <tr><td>Конструктор воронок</td><td>Исполняет заданный сценарий</td><td>Не решает, какой сценарий вообще стоит проверять</td></tr>
+          <tr><td>CRM</td><td>Ведёт сделки</td><td>Включается уже после того, как заявка появилась</td></tr>
+          <tr><td>Сервисы аналитики</td><td>Дают данные о рынке</td><td>Не превращают их в продукт, контент и продажи</td></tr>
+        </tbody>
+      </table></div>
+      <p class="diff-concl">NeuroVia хранит контекст проекта и связывает решения между шагами.</p>
+      <div class="block-cta"><a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Посмотреть, как это связано <span aria-hidden="true">↗</span></a></div>
+    </div></section>
+
+    <section class="section feat-section general-only" id="features"><div class="wrap">
+      <div class="section-heading"><div><p class="eyebrow">Возможности</p><h2>Всё, что нужно для следующего шага Вашего бизнеса.</h2></div><p class="lead">Выберите задачу, с которой сейчас тяжелее всего. Остальное подключайте по мере роста — осваивать всю платформу сразу не нужно.</p></div>
+      <div class="feat-grid" id="featGrid"></div>
+      <div class="block-cta"><a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Посмотреть возможности внутри <span aria-hidden="true">↗</span></a><span class="block-cta-note">Регистрация — 2 минуты, диагностика бесплатна</span></div>
+    </div></section>
+
 
     <section class="section faq-section"><div class="wrap faq-layout"><h2>До первого шага</h2><div>
       <details><summary>Оракул заменяет бизнес-трекера?</summary><p>Оракул помогает с анализом, черновиками и последовательностью действий. Живой трекер подключается к вопросам, где важны опыт и обсуждение контекста. Окончательное решение принимает предприниматель.</p></details>
@@ -3106,12 +3205,18 @@ renderPlan();
 <script>
 (function(){
   var CAPS = [
-    {t:"Понять",      why:"Где Вы сейчас и кто Ваш клиент.",      tools:"Диагностика точки А, портреты клиентов, каталог болей, разбор конкурентов, карта пробелов."},
-    {t:"Предложить",  why:"Что и за сколько Вы продаёте.",        tools:"Авторская методология, продуктовая матрица, форматы, цены, офферы."},
-    {t:"Привлечь",    why:"Как о Вас узнаёт рынок.",            tools:"Бренд-кит, контент под площадки, контент-план, цепочки, кампании, лендинги."},
-    {t:"Продать",     why:"Как деньги доходят до Вас.",           tools:"Страницы оплаты, заказы, контакты с перепиской, статусы сделок, система автоплатежей."},
-    {t:"Посчитать",   why:"Что действительно работает.",          tools:"Финмодель, экономика одной продажи, отдача каждого канала, средний чек, повторные покупки."},
-    {t:"Пересобрать", why:"Какую гипотезу берём в следующий круг?",                tools:"Гипотезы по степени риска, цели план-факт, поиск узкого горлышка."}
+    {t:"Понять",      why:"Где Вы сейчас и кто Ваш клиент.",      tools:"Диагностика точки А, портреты клиентов, каталог болей, разбор конкурентов, карта пробелов.",
+      out:"выбранный сегмент и главный разрыв, с которого начинаем"},
+    {t:"Предложить",  why:"Что и за сколько Вы продаёте.",        tools:"Авторская методология, продуктовая матрица, форматы, цены, офферы.",
+      out:"один продукт и оффер, готовые к проверке"},
+    {t:"Привлечь",    why:"Как о Вас узнаёт рынок.",            tools:"Бренд-кит, контент под площадки, контент-план, цепочки, кампании, лендинги.",
+      out:"план касаний на неделю и черновики под Ваш канал"},
+    {t:"Продать",     why:"Как деньги доходят до Вас.",           tools:"Страницы оплаты, заказы, контакты с перепиской, статусы сделок, система автоплатежей.",
+      out:"работающий приём оплаты и заявки в одном месте"},
+    {t:"Посчитать",   why:"Что действительно работает.",          tools:"Финмодель, экономика одной продажи, отдача каждого канала, средний чек, повторные покупки.",
+      out:"ответ, что окупается, а что нет"},
+    {t:"Пересобрать", why:"Какую гипотезу берём в следующий круг?",                tools:"Гипотезы по степени риска, цели план-факт, поиск узкого горлышка.",
+      out:"одна гипотеза на следующий круг и причина, почему она"}
   ];
   var nav = document.getElementById("capsNav"), panel = document.getElementById("capsPanel");
   if (!nav || !panel) return;
@@ -3119,7 +3224,8 @@ renderPlan();
   function pick(i){
     var c = CAPS[i]; if (!c) return;
     btns.forEach(function(b,j){ b.setAttribute("aria-selected", j===i ? "true" : "false"); });
-    panel.innerHTML = "<h3>" + c.t + "</h3><p class='why'>" + c.why + "</p><p class='tools'>" + c.tools + "</p>";
+    panel.innerHTML = "<h3>" + c.t + "</h3><p class='why'>" + c.why + "</p><p class='tools'>" + c.tools +
+                       "</p><p class='out'><b>В проекте:</b> " + c.out + "</p>";
   }
   var wrapEl = document.querySelector("#track .cycle-wrap");
   var holdT = 0;
