@@ -1227,11 +1227,12 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
   .ticker{width:calc(100% + var(--gut) * 2);height:clamp(190px,52vw,250px);margin-bottom:18px}
 }
 @media (max-width:460px){.feat-grid{grid-template-columns:1fr}}
-@media (max-width:760px){
+@media (max-width:1000px){
   .hero-character{position:static;width:100%;right:auto;top:auto;margin:10px 0 0;display:flex;flex-direction:column;align-items:center}
   .hero-character img{position:static;width:auto;max-width:240px;height:240px;margin:0 auto}
   .hero-character figcaption{width:100%;margin:10px 0 6px;text-align:center}
   .oracle-line{width:100%;max-width:none}
+  .hero-inner{min-height:0}
   .hero-oracle-link{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:4px 8px}
 }
 @media (prefers-reduced-motion:reduce){.tslide{transition:none}}
