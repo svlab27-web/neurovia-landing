@@ -1559,6 +1559,19 @@ html{scroll-padding-top:142px}
 
 /* фирменные цвета, которые не читаются на тёмном, показываем белым */
 .int-lane.on .il.inv svg path{fill:#fff}
+
+/* ===================== v13: раздел аудитории — половина на половину ===================== */
+@media (min-width:901px){
+  .persona-panel{grid-template-columns:1fr 1fr;gap:32px}
+  .cycle-mini{max-width:440px;margin:0 auto 18px}
+  .cycle-mini .clabel{font-size:10px}
+  .cycle-mini text{font-size:10px}
+  .persona-copy{padding:38px 34px;justify-content:center;gap:26px}
+  .persona-copy h3{font-size:clamp(24px,2.4vw,32px);max-width:18ch}
+}
+/* метки шага: тёмные с белым текстом вместо жёлтых плашек */
+.persona-flow em{background:var(--navy);color:var(--warm);padding:4px 10px;border-radius:6px;
+  font:600 10.5px var(--mono);letter-spacing:.04em}
 </style>
 </head>
 <body>
