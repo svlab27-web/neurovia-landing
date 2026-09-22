@@ -1324,6 +1324,36 @@ header{background:var(--warm);color:var(--ink);border-bottom:1px solid var(--lin
   .of-split{grid-template-columns:1fr}
   .of-fact{border-right:0;border-bottom:1px solid var(--line)}
 }
+
+/* ===================== v13: цифры и тарифы ===================== */
+.figures{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.figures .wrap{display:grid;grid-template-columns:repeat(3,1fr)}
+.figures > .wrap > div{padding:26px 18px;text-align:center;border-right:1px solid var(--line)}
+.figures > .wrap > div:last-child{border-right:0}
+.figures b{display:block;font:800 clamp(24px,2.6vw,31px)/1.1 var(--head);letter-spacing:-.025em;color:var(--navy)}
+.figures span{display:block;margin-top:6px;font-size:13px;line-height:1.4;color:var(--muted)}
+
+.plan{position:relative;display:flex;flex-direction:column}
+.plan-name{font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.plan.featured .plan-name{color:var(--gold)}
+.plan-for{margin:14px 0 16px;font-size:14.5px;line-height:1.5;color:var(--muted)}
+.plan.featured .plan-for{color:#c4ccd6}
+.plan-list{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:9px}
+.plan-list li{position:relative;padding-left:20px;font-size:14px;line-height:1.45;color:var(--muted)}
+.plan.featured .plan-list li{color:#c6cee0}
+.plan-list li::before{content:"✓";position:absolute;left:0;font-size:11px;font-weight:800;color:#2a6549}
+.plan.featured .plan-list li::before{color:var(--gold)}
+.plan-badge{position:absolute;top:-13px;right:20px;padding:6px 14px;border-radius:99px;
+  background:var(--gold);color:var(--ink);font:700 11.5px var(--head)}
+.plan .button{margin-top:auto}
+.pay-row{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:26px}
+.pay-row span{padding:8px 14px;border:1px solid var(--line);border-radius:8px;background:#fff;
+  font-size:13px;color:var(--muted)}
+@media (max-width:760px){
+  .figures .wrap{grid-template-columns:1fr}
+  .figures > .wrap > div{border-right:0;border-bottom:1px solid var(--line)}
+  .figures > .wrap > div:last-child{border-bottom:0}
+}
 </style>
 </head>
 <body>
@@ -1509,6 +1539,13 @@ header{background:var(--warm);color:var(--ink);border-bottom:1px solid var(--lin
         <div class="prow is-on"><span>03</span><div><b>Программа сопровождения</b><p>Доходит до результата вместе с Вами</p></div><small>Основной продукт</small></div>
         <p class="visual-foot">Каждая ступень привязана к аудитории и её задаче. Оракул помогает собрать линейку и подсказывает, какую ступень тестировать первой — решение остаётся за Вами.</p>
       </div>
+    </div></section>
+
+
+    <section class="figures general-only"><div class="wrap">
+      <div><b>6 шагов</b><span>от идеи до повторяемых продаж</span></div>
+      <div><b>1 проект</b><span>вместо десятка сервисов</span></div>
+      <div><b>0 ₸</b><span>стоит первая диагностика</span></div>
     </div></section>
 
     <section class="section track-section general-only" id="track"><div class="wrap">
@@ -1742,27 +1779,49 @@ header{background:var(--warm);color:var(--ink);border-bottom:1px solid var(--lin
       <div class="block-cta"><a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Начать свой проект <span aria-hidden="true">↗</span></a></div>
     </div></section>
     <section class="section pricing-section" id="pricing"><div class="wrap">
-      <div class="section-heading"><div><p class="eyebrow">Тарифы</p><h2>Выберите сценарий,<br>а не список функций</h2></div><p class="lead">Диагностика бесплатна на любом сценарии.</p></div>
+      <div class="section-heading"><div><p class="eyebrow">Тарифы</p><h2>Начните бесплатно.<br>Платите, когда увидите,<br>что это Ваш инструмент.</h2></div><p class="lead">Диагностика проходится без оплаты и без обязательств. Подписка нужна, когда начинаете собирать продукт, воронку и продажи.</p></div>
       <div class="plans">
         <article class="plan">
-          <h3>Начать одному</h3>
-          <p>Для эксперта или основателя с одним проектом. Диагностика, продукт, воронка, первые продажи.</p>
+          <p class="plan-name">Начать одному</p>
           <div class="plan-price">59 900 ₸<small>/ месяц</small></div>
-          <a class="button ghost" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Начать бесплатно <span aria-hidden="true">↗</span></a>
+          <p class="plan-for">Для эксперта или основателя с одним проектом.</p>
+          <ul class="plan-list">
+            <li>диагностика и карта разрывов</li>
+            <li>продукт и предложение</li>
+            <li>воронка и первые продажи</li>
+            <li>Оракул — ИИ-помощник по проекту</li>
+            <li>Академия: инструкции и шаблоны</li>
+          </ul>
+          <a class="button ghost" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Начать <span aria-hidden="true">↗</span></a>
         </article>
         <article class="plan featured">
-          <h3>Развернуть рост</h3>
-          <p>Когда нужно связать каналы, контент, переписки, заказы, оплаты и финмодель.</p>
+          <span class="plan-badge">Выбирают чаще</span>
+          <p class="plan-name">Развернуть рост</p>
           <div class="plan-price">125 000 ₸<small>/ месяц</small></div>
-          <a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Пройти диагностику <span aria-hidden="true">↗</span></a>
+          <p class="plan-for">Когда нужно подключить каналы, контент, переписки, заявки, оплаты и финмодель.</p>
+          <ul class="plan-list">
+            <li>всё из «Начать одному»</li>
+            <li>каналы и автопостинг</li>
+            <li>переписки и заявки</li>
+            <li>приём оплат</li>
+            <li>финансовая модель и аналитика</li>
+          </ul>
+          <a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Развернуть рост <span aria-hidden="true">↗</span></a>
         </article>
         <article class="plan">
-          <h3>Вести портфель</h3>
-          <p>Для нескольких продуктов, клиентов или направлений. Роли, проекты, внедрение и методолог.</p>
+          <p class="plan-name">Вести портфель</p>
           <div class="plan-price">от 280 000 ₸<small>/ месяц</small></div>
-          <a class="button ghost" href="https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9F%D0%B8%D1%88%D1%83%20%D1%81%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0%20NeuroVia%20Labs" target="_blank" rel="noopener">Обсудить внедрение <span aria-hidden="true">↗</span></a>
+          <p class="plan-for">Для нескольких продуктов, клиентов или направлений.</p>
+          <ul class="plan-list">
+            <li>роли и доступы команды</li>
+            <li>несколько проектов</li>
+            <li>внедрение и методолог</li>
+            <li>приоритетная поддержка</li>
+          </ul>
+          <a class="button ghost" href="https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9F%D0%B8%D1%88%D1%83%20%D1%81%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0%20NeuroVia%20Labs" target="_blank" rel="noopener">Обсудить портфель <span aria-hidden="true">↗</span></a>
         </article>
       </div>
+      <div class="pay-row"><span>Карты Visa / Mastercard</span><span>Kaspi</span><span>Рассрочка</span><span>Оплата от юрлица со счётом</span></div>
     </div></section>
     <section class="final"><div class="wrap final-layout"><div class="final-card"><p class="eyebrow">Следующий шаг уже ближе</p><h2>С чего начнётся<br>Ваш маршрут?</h2><a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Начать бесплатно <span aria-hidden="true">↗</span></a></div><figure class="final-oracle"><span class="oracle-breathe"><img id="oracleFinalImg" width="1254" height="1254" loading="lazy" decoding="async" alt="Оракул предлагает следующий шаг: открытая ладонь направлена в сторону, планшет в другой руке"></span></figure></div></section>
   </main>
