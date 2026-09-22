@@ -1531,7 +1531,7 @@ html{scroll-padding-top:142px}
 /* ===================== v13: подстрока оффера и бегущая строка ===================== */
 .hero-sub2{margin:22px 0 0;font:500 clamp(15px,1.5vw,18px)/1.5 var(--head);color:#c4ccd6;max-width:34ch}
 @media (min-width:1001px){
-  .hero-copy{display:flex;flex-direction:column;min-height:560px}
+  .hero .hero-copy{display:flex;flex-direction:column;padding-bottom:14px}
   .hero .actions{margin-top:auto;padding-top:28px}
 }
 
@@ -3648,8 +3648,23 @@ renderPlan();
       var w = document.querySelector(".hero-inner");
       if (w) document.documentElement.style.setProperty("--gut", Math.round(w.getBoundingClientRect().left) + "px");
     };
-    setGut();
-    window.addEventListener("resize", setGut);
+    /* нижняя кнопка встаёт вровень с кнопкой Оракула */
+    var alignHero = function () {
+      var c = document.querySelector(".hero-copy");
+      var t = document.querySelector(".oracle-cta");
+      if (!c || !t) return;
+      c.style.minHeight = "";
+      if (window.innerWidth < 1001) return;
+      var pb = parseFloat(getComputedStyle(c).paddingBottom) || 0;
+      var h = Math.round(t.getBoundingClientRect().bottom - c.getBoundingClientRect().top + pb);
+      if (h > 0) c.style.minHeight = h + "px";
+    };
+    var sync = function () { setGut(); alignHero(); };
+    sync();
+    window.addEventListener("resize", sync);
+    window.addEventListener("load", sync);
+    setTimeout(sync, 1200);
+    setTimeout(sync, 3400);
 
     var cur = 0, timer = null, hold = false;
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
