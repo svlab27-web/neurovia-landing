@@ -1385,6 +1385,20 @@ header .nav-row > .button.small{display:inline-flex}
   header .nav-row > .button.small{padding:9px 14px;font-size:12.5px;min-height:38px}
   header .nav-main{gap:14px;font-size:12.5px}
 }
+
+/* ===================== v13: интеграции ===================== */
+.integr-section{background:#fff;border-top:1px solid var(--line)}
+.int-group + .int-group{margin-top:26px}
+.int-label{display:inline-flex;align-items:center;gap:8px;margin:0 0 14px;
+  font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.int-label.int-on{color:#2a6549}
+.int-label.int-on::before{content:"";width:8px;height:8px;border-radius:50%;background:#2a6549}
+.int-label.int-soon{color:var(--muted)}
+.int-label.int-soon::before{content:"\1F512";font-size:12px}
+.int-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:9px}
+.int-chips li{padding:10px 16px;border:1px solid var(--line);border-radius:99px;background:var(--warm);
+  font:600 14px var(--head);color:var(--ink)}
+.int-chips.is-soon-list li{border-style:dashed;background:none;color:var(--muted);font-weight:500}
 </style>
 </head>
 <body>
@@ -1765,6 +1779,28 @@ header .nav-row > .button.small{display:inline-flex}
       <div class="block-cta"><a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Посмотреть возможности внутри <span aria-hidden="true">↗</span></a><span class="block-cta-note">Регистрация — 2 минуты, диагностика бесплатна</span></div>
     </div></section>
 
+    <section class="section integr-section general-only" id="integrations"><div class="wrap">
+      <div class="section-heading"><div><p class="eyebrow">Интеграции</p><h2>Подключается к тому,<br>чем Вы уже пользуетесь.</h2></div><p class="lead">Ключи и доступы Вы вводите у себя в проекте, платформа хранит их в зашифрованном виде. В каталоге 38 подключений, список пополняется.</p></div>
+      <div class="int-group">
+        <p class="int-label int-on">Работает сейчас</p>
+        <ul class="int-chips">
+          <li>WhatsApp</li><li>Telegram</li><li>Instagram</li><li>Facebook</li>
+          <li>Claude</li><li>OpenAI</li><li>DeepSeek</li><li>Z.ai GLM</li>
+          <li>Приём оплаты картой</li>
+        </ul>
+      </div>
+      <div class="int-group">
+        <p class="int-label int-soon">Скоро</p>
+        <ul class="int-chips is-soon-list">
+          <li>E-mail рассылки</li><li>TikTok</li><li>YouTube</li><li>LinkedIn</li><li>VK</li>
+          <li>Kaspi Pay</li><li>FreedomPay</li>
+          <li>Bitrix24</li><li>amoCRM</li>
+          <li>Яндекс.Директ</li><li>Google Ads</li><li>Meta Ads</li>
+          <li>Яндекс.Метрика</li><li>Google Analytics</li><li>Телефония</li>
+        </ul>
+      </div>
+      <div class="block-cta"><a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Посмотреть все подключения <span aria-hidden="true">↗</span></a></div>
+    </div></section>
 
     <section class="section faq-section"><div class="wrap faq-layout"><h2>До первого шага</h2><div>
       <details><summary>Оракул заменяет бизнес-трекера?</summary><p>Оракул помогает с анализом, черновиками и последовательностью действий. Живой трекер подключается к вопросам, где важны опыт и обсуждение контекста. Окончательное решение принимает предприниматель.</p></details>
