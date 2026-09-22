@@ -1285,12 +1285,11 @@ header{background:var(--warm);color:var(--ink);border-bottom:1px solid var(--lin
       <div class="wrap hero-inner">
         <div class="hero-copy"><p class="hero-intro">Одна экосистема с ИИ-ассистентом вместо множества сервисов и большой команды.</p>
           <div class="ticker" id="ticker" data-tone="light">
-            <button type="button" class="tslide is-on" data-go="expert"><span>Есть знания и опыт.<br>Как превратить их <em>в доход?</em></span></button>
-            <button type="button" class="tslide" data-go="small" tabindex="-1" aria-hidden="true"><span>Есть идея.<br>Как не слить <em>бюджет?</em></span></button>
-            <button type="button" class="tslide" data-go="expert" tabindex="-1" aria-hidden="true"><span>Клиенты благодарят,<br>а продаж <em>всё нет?</em></span></button>
-            <button type="button" class="tslide" data-go="small" tabindex="-1" aria-hidden="true"><span>Идея нравится всем.<br>А <em>купит кто?</em></span></button>
-            <button type="button" class="tslide" data-go="expert" tabindex="-1" aria-hidden="true"><span>Опыта много,<br>а упаковки <em>никакой?</em></span></button>
-            <button type="button" class="tslide" data-go="small" tabindex="-1" aria-hidden="true"><span>Продукт почти готов.<br>А спрос <em>проверяли?</em></span></button>
+            <button type="button" class="tslide is-on" data-go="choose"><span>Сначала SMM.<br>Контент выходит — <em>а продаж нет.</em></span></button>
+            <button type="button" class="tslide" data-go="choose" tabindex="-1" aria-hidden="true"><span>Потом таргетолог.<br>Бюджет ушёл <em>на чужие гипотезы.</em></span></button>
+            <button type="button" class="tslide" data-go="choose" tabindex="-1" aria-hidden="true"><span>Потом ещё один курс.<br>А связывать всё — <em>снова Вам.</em></span></button>
+            <button type="button" class="tslide" data-go="choose" tabindex="-1" aria-hidden="true"><span>Потом AI-сервисы.<br>Каждый своё, <em>а пути клиента нет.</em></span></button>
+            <button type="button" class="tslide" data-go="choose" tabindex="-1" aria-hidden="true"><span>Так проходят годы.<br>А системы <em>так и не появилось.</em></span></button>
           </div>
           <h1 id="hero-title">Маркетинг, стратегия, упаковка продукта, контент, соцсети, продажи и финансы — <b>всё в одном месте.</b></h1>
           <div class="actions"><a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Начать бесплатно <span aria-hidden="true">↗</span></a></div>
@@ -3216,10 +3215,16 @@ renderPlan();
     slides.forEach(function (el) {
       el.addEventListener("click", function () {
         var go = el.dataset.go;
-        if (go === "soon") {
-          if (window.__pickAudience) window.__pickAudience(2);
-          var sec = document.getElementById("audiences");
+        var sec = document.getElementById("audiences");
+        var toAudiences = function () {
           if (sec) sec.scrollIntoView({ behavior: reduce.matches ? "auto" : "smooth", block: "start" });
+        };
+        if (go === "choose") {
+          /* боль общая для всех — человек выбирает свой раздел сам */
+          toAudiences();
+        } else if (go === "soon") {
+          if (window.__pickAudience) window.__pickAudience(2);
+          toAudiences();
         } else if (window.__openPersona) {
           window.__openPersona(go, true);
         }
