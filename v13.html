@@ -1216,6 +1216,12 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
   .tslide{font-size:clamp(27px,7.4vw,36px)}
 }
 @media (max-width:460px){.feat-grid{grid-template-columns:1fr}}
+@media (max-width:760px){
+  .hero-character{position:static;width:100%;right:auto;top:auto;margin:10px 0 0;display:flex;flex-direction:column;align-items:center}
+  .hero-character img{position:static;width:auto;max-width:240px;height:240px;margin:0 auto}
+  .hero-character figcaption{width:100%;margin-top:10px;text-align:center}
+  .hero-oracle-link{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:4px 8px}
+}
 @media (prefers-reduced-motion:reduce){.tslide{transition:none}}
 
 </style>
@@ -3164,10 +3170,10 @@ renderPlan();
     ["\u2934", "Проверка гипотез", "Узнать правду о спросе до больших вложений.", "#create"],
     ["\u25C7", "Продукт и офферы", "Собрать линейку и понятную причину купить.", "#create"],
     ["Aa", "Бренд и голос", "Сохранить свою манеру во всех материалах.", "#oracle"],
-    ["\u25A4", "Контент с ИИ", "Посты, письма и сценарии коротких видео.", "#track"],
-    ["\u25A6", "План публикаций", "Собрать продвижение в календарь на неделю.", "#week"],
+    ["\u2261", "Контент с ИИ", "Посты, письма и сценарии коротких видео.", "#track"],
+    ["\u229E", "План публикаций", "Собрать продвижение в календарь на неделю.", "#week"],
     ["\u21E2", "Воронки и кампании", "Связать касания с покупкой, а не с лайком.", "#diagnostic"],
-    ["\u2637", "Заявки и заказы", "Хранить контакты, статусы и историю сделки.", "#inside"],
+    ["\u229F", "Заявки и заказы", "Хранить контакты, статусы и историю сделки.", "#inside"],
     ["\u25F7", "Автоматизация", "Настроить цепочки сообщений по событию.", "#inside"],
     ["\u25F4", "Финансы и экономика", "Считать расходы, прибыль и точку безубыточности.", "#diagnostic"],
     ["\u21C4", "Интеграции", "Мессенджеры, платёжные системы, CRM, аналитика.", "#inside"],
