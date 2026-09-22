@@ -1125,11 +1125,20 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 .button.ghost-light{background:none;border:1px solid rgba(244,243,240,.55);color:var(--warm)}
 .button.ghost-light:hover{background:rgba(244,243,240,.12);filter:none}
 
-.ticker{display:grid;margin-bottom:4px}
-.tslide{grid-area:1/1;font:700 clamp(29px,3.6vw,46px)/1.06 var(--head);letter-spacing:-.038em;
-  opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.8,.3,1);pointer-events:none}
-.tslide.is-on{opacity:1;transform:none}
-.tslide em{font-style:normal;color:var(--gold)}
+.ticker{position:relative;overflow:hidden;border-radius:14px;height:clamp(146px,14.4vw,178px);margin-bottom:6px}
+.tslide{position:absolute;inset:0;display:flex;align-items:center;padding:0 clamp(20px,2.2vw,30px);
+  font:700 clamp(26px,3.15vw,40px)/1.08 var(--head);letter-spacing:-.038em;pointer-events:none;
+  transform:translateX(-100%);visibility:hidden;
+  transition:transform .9s cubic-bezier(.76,0,.24,1),visibility 0s .9s}
+.tslide.is-on{transform:none;visibility:visible;transition:transform .9s cubic-bezier(.76,0,.24,1)}
+.tslide.is-out{transform:translateX(100%);visibility:visible;transition:transform .9s cubic-bezier(.76,0,.24,1)}
+.tslide em{font-style:normal}
+.tslide.s1{background:var(--warm);color:var(--ink)}
+.tslide.s1 em{background:linear-gradient(transparent 68%,var(--gold) 0)}
+.tslide.s2{background:var(--gold);color:var(--ink)}
+.tslide.s2 em{box-shadow:inset 0 -3px rgba(15,28,46,.55)}
+.tslide.s3{background:#16283f;color:#fff}
+.tslide.s3 em{color:var(--gold)}
 .tick-ctl{display:flex;align-items:center;gap:14px;margin:14px 0 12px}
 .tick-dots{display:flex;gap:7px}
 .tick-dots button{width:28px;height:3px;padding:0;border:0;border-radius:2px;background:rgba(244,243,240,.28);cursor:pointer;transition:background .25s}
@@ -1213,7 +1222,8 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
   .aud-tabs{grid-template-columns:1fr 1fr}
   .aud-tabs button{font-size:13.5px;padding:12px 8px}
   .ribbon .wrap{flex-direction:column;gap:8px}
-  .tslide{font-size:clamp(27px,7.4vw,36px)}
+  .tslide{font-size:clamp(25px,6.6vw,32px);padding:0 18px}
+  .ticker{height:clamp(128px,34vw,150px)}
 }
 @media (max-width:460px){.feat-grid{grid-template-columns:1fr}}
 @media (max-width:760px){
@@ -1256,9 +1266,9 @@ header{background:var(--warm);color:var(--ink);border-bottom:1px solid var(--lin
       <div class="wrap hero-inner">
         <div class="hero-copy"><p class="eyebrow">Цифровая экосистема 6П</p>
           <div class="ticker" id="ticker" aria-hidden="true">
-            <b class="tslide is-on">Есть знания.<br>Как превратить их <em>в доход?</em></b>
-            <b class="tslide">Есть идея.<br>Как не слить <em>бюджет?</em></b>
-            <b class="tslide">Бизнес работает.<br>Почему прибыль <em>не растёт?</em></b>
+            <b class="tslide s1 is-on"><span>Есть знания.<br>Как превратить их <em>в доход?</em></span></b>
+            <b class="tslide s2"><span>Есть идея.<br>Как не слить <em>бюджет?</em></span></b>
+            <b class="tslide s3"><span>Бизнес работает.<br>Почему прибыль <em>не растёт?</em></span></b>
           </div>
           <div class="tick-ctl">
             <div class="tick-dots" role="group" aria-label="Переключить вопрос"><button type="button" class="on" data-tick="0" aria-label="Вопрос 1"></button><button type="button" data-tick="1" aria-label="Вопрос 2"></button><button type="button" data-tick="2" aria-label="Вопрос 3"></button></div>
@@ -3162,8 +3172,17 @@ renderPlan();
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
     var paused = reduce.matches;
     function show(n) {
+      var prev = cur;
       cur = (n + slides.length) % slides.length;
-      slides.forEach(function (el, k) { el.classList.toggle("is-on", k === cur); });
+      if (prev === cur) return;
+      slides.forEach(function (el, k) {
+        el.classList.remove("is-out");
+        el.classList.toggle("is-on", k === cur);
+      });
+      /* уходящий слайд уезжает вправо, новый въезжает слева */
+      var out = slides[prev];
+      out.classList.add("is-out");
+      setTimeout(function () { out.classList.remove("is-out"); }, 950);
       dots.forEach(function (d, k) { d.classList.toggle("on", k === cur); });
     }
     function run() {
