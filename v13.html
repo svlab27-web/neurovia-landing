@@ -1129,10 +1129,18 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
   margin-left:calc(-1 * var(--gut));width:calc(100% + var(--gut));
   height:clamp(160px,15.4vw,198px);margin-bottom:24px}
 .tslide{position:absolute;inset:0;display:flex;align-items:center;padding:0 26px 0 var(--gut);
+  border:0;text-align:left;cursor:pointer;
   font:700 clamp(26px,3.15vw,40px)/1.08 var(--head);letter-spacing:-.038em;pointer-events:none;
   transform:translateX(-100%);visibility:hidden;
   transition:transform .9s cubic-bezier(.76,0,.24,1),visibility 0s .9s}
-.tslide.is-on{transform:none;visibility:visible;transition:transform .9s cubic-bezier(.76,0,.24,1)}
+.tslide.is-on{transform:none;visibility:visible;pointer-events:auto;transition:transform .9s cubic-bezier(.76,0,.24,1)}
+.tslide:hover{filter:none}
+.tslide-go{position:absolute;left:var(--gut);bottom:18px;display:inline-flex;align-items:center;gap:9px;
+  font:600 13px/1 var(--head);font-style:normal;letter-spacing:.01em;opacity:.72;
+  border-bottom:1px solid currentColor;padding-bottom:4px;transition:opacity .2s,gap .2s}
+.tslide-go b{font-weight:600}
+.tslide:hover .tslide-go,.tslide:focus-visible .tslide-go{opacity:1;gap:13px}
+.tslide:focus-visible{outline:3px solid var(--gold);outline-offset:-4px}
 .tslide.is-out{transform:translateX(100%);visibility:visible;transition:transform .9s cubic-bezier(.76,0,.24,1)}
 .tslide em{font-style:normal;white-space:nowrap}
 .tslide.s1{background:var(--warm);color:var(--ink)}
@@ -1225,6 +1233,7 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
   .aud-tabs button{font-size:13.5px;padding:12px 8px}
   .ribbon .wrap{flex-direction:column;gap:8px}
   .tslide{font-size:clamp(22px,5.9vw,28px);padding:0 var(--gut)}
+  .tslide-go{bottom:14px;font-size:12px}
   .ticker{width:calc(100% + var(--gut) * 2);height:clamp(132px,33vw,164px);margin-bottom:20px}
 }
 @media (max-width:460px){.feat-grid{grid-template-columns:1fr}}
@@ -1269,9 +1278,9 @@ header{background:var(--warm);color:var(--ink);border-bottom:1px solid var(--lin
       <div class="wrap hero-inner">
         <div class="hero-copy"><p class="hero-intro">Одна экосистема с ИИ-ассистентом вместо множества сервисов и большой команды.</p>
           <div class="ticker" id="ticker" data-tone="light">
-            <b class="tslide s1 is-on" data-tone="light" aria-hidden="true"><span>Есть знания и опыт.<br>Как превратить их <em>в доход?</em></span></b>
-            <b class="tslide s2" data-tone="light" aria-hidden="true"><span>Есть идея.<br>Как не слить <em>бюджет?</em></span></b>
-            <b class="tslide s3" data-tone="dark" aria-hidden="true"><span>Бизнес работает.<br>Почему прибыль <em>не растёт?</em></span></b>
+            <button type="button" class="tslide s1 is-on" data-tone="light" data-go="expert"><span>Есть знания и опыт.<br>Как превратить их <em>в доход?</em></span><i class="tslide-go">Открыть маршрут эксперта <b aria-hidden="true">→</b></i></button>
+            <button type="button" class="tslide s2" data-tone="light" data-go="small" tabindex="-1" aria-hidden="true"><span>Есть идея.<br>Как не слить <em>бюджет?</em></span><i class="tslide-go">Открыть маршрут стартапа <b aria-hidden="true">→</b></i></button>
+            <button type="button" class="tslide s3" data-tone="dark" data-go="soon" tabindex="-1" aria-hidden="true"><span>Бизнес работает.<br>Почему прибыль <em>не растёт?</em></span><i class="tslide-go">Раздел готовится — посмотреть <b aria-hidden="true">→</b></i></button>
           </div>
           <h1 id="hero-title">Маркетинг, стратегия, упаковка продукта, контент, соцсети, продажи и финансы — <b>всё в одном месте.</b></h1>
           <div class="actions"><a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Начать бесплатно <span aria-hidden="true">↗</span></a></div>
@@ -3180,8 +3189,11 @@ renderPlan();
       cur = (n + slides.length) % slides.length;
       if (prev === cur) return;
       slides.forEach(function (el, k) {
+        var on = k === cur;
         el.classList.remove("is-out");
-        el.classList.toggle("is-on", k === cur);
+        el.classList.toggle("is-on", on);
+        el.tabIndex = on ? 0 : -1;
+        if (on) el.removeAttribute("aria-hidden"); else el.setAttribute("aria-hidden", "true");
       });
       var out = slides[prev];
       out.classList.add("is-out");
@@ -3198,6 +3210,20 @@ renderPlan();
       clearInterval(timer);
       if (!hold && !reduce.matches && !document.hidden) timer = setInterval(function () { show(cur + 1); }, 5200);
     }
+    /* вопрос — это вход в свой раздел */
+    slides.forEach(function (el) {
+      el.addEventListener("click", function () {
+        var go = el.dataset.go;
+        if (go === "soon") {
+          if (window.__pickAudience) window.__pickAudience(2);
+          var sec = document.getElementById("audiences");
+          if (sec) sec.scrollIntoView({ behavior: reduce.matches ? "auto" : "smooth", block: "start" });
+        } else if (window.__openPersona) {
+          window.__openPersona(go, true);
+        }
+      });
+    });
+
     /* пауза, пока человек читает: наведение или фокус с клавиатуры */
     stage.addEventListener("mouseenter", function () { hold = true; run(); });
     stage.addEventListener("mouseleave", function () { hold = false; run(); });
@@ -3296,6 +3322,7 @@ renderPlan();
       pick(i, true);
     });
     pick(0);
+    window.__pickAudience = pick;
   }
 
   /* --- шапка: разделы страницы / выбранная аудитория --- */
