@@ -1511,10 +1511,29 @@ header .nav-row > .button.small{display:inline-flex}
 .inside-all-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px 26px}
 .inside-all-list li{position:relative;padding-left:20px;font:500 14.5px var(--head);color:#dfe4ea}
 .inside-all-list li::before{content:"\25C6";position:absolute;left:0;color:var(--gold);font-size:9px;top:.35em}
+
+/* ===================== v13: полоса со скидкой ===================== */
+.promo-bar{position:sticky;top:0;z-index:30;background:var(--gold);color:var(--ink)}
+.promo-in{display:flex;align-items:center;justify-content:center;gap:10px 22px;flex-wrap:wrap;
+  min-height:38px;padding-block:8px;font:600 13.5px var(--head);text-align:center}
+.promo-in b{font-weight:800}
+.promo-in a{border-bottom:1px solid rgba(15,28,46,.45);padding-bottom:1px;white-space:nowrap}
+.promo-in a:hover{border-bottom-color:var(--ink);filter:none}
+header{top:38px}
+html{scroll-padding-top:142px}
+@media (max-width:620px){
+  .promo-in{font-size:12.5px;gap:6px 14px;min-height:34px}
+  header{top:34px}
+  html{scroll-padding-top:120px}
+}
 </style>
 </head>
 <body>
   <a class="skip" href="#main">К содержимому</a>
+  <div class="promo-bar"><div class="wrap promo-in">
+    <span><b>−50%</b> на первый месяц платных тарифов</span>
+    <a href="#pricing">Выбрать тариф <span aria-hidden="true">→</span></a>
+  </div></div>
   <header><div class="wrap nav-row">
     <a class="wordmark" href="#" aria-label="NeuroVia Labs, главная">Neuro<span>Via</span><small>LABS</small></a>
     <nav class="nav-main" aria-label="Разделы страницы"><a href="#audiences">Для кого</a><a href="#track">Маршрут 6П</a><a href="#result">Результат</a><a href="#oracle">Оракул</a><a href="#pricing">Тарифы</a></nav>
