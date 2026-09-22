@@ -1354,6 +1354,20 @@ header{background:var(--warm);color:var(--ink);border-bottom:1px solid var(--lin
   .figures > .wrap > div{border-right:0;border-bottom:1px solid var(--line)}
   .figures > .wrap > div:last-child{border-bottom:0}
 }
+
+/* ===================== v13: четыре тарифа ===================== */
+.plans-4{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.plan-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px}
+.plan-price .was{font-size:17px;font-weight:600;color:var(--muted);text-decoration:line-through;text-decoration-thickness:2px}
+.plan.featured .plan-price .was{color:#8b95ac}
+.plan-price .now{font-size:clamp(24px,2.4vw,30px);font-weight:800;letter-spacing:-.03em}
+.plan-then{margin:8px 0 0;font:500 12.5px var(--head);color:var(--muted)}
+.plan.featured .plan-then{color:#95a0bb}
+.plan-no{margin:0 0 20px;padding-top:12px;border-top:1px dashed var(--line);
+  font-size:12.5px;line-height:1.45;color:var(--muted)}
+.plan-badge.off{background:var(--navy);color:var(--warm)}
+@media (max-width:1100px){.plans-4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.plans-4{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -1780,45 +1794,59 @@ header{background:var(--warm);color:var(--ink);border-bottom:1px solid var(--lin
     </div></section>
     <section class="section pricing-section" id="pricing"><div class="wrap">
       <div class="section-heading"><div><p class="eyebrow">Тарифы</p><h2>Начните бесплатно.<br>Платите, когда увидите,<br>что это Ваш инструмент.</h2></div><p class="lead">Диагностика проходится без оплаты и без обязательств. Подписка нужна, когда начинаете собирать продукт, воронку и продажи.</p></div>
-      <div class="plans">
+      <div class="plans plans-4">
         <article class="plan">
-          <p class="plan-name">Начать одному</p>
-          <div class="plan-price">59 900 ₸<small>/ месяц</small></div>
-          <p class="plan-for">Для эксперта или основателя с одним проектом.</p>
+          <p class="plan-name">Free</p>
+          <div class="plan-price"><span class="now">0 ₸</span></div>
+          <p class="plan-for">Начните работу с нашим ИИ бизнес-коучем.</p>
           <ul class="plan-list">
-            <li>диагностика и карта разрывов</li>
-            <li>продукт и предложение</li>
-            <li>воронка и первые продажи</li>
-            <li>Оракул — ИИ-помощник по проекту</li>
-            <li>Академия: инструкции и шаблоны</li>
+            <li>диагностика</li>
+            <li>карта разрывов</li>
           </ul>
+          <a class="button ghost" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Начать бесплатно <span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="plan">
+          <span class="plan-badge off">−50%</span>
+          <p class="plan-name">Start</p>
+          <div class="plan-price"><span class="was">59 900 ₸</span><span class="now">29 900 ₸</span><small>/ первый месяц</small></div>
+          <p class="plan-then">далее 59 900 ₸ в месяц</p>
+          <p class="plan-for">Один проект, один человек.</p>
+          <ul class="plan-list">
+            <li>продукт, предложение и воронка</li>
+            <li>глубокий конкурентный анализ</li>
+            <li>мессенджеры</li>
+            <li>1 проект · 1 пользователь</li>
+          </ul>
+          <p class="plan-no">Без разделов: финансы, реклама, источники трафика, соцсети.</p>
           <a class="button ghost" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Начать <span aria-hidden="true">↗</span></a>
         </article>
         <article class="plan featured">
           <span class="plan-badge">Выбирают чаще</span>
-          <p class="plan-name">Развернуть рост</p>
-          <div class="plan-price">125 000 ₸<small>/ месяц</small></div>
-          <p class="plan-for">Когда нужно подключить каналы, контент, переписки, заявки, оплаты и финмодель.</p>
+          <p class="plan-name">Pro</p>
+          <div class="plan-price"><span class="was">125 000 ₸</span><span class="now">59 900 ₸</span><small>/ первый месяц</small></div>
+          <p class="plan-then">далее 125 000 ₸ в месяц · скидка −50%</p>
+          <p class="plan-for">Весь функционал платформы.</p>
           <ul class="plan-list">
-            <li>всё из «Начать одному»</li>
-            <li>каналы и автопостинг</li>
-            <li>переписки и заявки</li>
-            <li>приём оплат</li>
-            <li>финансовая модель и аналитика</li>
+            <li>всё из Start</li>
+            <li>финансы, реклама, источники трафика</li>
+            <li>соцсети и мессенджеры</li>
+            <li>3 проекта · 3 пользователя</li>
           </ul>
           <a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Развернуть рост <span aria-hidden="true">↗</span></a>
         </article>
         <article class="plan">
-          <p class="plan-name">Вести портфель</p>
-          <div class="plan-price">от 280 000 ₸<small>/ месяц</small></div>
-          <p class="plan-for">Для нескольких продуктов, клиентов или направлений.</p>
+          <span class="plan-badge off">−50%</span>
+          <p class="plan-name">Business</p>
+          <div class="plan-price"><span class="was">от 280 000 ₸</span><span class="now">от 140 000 ₸</span><small>/ первый месяц</small></div>
+          <p class="plan-then">далее от 280 000 ₸ в месяц</p>
+          <p class="plan-for">Команда и портфель проектов.</p>
           <ul class="plan-list">
-            <li>роли и доступы команды</li>
-            <li>несколько проектов</li>
-            <li>внедрение и методолог</li>
-            <li>приоритетная поддержка</li>
+            <li>весь функционал платформы</li>
+            <li>более 5 проектов</li>
+            <li>более 3 пользователей в команде</li>
+            <li>внедрение и приоритетная поддержка</li>
           </ul>
-          <a class="button ghost" href="https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9F%D0%B8%D1%88%D1%83%20%D1%81%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0%20NeuroVia%20Labs" target="_blank" rel="noopener">Обсудить портфель <span aria-hidden="true">↗</span></a>
+          <a class="button ghost" href="https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9F%D0%B8%D1%88%D1%83%20%D1%81%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0%20NeuroVia%20Labs" target="_blank" rel="noopener">Обсудить <span aria-hidden="true">↗</span></a>
         </article>
       </div>
       <div class="pay-row"><span>Карты Visa / Mastercard</span><span>Kaspi</span><span>Рассрочка</span><span>Оплата от юрлица со счётом</span></div>
