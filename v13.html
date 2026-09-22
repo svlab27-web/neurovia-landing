@@ -1125,7 +1125,7 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 .button.ghost-light{background:none;border:1px solid rgba(244,243,240,.55);color:var(--warm)}
 .button.ghost-light:hover{background:rgba(244,243,240,.12);filter:none}
 
-.ticker{position:relative;overflow:hidden;border-radius:14px;height:clamp(146px,14.4vw,178px);margin-bottom:6px}
+.ticker{position:relative;overflow:hidden;border-radius:14px;height:clamp(132px,12.2vw,152px);margin-bottom:6px}
 .tslide{position:absolute;inset:0;display:flex;align-items:center;padding:0 clamp(20px,2.2vw,30px);
   font:700 clamp(26px,3.15vw,40px)/1.08 var(--head);letter-spacing:-.038em;pointer-events:none;
   transform:translateX(-100%);visibility:hidden;
@@ -1139,7 +1139,7 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 .tslide.s2 em{box-shadow:inset 0 -3px rgba(15,28,46,.55)}
 .tslide.s3{background:#16283f;color:#fff}
 .tslide.s3 em{color:var(--gold)}
-.tick-ctl{display:flex;align-items:center;gap:14px;margin:14px 0 12px}
+.tick-ctl{display:flex;align-items:center;gap:14px;margin:11px 0 10px}
 .tick-dots{display:flex;gap:7px}
 .tick-dots button{width:28px;height:3px;padding:0;border:0;border-radius:2px;background:rgba(244,243,240,.28);cursor:pointer;transition:background .25s}
 .tick-dots button.on{background:var(--gold)}
@@ -1147,9 +1147,9 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
   border:1px solid rgba(244,243,240,.45);border-radius:50%;background:none;color:var(--warm);font-size:11px;line-height:1}
 .hero h1{font:700 clamp(21px,2.3vw,30px)/1.25 var(--head);letter-spacing:-.02em;color:#fff}
 .hero .actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.hero .actions .button{margin-top:16px}
-.hero-inner{padding-block:44px 26px}
-.doors-label{margin:24px 0 12px;padding-top:16px}
+.hero .actions .button{margin-top:12px}
+.hero-inner{padding-block:34px 20px}
+.doors-label{margin:18px 0 10px;padding-top:12px}
 .button.wa{background:none;border:1px solid rgba(244,243,240,.5);color:var(--warm);gap:10px}
 .button.wa:hover{background:rgba(244,243,240,.12);filter:none}
 .wa-i{width:9px;height:9px;border-radius:50%;background:#25d366;display:inline-block}
@@ -1223,7 +1223,7 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
   .aud-tabs button{font-size:13.5px;padding:12px 8px}
   .ribbon .wrap{flex-direction:column;gap:8px}
   .tslide{font-size:clamp(25px,6.6vw,32px);padding:0 18px}
-  .ticker{height:clamp(128px,34vw,150px)}
+  .ticker{height:clamp(120px,32vw,142px)}
 }
 @media (max-width:460px){.feat-grid{grid-template-columns:1fr}}
 @media (max-width:760px){
@@ -3182,7 +3182,13 @@ renderPlan();
       /* уходящий слайд уезжает вправо, новый въезжает слева */
       var out = slides[prev];
       out.classList.add("is-out");
-      setTimeout(function () { out.classList.remove("is-out"); }, 950);
+      setTimeout(function () {
+        /* возврат в исходную позицию — мгновенно, иначе слайд поедет обратно через всю сцену */
+        out.style.transition = "none";
+        out.classList.remove("is-out");
+        void out.offsetWidth;
+        out.style.transition = "";
+      }, 950);
       dots.forEach(function (d, k) { d.classList.toggle("on", k === cur); });
     }
     function run() {
