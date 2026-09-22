@@ -1452,6 +1452,11 @@ header .nav-row > .button.small{display:inline-flex}
 .final-card h2{font-size:clamp(25px,2.8vw,36px);line-height:1.18;max-width:20ch}
 .final-note{margin:18px 0 0;font:500 16px/1.55 var(--head);color:#dfe4ea;max-width:34ch}
 .final-card .button{margin-top:24px}
+
+/* ===================== v13: перечень разделов под скринами ===================== */
+.inside-list{margin-top:26px;padding:18px 22px;border-radius:12px;background:rgba(15,28,46,.05);
+  border:1px solid var(--line);font-size:14.5px;line-height:1.7;color:var(--muted)}
+.inside-list b{color:var(--ink);font-weight:700}
 </style>
 </head>
 <body>
@@ -1806,11 +1811,12 @@ header .nav-row > .button.small{display:inline-flex}
         <figure><img src="assets/app-pains.webp" width="1400" height="674" loading="lazy" decoding="async" alt="Каталог болей клиентов в кабинете">
           <figcaption><b>Боли клиентов</b>Каталог проблем: по ним подбираются офферы и темы контента.</figcaption></figure>
       </div>
+      <p class="inside-list"><b>Всего в проекте:</b> диагностика · дашборд · аналитика · заказы · формы оплаты · контакты · карта рынка · продукт · целевая аудитория · боли · гипотезы · конкуренты · бренд · контент · кампании · источники · воронка · сегменты · калькулятор · финмодель · мессенджеры · библиотека материалов</p>
     
       <div class="block-cta"><a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Зайти в кабинет <span aria-hidden="true">↗</span></a></div>
     </div></section>
 
-    <section class="section map-section general-only" id="inside-map"><div class="wrap">
+    <section class="section map-section general-only" id="inside-map" hidden><div class="wrap">
       <div class="section-heading"><div><p class="eyebrow">Что внутри</p><h2>Полная карта кабинета.</h2></div><p class="lead">На скриншотах видно несколько экранов. Вот все разделы проекта целиком. Разделы с замком готовятся — остальные работают сейчас.</p></div>
       <div class="map-grid"><div class="map-group"><h3>Проект</h3><ul><li>Диагностика</li><li>Дашборд</li><li>Аналитика</li><li>Заказы</li><li>Формы оплаты</li><li>Контакты</li><li>Активность</li></ul></div><div class="map-group"><h3>Исследования</h3><ul><li>Карта рынка</li><li class="soon">Тренды</li></ul></div><div class="map-group"><h3>Создание</h3><ul><li>Продукт</li><li>Целевая аудитория</li><li>Боли</li><li>Гипотезы</li><li>Конкуренты</li><li>Бренд</li><li>Контент</li></ul></div><div class="map-group"><h3>Продвижение</h3><ul><li>Кампании</li><li>Источники</li><li>Воронка</li><li>Сегменты</li><li>AI-боли</li><li class="soon">Контент-план</li><li class="soon">Клиенты</li></ul></div><div class="map-group"><h3>Финансы</h3><ul><li>Калькулятор</li><li>Финмодель</li></ul></div><div class="map-group"><h3>Каналы</h3><ul><li>Мессенджеры</li><li class="soon">Соцсети</li><li class="soon">Телефония</li></ul></div><div class="map-group"><h3>Библиотека</h3><ul><li>Созданное</li><li class="soon">Загруженное</li></ul></div></div>
       <div class="block-cta"><a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Зайти и посмотреть самому <span aria-hidden="true">↗</span></a></div>
@@ -1962,14 +1968,14 @@ header .nav-row > .button.small{display:inline-flex}
       <div class="foot-col">
         <h3>Возможности</h3>
         <ul>
-          <li><a href="#inside-map">Диагностика</a></li>
-          <li><a href="#inside-map">Продукт и офферы</a></li>
-          <li><a href="#inside-map">Клиенты и боли</a></li>
-          <li><a href="#inside-map">Конкуренты и рынок</a></li>
-          <li><a href="#inside-map">Контент и бренд</a></li>
-          <li><a href="#inside-map">Кампании и воронка</a></li>
-          <li><a href="#inside-map">Заказы и формы оплаты</a></li>
-          <li><a href="#inside-map">Калькулятор и финмодель</a></li>
+          <li><a href="#inside">Диагностика</a></li>
+          <li><a href="#inside">Продукт и офферы</a></li>
+          <li><a href="#inside">Клиенты и боли</a></li>
+          <li><a href="#inside">Конкуренты и рынок</a></li>
+          <li><a href="#inside">Контент и бренд</a></li>
+          <li><a href="#inside">Кампании и воронка</a></li>
+          <li><a href="#inside">Заказы и формы оплаты</a></li>
+          <li><a href="#inside">Калькулятор и финмодель</a></li>
         </ul>
       </div>
       <div class="foot-col">
