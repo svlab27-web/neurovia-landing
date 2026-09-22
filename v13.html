@@ -1530,8 +1530,10 @@ html{scroll-padding-top:142px}
 
 /* ===================== v13: подстрока оффера и бегущая строка ===================== */
 .hero-sub2{margin:22px 0 0;font:500 clamp(15px,1.5vw,18px)/1.5 var(--head);color:#c4ccd6;max-width:34ch}
-.hero-copy{display:flex;flex-direction:column;min-height:560px}
-.hero .actions{margin-top:auto;padding-top:28px}
+@media (min-width:1001px){
+  .hero-copy{display:flex;flex-direction:column;min-height:560px}
+  .hero .actions{margin-top:auto;padding-top:28px}
+}
 
 .promo-bar{position:sticky;top:0;z-index:30;display:block;overflow:hidden;
   background:var(--gold);color:var(--ink);text-decoration:none}
