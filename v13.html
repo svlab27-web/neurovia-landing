@@ -1126,11 +1126,11 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 .button.ghost-light:hover{background:rgba(244,243,240,.12);filter:none}
 
 .ticker{display:grid;margin-bottom:4px}
-.tslide{grid-area:1/1;font:700 clamp(32px,4.3vw,54px)/1.04 var(--head);letter-spacing:-.04em;
+.tslide{grid-area:1/1;font:700 clamp(29px,3.6vw,46px)/1.06 var(--head);letter-spacing:-.038em;
   opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.8,.3,1);pointer-events:none}
 .tslide.is-on{opacity:1;transform:none}
 .tslide em{font-style:normal;color:var(--gold)}
-.tick-ctl{display:flex;align-items:center;gap:14px;margin:20px 0 18px}
+.tick-ctl{display:flex;align-items:center;gap:14px;margin:14px 0 12px}
 .tick-dots{display:flex;gap:7px}
 .tick-dots button{width:28px;height:3px;padding:0;border:0;border-radius:2px;background:rgba(244,243,240,.28);cursor:pointer;transition:background .25s}
 .tick-dots button.on{background:var(--gold)}
@@ -1138,7 +1138,9 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
   border:1px solid rgba(244,243,240,.45);border-radius:50%;background:none;color:var(--warm);font-size:11px;line-height:1}
 .hero h1{font:700 clamp(21px,2.3vw,30px)/1.25 var(--head);letter-spacing:-.02em;color:#fff}
 .hero .actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.hero .actions .button{margin-top:26px}
+.hero .actions .button{margin-top:16px}
+.hero-inner{padding-block:44px 26px}
+.doors-label{margin:24px 0 12px;padding-top:16px}
 .button.wa{background:none;border:1px solid rgba(244,243,240,.5);color:var(--warm);gap:10px}
 .button.wa:hover{background:rgba(244,243,240,.12);filter:none}
 .wa-i{width:9px;height:9px;border-radius:50%;background:#25d366;display:inline-block}
@@ -1211,7 +1213,7 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
   .aud-tabs{grid-template-columns:1fr 1fr}
   .aud-tabs button{font-size:13.5px;padding:12px 8px}
   .ribbon .wrap{flex-direction:column;gap:8px}
-  .tslide{font-size:clamp(28px,8vw,40px)}
+  .tslide{font-size:clamp(27px,7.4vw,36px)}
 }
 @media (max-width:460px){.feat-grid{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.tslide{transition:none}}
@@ -3259,8 +3261,13 @@ renderPlan();
     new MutationObserver(sync).observe(audSection, { attributes: true, attributeFilter: ["hidden"] });
     sync();
   }
+  var offAtStart = [].slice.call(document.querySelectorAll(".general-only")).filter(function (el) { return el.hidden; });
   var home = document.getElementById("navHome");
-  if (home) home.addEventListener("click", function () { if (window.__closePersona) window.__closePersona(); });
+  if (home) home.addEventListener("click", function () {
+    if (window.__closePersona) window.__closePersona();
+    /* блоки, скрытые изначально, не должны всплывать при возврате на главную */
+    offAtStart.forEach(function (el) { el.hidden = true; });
+  });
 
   /* --- подсветка активного пункта шапки --- */
   var links = [].slice.call(document.querySelectorAll(".nav-main a"));
