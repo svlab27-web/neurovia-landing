@@ -1549,11 +1549,15 @@ html{scroll-padding-top:142px}
   .promo-seq{padding-left:32px}
 }
 @media (max-width:620px){.promo-seq span{font-size:12.5px}.promo-seq span::after{margin:0 18px}}
+
+/* ===================== v13: лента над тарифами ===================== */
+.promo-strip{overflow:hidden;margin:0 0 26px;border-radius:10px;background:var(--gold);color:var(--ink)}
+.promo-strip .promo-track{animation-duration:30s}
 </style>
 </head>
 <body>
   <a class="skip" href="#main">К содержимому</a>
-    <a class="promo-bar" href="#pricing" aria-label="Скидка 50% на первый месяц платных тарифов — перейти к тарифам"><span class="promo-track"><span class="promo-seq"><span>−50% на первый месяц платных тарифов</span><span>Start — 29 900 ₸ вместо 59 900 ₸</span><span>Pro — 59 900 ₸ вместо 125 000 ₸</span><span>Business — от 140 000 ₸ вместо 280 000 ₸</span><span>Диагностика — бесплатно</span></span><span class="promo-seq" aria-hidden="true"><span>−50% на первый месяц платных тарифов</span><span>Start — 29 900 ₸ вместо 59 900 ₸</span><span>Pro — 59 900 ₸ вместо 125 000 ₸</span><span>Business — от 140 000 ₸ вместо 280 000 ₸</span><span>Диагностика — бесплатно</span></span></span></a>
+    <a class="promo-bar" href="#pricing" aria-label="Скидка 50% на первый месяц, перейти к тарифам"><span class="promo-track"><span class="promo-seq"><span>−50% на первый месяц</span><span>Start — 29 900 ₸ вместо 59 900 ₸</span><span>Pro — 59 900 ₸ вместо 125 000 ₸</span><span>Business — от 140 000 ₸ вместо 280 000 ₸</span><span>Диагностика — бесплатно</span></span><span class="promo-seq" aria-hidden="true"><span>−50% на первый месяц</span><span>Start — 29 900 ₸ вместо 59 900 ₸</span><span>Pro — 59 900 ₸ вместо 125 000 ₸</span><span>Business — от 140 000 ₸ вместо 280 000 ₸</span><span>Диагностика — бесплатно</span></span></span></a>
   <header><div class="wrap nav-row">
     <a class="wordmark" href="#" aria-label="NeuroVia Labs, главная">Neuro<span>Via</span><small>LABS</small></a>
     <nav class="nav-main" aria-label="Разделы страницы"><a href="#audiences">Для кого</a><a href="#track">Маршрут 6П</a><a href="#result">Результат</a><a href="#oracle">Оракул</a><a href="#pricing">Тарифы</a></nav>
@@ -2018,9 +2022,10 @@ html{scroll-padding-top:142px}
       <div class="block-cta"><a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Начать свой проект <span aria-hidden="true">↗</span></a></div>
     </div></section>
     <section class="section pricing-section" id="pricing"><div class="wrap">
-      <div class="section-heading"><div><p class="eyebrow">Тарифы</p><h2>Начните бесплатно.<br>Платите, когда увидите,<br>что это Ваш инструмент.</h2></div><p class="lead">Диагностика проходится без оплаты и без обязательств. Подписка нужна, когда начинаете собирать продукт, воронку и продажи. <b class="lead-off">Первый месяц платных тарифов — со скидкой 50%.</b></p></div>
+      <div class="section-heading"><div><p class="eyebrow">Тарифы</p><h2>Начните бесплатно.<br>Платите, когда увидите,<br>что это Ваш инструмент.</h2></div></div>
+      <div class="promo-strip" aria-hidden="true"><span class="promo-track"><span class="promo-seq"><span>Первый месяц со скидкой 50%</span><span>Start — 29 900 ₸ вместо 59 900 ₸</span><span>Pro — 59 900 ₸ вместо 125 000 ₸</span><span>Business — от 140 000 ₸ вместо 280 000 ₸</span><span>Диагностика — бесплатно</span></span><span class="promo-seq"><span>Первый месяц со скидкой 50%</span><span>Start — 29 900 ₸ вместо 59 900 ₸</span><span>Pro — 59 900 ₸ вместо 125 000 ₸</span><span>Business — от 140 000 ₸ вместо 280 000 ₸</span><span>Диагностика — бесплатно</span></span></span></div>
       <div class="plans plans-4">
-        <article class="plan">
+        <article class="plan featured">
           <p class="plan-name">Free</p>
           <div class="plan-price"><span class="now">0 ₸</span></div>
           <p class="plan-for">Начните работу с Оракулом — Вашим ИИ-помощником.</p>
