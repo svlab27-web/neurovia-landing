@@ -2429,34 +2429,10 @@ renderPlan();
         cmp.innerHTML = "";
       }
       document.querySelector(".persona-flow h4").textContent = d.flowTitle || "Первый маршрут";
-      setTimeout(function () {
-        const flow = document.getElementById("personaFlow");
-        if (!flow) return;
-        const first = flow.querySelector("details");
-        if (!first || window.__flowTouched) return;
-        const li = first.parentElement;
-        li.classList.add("flow-nudge");
-        const old = flow.querySelector(".flow-hint");
-        if (old) old.remove();
-        const hint = document.createElement("span");
-        hint.className = "flow-hint";
-        hint.setAttribute("aria-hidden", "true");
-        hint.textContent = "\uD83D\uDC47";
-        li.appendChild(hint);
-        flow.addEventListener("click", function once() {
-          window.__flowTouched = true;
-          hint.remove();
-          [].forEach.call(flow.querySelectorAll(".flow-nudge"), function (el) { el.classList.remove("flow-nudge"); });
-          flow.removeEventListener("click", once);
-        });
-      }, 60);
       document.getElementById("personaFlow").innerHTML =
         d.flow.map(([n, title, sub, meta, points]) => {
           const head = `<span class="n">${n}</span><span><b>${title}</b><small>${sub}</small></span>${meta ? `<em>${meta}</em>` : ""}`;
-          if (!points || !points.length) return `<li class="plain">${head}</li>`;
-          return `<li><details><summary>${head}</summary><ul>${
-            points.map((t) => `<li>${t}</li>`).join("")
-          }</ul></details></li>`;
+          return `<li class="plain">${head}</li>`;
         }).join("");
       document.querySelectorAll(".persona-tabs button").forEach((b) => {
         b.setAttribute("aria-selected", String(b.dataset.persona === key));
