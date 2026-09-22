@@ -1224,6 +1224,23 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 }
 @media (prefers-reduced-motion:reduce){.tslide{transition:none}}
 
+
+/* ===== светлая шапка (как в варианте с ChatGPT) ===== */
+header{background:var(--warm);color:var(--ink);border-bottom:1px solid var(--line)}
+.wordmark{color:var(--ink)}
+.wordmark > span{color:#a27f00}
+.wordmark small{color:var(--muted)}
+.nav-main a{color:var(--muted)}
+.nav-main a:hover{color:var(--ink)}
+.nav-main a.is-here{color:var(--ink);border-bottom-color:var(--navy)}
+.nav-personas a{color:var(--muted)}
+.nav-personas a:hover{color:var(--ink)}
+.nav-personas a[aria-current]{color:var(--ink);border-bottom-color:var(--navy)}
+.nav-home{border-color:var(--line);color:var(--muted)}
+.nav-home:hover{background:rgba(15,28,46,.07);color:var(--ink)}
+.nav-row > .button.small{background:var(--navy);color:var(--warm);box-shadow:none;border-radius:50px;
+  font-weight:700;padding:12px 24px;min-height:46px}
+.nav-row > .button.small:hover{background:#16283f;color:var(--warm);box-shadow:none;filter:none}
 </style>
 </head>
 <body>
