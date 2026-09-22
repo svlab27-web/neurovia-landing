@@ -1138,12 +1138,8 @@ h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
 .tslide:focus-visible{outline:3px solid var(--gold);outline-offset:-4px}
 .tslide.is-out{transform:translateX(100%);visibility:visible;transition:transform .9s cubic-bezier(.76,0,.24,1)}
 .tslide em{font-style:normal;white-space:nowrap}
-.tslide.s1{background:var(--warm);color:var(--ink)}
-.tslide.s1 em{background:linear-gradient(transparent 68%,var(--gold) 0)}
-.tslide.s2{background:var(--gold);color:var(--ink)}
-.tslide.s2 em{box-shadow:inset 0 -3px rgba(15,28,46,.55)}
-.tslide.s3{background:var(--navy);color:#fff}
-.tslide.s3 em{color:var(--gold)}
+.tslide{background:transparent;color:#fff}
+.tslide em{color:var(--gold)}
 :root{--gut:max(32px,(100vw - 1160px)/2)}
 .hero-intro{margin:0 0 18px;font:500 clamp(14.5px,1.25vw,16px)/1.5 var(--head);color:#c4ccd6;max-width:44ch}
 .hero h1{font:400 clamp(16px,1.55vw,20px)/1.5 var(--head);letter-spacing:0;color:#dfe4ea;max-width:44ch}
@@ -1289,9 +1285,12 @@ header{background:var(--warm);color:var(--ink);border-bottom:1px solid var(--lin
       <div class="wrap hero-inner">
         <div class="hero-copy"><p class="hero-intro">Одна экосистема с ИИ-ассистентом вместо множества сервисов и большой команды.</p>
           <div class="ticker" id="ticker" data-tone="light">
-            <button type="button" class="tslide s1 is-on" data-tone="light" data-go="expert"><span>Есть знания и опыт.<br>Как превратить их <em>в доход?</em></span></button>
-            <button type="button" class="tslide s2" data-tone="light" data-go="small" tabindex="-1" aria-hidden="true"><span>Есть идея.<br>Как не слить <em>бюджет?</em></span></button>
-            <button type="button" class="tslide s3" data-tone="dark" data-go="soon" tabindex="-1" aria-hidden="true"><span>Бизнес работает.<br>Почему прибыль <em>не растёт?</em></span></button>
+            <button type="button" class="tslide is-on" data-go="expert"><span>Есть знания и опыт.<br>Как превратить их <em>в доход?</em></span></button>
+            <button type="button" class="tslide" data-go="small" tabindex="-1" aria-hidden="true"><span>Есть идея.<br>Как не слить <em>бюджет?</em></span></button>
+            <button type="button" class="tslide" data-go="expert" tabindex="-1" aria-hidden="true"><span>Клиенты благодарят,<br>а продаж <em>всё нет?</em></span></button>
+            <button type="button" class="tslide" data-go="small" tabindex="-1" aria-hidden="true"><span>Идея нравится всем.<br>А <em>купит кто?</em></span></button>
+            <button type="button" class="tslide" data-go="expert" tabindex="-1" aria-hidden="true"><span>Опыта много,<br>а упаковки <em>никакой?</em></span></button>
+            <button type="button" class="tslide" data-go="small" tabindex="-1" aria-hidden="true"><span>Продукт почти готов.<br>А спрос <em>проверяли?</em></span></button>
           </div>
           <h1 id="hero-title">Маркетинг, стратегия, упаковка продукта, контент, соцсети, продажи и финансы — <b>всё в одном месте.</b></h1>
           <div class="actions"><a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Начать бесплатно <span aria-hidden="true">↗</span></a></div>
