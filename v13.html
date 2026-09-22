@@ -1493,6 +1493,24 @@ header .nav-row > .button.small{display:inline-flex}
 .final-card{padding:30px 34px 32px}
 .final-micro{margin:14px 0 0;font:500 13.5px/1.5 var(--head);color:#9aa6b8;max-width:38ch}
 .lead-off{display:block;margin-top:10px;font-weight:700;color:var(--ink)}
+
+/* ===================== v13: оффер, блок боли, перечень разделов ===================== */
+.hero h1{font:700 clamp(30px,3.7vw,50px)/1.06 var(--head);letter-spacing:-.038em;color:#fff;max-width:20ch}
+.hero h1 b{font-weight:700;color:var(--gold)}
+.hero-intro{margin:0 0 26px}
+
+.pain-section{background:var(--navy);color:var(--warm);padding-block:56px}
+.pain-section .eyebrow{color:var(--gold);margin-bottom:18px}
+.pain-section .ticker{height:clamp(150px,15vw,190px);margin-bottom:22px}
+.pain-turn{max-width:62ch;font:500 clamp(16px,1.6vw,19px)/1.55 var(--head);color:#c4ccd6}
+.pain-turn b{color:#fff;font-weight:600}
+
+.inside-all{margin-top:28px;padding:24px 26px;border-radius:14px;background:var(--navy);color:var(--warm)}
+.inside-all-title{margin:0 0 16px;font:600 11px var(--mono);letter-spacing:.12em;
+  text-transform:uppercase;color:var(--gold)}
+.inside-all-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px 26px}
+.inside-all-list li{position:relative;padding-left:20px;font:500 14.5px var(--head);color:#dfe4ea}
+.inside-all-list li::before{content:"\25C6";position:absolute;left:0;color:var(--gold);font-size:9px;top:.35em}
 </style>
 </head>
 <body>
@@ -1508,14 +1526,7 @@ header .nav-row > .button.small{display:inline-flex}
       <div class="wrap hero-inner">
         <div class="hero-copy"><p class="hero-kicker">Платформа для онлайн-бизнеса</p>
           <p class="hero-intro">Одна экосистема с ИИ-ассистентом вместо множества сервисов и большой команды.</p>
-          <div class="ticker" id="ticker" data-tone="light">
-            <button type="button" class="tslide is-on" data-go="choose"><span>Сначала SMM.<br>Контент выходит — <em>а продаж нет.</em></span></button>
-            <button type="button" class="tslide" data-go="choose" tabindex="-1" aria-hidden="true"><span>Потом таргетолог.<br>Бюджет ушёл <em>на чужие гипотезы.</em></span></button>
-            <button type="button" class="tslide" data-go="choose" tabindex="-1" aria-hidden="true"><span>Потом ещё один курс.<br>А связывать всё — <em>снова Вам.</em></span></button>
-            <button type="button" class="tslide" data-go="choose" tabindex="-1" aria-hidden="true"><span>Потом AI-сервисы.<br>Каждый своё, <em>а пути клиента нет.</em></span></button>
-            <button type="button" class="tslide" data-go="choose" tabindex="-1" aria-hidden="true"><span>Так проходят годы.<br>А системы <em>так и не появилось.</em></span></button>
-          </div>
-          <h1 id="hero-title">NeuroVia собирает систему в одном проекте: решение о клиенте подставляется в продукт, воронку, контент и расчёты — <b>и остаётся у Вас.</b></h1>
+                    <h1 id="hero-title">От идеи и опыта —<br>до продукта и продаж.<br><b>В одной системе.</b></h1>
           <div class="actions"><a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Начать бесплатно <span aria-hidden="true">↗</span></a></div>
           <p class="hero-micro">Без карты и без обязательств: диагностика входит в бесплатный тариф.</p>
         </div>
@@ -1570,6 +1581,19 @@ header .nav-row > .button.small{display:inline-flex}
     </section>
 
     
+
+
+    <section class="section pain-section general-only" id="pain"><div class="wrap">
+      <p class="eyebrow">Знакомый круг</p>
+      <div class="ticker" id="ticker" data-tone="light">
+            <button type="button" class="tslide is-on" data-go="choose"><span>Сначала SMM.<br>Контент выходит — <em>а продаж нет.</em></span></button>
+            <button type="button" class="tslide" data-go="choose" tabindex="-1" aria-hidden="true"><span>Потом таргетолог.<br>Бюджет ушёл <em>на чужие гипотезы.</em></span></button>
+            <button type="button" class="tslide" data-go="choose" tabindex="-1" aria-hidden="true"><span>Потом ещё один курс.<br>А связывать всё — <em>снова Вам.</em></span></button>
+            <button type="button" class="tslide" data-go="choose" tabindex="-1" aria-hidden="true"><span>Потом AI-сервисы.<br>Каждый своё, <em>а пути клиента нет.</em></span></button>
+            <button type="button" class="tslide" data-go="choose" tabindex="-1" aria-hidden="true"><span>Так проходят годы.<br>А системы <em>так и не появилось.</em></span></button>
+          </div>
+      <p class="pain-turn">NeuroVia собирает систему в одном проекте: решение о клиенте подставляется в продукт, воронку, контент и расчёты — <b>и остаётся у Вас.</b></p>
+    </div></section>
 
     <section class="section aud-section general-only" id="audiences"><div class="wrap">
       <div class="section-heading"><div><p class="eyebrow">Для кого</p><h2>Пять маршрутов.<br>Разные точки старта — одна система.</h2></div><p class="lead">Маршрут подстраивается под то, что у Вас уже есть: опыт, идея или действующие продажи. Сам бизнес может быть любым — услуги, товар или digital. Онлайн здесь только канал: воронку и оплаты NeuroVia собирает в мессенджерах, соцсетях и на сайте.</p></div>
@@ -1864,11 +1888,11 @@ header .nav-row > .button.small{display:inline-flex}
         <figure><img src="assets/app-diagnostic.webp" width="1400" height="674" loading="lazy" decoding="async" alt="Экран диагностики в кабинете NeuroVia Labs">
           <figcaption><b>Диагностика</b>Определяем точку А: десять шагов, на выходе AI собирает Вашу методику на основе ответов.</figcaption></figure>
         <figure><img src="assets/app-wizard.webp" width="1400" height="674" loading="lazy" decoding="async" alt="Первый шаг диагностики: вопросы про опыт и клиентов">
-          <figcaption><b>Ваш опыт и клиенты</b>Кто к Вам приходит, с какой проблемой и какой результат получал - из этих ответов строится всё остальное.</figcaption></figure>
+          <figcaption><b>Ваш опыт и клиенты</b>Определяем, с какой проблемой приходят к Вам люди и какой результат получают. На базе этого строится дальнейшая работа над продуктом и контентом.</figcaption></figure>
         <figure><img src="assets/app-pains.webp" width="1400" height="674" loading="lazy" decoding="async" alt="Каталог болей клиентов в кабинете">
           <figcaption><b>Боли клиентов</b>Каталог проблем: по ним подбираются офферы и темы контента.</figcaption></figure>
       </div>
-      <p class="inside-list"><b>Всего в проекте:</b> диагностика · дашборд · аналитика · заказы · формы оплаты · контакты · карта рынка · продукт · целевая аудитория · боли · гипотезы · конкуренты · бренд · контент · кампании · источники · воронка · сегменты · калькулятор · финмодель · мессенджеры · библиотека материалов</p>
+      <div class="inside-all"><p class="inside-all-title">Всего в проекте</p><ul class="inside-all-list"><li>Диагностика</li><li>Дашборд</li><li>Аналитика</li><li>Заказы</li><li>Формы оплаты</li><li>Контакты</li><li>Карта рынка</li><li>Продукт</li><li>Целевая аудитория</li><li>Боли</li><li>Гипотезы</li><li>Конкуренты</li><li>Бренд</li><li>Контент</li><li>Кампании</li><li>Источники</li><li>Воронка</li><li>Сегменты</li><li>Калькулятор</li><li>Финмодель</li><li>Мессенджеры</li><li>Библиотека материалов</li></ul></div>
     
       <div class="block-cta"><a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Зайти в кабинет <span aria-hidden="true">↗</span></a></div>
     </div></section>
@@ -1960,10 +1984,11 @@ header .nav-row > .button.small{display:inline-flex}
         <article class="plan">
           <p class="plan-name">Free</p>
           <div class="plan-price"><span class="now">0 ₸</span></div>
-          <p class="plan-for">Начните работу с нашим ИИ бизнес-коучем.</p>
+          <p class="plan-for">Начните работу с Оракулом — Вашим ИИ-помощником.</p>
           <ul class="plan-list">
-            <li>диагностика</li>
-            <li>карта разрывов</li>
+            <li>диагностика: десять шагов до точки А</li>
+            <li>карта разрывов — где теряется результат</li>
+            <li>Оракул разбирает Ваши ответы и называет первый шаг</li>
           </ul>
           <a class="button ghost" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Начать бесплатно <span aria-hidden="true">↗</span></a>
         </article>
