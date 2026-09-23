@@ -1882,6 +1882,25 @@ main h2,.section-heading h2{font-size:clamp(26px,2.9vw,34px);line-height:1.12;le
   background:none;color:#c4ccd6;font:700 12px var(--head)}
 .anim-pick button[aria-pressed="true"]{background:var(--gold);color:var(--ink);border-color:var(--gold)}
 @media (max-width:620px){.anim-pick{left:10px;bottom:76px;padding:7px 10px}}
+
+/* ============ v15: полотно — крупнее, быстрее, с контрастом фона ============ */
+.hero{transition:background .3s linear}
+@media (prefers-reduced-motion:reduce){.hero{transition:none}}
+.hero .seg-copy h3{font:700 clamp(36px,5.2vw,72px)/1.0 var(--head);letter-spacing:-.05em}
+.hero .seg-copy > p{font-size:clamp(16px,1.6vw,18.5px);max-width:42ch;margin-top:20px}
+.hero .seg-stage{height:clamp(420px,33vw,470px)}
+.hero[data-tone="gold"]{background:var(--gold);color:var(--ink)}
+.hero[data-tone="gold"] h1,
+.hero[data-tone="gold"] h1 b,
+.hero[data-tone="gold"] .hero-sub,
+.hero[data-tone="gold"] .seg-copy h3{color:var(--ink)}
+.hero[data-tone="gold"] .seg-copy h3 em{color:var(--ink);
+  text-decoration:underline;text-decoration-thickness:.06em;text-underline-offset:.16em;
+  text-decoration-color:rgba(10,22,40,.4)}
+.hero[data-tone="gold"] .seg-copy > p{color:rgba(10,22,40,.75)}
+.hero[data-tone="gold"] .hero-character figcaption{color:rgba(10,22,40,.7)}
+.hero[data-tone="gold"] .hero-character figcaption b{color:var(--ink)}
+.hero[data-tone="gold"] .eyebrow{color:rgba(10,22,40,.6)}
 </style>
 </head>
 <body>
@@ -1950,6 +1969,11 @@ main h2,.section-heading h2{font-size:clamp(26px,2.9vw,34px);line-height:1.12;le
   if(img.complete) run(); else img.addEventListener("load",run,{once:true});
 })();</script>
       </section>
+
+<section class="section fw-section general-only" id="forwhom"><div class="wrap">
+      <div class="section-heading"><div><p class="eyebrow">Для кого</p><h2>Пять маршрутов.<br>Разные точки старта, одна система.</h2></div><p class="lead">Маршрут подстраивается под то, что у Вас уже есть: опыт, идея, выручка или клиенты. Сам бизнес может быть любым: услуги, товар или digital.</p></div>
+      <div class="fw-grid"><article class="fw-card"><p class="fw-name">Эксперт</p><p class="fw-promise">Превратите то, что умеете, в продукт, который покупают.</p><ol class="fw-steps"><li>Найти, чем Вы отличаетесь от других экспертов ниши</li><li>Собрать из этого свой метод и продуктовую линейку</li><li>Выбрать один продукт и проверить его на первых клиентах</li></ol><button type="button" class="button" data-open="expert">Открыть маршрут <span aria-hidden="true">→</span></button></article><article class="fw-card"><p class="fw-name">Стартап</p><p class="fw-promise">Проверьте спрос раньше, чем потратите деньги.</p><ol class="fw-steps"><li>Сформулировать самую рискованную гипотезу</li><li>Проверить её на одном сегменте и живых людях</li><li>Посчитать экономику и решить: масштабировать, менять или закрыть</li></ol><button type="button" class="button" data-open="small">Открыть маршрут <span aria-hidden="true">→</span></button></article><article class="fw-card is-locked"><p class="fw-name">Действующий бизнес <span class="lk">🔒</span></p><p class="fw-promise">Найдите, где бизнес теряет деньги.</p><ol class="fw-steps"><li>Свести цифры отделов в один контур</li><li>Найти узкое горлышко в пути клиента</li><li>Проверить изменение и пересчитать прибыль</li></ol><a class="button ghost" href="https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9A%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%BE%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%D0%B4%D0%BB%D1%8F%20%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D1%83%D1%8E%D1%89%D0%B5%D0%B3%D0%BE%20%D0%B1%D0%B8%D0%B7%D0%BD%D0%B5%D1%81%D0%B0%3F" target="_blank" rel="noopener">Узнать о старте <span aria-hidden="true">↗</span></a></article><article class="fw-card is-locked"><p class="fw-name">Агентство <span class="lk">🔒</span></p><p class="fw-promise">Сведите клиентов и сервисы в одну систему.</p><ol class="fw-steps"><li>Собрать данные всех клиентов в одном месте</li><li>Вести каждого по одному маршруту</li><li>Готовить отчёт без ручной сборки</li></ol><a class="button ghost" href="https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9A%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%BE%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%D0%B4%D0%BB%D1%8F%20%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D1%81%D1%82%D0%B2%3F" target="_blank" rel="noopener">Узнать о старте <span aria-hidden="true">↗</span></a></article><article class="fw-card is-locked"><p class="fw-name">Бизнес-трекер <span class="lk">🔒</span></p><p class="fw-promise">Приходите на сессию с готовой картиной.</p><ol class="fw-steps"><li>Хранить гипотезы и решения между встречами</li><li>Видеть прогресс каждой команды</li><li>Готовить разбор к сессии заранее</li></ol><a class="button ghost" href="https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9A%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%BE%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%D0%B4%D0%BB%D1%8F%20%D0%B1%D0%B8%D0%B7%D0%BD%D0%B5%D1%81-%D1%82%D1%80%D0%B5%D0%BA%D0%B5%D1%80%D0%BE%D0%B2%3F" target="_blank" rel="noopener">Узнать о старте <span aria-hidden="true">↗</span></a></article></div>
+    </div></section>
 
     
 
@@ -2186,10 +2210,7 @@ main h2,.section-heading h2{font-size:clamp(26px,2.9vw,34px);line-height:1.12;le
       <div class="block-cta"><a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Начать бесплатно <span aria-hidden="true">↗</span></a></div>
     </div></section>
 
-    <section class="section fw-section general-only" id="forwhom"><div class="wrap">
-      <div class="section-heading"><div><p class="eyebrow">Для кого</p><h2>Пять маршрутов.<br>Разные точки старта, одна система.</h2></div><p class="lead">Маршрут подстраивается под то, что у Вас уже есть: опыт, идея, выручка или клиенты. Сам бизнес может быть любым: услуги, товар или digital.</p></div>
-      <div class="fw-grid"><article class="fw-card"><p class="fw-name">Эксперт</p><p class="fw-promise">Превратите то, что умеете, в продукт, который покупают.</p><ol class="fw-steps"><li>Найти, чем Вы отличаетесь от других экспертов ниши</li><li>Собрать из этого свой метод и продуктовую линейку</li><li>Выбрать один продукт и проверить его на первых клиентах</li></ol><button type="button" class="button" data-open="expert">Открыть маршрут <span aria-hidden="true">→</span></button></article><article class="fw-card"><p class="fw-name">Стартап</p><p class="fw-promise">Проверьте спрос раньше, чем потратите деньги.</p><ol class="fw-steps"><li>Сформулировать самую рискованную гипотезу</li><li>Проверить её на одном сегменте и живых людях</li><li>Посчитать экономику и решить: масштабировать, менять или закрыть</li></ol><button type="button" class="button" data-open="small">Открыть маршрут <span aria-hidden="true">→</span></button></article><article class="fw-card is-locked"><p class="fw-name">Действующий бизнес <span class="lk">🔒</span></p><p class="fw-promise">Найдите, где бизнес теряет деньги.</p><ol class="fw-steps"><li>Свести цифры отделов в один контур</li><li>Найти узкое горлышко в пути клиента</li><li>Проверить изменение и пересчитать прибыль</li></ol><a class="button ghost" href="https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9A%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%BE%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%D0%B4%D0%BB%D1%8F%20%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D1%83%D1%8E%D1%89%D0%B5%D0%B3%D0%BE%20%D0%B1%D0%B8%D0%B7%D0%BD%D0%B5%D1%81%D0%B0%3F" target="_blank" rel="noopener">Узнать о старте <span aria-hidden="true">↗</span></a></article><article class="fw-card is-locked"><p class="fw-name">Агентство <span class="lk">🔒</span></p><p class="fw-promise">Сведите клиентов и сервисы в одну систему.</p><ol class="fw-steps"><li>Собрать данные всех клиентов в одном месте</li><li>Вести каждого по одному маршруту</li><li>Готовить отчёт без ручной сборки</li></ol><a class="button ghost" href="https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9A%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%BE%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%D0%B4%D0%BB%D1%8F%20%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D1%81%D1%82%D0%B2%3F" target="_blank" rel="noopener">Узнать о старте <span aria-hidden="true">↗</span></a></article><article class="fw-card is-locked"><p class="fw-name">Бизнес-трекер <span class="lk">🔒</span></p><p class="fw-promise">Приходите на сессию с готовой картиной.</p><ol class="fw-steps"><li>Хранить гипотезы и решения между встречами</li><li>Видеть прогресс каждой команды</li><li>Готовить разбор к сессии заранее</li></ol><a class="button ghost" href="https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9A%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%BE%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%D0%B4%D0%BB%D1%8F%20%D0%B1%D0%B8%D0%B7%D0%BD%D0%B5%D1%81-%D1%82%D1%80%D0%B5%D0%BA%D0%B5%D1%80%D0%BE%D0%B2%3F" target="_blank" rel="noopener">Узнать о старте <span aria-hidden="true">↗</span></a></article></div>
-    </div></section>
+    
 
 
     <section class="section general-only" id="week" hidden><div class="wrap">
@@ -4089,31 +4110,31 @@ renderPlan();
 
   /* --- сцена сегментов: пять слайдов --- */
   var SEG = [
-    { key:"expert", tab:"Эксперт", open:true,
+    { key:"expert", tone:"navy", tab:"Эксперт", open:true,
       h:'Есть знания и опыт.<br>Как превратить их <em>в доход?</em>',
       sub:"Опыт есть, клиенты довольны. Не хватает упаковки: что продавать, кому и за сколько.",
       cta:"Открыть маршрут эксперта", note:"Первый шаг — Ваш метод, а не ещё один курс",
       card:{ t:"Продуктовая лестница",
         rows:[["01","Разбор-чеклист","знакомство"],["02","Личная консультация","первая покупка"],["03","Программа сопровождения","основной продукт"]], on:2 } },
-    { key:"small", tab:"Стартап", open:true,
+    { key:"small", tone:"gold", tab:"Стартап", open:true,
       h:'Есть идея.<br>Как не слить <em>бюджет?</em>',
       sub:"Идея нравится всем, пока её не столкнули с рынком. Задача — узнать правду о спросе.",
       cta:"Открыть маршрут стартапа", note:"Первый шаг — гипотеза, а не разработка",
       card:{ t:"Бланк гипотезы",
         rows:[["Аудитория","клиенты после разовой консультации"],["Гипотеза","им нужно сопровождение внедрения"],["Проверка","предложить короткую программу"],["Сигнал","оплаты и причины отказов"]], on:3 } },
-    { key:"founder", tab:"Действующий бизнес", open:false, wa:"https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9A%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%BE%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%D0%B4%D0%BB%D1%8F%20%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D1%83%D1%8E%D1%89%D0%B5%D0%B3%D0%BE%20%D0%B1%D0%B8%D0%B7%D0%BD%D0%B5%D1%81%D0%B0%3F",
+    { key:"founder", tone:"navy", tab:"Действующий бизнес", open:false, wa:"https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9A%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%BE%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%D0%B4%D0%BB%D1%8F%20%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D1%83%D1%8E%D1%89%D0%B5%D0%B3%D0%BE%20%D0%B1%D0%B8%D0%B7%D0%BD%D0%B5%D1%81%D0%B0%3F",
       h:'Выручка есть, прибыль не растёт.<br>Где <em>теряются деньги?</em>',
       sub:"Отделы считают каждый свои цифры. Общая картина нужна только собственнику.",
       cta:"Узнать о старте", note:"Раздел готовится",
       card:{ t:"Кто что считает",
         rows:[["Продажи","свою воронку"],["Маркетинг","свои заявки"],["Бухгалтерия","налоги и остаток"],["Собственник","общую картину, которой нет"]], on:3 } },
-    { key:"agency", tab:"Агентство", open:false, wa:"https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9A%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%BE%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%D0%B4%D0%BB%D1%8F%20%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D1%81%D1%82%D0%B2%3F",
+    { key:"agency", tone:"gold", tab:"Агентство", open:false, wa:"https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9A%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%BE%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%D0%B4%D0%BB%D1%8F%20%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D1%81%D1%82%D0%B2%3F",
       h:'Несколько клиентов, десяток сервисов.<br>Как свести их <em>в одну систему?</em>',
       sub:"Данные разбросаны, отчёт собирается вручную, общей картины по портфелю нет.",
       cta:"Узнать о старте", note:"Раздел готовится",
       card:{ t:"Портфель проектов", foot:"один маршрут на всех клиентов",
         rows:[["Клиент А","Понять","в работе"],["Клиент Б","Привлечь","ждёт правок"],["Клиент В","Посчитать","отчёт готов"]], on:-1 } },
-    { key:"tracker", tab:"Бизнес-трекер", open:false, wa:"https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9A%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%BE%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%D0%B4%D0%BB%D1%8F%20%D0%B1%D0%B8%D0%B7%D0%BD%D0%B5%D1%81-%D1%82%D1%80%D0%B5%D0%BA%D0%B5%D1%80%D0%BE%D0%B2%3F",
+    { key:"tracker", tone:"navy", tab:"Бизнес-трекер", open:false, wa:"https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9A%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%BE%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%D0%B4%D0%BB%D1%8F%20%D0%B1%D0%B8%D0%B7%D0%BD%D0%B5%D1%81-%D1%82%D1%80%D0%B5%D0%BA%D0%B5%D1%80%D0%BE%D0%B2%3F",
       h:'Несколько команд на трекинге.<br>Прогресс <em>собираете вручную?</em>',
       sub:"Гипотезы и цифры живут в блокноте. К каждой встрече картину восстанавливаете заново.",
       cta:"Узнать о старте", note:"Раздел готовится",
@@ -4171,10 +4192,17 @@ renderPlan();
         b.setAttribute("aria-selected", String(k === cur));
         b.tabIndex = k === cur ? 0 : -1;
       });
+      tone(cur);
+    }
+    var heroEl = document.querySelector(".hero"), toneT = null;
+    function tone(i) {
+      if (!heroEl) return;
+      clearTimeout(toneT);
+      toneT = setTimeout(function () { heroEl.dataset.tone = SEG[i].tone || "navy"; }, 300);
     }
     function run() {
       clearInterval(timer);
-      if (!locked && !hover && !document.hidden) timer = setInterval(function () { show(cur + 1); }, 7500);
+      if (!locked && !hover && !document.hidden) timer = setInterval(function () { show(cur + 1); }, 4400);
     }
     tabs.addEventListener("click", function (e) {
       var b = e.target.closest("button[data-i]");
@@ -4205,6 +4233,7 @@ renderPlan();
     });
     document.addEventListener("visibilitychange", run);
     window.__pickAudience = function (i) { locked = true; show(i); run(); };
+    if (heroEl) heroEl.dataset.tone = SEG[0].tone || "navy";
     run();
   })();
 
