@@ -1721,6 +1721,20 @@ html{scroll-padding-top:142px}
 .promo-strip{background:#16283f;border:1px solid rgba(238,200,48,.4)}
 .promo-strip .promo-seq span{color:var(--gold)}
 .promo-strip .promo-seq span::after{color:rgba(238,200,48,.45)}
+
+/* ===================== v14: одна мера строки и два размера заголовка ===================== */
+/* строка везде 60–72 знака: удобный диапазон для чтения */
+.lead,.pain-turn,.res-note,.of-lead,.diff-concl,.inside-list,
+.section-heading > p,.seg-copy > p{max-width:66ch}
+.hero .seg-copy > p{max-width:52ch}
+.oracle-layout .lead,.oracle-layout .muted{max-width:66ch}
+.pain-turn{max-width:66ch}
+
+/* два размера заголовка вместо трёх */
+main h2,.section-heading h2{font-size:clamp(26px,2.9vw,34px);line-height:1.12;letter-spacing:-.025em}
+.persona-copy h3,.aud-panel h3,.benefits h3,.visual h3,.seg-card h3{font-size:clamp(20px,1.9vw,25px);line-height:1.2}
+/* первый экран — отдельная величина, он и должен быть крупнее всех */
+.hero .seg-copy h3{font-size:clamp(30px,3.9vw,52px);line-height:1.05}
 </style>
 </head>
 <body>
