@@ -1780,6 +1780,44 @@ main h2,.section-heading h2{font-size:clamp(26px,2.9vw,34px);line-height:1.12;le
 @media (max-width:620px){
   .fw-grid{grid-template-columns:1fr}
 }
+
+/* ===================== v14: ритм фонов ===================== */
+/* мостик — светлый */
+.turn-section{background:#fff;color:var(--ink);border-top:1px solid var(--line)}
+.turn-section .pain-turn{color:var(--muted)}
+.turn-section .pain-turn b{color:var(--ink)}
+
+/* цифры — серые, стоят после цикла */
+.figures{background:var(--mist);border-color:var(--line)}
+
+/* Результат — светлый */
+.result-section{background:#fff;color:var(--ink);border-top:1px solid var(--line)}
+.result-section .eyebrow{color:var(--muted)}
+.result-section .lead{color:var(--muted)}
+.res-item{background:var(--warm);border-color:var(--line)}
+.res-item>span{background:rgba(201,151,60,.15);color:#c9973c}
+.res-item b{color:var(--ink)}
+.res-item p{color:var(--muted)}
+.res-note{background:rgba(15,28,46,.05);color:var(--ink);border-left-color:#c9973c}
+
+/* Пять маршрутов — тёмный */
+.fw-section{background:var(--navy);color:var(--warm);border-top:1px solid rgba(255,255,255,.1)}
+.fw-section .eyebrow{color:var(--gold)}
+.fw-section .lead{color:#c4ccd6}
+.fw-card{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.16);box-shadow:none}
+.fw-card.is-locked{border-color:rgba(255,255,255,.24);background:none}
+.fw-name{color:#fff}
+.fw-card.is-locked .fw-name{color:#8a9bb0}
+.fw-promise{color:#c4ccd6}
+.fw-steps li{color:#dfe4ea}
+.fw-steps li::before{color:var(--gold)}
+.fw-card .button.ghost{background:none;border-color:rgba(244,243,240,.5);color:var(--warm)}
+.fw-card .button.ghost:hover{background:rgba(244,243,240,.12);color:var(--warm);filter:none}
+
+/* Кабинет — белый, Вопросы — серые, Отзывы — белые */
+.inside-section{background:#fff}
+.faq-section{background:var(--mist)}
+.reviews-section{background:#fff}
 </style>
 </head>
 <body>
@@ -1855,8 +1893,6 @@ main h2,.section-heading h2{font-size:clamp(26px,2.9vw,34px);line-height:1.12;le
     <section class="turn-section general-only" id="pain"><div class="wrap">
       <p class="pain-turn">NeuroVia собирает систему в одном проекте: решение о клиенте подставляется в продукт, воронку, контент, расчёты <b>и остаётся у Вас.</b></p>
     </div></section>
-
-
 
     <section class="audience wrap" id="audience" aria-label="Ваш раздел" hidden>
 
@@ -1976,13 +2012,6 @@ main h2,.section-heading h2{font-size:clamp(26px,2.9vw,34px);line-height:1.12;le
       </div>
     </div></section>
 
-
-    <section class="figures general-only"><div class="wrap">
-      <div><b>6 шагов</b><span>от идеи до повторяемых продаж</span></div>
-      <div><b>1 платформа</b><span>вместо десятка сервисов</span></div>
-      <div><b>0 ₸</b><span>стоит первая диагностика</span></div>
-    </div></section>
-
     <section class="section track-section general-only" id="track"><div class="wrap">
       <div class="section-heading track-head"><div><h2>Пройти цикл</h2><p class="lead">На каждом этапе Вы создаёте конкретный результат. Он становится основой следующего шага.</p></div></div>
       <div class="ring-row">
@@ -2030,6 +2059,11 @@ main h2,.section-heading h2{font-size:clamp(26px,2.9vw,34px);line-height:1.12;le
     
     
       <div class="wrap"><div class="block-cta"><a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Начать бесплатно <span aria-hidden="true">↗</span></a></div></div>
+    </div></section>
+    <section class="figures general-only"><div class="wrap">
+      <div><b>6 шагов</b><span>от идеи до повторяемых продаж</span></div>
+      <div><b>1 платформа</b><span>вместо десятка сервисов</span></div>
+      <div><b>0 ₸</b><span>стоит первая диагностика</span></div>
     </div></section>
 
     <section class="section general-only" id="diagnostic" hidden><div class="wrap">
