@@ -3770,7 +3770,15 @@ renderPlan();
       var h = Math.round(t.getBoundingClientRect().bottom - c.getBoundingClientRect().top + pb);
       if (h > 0) c.style.minHeight = h + "px";
     };
-    var sync = function () { setGut(); };
+    /* первый экран ровно во всю высоту окна, без выглядывающего следующего блока */
+    var fitHero = function () {
+      var inner = document.querySelector(".hero-inner");
+      var bar = document.querySelector(".promo-bar"), hdr = document.querySelector("header");
+      if (!inner) return;
+      if (window.innerWidth < 1001 || !bar || !hdr) { inner.style.minHeight = ""; return; }
+      inner.style.minHeight = Math.max(420, window.innerHeight - bar.offsetHeight - hdr.offsetHeight) + "px";
+    };
+    var sync = function () { setGut(); fitHero(); };
     sync();
     window.addEventListener("resize", sync);
     window.addEventListener("load", sync);
