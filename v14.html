@@ -1834,6 +1834,23 @@ main h2,.section-heading h2{font-size:clamp(26px,2.9vw,34px);line-height:1.12;le
   .turn-figures > div{padding:18px 0;border-right:0;border-bottom:1px solid var(--line)}
   .turn-figures > div:last-child{border-bottom:0}
 }
+
+/* ===================== v14: порядок как в меню ===================== */
+/* «Для кого» встал под первый экран — он светлый, чтобы не слиться с тёмным героем */
+.fw-section{background:#fff;color:var(--ink);border-top:1px solid var(--line)}
+.fw-section .eyebrow{color:var(--muted)}
+.fw-section .lead{color:var(--muted)}
+.fw-card{background:var(--warm);border-color:var(--line);box-shadow:var(--sh-card)}
+.fw-card.is-locked{background:none;border-color:var(--line);border-style:dashed;box-shadow:none}
+.fw-name{color:var(--ink)}
+.fw-card.is-locked .fw-name{color:var(--muted)}
+.fw-promise{color:var(--muted)}
+.fw-steps li{color:var(--ink)}
+.fw-steps li::before{color:#c9973c}
+.fw-card .button.ghost{background:none;border-color:var(--line);color:var(--ink)}
+.fw-card .button.ghost:hover{background:var(--navy);border-color:var(--navy);color:var(--warm);filter:none}
+/* ответ с цифрами — серый, между выбором и маршрутом */
+.turn-section{background:var(--mist)}
 </style>
 </head>
 <body>
@@ -1904,16 +1921,6 @@ main h2,.section-heading h2{font-size:clamp(26px,2.9vw,34px);line-height:1.12;le
       </section>
 
     
-
-
-    <section class="turn-section general-only" id="pain"><div class="wrap">
-      <p class="pain-turn">NeuroVia собирает систему в одном проекте: решение о клиенте подставляется в продукт, воронку, контент, расчёты <b>и остаётся у Вас.</b></p>
-      <div class="turn-figures">
-        <div><b>6 шагов</b><span>от идеи до повторяемых продаж</span></div>
-        <div><b>1 платформа</b><span>вместо десятка сервисов</span></div>
-        <div><b>0 ₸</b><span>стоит первая диагностика</span></div>
-      </div>
-    </div></section>
 
     <section class="audience wrap" id="audience" aria-label="Ваш раздел" hidden>
 
@@ -2033,6 +2040,20 @@ main h2,.section-heading h2{font-size:clamp(26px,2.9vw,34px);line-height:1.12;le
       </div>
     </div></section>
 
+        <section class="section fw-section general-only" id="forwhom"><div class="wrap">
+      <div class="section-heading"><div><p class="eyebrow">Для кого</p><h2>Пять маршрутов.<br>Разные точки старта, одна система.</h2></div><p class="lead">Маршрут подстраивается под то, что у Вас уже есть: опыт, идея, выручка или клиенты. Сам бизнес может быть любым: услуги, товар или digital.</p></div>
+      <div class="fw-grid"><article class="fw-card"><p class="fw-name">Эксперт</p><p class="fw-promise">Превратите то, что умеете, в продукт, который покупают.</p><ol class="fw-steps"><li>Найти, чем Вы отличаетесь от других экспертов ниши</li><li>Собрать из этого свой метод и продуктовую линейку</li><li>Выбрать один продукт и проверить его на первых клиентах</li></ol><button type="button" class="button" data-open="expert">Открыть маршрут <span aria-hidden="true">→</span></button></article><article class="fw-card"><p class="fw-name">Стартап</p><p class="fw-promise">Проверьте спрос раньше, чем потратите деньги.</p><ol class="fw-steps"><li>Сформулировать самую рискованную гипотезу</li><li>Проверить её на одном сегменте и живых людях</li><li>Посчитать экономику и решить: масштабировать, менять или закрыть</li></ol><button type="button" class="button" data-open="small">Открыть маршрут <span aria-hidden="true">→</span></button></article><article class="fw-card is-locked"><p class="fw-name">Действующий бизнес <span class="lk">🔒</span></p><p class="fw-promise">Найдите, где бизнес теряет деньги.</p><ol class="fw-steps"><li>Свести цифры отделов в один контур</li><li>Найти узкое горлышко в пути клиента</li><li>Проверить изменение и пересчитать прибыль</li></ol><a class="button ghost" href="https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9A%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%BE%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%D0%B4%D0%BB%D1%8F%20%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D1%83%D1%8E%D1%89%D0%B5%D0%B3%D0%BE%20%D0%B1%D0%B8%D0%B7%D0%BD%D0%B5%D1%81%D0%B0%3F" target="_blank" rel="noopener">Узнать о старте <span aria-hidden="true">↗</span></a></article><article class="fw-card is-locked"><p class="fw-name">Агентство <span class="lk">🔒</span></p><p class="fw-promise">Сведите клиентов и сервисы в одну систему.</p><ol class="fw-steps"><li>Собрать данные всех клиентов в одном месте</li><li>Вести каждого по одному маршруту</li><li>Готовить отчёт без ручной сборки</li></ol><a class="button ghost" href="https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9A%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%BE%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%D0%B4%D0%BB%D1%8F%20%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D1%81%D1%82%D0%B2%3F" target="_blank" rel="noopener">Узнать о старте <span aria-hidden="true">↗</span></a></article><article class="fw-card is-locked"><p class="fw-name">Бизнес-трекер <span class="lk">🔒</span></p><p class="fw-promise">Приходите на сессию с готовой картиной.</p><ol class="fw-steps"><li>Хранить гипотезы и решения между встречами</li><li>Видеть прогресс каждой команды</li><li>Готовить разбор к сессии заранее</li></ol><a class="button ghost" href="https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9A%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%BE%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%D0%B4%D0%BB%D1%8F%20%D0%B1%D0%B8%D0%B7%D0%BD%D0%B5%D1%81-%D1%82%D1%80%D0%B5%D0%BA%D0%B5%D1%80%D0%BE%D0%B2%3F" target="_blank" rel="noopener">Узнать о старте <span aria-hidden="true">↗</span></a></article></div>
+    </div></section>
+
+        <section class="turn-section general-only" id="pain"><div class="wrap">
+      <p class="pain-turn">NeuroVia собирает систему в одном проекте: решение о клиенте подставляется в продукт, воронку, контент, расчёты <b>и остаётся у Вас.</b></p>
+      <div class="turn-figures">
+        <div><b>6 шагов</b><span>от идеи до повторяемых продаж</span></div>
+        <div><b>1 платформа</b><span>вместо десятка сервисов</span></div>
+        <div><b>0 ₸</b><span>стоит первая диагностика</span></div>
+      </div>
+    </div></section>
+
     <section class="section track-section general-only" id="track"><div class="wrap">
       <div class="section-heading track-head"><div><h2>Пройти цикл</h2><p class="lead">На каждом этапе Вы создаёте конкретный результат. Он становится основой следующего шага.</p></div></div>
       <div class="ring-row">
@@ -2137,12 +2158,6 @@ main h2,.section-heading h2{font-size:clamp(26px,2.9vw,34px);line-height:1.12;le
       <p class="res-note">Всё связано между собой: то, что Вы решили про клиента, работает в продукте, оффере, контенте, воронке и в расчётах.</p>
       <div class="block-cta"><a class="button" href="https://neurovialabs.io/register" target="_blank" rel="noopener">Начать бесплатно <span aria-hidden="true">↗</span></a></div>
     </div></section>
-
-    <section class="section fw-section general-only" id="forwhom"><div class="wrap">
-      <div class="section-heading"><div><p class="eyebrow">Для кого</p><h2>Пять маршрутов.<br>Разные точки старта, одна система.</h2></div><p class="lead">Маршрут подстраивается под то, что у Вас уже есть: опыт, идея, выручка или клиенты. Сам бизнес может быть любым: услуги, товар или digital.</p></div>
-      <div class="fw-grid"><article class="fw-card"><p class="fw-name">Эксперт</p><p class="fw-promise">Превратите то, что умеете, в продукт, который покупают.</p><ol class="fw-steps"><li>Найти, чем Вы отличаетесь от других экспертов ниши</li><li>Собрать из этого свой метод и продуктовую линейку</li><li>Выбрать один продукт и проверить его на первых клиентах</li></ol><button type="button" class="button" data-open="expert">Открыть маршрут <span aria-hidden="true">→</span></button></article><article class="fw-card"><p class="fw-name">Стартап</p><p class="fw-promise">Проверьте спрос раньше, чем потратите деньги.</p><ol class="fw-steps"><li>Сформулировать самую рискованную гипотезу</li><li>Проверить её на одном сегменте и живых людях</li><li>Посчитать экономику и решить: масштабировать, менять или закрыть</li></ol><button type="button" class="button" data-open="small">Открыть маршрут <span aria-hidden="true">→</span></button></article><article class="fw-card is-locked"><p class="fw-name">Действующий бизнес <span class="lk">🔒</span></p><p class="fw-promise">Найдите, где бизнес теряет деньги.</p><ol class="fw-steps"><li>Свести цифры отделов в один контур</li><li>Найти узкое горлышко в пути клиента</li><li>Проверить изменение и пересчитать прибыль</li></ol><a class="button ghost" href="https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9A%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%BE%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%D0%B4%D0%BB%D1%8F%20%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D1%83%D1%8E%D1%89%D0%B5%D0%B3%D0%BE%20%D0%B1%D0%B8%D0%B7%D0%BD%D0%B5%D1%81%D0%B0%3F" target="_blank" rel="noopener">Узнать о старте <span aria-hidden="true">↗</span></a></article><article class="fw-card is-locked"><p class="fw-name">Агентство <span class="lk">🔒</span></p><p class="fw-promise">Сведите клиентов и сервисы в одну систему.</p><ol class="fw-steps"><li>Собрать данные всех клиентов в одном месте</li><li>Вести каждого по одному маршруту</li><li>Готовить отчёт без ручной сборки</li></ol><a class="button ghost" href="https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9A%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%BE%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%D0%B4%D0%BB%D1%8F%20%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D1%81%D1%82%D0%B2%3F" target="_blank" rel="noopener">Узнать о старте <span aria-hidden="true">↗</span></a></article><article class="fw-card is-locked"><p class="fw-name">Бизнес-трекер <span class="lk">🔒</span></p><p class="fw-promise">Приходите на сессию с готовой картиной.</p><ol class="fw-steps"><li>Хранить гипотезы и решения между встречами</li><li>Видеть прогресс каждой команды</li><li>Готовить разбор к сессии заранее</li></ol><a class="button ghost" href="https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9A%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%BE%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%D0%B4%D0%BB%D1%8F%20%D0%B1%D0%B8%D0%B7%D0%BD%D0%B5%D1%81-%D1%82%D1%80%D0%B5%D0%BA%D0%B5%D1%80%D0%BE%D0%B2%3F" target="_blank" rel="noopener">Узнать о старте <span aria-hidden="true">↗</span></a></article></div>
-    </div></section>
-
 
     <section class="section general-only" id="week" hidden><div class="wrap">
       <div class="section-heading"><div><p class="eyebrow">Сделать следующий шаг</p><h2>Большая цель.<br>Понятная неделя.</h2></div><p class="lead">Один приоритет, три действия и показатель, который Вы проверите вместе с Оракулом.</p></div>
