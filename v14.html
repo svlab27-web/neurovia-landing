@@ -2477,6 +2477,11 @@ renderPlan();
       window.__persona = key;
       if (window.__renderBlocks) window.__renderBlocks(key);
       if (window.__renderBenefits) window.__renderBenefits(key);
+      /* первый экран показывает тот же сегмент, что открыт ниже */
+      if (window.__pickAudience) {
+        var segIdx = { expert: 0, small: 1, founder: 2 }[key];
+        if (segIdx !== undefined) window.__pickAudience(segIdx);
+      }
       document.querySelectorAll(".general-only").forEach((el) => { el.hidden = true; });
       if (window.__applyPersonaFunnel) window.__applyPersonaFunnel(key);
     }
