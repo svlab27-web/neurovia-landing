@@ -1903,6 +1903,34 @@ main h2,.section-heading h2{font-size:clamp(26px,2.9vw,34px);line-height:1.12;le
 .hero[data-tone="gold"] .eyebrow{color:rgba(10,22,40,.6)}
 .hero[data-tone="gold"] .hero-offer{color:var(--ink)}
 .hero[data-tone="gold"] .hero-offer span{color:rgba(10,22,40,.62)}
+
+/* ===== v15: первый экран — полотно ===== */
+/* перенос кадра строго по вертикали: новый приходит снизу, старый уходит вверх */
+#segStage .seg-slide{transform:translateY(100%);
+  transition:transform .95s cubic-bezier(.76,0,.24,1),visibility 0s .95s}
+#segStage .seg-slide.is-on{transform:none;
+  transition:transform .95s cubic-bezier(.76,0,.24,1)}
+#segStage .seg-slide.is-out{transform:translateY(-100%);visibility:visible;
+  transition:transform .95s cubic-bezier(.76,0,.24,1)}
+@media (prefers-reduced-motion:reduce){#segStage .seg-slide{transition:none}}
+
+/* две доли: текст две трети, Оракул треть и статичен */
+@media (min-width:1001px){
+  .hero .hero-inner{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);
+    gap:clamp(28px,3.4vw,56px);align-items:center}
+  .hero .hero-copy{min-width:0}
+  .hero .hero-character{position:static;width:auto;right:auto;top:auto;margin:0}
+  .hero .hero-character::before{display:none}
+  .hero .hero-character img{width:100%;height:clamp(300px,25vw,400px)}
+  .hero .hero-character figcaption{margin-top:10px;font-size:13px;line-height:1.45}
+  .hero .seg-stage{margin-top:26px;height:auto;min-height:clamp(330px,26vw,400px)}
+  .hero .seg-slide{display:block;align-content:start}
+  .hero .seg-copy,
+  .hero .seg-copy h3{max-width:none}
+  .hero .seg-copy > p{max-width:36ch}
+}
+.hero .seg-tabs:empty{display:none}
+.hero .seg-copy h3{line-height:1.02}
 </style>
 </head>
 <body>
@@ -4240,44 +4268,29 @@ renderPlan();
   })();
 
 
-  /* --- переключатель анимации первого экрана (только в v15) --- */
-  (function animPicker() {
+
+
+
+  /* --- заголовки первого экрана: максимум три строки, единая высота --- */
+  (function fitHero() {
     var stage = document.getElementById("segStage");
     if (!stage) return;
-    var NAMES = { a: "горизонталь", b: "вертикаль", c: "по строкам", d: "вертикаль + вспышка" };
-    var cur = "b";
-    try { cur = localStorage.getItem("nvl-anim2") || "b"; } catch (e) {}
-    function apply(k) {
-      cur = k;
-      if (k === "a") stage.removeAttribute("data-anim"); else stage.setAttribute("data-anim", k);
-      stage.style.setProperty("--sh", stage.getBoundingClientRect().height + "px");
-      [].forEach.call(pick.querySelectorAll("button"), function (b) {
-        b.setAttribute("aria-pressed", String(b.dataset.k === k));
+    function fit() {
+      var hs = [].slice.call(stage.querySelectorAll(".seg-copy h3"));
+      if (!hs.length) return;
+      hs.forEach(function (h) { h.style.fontSize = ""; h.style.minHeight = ""; });
+      var base = parseFloat(getComputedStyle(hs[0]).fontSize);
+      var maxH = Math.round(base * 1.02 * 3) + 2;
+      hs.forEach(function (h) {
+        var size = base;
+        h.style.fontSize = size + "px";
+        while (h.scrollHeight > maxH && size > 26) { size -= 1; h.style.fontSize = size + "px"; }
       });
-      try { localStorage.setItem("nvl-anim2", k); } catch (e) {}
+      hs.forEach(function (h) { h.style.minHeight = maxH + "px"; });
     }
-    var pick = document.createElement("div");
-    pick.className = "anim-pick";
-    pick.innerHTML = "<b>анимация</b>" + ["a","b","c","d"].map(function (k) {
-      return '<button type="button" data-k="' + k + '" title="' + NAMES[k] + '">' + k.toUpperCase() + "</button>";
-    }).join("");
-    document.body.appendChild(pick);
-    pick.addEventListener("click", function (e) {
-      var b = e.target.closest("button[data-k]");
-      if (b) apply(b.dataset.k);
-    });
-    apply(cur);
-
-    /* вспышка для варианта D */
-    var obs = new MutationObserver(function () {
-      if (stage.getAttribute("data-anim") !== "d") return;
-      stage.classList.remove("is-flash");
-      void stage.offsetWidth;
-      stage.classList.add("is-flash");
-    });
-    [].forEach.call(stage.querySelectorAll(".seg-slide"), function (el) {
-      obs.observe(el, { attributes: true, attributeFilter: ["class"] });
-    });
+    window.addEventListener("resize", fit);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    fit();
   })();
 
   /* --- шапка: разделы страницы / выбранная аудитория --- */
