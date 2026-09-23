@@ -1669,6 +1669,22 @@ html{scroll-padding-top:142px}
 /* подпись всегда под кнопкой, а не сбоку */
 .seg-act{flex-direction:column;align-items:flex-start;gap:12px}
 .seg-note{padding-left:2px}
+
+/* ===================== v14: первый экран во всю высоту ===================== */
+.hero .hero-inner{min-height:calc(100svh - 136px);display:flex;flex-direction:column;padding-block:34px 44px}
+.hero .hero-copy.hero-seg{flex:1;display:flex;flex-direction:column}
+.hero .seg-stage{flex:1;height:auto;min-height:clamp(300px,24vw,360px);margin-top:34px}
+.hero .seg-slide{height:100%}
+.hero .seg-copy{display:flex;flex-direction:column;height:100%}
+.hero .seg-copy > p{margin-bottom:0}
+.hero .seg-act{margin-top:auto;padding-top:26px}
+.hero .hero-character{top:50%;transform:translateY(-50%);right:0}
+@media (max-width:1000px){
+  .hero .hero-inner{min-height:0;display:block}
+  .hero .seg-stage{min-height:0}
+  .hero .seg-act{margin-top:24px;padding-top:0}
+  .hero .hero-character{transform:none;top:auto}
+}
 </style>
 </head>
 <body>
