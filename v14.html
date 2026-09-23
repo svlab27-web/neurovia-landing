@@ -4093,9 +4093,14 @@ renderPlan();
       var t = e.key === "Home" ? 0 : e.key === "End" ? L - 1 : (n + (e.key === "ArrowRight" ? 1 : L - 1)) % L;
       held = true; show(t); run(); btns[t].focus();
     });
+    /* пауза, пока курсор на первом экране; увёл — лента снова пошла */
     var heroBox = document.querySelector(".hero");
-    if (heroBox) heroBox.addEventListener("mouseenter", function () { held = true; run(); });
-    stage.addEventListener("mouseenter", function () { held = true; run(); });
+    if (heroBox) {
+      heroBox.addEventListener("mouseenter", function () { held = true; run(); });
+      heroBox.addEventListener("mouseleave", function () { held = false; run(); });
+    }
+    stage.addEventListener("focusin", function () { held = true; run(); });
+    stage.addEventListener("focusout", function () { held = false; run(); });
     stage.addEventListener("click", function (e) {
       var go = e.target.closest("[data-open]");
       if (go && window.__openPersona) window.__openPersona(go.dataset.open, true);
