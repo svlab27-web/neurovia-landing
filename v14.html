@@ -4055,7 +4055,7 @@ renderPlan();
 
     var slides = [].slice.call(stage.querySelectorAll(".seg-slide"));
     var btns = [].slice.call(tabs.querySelectorAll("button"));
-    var cur = 0, timer = null, held = reduce.matches;
+    var cur = 0, timer = null, hover = false, locked = reduce.matches;
 
     function show(n) {
       var prev = cur;
@@ -4079,35 +4079,37 @@ renderPlan();
     }
     function run() {
       clearInterval(timer);
-      if (!held && !document.hidden) timer = setInterval(function () { show(cur + 1); }, 7500);
+      if (!locked && !hover && !document.hidden) timer = setInterval(function () { show(cur + 1); }, 7500);
     }
     tabs.addEventListener("click", function (e) {
       var b = e.target.closest("button[data-i]");
       if (!b) return;
-      held = true; show(Number(b.dataset.i)); run();
+      locked = true; show(Number(b.dataset.i)); run();
     });
     tabs.addEventListener("keydown", function (e) {
       if (["ArrowLeft", "ArrowRight", "Home", "End"].indexOf(e.key) < 0) return;
       e.preventDefault();
       var n = Number(e.target.dataset.i) || 0, L = SEG.length;
       var t = e.key === "Home" ? 0 : e.key === "End" ? L - 1 : (n + (e.key === "ArrowRight" ? 1 : L - 1)) % L;
-      held = true; show(t); run(); btns[t].focus();
+      locked = true; show(t); run(); btns[t].focus();
     });
-    /* пауза, пока курсор на первом экране; увёл — лента снова пошла */
+    /* курсор на первом экране — временная пауза; кнопка перехода — стоп навсегда */
     var heroBox = document.querySelector(".hero");
     if (heroBox) {
-      heroBox.addEventListener("mouseenter", function () { held = true; run(); });
-      heroBox.addEventListener("mouseleave", function () { held = false; run(); });
+      heroBox.addEventListener("mouseenter", function () { hover = true; run(); });
+      heroBox.addEventListener("mouseleave", function () { hover = false; run(); });
     }
-    stage.addEventListener("focusin", function () { held = true; run(); });
-    stage.addEventListener("focusout", function () { held = false; run(); });
+    stage.addEventListener("focusin", function () { hover = true; run(); });
+    stage.addEventListener("focusout", function () { hover = false; run(); });
     stage.addEventListener("click", function (e) {
+      /* человек выбрал маршрут — лента больше не переключается */
+      if (!e.target.closest(".button")) return;
+      locked = true; run();
       var go = e.target.closest("[data-open]");
       if (go && window.__openPersona) window.__openPersona(go.dataset.open, true);
-      held = true; run();
     });
     document.addEventListener("visibilitychange", run);
-    window.__pickAudience = function (i) { held = true; show(i); run(); };
+    window.__pickAudience = function (i) { locked = true; show(i); run(); };
     run();
   })();
 
