@@ -1735,6 +1735,11 @@ main h2,.section-heading h2{font-size:clamp(26px,2.9vw,34px);line-height:1.12;le
 /* первый экран — отдельная величина, он и должен быть крупнее всех */
 .hero .seg-copy h3{font-size:clamp(30px,3.9vw,52px);line-height:1.05}
 .faq-layout h2,.final-card h2{font-size:clamp(26px,2.9vw,34px);line-height:1.12}
+
+/* ===================== v14: разворот вместо блока боли ===================== */
+.turn-section{background:var(--navy);color:var(--warm);border-top:1px solid rgba(255,255,255,.12);padding-block:34px}
+.turn-section .pain-turn{margin:0;max-width:760px;font:500 clamp(16px,1.55vw,19px)/1.55 var(--head);color:#c4ccd6}
+.turn-section .pain-turn b{color:#fff;font-weight:600}
 </style>
 </head>
 <body>
@@ -1806,15 +1811,7 @@ main h2,.section-heading h2{font-size:clamp(26px,2.9vw,34px);line-height:1.12;le
     
 
 
-    <section class="section pain-section general-only" id="pain"><div class="wrap">
-      <p class="eyebrow">Знакомый круг</p>
-      <div class="ticker" id="ticker" data-tone="light">
-            <button type="button" class="tslide is-on" data-go="choose"><span>Сначала SMM.<br>Контент выходит — <em>а продаж нет.</em></span></button>
-            <button type="button" class="tslide" data-go="choose" tabindex="-1" aria-hidden="true"><span>Потом таргетолог.<br>Бюджет ушёл <em>на чужие гипотезы.</em></span></button>
-            <button type="button" class="tslide" data-go="choose" tabindex="-1" aria-hidden="true"><span>Потом ещё один курс.<br>А связывать всё — <em>снова Вам.</em></span></button>
-            <button type="button" class="tslide" data-go="choose" tabindex="-1" aria-hidden="true"><span>Потом AI-сервисы.<br>Каждый своё, <em>а пути клиента нет.</em></span></button>
-            <button type="button" class="tslide" data-go="choose" tabindex="-1" aria-hidden="true"><span>Так проходят годы.<br>А системы <em>так и не появилось.</em></span></button>
-          </div>
+    <section class="turn-section general-only" id="pain"><div class="wrap">
       <p class="pain-turn">NeuroVia собирает систему в одном проекте: решение о клиенте подставляется в продукт, воронку, контент, расчёты <b>и остаётся у Вас.</b></p>
     </div></section>
 
