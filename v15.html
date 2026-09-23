@@ -1839,9 +1839,12 @@ main h2,.section-heading h2{font-size:clamp(26px,2.9vw,34px);line-height:1.12;le
 /* A — горизонталь (как в v14), задана базовыми правилами */
 
 /* B — вертикаль: уходит вверх, новый приходит снизу */
-#segStage[data-anim="b"] .seg-slide{transform:translateY(100%)}
+#segStage[data-anim="b"] .seg-slide{transform:translateY(105%);
+  transition:transform .95s cubic-bezier(.76,0,.24,1),visibility 0s .95s}
+#segStage[data-anim="b"] .seg-slide.is-on,
+#segStage[data-anim="b"] .seg-slide.is-out{transition:transform .95s cubic-bezier(.76,0,.24,1)}
 #segStage[data-anim="b"] .seg-slide.is-on{transform:none}
-#segStage[data-anim="b"] .seg-slide.is-out{transform:translateY(-100%)}
+#segStage[data-anim="b"] .seg-slide.is-out{transform:translateY(-105%)}
 
 /* C — проявление по строкам: слайд не едет, содержимое раскрывается */
 #segStage[data-anim="c"] .seg-slide{transform:none;transition:visibility 0s .5s;opacity:0}
@@ -4216,8 +4219,8 @@ renderPlan();
     var stage = document.getElementById("segStage");
     if (!stage) return;
     var NAMES = { a: "горизонталь", b: "вертикаль", c: "по строкам", d: "вертикаль + вспышка" };
-    var cur = "a";
-    try { cur = localStorage.getItem("nvl-anim") || "a"; } catch (e) {}
+    var cur = "b";
+    try { cur = localStorage.getItem("nvl-anim2") || "b"; } catch (e) {}
     function apply(k) {
       cur = k;
       if (k === "a") stage.removeAttribute("data-anim"); else stage.setAttribute("data-anim", k);
@@ -4225,7 +4228,7 @@ renderPlan();
       [].forEach.call(pick.querySelectorAll("button"), function (b) {
         b.setAttribute("aria-pressed", String(b.dataset.k === k));
       });
-      try { localStorage.setItem("nvl-anim", k); } catch (e) {}
+      try { localStorage.setItem("nvl-anim2", k); } catch (e) {}
     }
     var pick = document.createElement("div");
     pick.className = "anim-pick";
