@@ -3111,6 +3111,12 @@ renderPlan();
       if (!key) return;
       _open(key, false);
       window.scrollTo(0, 0);
+      /* первый экран показывает слоган своей аудитории, даже если лента уже уехала */
+      var idx = { expert: 0, small: 1 }[key];
+      if (idx === undefined) return;
+      [60, 400, 1200, 2500].forEach(function (t) {
+        setTimeout(function () { if (window.__pickAudience) window.__pickAudience(idx); }, t);
+      });
     })();
 
   
