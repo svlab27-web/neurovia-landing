@@ -2008,10 +2008,12 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
   .hero .hero-conversion .hero-system{margin-bottom:0}
   /* слоган стоит по центру своей колонки, без провала снизу */
   .hero .seg-stage{margin-block:auto;min-height:0;height:clamp(290px,26vw,370px)}
+  /* подпись остаётся на общей нижней линии, сам Оракул поднят и крупнее */
   .hero .hero-character{grid-area:1/2/3/3;position:static;width:auto;right:auto;top:auto;
-    transform:none;margin:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:center}
-  .hero .hero-character img{width:100%;height:clamp(300px,27vw,410px);object-fit:contain}
-  .hero .hero-character figcaption{margin:14px 0 0}
+    transform:none;margin:0;display:grid;grid-template-rows:1fr auto;justify-items:center}
+  .hero .hero-character img{width:100%;height:clamp(320px,30vw,470px);max-height:100%;
+    object-fit:contain;align-self:center}
+  .hero .hero-character figcaption{margin:14px 0 0;align-self:end}
   .hero .hero-character::before{display:none}
 }
 /* на золотом полотне фигура не сливается с фоном */
