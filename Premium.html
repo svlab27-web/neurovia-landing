@@ -2948,7 +2948,50 @@ renderPlan();
         }
       }
 
-      btns.forEach(function (b, i) { b.addEventListener("click", function () { pick(i); }); });
+      /* человек выбрал сам — шарик замирает на 10 секунд, потом идёт дальше */
+      var holdT = 0;
+      function hold() {
+        var ring = theRing();
+        if (!ring) return;
+        ring.classList.add("is-held");
+        clearTimeout(holdT);
+        holdT = setTimeout(function () { ring.classList.remove("is-held"); }, 10000);
+      }
+      btns.forEach(function (b, i) { b.addEventListener("click", function () { hold(); pick(i); }); });
+
+      /* шарик добежал до узла — узел загорается и панель сама меняется, как на первой странице */
+      var lastHit = -1, RUN = 18000, WINDOW = 0.16;
+      function markHit(i) {
+        var ring = theRing();
+        if (!ring) return;
+        [].slice.call(ring.querySelectorAll(".cnode")).forEach(function (n, k) {
+          n.classList.toggle("is-hit", k === i);
+        });
+        [].slice.call(ring.querySelectorAll(".clabel, .cycle-labels text")).forEach(function (l, k) {
+          l.classList.toggle("is-hit", k === i);
+        });
+      }
+      function watchMini() {
+        requestAnimationFrame(watchMini);
+        var ring = theRing();
+        if (!ring || !ring.classList.contains("is-live")) return;
+        if (ring.classList.contains("is-off") || ring.classList.contains("is-held")) return;
+        var head = ring.querySelector(".cycle-dot.head");
+        if (!head || !head.getAnimations) return;
+        var a = head.getAnimations()[0];
+        if (!a || a.currentTime == null) return;
+        var nodes = ring.querySelectorAll(".cnode"), L = nodes.length;
+        if (!L) return;
+        var pos = ((((a.currentTime % RUN) / RUN) % 1) + 1) % 1 * L;
+        var near = Math.round(pos) % L;
+        if (Math.abs(pos - Math.round(pos)) < WINDOW) {
+          if (near !== lastHit) { lastHit = near; markHit(near); pick(near); }
+        } else if (lastHit !== -1) { lastHit = -1; markHit(-1); }
+      }
+      if (!window.__miniWatch && !reducedMotion.matches) {
+        window.__miniWatch = true;
+        requestAnimationFrame(watchMini);
+      }
 
       var box = document.getElementById("audience");
       if (box && !box.dataset.capsBound) {
@@ -2960,7 +3003,7 @@ renderPlan();
           var idx = -1;
           if (node) idx = [].slice.call(ring.querySelectorAll(".cnode")).indexOf(node);
           else idx = [].slice.call(ring.querySelectorAll(".clabel, .cycle-labels text")).indexOf(e.target);
-          if (idx >= 0 && window.__personaPick) window.__personaPick(idx);
+          if (idx >= 0 && window.__personaPick) { hold(); window.__personaPick(idx); }
         });
       }
       window.__personaPick = pick;
