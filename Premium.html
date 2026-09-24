@@ -4555,9 +4555,12 @@ renderPlan();
       clearTimeout(toneT);
       heroEl.dataset.tone = SEG[i].tone || "navy";
     }
+    /* эксперт стоит дольше — это главный сегмент; остальные идут быстрее */
+    var HERO_DWELL = [7000, 3800, 3800, 3800, 3800];
     function run() {
-      clearInterval(timer);
-      if (!locked && !hover && !document.hidden) timer = setInterval(function () { show(cur + 1); }, 6200);
+      clearTimeout(timer);
+      if (locked || hover || document.hidden) return;
+      timer = setTimeout(function () { show(cur + 1); run(); }, HERO_DWELL[cur] || 3800);
     }
     tabs.addEventListener("click", function (e) {
       var b = e.target.closest("button[data-i]");
