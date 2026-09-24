@@ -2040,9 +2040,12 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
 /* маршрут раздела: кольцо и панель шага — раскладка блока 6П */
 .persona-panel--ring{grid-template-columns:1fr !important}
 .persona-copy .ring-row{margin-top:26px;padding-top:26px;border-top:1px solid rgba(255,255,255,.16);
-  grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:40px;align-items:center}
+  grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);gap:36px;align-items:center}
 .persona-copy .ring-slot{display:flex;justify-content:center}
-.persona-copy .ring-slot .cycle-mini{margin:0;max-width:460px}
+.persona-copy .ring-slot .cycle-mini{margin:0;max-width:560px}
+.persona-copy .cycle-ring{stroke-opacity:.72;stroke-width:3.4}
+.persona-copy .cycle-nodes circle{stroke-opacity:1;stroke-width:2.8}
+.persona-copy .cycle-labels text{font-size:12px}
 .persona-copy .ring-copy .caps-panel{min-height:190px}
 @media (max-width:900px){.persona-copy .ring-row{grid-template-columns:1fr;gap:26px}
   .persona-copy .ring-copy .caps-panel{min-height:0}}
@@ -2651,6 +2654,20 @@ renderPlan();
 
     const personaData = {
       expert: {
+        caps: [
+          ["01","Понять","Кому Вы помогаете и с какой проблемой.",
+           "Разбор опыта, выбор сегмента, проблема словами клиента, проверка готовности платить.","сегмент и проблема"],
+          ["02","Предложить","Чем Вы отличаетесь и что продаёте.",
+           "Ваш метод, продуктовая линейка, один продукт для проверки, цена-гипотеза.","метод и продукт"],
+          ["03","Привлечь","Как о Вас узнают без рекламного бюджета.",
+           "Боли клиента в контенте, площадки, план публикаций, первые заявки.","контент и заявки"],
+          ["04","Продать","Как деньги доходят до Вас.",
+           "Маршрут продажи, ответ на цену, оплата по ссылке, заявки в одном месте.","оплата по ссылке"],
+          ["05","Посчитать","Что окупается, а что нет.",
+           "Экономика продажи, отдача каналов, расходы и прибыль.","экономика продажи"],
+          ["06","Пересобрать","Что меняем на следующем круге.",
+           "Узкое место, гипотеза на круг, план и факт.","гипотеза на круг"]
+        ],
         title: "Один маршрут вместо команды подрядчиков",
         copy: [],
         offer: "Что продавать, откуда клиенты и сколько остаётся денег - шесть шагов, которые Вы проходите сами.",
@@ -2897,7 +2914,12 @@ renderPlan();
       var copy = document.querySelector("#audience .persona-copy");
       var flow = document.querySelector("#audience .persona-flow");
       var panelWrap = document.querySelector("#audience .persona-panel");
-      if (!copy || !d.flow || !d.flow.length) return;
+      var steps = (d.caps && d.caps.length)
+        ? d.caps.map(function (c) { return { n: c[0], t: c[1], why: c[2], tools: c[3], out: c[4] }; })
+        : (d.flow || []).map(function (f) {
+            return { n: f[0], t: f[1], why: f[2], tools: (f[4] || []).join("; "), out: f[3] };
+          });
+      if (!copy || !steps.length) return;
       if (flow) flow.hidden = true;                    /* большой список справа убираем */
       if (panelWrap) panelWrap.classList.add("persona-panel--ring");
 
@@ -2914,9 +2936,9 @@ renderPlan();
       var nav = row.querySelector(".caps-nav");
       var panel = row.querySelector(".caps-panel");
 
-      nav.innerHTML = d.flow.map(function (f, i) {
+      nav.innerHTML = steps.map(function (f, i) {
         return '<button type="button" role="tab" data-step="' + i + '" aria-selected="' +
-               (i === 0 ? "true" : "false") + '"><i>' + f[0] + "</i>" + f[1] + "</button>";
+               (i === 0 ? "true" : "false") + '"><i>' + f.n + "</i>" + f.t + "</button>";
       }).join("");
       var btns = [].slice.call(nav.querySelectorAll("button"));
 
@@ -2929,14 +2951,13 @@ renderPlan();
       [0, 120, 400, 1200].forEach(function (t) { setTimeout(mount, t); });
 
       function pick(i) {
-        var f = d.flow[i];
+        var f = steps[i];
         if (!f) return;
         btns.forEach(function (b, j) { b.setAttribute("aria-selected", j === i ? "true" : "false"); });
-        var tools = (f[4] && f[4].length) ? f[4].join("; ") + "." : "";
-        panel.innerHTML = "<h3>" + f[1] + "</h3>" +
-          "<p class='why'>" + f[2] + "</p>" +
-          (tools ? "<p class='tools'>" + tools + "</p>" : "") +
-          (f[3] ? "<p class='out'><b>В проекте:</b> " + f[3] + "</p>" : "");
+        panel.innerHTML = "<h3>" + f.t + "</h3>" +
+          "<p class='why'>" + f.why + "</p>" +
+          (f.tools ? "<p class='tools'>" + f.tools + "</p>" : "") +
+          (f.out ? "<p class='out'><b>В проекте:</b> " + f.out + "</p>" : "");
         var ring = theRing();
         if (ring) {
           [].slice.call(ring.querySelectorAll(".cnode")).forEach(function (n, j) {
