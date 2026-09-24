@@ -1679,7 +1679,7 @@ html{scroll-padding-top:142px}
 .seg-note{padding-left:2px}
 
 /* ===================== v14: первый экран во всю высоту ===================== */
-.hero .hero-inner{min-height:calc(100svh - var(--topbar, 136px));display:flex;flex-direction:column;padding-block:34px 44px}
+.hero .hero-inner{min-height:var(--heroH, calc(100svh - var(--topbar, 136px)));display:flex;flex-direction:column;padding-block:34px 44px}
 .hero .hero-copy.hero-seg{flex:1;display:flex;flex-direction:column}
 .hero .seg-stage{flex:1;height:auto;min-height:clamp(300px,24vw,360px);margin-top:34px}
 .hero .seg-slide{height:100%}
@@ -4343,6 +4343,11 @@ renderPlan();
       if (bar) top += bar.getBoundingClientRect().height;
       if (hdr) top += hdr.getBoundingClientRect().height;
       document.documentElement.style.setProperty("--topbar", Math.round(top) + "px");
+      if (window.innerWidth > 1000) {
+        document.documentElement.style.setProperty("--heroH", Math.max(520, Math.round(window.innerHeight - top)) + "px");
+      } else {
+        document.documentElement.style.removeProperty("--heroH");
+      }
     }
     set();
     window.addEventListener("resize", set);
