@@ -1679,7 +1679,7 @@ html{scroll-padding-top:142px}
 .seg-note{padding-left:2px}
 
 /* ===================== v14: первый экран во всю высоту ===================== */
-.hero .hero-inner{min-height:calc(100svh - 136px);display:flex;flex-direction:column;padding-block:34px 44px}
+.hero .hero-inner{min-height:calc(100svh - var(--topbar, 136px));display:flex;flex-direction:column;padding-block:34px 44px}
 .hero .hero-copy.hero-seg{flex:1;display:flex;flex-direction:column}
 .hero .seg-stage{flex:1;height:auto;min-height:clamp(300px,24vw,360px);margin-top:34px}
 .hero .seg-slide{height:100%}
@@ -2036,7 +2036,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
     <section class="hero" id="audiences" aria-label="Выберите свой маршрут">
       <div class="wrap hero-inner">
         <div class="hero-copy hero-seg">
-          <p class="hero-offer">AI-трекер для предпринимателей и экспертов</p>
           <div class="seg-tabs" role="tablist" aria-label="Кто Вы" id="segTabs"></div>
           <div class="seg-stage" id="segStage"></div>
         </div>
@@ -4319,6 +4318,23 @@ renderPlan();
 
 
   /* --- переключатель анимации первого экрана (только в v15) --- */
+
+  /* --- первый экран ровно по высоте окна: меряем шапку, а не угадываем --- */
+  (function fitFirstScreen() {
+    var hero = document.querySelector(".hero");
+    if (!hero) return;
+    function set() {
+      var top = 0;
+      var bar = document.querySelector(".promo-bar"), hdr = document.querySelector("header");
+      if (bar) top += bar.getBoundingClientRect().height;
+      if (hdr) top += hdr.getBoundingClientRect().height;
+      document.documentElement.style.setProperty("--topbar", Math.round(top) + "px");
+    }
+    set();
+    window.addEventListener("resize", set);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(set);
+  })();
+
   /* --- шапка: разделы страницы / выбранная аудитория --- */
   var audSection = document.getElementById("audience");
   var navMain = document.querySelector(".nav-main"), navP = document.querySelector(".nav-personas");
