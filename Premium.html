@@ -2919,7 +2919,7 @@ renderPlan();
 
       var btns = [].slice.call(host.querySelectorAll("button"));
       var panel = host.querySelector(".p-caps-panel");
-      var ring = document.querySelector("#audience .cycle-mini");
+      function theRing() { return document.querySelector("#audience .cycle-mini"); }
 
       function pick(i) {
         var f = d.flow[i];
@@ -2930,6 +2930,7 @@ renderPlan();
           : "";
         panel.innerHTML = "<h3>" + f[1] + "</h3><p class='why'>" + f[2] + "</p>" + pts +
           (f[3] ? "<p class='out'><b>В проекте:</b> " + f[3] + "</p>" : "");
+        var ring = theRing();
         if (ring) {
           [].slice.call(ring.querySelectorAll(".cnode")).forEach(function (n, j) {
             n.classList.toggle("is-active", j === i);
@@ -2942,15 +2943,22 @@ renderPlan();
 
       btns.forEach(function (b, i) { b.addEventListener("click", function () { pick(i); }); });
 
-      if (ring && !ring.dataset.capsBound) {
-        ring.dataset.capsBound = "1";
-        [].slice.call(ring.querySelectorAll(".cnode")).forEach(function (n, i) {
-          n.style.cursor = "pointer";
-          n.addEventListener("click", function () { pick(i); });
-        });
-        [].slice.call(ring.querySelectorAll(".clabel, .cycle-labels text")).forEach(function (l, i) {
-          l.style.cursor = "pointer";
-          l.addEventListener("click", function () { pick(i); });
+      /* кольцо приезжает копией позже, поэтому слушаем клики на всём разделе */
+      var box = document.getElementById("audience");
+      if (box && !box.dataset.capsBound) {
+        box.dataset.capsBound = "1";
+        box.addEventListener("click", function (e) {
+          var ring = theRing();
+          if (!ring || !ring.contains(e.target)) return;
+          var node = e.target.closest ? e.target.closest(".cnode") : null;
+          var idx = -1;
+          if (node) {
+            idx = [].slice.call(ring.querySelectorAll(".cnode")).indexOf(node);
+          } else {
+            var labs = [].slice.call(ring.querySelectorAll(".clabel, .cycle-labels text"));
+            idx = labs.indexOf(e.target);
+          }
+          if (idx >= 0 && window.__personaPick) window.__personaPick(idx);
         });
       }
       window.__personaPick = pick;
