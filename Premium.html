@@ -2068,6 +2068,31 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
 @media (max-width:900px){.persona-copy .ring-row{grid-template-columns:1fr;gap:26px}
   .persona-copy .ring-copy .caps-panel{min-height:0}}
 
+
+/* ===== «На каком этапе Вы сейчас?» — вкладки аудиторий, светлый блок ===== */
+.fw-section{background:#fff !important;color:var(--ink) !important;border-top:1px solid var(--line)}
+.fw-section .eyebrow{color:var(--muted) !important}
+.fw-section h2{color:var(--ink) !important}
+.fw-section .lead{color:var(--muted) !important}
+.aud-tabs{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 26px}
+.aud-tabs button{cursor:pointer;background:none;border:1px solid var(--line);border-radius:999px;
+  color:var(--ink);padding:11px 18px;font:600 14.5px var(--head);display:inline-flex;align-items:center;gap:8px;
+  transition:background .2s,border-color .2s,color .2s}
+.aud-tabs button:hover{border-color:var(--gold)}
+.aud-tabs button[aria-selected="true"]{background:var(--navy);border-color:var(--navy);color:var(--warm)}
+.aud-tabs button .lk{font-size:11px;opacity:.65}
+.aud-panel{background:var(--mist);border:1px solid var(--line);border-radius:16px;padding:32px 34px;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:30px 44px;align-items:start}
+.aud-panel h3{margin:0 0 12px;font:700 clamp(21px,2.1vw,28px)/1.2 var(--head);color:var(--ink)}
+.aud-panel .aud-lead{margin:0;font-size:16.5px;line-height:1.6;color:var(--muted)}
+.aud-panel ol{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:a}
+.aud-panel ol li{counter-increment:a;position:relative;padding-left:40px;font-size:15.5px;line-height:1.5;color:var(--ink)}
+.aud-panel ol li::before{content:counter(a,decimal-leading-zero);position:absolute;left:0;top:1px;
+  font:600 12px var(--mono);color:var(--gold)}
+.aud-panel .aud-go{grid-column:1/-1;margin:0;padding-top:20px;border-top:1px solid var(--line)}
+.aud-panel .aud-go .button{align-self:flex-start}
+.aud-soon{margin:14px 0 0;font-size:14.5px;color:var(--muted)}
+@media (max-width:900px){.aud-panel{grid-template-columns:1fr;padding:26px 22px}}
 </style>
 </head>
 <body>
@@ -2099,8 +2124,9 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
       </div></section>
 
 <section class="section fw-section general-only" id="forwhom"><div class="wrap">
-      <div class="section-heading"><div><p class="eyebrow">Для кого</p><h2>Что должно приносить<br>Вам больше денег?</h2></div><p class="lead">Маршрут подстраивается под то, что у Вас уже есть: опыт, идея, выручка или клиенты. Сам бизнес может быть любым: услуги, товар или digital.</p></div>
-      <div class="fw-grid"><article class="fw-card"><p class="fw-name">Эксперт</p><p class="fw-promise">Превратите то, что умеете, в продукт, который покупают.</p><ol class="fw-steps"><li>Найти, чем Вы отличаетесь от других экспертов ниши</li><li>Собрать из этого свой метод и продуктовую линейку</li><li>Выбрать один продукт и проверить его на первых клиентах</li></ol><button type="button" class="button" data-open="expert">Открыть маршрут <span aria-hidden="true">→</span></button></article><article class="fw-card"><p class="fw-name">Стартап</p><p class="fw-promise">Проверьте спрос раньше, чем потратите деньги.</p><ol class="fw-steps"><li>Сформулировать самую рискованную гипотезу</li><li>Проверить её на одном сегменте и живых людях</li><li>Посчитать экономику и решить: масштабировать, менять или закрыть</li></ol><button type="button" class="button" data-open="small">Открыть маршрут <span aria-hidden="true">→</span></button></article><article class="fw-card is-locked"><p class="fw-name">Действующий бизнес <span class="lk">🔒</span></p><p class="fw-promise">Найдите, где бизнес теряет деньги.</p><ol class="fw-steps"><li>Свести цифры отделов в один контур</li><li>Найти узкое горлышко в пути клиента</li><li>Проверить изменение и пересчитать прибыль</li></ol><a class="button ghost" href="https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9A%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%BE%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%D0%B4%D0%BB%D1%8F%20%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D1%83%D1%8E%D1%89%D0%B5%D0%B3%D0%BE%20%D0%B1%D0%B8%D0%B7%D0%BD%D0%B5%D1%81%D0%B0%3F" target="_blank" rel="noopener">Узнать о старте <span aria-hidden="true">↗</span></a></article><article class="fw-card is-locked"><p class="fw-name">Агентство <span class="lk">🔒</span></p><p class="fw-promise">Сведите клиентов и сервисы в одну систему.</p><ol class="fw-steps"><li>Собрать данные всех клиентов в одном месте</li><li>Вести каждого по одному маршруту</li><li>Готовить отчёт без ручной сборки</li></ol><a class="button ghost" href="https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9A%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%BE%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%D0%B4%D0%BB%D1%8F%20%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D1%81%D1%82%D0%B2%3F" target="_blank" rel="noopener">Узнать о старте <span aria-hidden="true">↗</span></a></article><article class="fw-card is-locked"><p class="fw-name">Бизнес-трекер <span class="lk">🔒</span></p><p class="fw-promise">Приходите на сессию с готовой картиной.</p><ol class="fw-steps"><li>Хранить гипотезы и решения между встречами</li><li>Видеть прогресс каждой команды</li><li>Готовить разбор к сессии заранее</li></ol><a class="button ghost" href="https://wa.me/77715257709?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9A%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%BE%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%D0%B4%D0%BB%D1%8F%20%D0%B1%D0%B8%D0%B7%D0%BD%D0%B5%D1%81-%D1%82%D1%80%D0%B5%D0%BA%D0%B5%D1%80%D0%BE%D0%B2%3F" target="_blank" rel="noopener">Узнать о старте <span aria-hidden="true">↗</span></a></article></div>
+      <div class="section-heading"><div><p class="eyebrow">Ваш бизнес. Ваш маршрут.</p><h2>На каком этапе<br>Вы сейчас?</h2></div><p class="lead">Маршрут подстраивается под то, что у Вас уже есть: опыт, идея, выручка или клиенты. Сам бизнес может быть любым: услуги, товар или digital.</p></div>
+      <div class="aud-tabs" role="tablist" aria-label="Ваша роль" id="audTabs"></div>
+      <div class="aud-panel" role="tabpanel" id="audPanel" tabindex="0"></div>
     </div></section>
     
 
@@ -4590,6 +4616,75 @@ renderPlan();
     set();
     window.addEventListener("resize", set);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(set);
+  })();
+
+
+  /* --- «На каком этапе Вы сейчас?»: пять аудиторий вкладками --- */
+  (function audienceTabs() {
+    var tabs = document.getElementById("audTabs"), panel = document.getElementById("audPanel");
+    if (!tabs || !panel) return;
+    var AUD = [
+      { key:"expert", name:"Эксперт", open:true,
+        h:"Превратите то, что умеете, в востребованный продукт.",
+        lead:"Определите, какую проблему Вы решаете, кому нужен Ваш продукт и как начать его продавать.",
+        steps:["Выбрать аудиторию и проверить её запрос",
+               "Собрать предложение и продуктовую линейку",
+               "Подготовить контент, получить заявки и посчитать доход"] },
+      { key:"small", name:"Стартап", open:true,
+        h:"Проверьте спрос, прежде чем вкладываться в масштабирование.",
+        lead:"Сопоставьте идею с рынком и проверьте самые рискованные предположения.",
+        steps:["Изучить аудиторию и конкурентов",
+               "Сформулировать гипотезу и провести тест",
+               "Оценить спрос и экономику решения"] },
+      { key:"founder", name:"Действующий бизнес", open:false,
+        h:"Найдите, что мешает бизнесу зарабатывать больше.",
+        lead:"Свяжите предложения, продвижение, продажи и расходы, чтобы выбирать следующий шаг на основе данных.",
+        steps:["Найти пробелы в продукте и воронке",
+               "Проверить изменения в предложении и продвижении",
+               "Сравнить результаты и пересчитать прибыль"] },
+      { key:"agency", name:"Агентство", open:false,
+        h:"Соберите работу над клиентским проектом в одну систему.",
+        lead:"От исследования и стратегии до контента и оценки результатов - с единым контекстом проекта.",
+        steps:["Собрать данные клиента и определить приоритеты",
+               "Подготовить офферы, контент и кампании",
+               "Сопоставить действия с результатами"] },
+      { key:"tracker", name:"Бизнес-трекер", open:false,
+        h:"Приходите на сессию с понятной картиной проекта.",
+        lead:"Сохраняйте гипотезы, решения и материалы между встречами, чтобы следующий разбор начинался с фактов.",
+        steps:["Провести диагностику и выбрать фокус",
+               "Зафиксировать гипотезу, действия и показатель",
+               "Сравнить ожидания с фактами и выбрать следующий шаг"] }
+    ];
+    var WA = "https://wa.me/77715257709?text=" + encodeURIComponent("Здравствуйте! Когда откроется мой раздел?");
+
+    tabs.innerHTML = AUD.map(function (a, i) {
+      return '<button type="button" role="tab" data-i="' + i + '" aria-selected="' + (i === 0) + '">' +
+             a.name + (a.open ? "" : ' <span class="lk" aria-label="скоро">🔒</span>') + "</button>";
+    }).join("");
+    var btns = [].slice.call(tabs.querySelectorAll("button"));
+
+    function show(i) {
+      var a = AUD[i];
+      if (!a) return;
+      btns.forEach(function (b, j) { b.setAttribute("aria-selected", String(j === i)); });
+      panel.innerHTML =
+        "<div><h3>" + a.h + "</h3><p class='aud-lead'>" + a.lead + "</p>" +
+        (a.open ? "" : "<p class='aud-soon'>Раздел готовится - напишем, когда откроется.</p>") + "</div>" +
+        "<ol>" + a.steps.map(function (s) { return "<li>" + s + "</li>"; }).join("") + "</ol>" +
+        "<p class='aud-go'>" + (a.open
+          ? '<button type="button" class="button" data-open="' + a.key + '">Открыть маршрут <span aria-hidden="true">→</span></button>'
+          : '<a class="button ghost" href="' + WA + '" target="_blank" rel="noopener">Узнать о старте <span aria-hidden="true">↗</span></a>') +
+        "</p>";
+    }
+    tabs.addEventListener("click", function (e) {
+      var b = e.target.closest("button[data-i]");
+      if (b) show(Number(b.dataset.i));
+    });
+    panel.addEventListener("click", function (e) {
+      var go = e.target.closest("[data-open]");
+      if (go && window.__openPersona) window.__openPersona(go.dataset.open, true);
+    });
+    show(0);
   })();
 
   /* --- шапка: разделы страницы / выбранная аудитория --- */
