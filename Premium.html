@@ -2020,6 +2020,12 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
 .hero[data-tone="gold"] .hero-character figcaption{color:rgba(10,22,40,.85);font-weight:500}
 .hero[data-tone="gold"] .hero-character img{
   filter:drop-shadow(0 26px 40px rgba(10,22,40,.4)) drop-shadow(0 2px 6px rgba(10,22,40,.28))}
+
+/* на золотом полотне третий цвет — белый: маркер под акцентным словом */
+.hero[data-tone="gold"] .seg-copy h3 em{
+  color:var(--ink);
+  background:linear-gradient(to top,#fff .16em,transparent .16em);
+  padding:0 .04em}
 </style>
 </head>
 <body>
