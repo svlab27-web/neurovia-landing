@@ -2026,6 +2026,13 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
 .hero[data-tone="gold"]{background:#c08f2e}
 /* кнопка WhatsApp поднята над подписью Оракула */
 .wa-float{bottom:96px}
+@media (min-width:1001px){
+  /* обе нижние надписи поднимаем вместе: подпись — к ногам Оракула, вторая с ней вровень */
+  .hero .hero-conversion{position:relative;top:-65px}
+  .hero .hero-character figcaption{position:relative;top:-65px}
+  /* Оракул ближе к центру — убираем дыру между текстом и фигурой */
+  .hero .hero-character{transform:translateX(-80px)}
+}
 @media (max-width:700px){.wa-float{bottom:84px}}
 </style>
 </head>
