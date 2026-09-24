@@ -4676,15 +4676,40 @@ renderPlan();
           : '<a class="button ghost" href="' + WA + '" target="_blank" rel="noopener">Узнать о старте <span aria-hidden="true">↗</span></a>') +
         "</p>";
     }
+    /* лента сама перебирает аудитории, пока человек не выбрал свою */
+    var cur = 0, timer = null, hover = false, locked = false;
+    var seen = document.getElementById("forwhom");
+    var offscreen = true;
+    function run() {
+      clearInterval(timer);
+      if (locked || hover || offscreen || document.hidden || reducedMotion.matches) return;
+      timer = setInterval(function () { cur = (cur + 1) % AUD.length; show(cur); }, 5500);
+    }
+    if (seen && "IntersectionObserver" in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) { offscreen = !e.isIntersecting; run(); });
+      }, { threshold: 0.25 }).observe(seen);
+    } else { offscreen = false; }
+    if (seen) {
+      seen.addEventListener("mouseenter", function () { hover = true; run(); });
+      seen.addEventListener("mouseleave", function () { hover = false; run(); });
+    }
+    document.addEventListener("visibilitychange", run);
+
     tabs.addEventListener("click", function (e) {
       var b = e.target.closest("button[data-i]");
-      if (b) show(Number(b.dataset.i));
+      if (!b) return;
+      locked = true;                 /* человек выбрал свой сегмент - лента останавливается */
+      cur = Number(b.dataset.i);
+      show(cur);
+      run();
     });
     panel.addEventListener("click", function (e) {
       var go = e.target.closest("[data-open]");
       if (go && window.__openPersona) window.__openPersona(go.dataset.open, true);
     });
     show(0);
+    run();
   })();
 
   /* --- шапка: разделы страницы / выбранная аудитория --- */
