@@ -2027,9 +2027,11 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
 /* кнопка WhatsApp поднята над подписью Оракула */
 .wa-float{bottom:96px}
 @media (min-width:1001px){
-  /* обе нижние надписи поднимаем вместе: подпись — к ногам Оракула, вторая с ней вровень */
-  .hero .hero-conversion{position:relative;top:-65px}
-  .hero .hero-character figcaption{position:relative;top:-65px}
+  /* обе нижние надписи поднимаем вместе: подпись — к ногам Оракула, вторая с ней вровень.
+     На низких окнах подъём сам сходит на нет, чтобы Оракул не наехал на подпись. */
+  .hero{--lift:clamp(0px, calc(var(--heroH, 780px) - 700px), 65px)}
+  .hero .hero-conversion{position:relative;top:calc(-1 * var(--lift))}
+  .hero .hero-character figcaption{position:relative;top:calc(-1 * var(--lift))}
   /* Оракул ближе к центру — убираем дыру между текстом и фигурой */
   .hero .hero-character{transform:translateX(-80px)}
 }
