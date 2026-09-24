@@ -2045,7 +2045,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
     <a class="wordmark" href="#" aria-label="NeuroVia Labs, главная">Neuro<span>Via</span><small>LABS</small></a>
     <span class="wordmark-tag">AI-трекер для предпринимателей и экспертов</span>
     <nav class="nav-main" aria-label="Разделы страницы"><a href="#forwhom">Для кого</a><a href="#track">Маршрут 6П</a><a href="#result">Результат</a><a href="#oracle">Оракул</a><a href="#pricing">Тарифы</a></nav>
-    <nav class="nav-personas" aria-label="Кому подходит" hidden><button type="button" class="nav-home" id="navHome"><span aria-hidden="true">←</span> На главную</button><a href="#audience" data-persona="expert">Эксперт</a><a href="#audience" data-persona="small">Стартап</a></nav>
+    <nav class="nav-personas" aria-label="Кому подходит" hidden><button type="button" class="nav-home" id="navHome"><span aria-hidden="true">←</span> На главную</button><a href="#audience" data-persona="expert">Эксперт</a><a href="#audience" data-persona="small">Стартап</a><a href="#audience" data-nav="route">Маршрут</a><a href="#audience" data-nav="result">Результат</a><a href="#pricing" data-nav="pricing">Тарифы</a></nav>
     <a class="button small ghost-light" href="https://neurovialabs.io/login" target="_blank" rel="noopener">Войти в NVL <span aria-hidden="true">↗</span></a>
   </div></header>
   <main id="main">
@@ -2832,7 +2832,7 @@ renderPlan();
       document.querySelectorAll(".persona-tabs button").forEach((b) => {
         b.setAttribute("aria-selected", String(b.dataset.persona === key));
       });
-      document.querySelectorAll(".nav-personas a").forEach((a) => {
+      document.querySelectorAll(".nav-personas a[data-persona]").forEach((a) => {
         var mine = a.dataset.persona === key;
         if (mine) a.setAttribute("aria-current", "true");
         else a.removeAttribute("aria-current");
@@ -2854,8 +2854,26 @@ renderPlan();
       b.addEventListener("click", () => renderPersona(b.dataset.persona));
     });
 
-    document.querySelectorAll(".nav-personas a").forEach((a) => {
+    document.querySelectorAll(".nav-personas a[data-persona]").forEach((a) => {
       a.addEventListener("click", () => openPersona(a.dataset.persona));
+    });
+    /* якоря внутри раздела: маршрут, результат, тарифы */
+    document.querySelectorAll(".nav-personas a[data-nav]").forEach((a) => {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        var kind = a.dataset.nav, target = null, box = document.getElementById("audience");
+        if (kind === "pricing") target = document.getElementById("pricing");
+        else if (kind === "route") target = (box && (box.querySelector(".ring-row") || box.querySelector(".persona-flow"))) || box;
+        else if (kind === "result") {
+          var h = box && [].slice.call(box.querySelectorAll("h3")).filter(function (x) {
+            return /\u0427\u0442\u043e \u0438\u0437\u043c\u0435\u043d\u0438\u0442\u0441\u044f/i.test(x.textContent);
+          })[0];
+          target = h ? (h.closest("section, .wrap, div") || h) : box;
+        }
+        if (target) target.scrollIntoView({
+          behavior: reducedMotion.matches ? "auto" : "smooth", block: "start"
+        });
+      });
     });
     document.querySelectorAll(".hero-doors button").forEach((b) => {
       b.addEventListener("click", () => openPersona(b.dataset.persona, true));
@@ -2876,7 +2894,7 @@ renderPlan();
       document.querySelectorAll(".x-only").forEach((el) => { el.hidden = true; });
       document.querySelectorAll(".general-only").forEach((el) => { el.hidden = false; });
       document.getElementById("audience").hidden = true;
-      document.querySelectorAll(".nav-personas a").forEach((a) => {
+      document.querySelectorAll(".nav-personas a[data-persona]").forEach((a) => {
         a.removeAttribute("aria-current");
         a.hidden = false;
       });
