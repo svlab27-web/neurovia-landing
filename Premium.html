@@ -2868,7 +2868,7 @@ renderPlan();
           var h = box && [].slice.call(box.querySelectorAll("h3")).filter(function (x) {
             return /\u0427\u0442\u043e \u0438\u0437\u043c\u0435\u043d\u0438\u0442\u0441\u044f/i.test(x.textContent);
           })[0];
-          target = h ? (h.closest("section, .wrap, div") || h) : box;
+          target = h || box;
         }
         if (target) target.scrollIntoView({
           behavior: reducedMotion.matches ? "auto" : "smooth", block: "start"
