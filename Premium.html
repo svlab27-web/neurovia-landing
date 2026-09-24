@@ -2007,12 +2007,14 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
   .hero .hero-conversion{grid-area:2/1/3/2;width:100%;margin:0}
   .hero .hero-conversion .hero-system{margin-bottom:0}
   /* слоган стоит по центру своей колонки, без провала снизу */
-  .hero .seg-stage{margin-block:auto;min-height:0;height:clamp(290px,26vw,370px)}
+  .hero{--stageH:clamp(290px,26vw,370px);--oracleH:clamp(320px,30vw,470px)}
+  .hero .seg-stage{margin-block:auto;min-height:0;height:var(--stageH)}
   /* подпись остаётся на общей нижней линии, сам Оракул поднят и крупнее */
   .hero .hero-character{grid-area:1/2/3/3;position:static;width:auto;right:auto;top:auto;
     transform:none;margin:0;display:grid;grid-template-rows:1fr auto;justify-items:center}
-  .hero .hero-character img{width:100%;height:clamp(320px,30vw,470px);max-height:100%;
-    object-fit:contain;align-self:center;margin-bottom:96px}
+  /* верх Оракула ровно на первой строке заголовка */
+  .hero .hero-character img{width:100%;height:var(--oracleH);
+    object-fit:contain;align-self:center;margin-bottom:calc(var(--stageH) - var(--oracleH))}
   .hero .hero-character figcaption{margin:14px 0 0;align-self:end}
   .hero .hero-character::before{display:none}
 }
