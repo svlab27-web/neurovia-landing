@@ -2833,8 +2833,10 @@ renderPlan();
         b.setAttribute("aria-selected", String(b.dataset.persona === key));
       });
       document.querySelectorAll(".nav-personas a").forEach((a) => {
-        if (a.dataset.persona === key) a.setAttribute("aria-current", "true");
+        var mine = a.dataset.persona === key;
+        if (mine) a.setAttribute("aria-current", "true");
         else a.removeAttribute("aria-current");
+        a.hidden = !mine;           /* чужие аудитории в этом разделе не показываем */
       });
       window.__persona = key;
       if (window.__renderBlocks) window.__renderBlocks(key);
@@ -2874,7 +2876,10 @@ renderPlan();
       document.querySelectorAll(".x-only").forEach((el) => { el.hidden = true; });
       document.querySelectorAll(".general-only").forEach((el) => { el.hidden = false; });
       document.getElementById("audience").hidden = true;
-      document.querySelectorAll(".nav-personas a").forEach((a) => a.removeAttribute("aria-current"));
+      document.querySelectorAll(".nav-personas a").forEach((a) => {
+        a.removeAttribute("aria-current");
+        a.hidden = false;
+      });
       window.__persona = null;
       document.querySelector(".hero").scrollIntoView({
         behavior: reducedMotion.matches ? "auto" : "smooth", block: "start"
@@ -2882,6 +2887,29 @@ renderPlan();
     }
     window.__openPersona = openPersona;
     window.__closePersona = closePersona;
+
+    /* --- у каждого раздела своя ссылка: Premium.html#expert --- */
+    var HASHES = { expert: "expert", small: "small" };
+    var ALIAS = { expert: "expert", "ekspert": "expert", small: "small", startup: "small", start: "small" };
+    function markUrl(key) {
+      try {
+        var h = key && HASHES[key] ? "#" + HASHES[key] : location.pathname + location.search;
+        history.replaceState(null, "", h);
+      } catch (e) {}
+    }
+    var _open = openPersona, _close = closePersona;
+    openPersona = function (key, scroll) { _open(key, scroll); markUrl(key); };
+    closePersona = function () { _close(); markUrl(null); };
+    window.__openPersona = openPersona;
+    window.__closePersona = closePersona;
+
+    (function fromLink() {
+      var raw = (location.hash || "").replace("#", "").toLowerCase();
+      var key = ALIAS[raw];
+      if (!key) return;
+      _open(key, false);
+      window.scrollTo(0, 0);
+    })();
 
   
 
