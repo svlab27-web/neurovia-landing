@@ -2037,21 +2037,16 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
 }
 @media (max-width:700px){.wa-float{bottom:84px}}
 
-/* маршрут раздела: панель одного шага рядом с кольцом */
-.p-caps-nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
-.p-caps-nav button{cursor:pointer;background:none;border:1px solid var(--line);border-radius:999px;
-  color:var(--ink);padding:8px 14px;font:600 13px var(--head);display:inline-flex;align-items:center;gap:7px}
-.p-caps-nav button i{font:500 10px var(--mono);font-style:normal;color:var(--muted)}
-.p-caps-nav button[aria-selected="true"]{background:var(--navy);border-color:var(--navy);color:var(--warm)}
-.p-caps-nav button[aria-selected="true"] i{color:var(--gold)}
-.p-caps-panel h3{font:700 clamp(20px,2vw,26px)/1.15 var(--head);margin:0 0 8px}
-.p-caps-panel .why{margin:0 0 12px;font-size:16px;line-height:1.55;color:var(--muted)}
-.p-caps-panel .caps-pts{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:7px}
-.p-caps-panel .caps-pts li{position:relative;padding-left:16px;font-size:14.5px;line-height:1.5;color:var(--muted)}
-.p-caps-panel .caps-pts li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;
-  border-radius:50%;background:var(--gold)}
-.p-caps-panel .out{margin:0;padding-top:12px;border-top:1px solid var(--line);font-size:14.5px;line-height:1.5}
-.p-caps-panel .out b{color:var(--gold)}
+/* маршрут раздела: кольцо и панель шага — раскладка блока 6П */
+.persona-panel--ring{grid-template-columns:1fr !important}
+.persona-copy .ring-row{margin-top:26px;padding-top:26px;border-top:1px solid rgba(255,255,255,.16);
+  grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:40px;align-items:center}
+.persona-copy .ring-slot{display:flex;justify-content:center}
+.persona-copy .ring-slot .cycle-mini{margin:0;max-width:460px}
+.persona-copy .ring-copy .caps-panel{min-height:190px}
+@media (max-width:900px){.persona-copy .ring-row{grid-template-columns:1fr;gap:26px}
+  .persona-copy .ring-copy .caps-panel{min-height:0}}
+
 </style>
 </head>
 <body>
@@ -2897,38 +2892,50 @@ renderPlan();
     });
 
 
-    /* --- маршрут раздела: кольцо слева, один шаг справа (как на первой странице) --- */
+    /* --- маршрут раздела: один в один как блок 6П на первой странице --- */
     function buildPersonaCaps(d) {
-      var flow = document.querySelector(".persona-flow");
-      var list = document.getElementById("personaFlow");
-      if (!flow || !list || !d.flow || !d.flow.length) return;
-      list.hidden = true;
-      var host = flow.querySelector(".p-caps");
-      if (!host) {
-        host = document.createElement("div");
-        host.className = "p-caps";
-        flow.insertBefore(host, list);
-      }
-      host.innerHTML =
-        '<div class="caps-nav p-caps-nav" role="tablist" aria-label="Шесть шагов">' +
-        d.flow.map(function (f, i) {
-          return '<button type="button" role="tab" data-step="' + i + '" aria-selected="' +
-                 (i === 0 ? "true" : "false") + '"><i>' + f[0] + "</i>" + f[1] + "</button>";
-        }).join("") +
-        '</div><div class="caps-panel p-caps-panel"></div>';
+      var copy = document.querySelector("#audience .persona-copy");
+      var flow = document.querySelector("#audience .persona-flow");
+      var panelWrap = document.querySelector("#audience .persona-panel");
+      if (!copy || !d.flow || !d.flow.length) return;
+      if (flow) flow.hidden = true;                    /* большой список справа убираем */
+      if (panelWrap) panelWrap.classList.add("persona-panel--ring");
 
-      var btns = [].slice.call(host.querySelectorAll("button"));
-      var panel = host.querySelector(".p-caps-panel");
+      var row = copy.querySelector(".ring-row");
+      if (!row) {
+        row = document.createElement("div");
+        row.className = "ring-row";
+        row.innerHTML = '<div class="ring-slot"></div><div class="ring-copy">' +
+          '<div class="caps-nav" role="tablist" aria-label="Шесть шагов"></div>' +
+          '<div class="caps-panel"></div></div>';
+        copy.appendChild(row);
+      }
+      var slot = row.querySelector(".ring-slot");
+      var nav = row.querySelector(".caps-nav");
+      var panel = row.querySelector(".caps-panel");
+
+      nav.innerHTML = d.flow.map(function (f, i) {
+        return '<button type="button" role="tab" data-step="' + i + '" aria-selected="' +
+               (i === 0 ? "true" : "false") + '"><i>' + f[0] + "</i>" + f[1] + "</button>";
+      }).join("");
+      var btns = [].slice.call(nav.querySelectorAll("button"));
+
       function theRing() { return document.querySelector("#audience .cycle-mini"); }
+      function mount() {
+        var ring = theRing();
+        if (ring && slot && ring.parentElement !== slot) slot.appendChild(ring);
+      }
+      mount();
+      [0, 120, 400, 1200].forEach(function (t) { setTimeout(mount, t); });
 
       function pick(i) {
         var f = d.flow[i];
         if (!f) return;
         btns.forEach(function (b, j) { b.setAttribute("aria-selected", j === i ? "true" : "false"); });
-        var pts = (f[4] && f[4].length)
-          ? "<ul class='caps-pts'>" + f[4].map(function (x) { return "<li>" + x + "</li>"; }).join("") + "</ul>"
-          : "";
-        panel.innerHTML = "<h3>" + f[1] + "</h3><p class='why'>" + f[2] + "</p>" + pts +
+        var tools = (f[4] && f[4].length) ? f[4].join("; ") + "." : "";
+        panel.innerHTML = "<h3>" + f[1] + "</h3>" +
+          "<p class='why'>" + f[2] + "</p>" +
+          (tools ? "<p class='tools'>" + tools + "</p>" : "") +
           (f[3] ? "<p class='out'><b>В проекте:</b> " + f[3] + "</p>" : "");
         var ring = theRing();
         if (ring) {
@@ -2943,7 +2950,6 @@ renderPlan();
 
       btns.forEach(function (b, i) { b.addEventListener("click", function () { pick(i); }); });
 
-      /* кольцо приезжает копией позже, поэтому слушаем клики на всём разделе */
       var box = document.getElementById("audience");
       if (box && !box.dataset.capsBound) {
         box.dataset.capsBound = "1";
@@ -2952,12 +2958,8 @@ renderPlan();
           if (!ring || !ring.contains(e.target)) return;
           var node = e.target.closest ? e.target.closest(".cnode") : null;
           var idx = -1;
-          if (node) {
-            idx = [].slice.call(ring.querySelectorAll(".cnode")).indexOf(node);
-          } else {
-            var labs = [].slice.call(ring.querySelectorAll(".clabel, .cycle-labels text"));
-            idx = labs.indexOf(e.target);
-          }
+          if (node) idx = [].slice.call(ring.querySelectorAll(".cnode")).indexOf(node);
+          else idx = [].slice.call(ring.querySelectorAll(".clabel, .cycle-labels text")).indexOf(e.target);
           if (idx >= 0 && window.__personaPick) window.__personaPick(idx);
         });
       }
