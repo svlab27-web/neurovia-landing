@@ -4680,10 +4680,16 @@ renderPlan();
     var cur = 0, timer = null, hover = false, locked = false;
     var seen = document.getElementById("forwhom");
     var offscreen = true;
+    /* эксперт держится дольше — это наш главный сегмент */
+    var DWELL = [8000, 4500, 4500, 4500, 4500];
     function run() {
-      clearInterval(timer);
+      clearTimeout(timer);
       if (locked || hover || offscreen || document.hidden || reducedMotion.matches) return;
-      timer = setInterval(function () { cur = (cur + 1) % AUD.length; show(cur); }, 5500);
+      timer = setTimeout(function () {
+        cur = (cur + 1) % AUD.length;
+        show(cur);
+        run();
+      }, DWELL[cur] || 4500);
     }
     if (seen && "IntersectionObserver" in window) {
       new IntersectionObserver(function (es) {
