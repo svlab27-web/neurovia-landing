@@ -2095,18 +2095,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
 @media (max-width:900px){.aud-panel{grid-template-columns:1fr;padding:26px 22px}}
 
 /* ===== вариант со слайдовым движением по горизонтали ===== */
-.hero-rail{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:18px}
-.hero-dots{display:flex;gap:11px}
-.hero-dots button{width:12px;height:12px;padding:0;border-radius:50%;cursor:pointer;
-  border:1.5px solid rgba(244,243,240,.65);background:none;transition:background .2s,border-color .2s}
-.hero-dots button[aria-current="true"]{background:var(--warm);border-color:var(--warm)}
-.hero-dots button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-.hero-play{width:36px;height:36px;display:grid;place-items:center;border-radius:50%;cursor:pointer;
-  border:1.5px solid rgba(244,243,240,.55);background:none;color:var(--warm);font:12px/1 var(--head)}
-.hero-play:hover{border-color:var(--warm)}
-.hero[data-tone="gold"] .hero-dots button{border-color:rgba(10,22,40,.55)}
-.hero[data-tone="gold"] .hero-dots button[aria-current="true"]{background:var(--ink);border-color:var(--ink)}
-.hero[data-tone="gold"] .hero-play{border-color:rgba(10,22,40,.5);color:var(--ink)}
 </style>
 </head>
 <body>
@@ -4743,36 +4731,6 @@ renderPlan();
     run();
   })();
 
-
-  /* --- точки и пауза под первым экраном --- */
-  (function heroRail() {
-    var host = document.querySelector(".hero .hero-copy");
-    if (!host || !window.__heroCount) return;
-    var n = window.__heroCount();
-    if (!n) return;
-    var rail = document.createElement("div");
-    rail.className = "hero-rail";
-    rail.innerHTML = '<div class="hero-dots" role="tablist" aria-label="Кадры">' +
-      Array.apply(null, Array(n)).map(function (_, i) {
-        return '<button type="button" data-i="' + i + '" aria-label="Кадр ' + (i + 1) + '"></button>';
-      }).join("") + "</div>" +
-      '<button type="button" class="hero-play" aria-label="Приостановить смену кадров">&#10073;&#10073;</button>';
-    host.appendChild(rail);
-    var dots = [].slice.call(rail.querySelectorAll(".hero-dots button"));
-    var play = rail.querySelector(".hero-play");
-    dots.forEach(function (d, i) {
-      d.addEventListener("click", function () { window.__heroGo(i); });
-    });
-    play.addEventListener("click", function () {
-      var paused = window.__heroPaused(!window.__heroPaused());
-      play.innerHTML = paused ? "&#9654;" : "&#10073;&#10073;";
-      play.setAttribute("aria-label", paused ? "Продолжить смену кадров" : "Приостановить смену кадров");
-    });
-    setInterval(function () {
-      var i = window.__heroIndex();
-      dots.forEach(function (d, j) { d.setAttribute("aria-current", String(j === i)); });
-    }, 200);
-  })();
 
   /* --- шапка: разделы страницы / выбранная аудитория --- */
   var audSection = document.getElementById("audience");
