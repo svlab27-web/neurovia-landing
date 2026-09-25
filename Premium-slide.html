@@ -4539,14 +4539,14 @@ renderPlan();
       setTimeout(function () {
         out.style.transition = "none"; out.classList.remove("is-out");
         void out.offsetWidth; out.style.transition = "";
-      }, 950);
+      }, 500);
       btns.forEach(function (b, k) {
         b.setAttribute("aria-selected", String(k === cur));
         b.tabIndex = k === cur ? 0 : -1;
       });
       tone(cur);
       if (outgoing && inner) {
-        var opts={duration:700,easing:'cubic-bezier(.45,0,.15,1)',fill:'both'};
+        var opts={duration:450,easing:'cubic-bezier(.4,0,.2,1)',fill:'both'};
         inner.querySelector('.hero-copy').animate([{transform:'translateX('+inner.offsetWidth+'px)'},{transform:'translateX(0)'}],opts).onfinish=function(){this.cancel();};
         outgoing.animate([{transform:'translateX(0)'},{transform:'translateX(-100%)'}],opts).onfinish=function(){outgoing.remove();};
       }
@@ -4558,7 +4558,7 @@ renderPlan();
       heroEl.dataset.tone = SEG[i].tone || "navy";
     }
     /* эксперт стоит дольше — это главный сегмент; остальные идут быстрее */
-    var HERO_DWELL = [7000, 7000, 7000, 7000, 7000];
+    var HERO_DWELL = [4000, 4000, 4000, 4000, 4000];
     function run() {
       clearTimeout(timer);
       if (locked || hover || document.hidden) return;
